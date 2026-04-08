@@ -3,7 +3,11 @@ package com.biprangshu.guardiansathi.Global
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.provider.Settings
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.core.os.LocaleListCompat
 import java.util.Locale
 import androidx.core.content.edit
@@ -50,5 +54,15 @@ object LanguageUtils {
         val config = Configuration(context.resources.configuration)
         config.setLocale(locale)
         return context.createConfigurationContext(config)
+    }
+}
+
+var isGestureNav :Boolean by mutableStateOf(false)
+fun isGestureNavigationEnabled(context: Context): Boolean {
+    return try {
+        val mode = Settings.Secure.getInt(context.contentResolver, "navigation_mode")
+        mode == 2 // 2 = Gesture mode, 1 = 2-button, 0 = 3-button
+    } catch (e: Settings.SettingNotFoundException) {
+        false // Default to 3-button if not found
     }
 }

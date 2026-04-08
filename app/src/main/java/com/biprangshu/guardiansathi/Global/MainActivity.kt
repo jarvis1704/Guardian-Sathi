@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import com.biprangshu.guardiansathi.Global.Navigation.AppNav
 import com.biprangshu.guardiansathi.Global.ui.LanguageSelectionPage
 import com.biprangshu.guardiansathi.Global.ui.LoadingPage
+import com.biprangshu.guardiansathi.Global.ui.errorAlert
 import com.biprangshu.guardiansathi.Global.ui.theme.GuardianSathiTheme
 import com.psydrite.bugsnap.BugSnap
 import com.psydrite.bugsnap.BugSnapOverlay
@@ -48,7 +49,9 @@ class MainActivity : ComponentActivity() {
             val NavController = rememberNavController()
             GuardianSathiTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    isGestureNav = isGestureNavigationEnabled(this)
                     BugSnapOverlay()
+                    errorAlert()
                     AppNav(NavController)
                 }
             }

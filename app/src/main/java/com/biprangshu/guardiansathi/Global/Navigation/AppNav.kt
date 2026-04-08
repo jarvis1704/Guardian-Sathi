@@ -1,12 +1,17 @@
 package com.biprangshu.guardiansathi.Global.Navigation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavController
 import com.biprangshu.guardiansathi.Global.ui.LanguageSelectionPage
 import com.biprangshu.guardiansathi.Global.ui.LoadingPage
+import com.biprangshu.guardiansathi.Global.ui.OstrichAlgorithm
+import com.biprangshu.guardiansathi.Global.ui.errorMessage
+import com.biprangshu.guardiansathi.Global.ui.isErrorAlert
 
 // ROUTES (keep centralized)
 
@@ -14,6 +19,14 @@ import com.biprangshu.guardiansathi.Global.ui.LoadingPage
 fun AppNav(
     navController: NavHostController
 ) {
+    //for errorMessage
+    LaunchedEffect(key1 = errorMessage) {
+        if (errorMessage !="" && errorMessage !in OstrichAlgorithm){
+            isErrorAlert =true
+            Log.d("apperror", errorMessage)
+        }
+    }
+
     NavHost(
         navController = navController,
         startDestination = Routes.REGISTRATION
