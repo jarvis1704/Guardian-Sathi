@@ -3,6 +3,9 @@ package com.biprangshu.guardiansathi.Global.presentation.navigation
 import kotlinx.serialization.Serializable
 
 @Serializable
+data object RegistrationGraph
+
+@Serializable
 data object SplashRoute
 
 @Serializable
