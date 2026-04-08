@@ -39,6 +39,9 @@ android {
 }
 
 dependencies {
+    //datastore
+    implementation(libs.androidx.datastore.preferences)
+
     //bugsnap
     implementation("com.github.Psydrite01:BugSnap:1.0.0")
 
