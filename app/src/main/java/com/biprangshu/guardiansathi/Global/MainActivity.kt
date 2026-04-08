@@ -1,5 +1,6 @@
 package com.biprangshu.guardiansathi.Global
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,6 +17,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        val savedLanguage = LanguageUtils.getSavedLanguage(newBase)
+        val context = LanguageUtils.setLocale(newBase, savedLanguage)
+        super.attachBaseContext(context)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,8 +35,8 @@ class MainActivity : ComponentActivity() {
             ApiKey = "",
             collectionName = "BugSnap"
         )
-
         setContent {
+            val NavController = rememberNavController()
             GuardianSathiTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     BugSnapOverlay()
