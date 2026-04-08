@@ -6,18 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.biprangshu.guardiansathi.Global.Navigation.AppNav
-import com.biprangshu.guardiansathi.Global.ui.LanguageSelectionPage
-import com.biprangshu.guardiansathi.Global.ui.LoadingPage
+import com.biprangshu.guardiansathi.Global.presentation.navigation.AuthNavGraph
 import com.biprangshu.guardiansathi.Global.ui.theme.GuardianSathiTheme
 import com.psydrite.bugsnap.BugSnap
 import com.psydrite.bugsnap.BugSnapOverlay
@@ -49,7 +40,7 @@ class MainActivity : ComponentActivity() {
             GuardianSathiTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     BugSnapOverlay()
-                    AppNav(NavController)
+                    AuthNavGraph()
                 }
             }
         }
