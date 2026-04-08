@@ -22,21 +22,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.biprangshu.guardiansathi.Global.Language
 import com.biprangshu.guardiansathi.Global.setAppLanguage
-import com.biprangshu.guardiansathi.Global.ui.theme.GuardianSathiTheme
 import com.biprangshu.guardiansathi.R
 
 @Composable
-fun LanguageSelectionPage() {
+fun LanguageSelectionPage(
+    goto_loading: () -> Unit
+) {
+    val context = LocalContext.current
     val languages = listOf(
         Language("English", "English", "en"),
         Language("Hindi", "हिन्दी", "hi"),
-        Language("Assamese", "অসমীয়া","as")
+        Language("Assamese", "অসমীয়া", "as")
     )
 
     var selected by remember { mutableStateOf(languages[0]) }
@@ -87,7 +90,8 @@ fun LanguageSelectionPage() {
             // Continue Button
             Button(
                 onClick = {
-                    setAppLanguage(selected.code)
+                    setAppLanguage(context, selected.code)
+                    goto_loading()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -142,16 +146,10 @@ fun LanguageItem(
     }
 }
 
-data class Language(
-    val name: String,
-    val native: String,
-    val code: String
-)
-
-@Preview(showBackground = true)
-@Composable
-fun LanguagePagePreview() {
-    GuardianSathiTheme(dynamicColor = false) {
-        LanguageSelectionPage()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun LanguagePagePreview() {
+//    GuardianSathiTheme(dynamicColor = false) {
+//        LanguageSelectionPage()
+//    }
+//}

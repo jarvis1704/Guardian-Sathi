@@ -6,13 +6,9 @@ import androidx.navigation.compose.*
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavController
 import com.biprangshu.guardiansathi.Global.ui.LanguageSelectionPage
+import com.biprangshu.guardiansathi.Global.ui.LoadingPage
 
 // ROUTES (keep centralized)
-object Routes {
-    const val REGISTRATION = "registration"
-    const val ELDER = "elder"
-    const val GUARDIAN = "guardian"
-}
 
 @Composable
 fun AppNav(
@@ -25,7 +21,7 @@ fun AppNav(
 
         // 🔹 Registration Flow
         navigation(
-            startDestination = "language",
+            startDestination = NavScreensObj_Registration.LOADINGPAGE,
             route = Routes.REGISTRATION
         ) {
             registrationNav(navController)
@@ -51,11 +47,20 @@ fun AppNav(
 
 fun NavGraphBuilder.registrationNav(navController: NavController) {
 
-    composable("language") {
+    composable(
+        NavScreensObj_Registration.LOADINGPAGE
+    ) {
+        LoadingPage(
+            goto_selectlanguage = {
+                navController.navigate(NavScreensObj_Registration.SELECTLANGUAGEPAGE)
+            }
+        )
+    }
+    composable(NavScreensObj_Registration.SELECTLANGUAGEPAGE) {
         LanguageSelectionPage(
-//            onContinue = {
-//                navController.navigate("role_selection")
-//            }
+            goto_loading = {
+                navController.navigate(NavScreensObj_Registration.LOADINGPAGE)
+            }
         )
     }
 
