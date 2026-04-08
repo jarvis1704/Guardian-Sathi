@@ -38,6 +38,9 @@ android {
 }
 
 dependencies {
+    //bugsnap
+    implementation("com.github.Psydrite01:BugSnap:1.0.0")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)

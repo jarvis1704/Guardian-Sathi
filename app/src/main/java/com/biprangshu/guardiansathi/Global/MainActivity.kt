@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.biprangshu.guardiansathi.Global.ui.theme.GuardianSathiTheme
+import com.psydrite.bugsnap.BugSnap
+import com.psydrite.bugsnap.BugSnapOverlay
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,9 +22,19 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        BugSnap.init(
+            activity = this,
+            projectKey = "guardian-sathi",      // Firebase Project ID
+            FBstorageUrl = "gs://guardian-sathi.firebasestorage.app",  // Storage bucket
+            ApiKey = "",
+            collectionName = "BugSnap"
+        )
+
         setContent {
             GuardianSathiTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    BugSnapOverlay()
                     Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
@@ -30,6 +42,11 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        BugSnap.stop()  // Clean up resources
     }
 }
 
