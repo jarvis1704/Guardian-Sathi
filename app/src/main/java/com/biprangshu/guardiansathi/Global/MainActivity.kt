@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
             GuardianSathiTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     BugSnapOverlay()
-                    LanguageSelectionPage()
+                    com.biprangshu.guardiansathi.feature.auth.presentation.navigation.AuthNavGraph()
                 }
             }
         }
