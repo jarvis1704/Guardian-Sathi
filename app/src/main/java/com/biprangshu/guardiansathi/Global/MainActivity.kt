@@ -8,15 +8,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.biprangshu.guardiansathi.Global.Navigation.AppNav
-import com.biprangshu.guardiansathi.Global.ui.LanguageSelectionPage
-import com.biprangshu.guardiansathi.Global.ui.LoadingPage
-import com.biprangshu.guardiansathi.Global.ui.errorAlert
-import com.biprangshu.guardiansathi.Global.ui.theme.GuardianSathiTheme
+import com.biprangshu.guardiansathi.Global.core.LanguageUtils
+import com.biprangshu.guardiansathi.Global.core.isGestureNav
+import com.biprangshu.guardiansathi.Global.core.isGestureNavigationEnabled
+import com.biprangshu.guardiansathi.Global.presentation.navigation.AppNav
+import com.biprangshu.guardiansathi.Global.presentation.ui.components.errorAlert
+import com.biprangshu.guardiansathi.Global.presentation.ui.theme.GuardianSathiTheme
 import com.psydrite.bugsnap.BugSnap
 import com.psydrite.bugsnap.BugSnapOverlay
 

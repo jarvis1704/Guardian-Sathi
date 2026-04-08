@@ -1,16 +1,15 @@
-package com.biprangshu.guardiansathi.Global
+package com.biprangshu.guardiansathi.Global.core
 
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.provider.Settings
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.core.os.LocaleListCompat
 import java.util.Locale
 import androidx.core.content.edit
+import com.biprangshu.guardiansathi.Global.MainActivity
 
 fun setAppLanguage(context: Context, languageCode: String) {
     LanguageUtils.setLocale(context, languageCode)

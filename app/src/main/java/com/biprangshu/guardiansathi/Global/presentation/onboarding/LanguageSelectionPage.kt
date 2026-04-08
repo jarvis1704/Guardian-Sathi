@@ -1,4 +1,4 @@
-package com.biprangshu.guardiansathi.Global.ui
+package com.biprangshu.guardiansathi.Global.presentation.onboarding
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
@@ -29,9 +29,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.biprangshu.guardiansathi.Global.Language
-import com.biprangshu.guardiansathi.Global.isGestureNav
-import com.biprangshu.guardiansathi.Global.setAppLanguage
+import com.biprangshu.guardiansathi.Global.core.Language
+import com.biprangshu.guardiansathi.Global.core.isGestureNav
+import com.biprangshu.guardiansathi.Global.core.setAppLanguage
 import com.biprangshu.guardiansathi.R
 
 @Composable

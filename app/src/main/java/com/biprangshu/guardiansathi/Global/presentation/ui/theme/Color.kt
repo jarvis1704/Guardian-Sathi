@@ -1,4 +1,4 @@
-package com.biprangshu.guardiansathi.Global.ui.theme
+package com.biprangshu.guardiansathi.Global.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package com.biprangshu.guardiansathi.Global.Navigation
+package com.biprangshu.guardiansathi.Global.presentation.navigation
 
 object Routes {
     const val REGISTRATION = "registration"

@@ -2,7 +2,7 @@ package com.biprangshu.guardiansathi.Global.presentation.registration
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.biprangshu.guardiansathi.Global.core.domain.SessionRepository
+import com.biprangshu.guardiansathi.Global.domain.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow

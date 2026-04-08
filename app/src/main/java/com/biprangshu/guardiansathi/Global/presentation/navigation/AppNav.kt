@@ -1,4 +1,4 @@
-package com.biprangshu.guardiansathi.Global.Navigation
+package com.biprangshu.guardiansathi.Global.presentation.navigation
 
 import android.util.Log
 import androidx.compose.foundation.layout.Box
@@ -14,22 +14,15 @@ import androidx.navigation.compose.*
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavController
 import com.biprangshu.guardiansathi.Global.presentation.login.LoginRoot
-import com.biprangshu.guardiansathi.Global.presentation.navigation.LanguageSelectionPlaceholderRoot
-import com.biprangshu.guardiansathi.Global.presentation.navigation.LanguageSelectionRoute
-import com.biprangshu.guardiansathi.Global.presentation.navigation.LoginRoute
-import com.biprangshu.guardiansathi.Global.presentation.navigation.MainRoute
-import com.biprangshu.guardiansathi.Global.presentation.navigation.OnboardingRoute
-import com.biprangshu.guardiansathi.Global.presentation.navigation.RegistrationRoute
-import com.biprangshu.guardiansathi.Global.presentation.navigation.SplashRoute
 import com.biprangshu.guardiansathi.Global.presentation.onboarding.OnboardingRoot
 import com.biprangshu.guardiansathi.Global.presentation.registration.RegistrationRoot
 import com.biprangshu.guardiansathi.Global.presentation.splash.SplashRoot
 import com.biprangshu.guardiansathi.Global.presentation.splash.SplashViewModel
-import com.biprangshu.guardiansathi.Global.ui.LanguageSelectionPage
-import com.biprangshu.guardiansathi.Global.ui.LoadingPage
-import com.biprangshu.guardiansathi.Global.ui.OstrichAlgorithm
-import com.biprangshu.guardiansathi.Global.ui.errorMessage
-import com.biprangshu.guardiansathi.Global.ui.isErrorAlert
+import com.biprangshu.guardiansathi.Global.presentation.onboarding.LanguageSelectionPage
+import com.biprangshu.guardiansathi.Global.presentation.splash.LoadingPage
+import com.biprangshu.guardiansathi.Global.presentation.ui.components.OstrichAlgorithm
+import com.biprangshu.guardiansathi.Global.presentation.ui.components.errorMessage
+import com.biprangshu.guardiansathi.Global.presentation.ui.components.isErrorAlert
 
 // ROUTES (keep centralized)
 

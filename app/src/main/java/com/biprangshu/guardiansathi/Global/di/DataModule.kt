@@ -1,7 +1,6 @@
-package com.biprangshu.guardiansathi.Global.core.di
+package com.biprangshu.guardiansathi.Global.di
 
 import android.content.Context
-import com.biprangshu.guardiansathi.Global.core.data.RoomRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,11 +12,11 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DataModule {
 
-    @Provides
-    @Singleton
-    fun provideRoomRepository(
-        @ApplicationContext context: Context
-    ): RoomRepository {
-        return RoomRepository(context)
-    }
+//    @Provides
+//    @Singleton
+//    fun provideRoomRepository(
+//        @ApplicationContext context: Context
+//    ): RoomRepository {
+//        return RoomRepository(context)
+//    }
 }
