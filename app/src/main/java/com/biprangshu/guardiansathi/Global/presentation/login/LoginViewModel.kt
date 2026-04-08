@@ -1,9 +1,10 @@
-package com.biprangshu.guardiansathi.feature.auth.presentation.login
+package com.biprangshu.guardiansathi.Global.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.biprangshu.guardiansathi.core.domain.SessionRepository
+import com.biprangshu.guardiansathi.Global.core.domain.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -46,7 +47,7 @@ class LoginViewModel @Inject constructor(
             _state.update { it.copy(isLoading = true) }
             
             // Mock login delay
-            kotlinx.coroutines.delay(1000)
+            delay(1000)
             
             sessionRepository.setLoggedIn(true)
             _state.update { it.copy(isLoading = false) }

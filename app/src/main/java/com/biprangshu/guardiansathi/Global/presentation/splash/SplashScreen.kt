@@ -1,4 +1,4 @@
-package com.biprangshu.guardiansathi.feature.auth.presentation.splash
+package com.biprangshu.guardiansathi.Global.presentation.splash
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,11 +8,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.biprangshu.guardiansathi.feature.auth.presentation.navigation.LanguageSelectionRoute
-import com.biprangshu.guardiansathi.feature.auth.presentation.navigation.LoginRoute
-import com.biprangshu.guardiansathi.feature.auth.presentation.navigation.MainRoute
-import com.biprangshu.guardiansathi.feature.auth.presentation.navigation.OnboardingRoute
-import com.biprangshu.guardiansathi.feature.auth.presentation.navigation.RegistrationRoute
 
 @Composable
 fun SplashRoot(

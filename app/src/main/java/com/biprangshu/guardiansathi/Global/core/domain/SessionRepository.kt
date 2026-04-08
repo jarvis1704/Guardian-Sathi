@@ -1,4 +1,4 @@
-package com.biprangshu.guardiansathi.core.domain
+package com.biprangshu.guardiansathi.Global.core.domain
 
 import kotlinx.coroutines.flow.Flow
 

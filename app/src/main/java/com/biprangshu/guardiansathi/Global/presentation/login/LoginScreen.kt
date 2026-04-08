@@ -1,4 +1,4 @@
-package com.biprangshu.guardiansathi.feature.auth.presentation.login
+package com.biprangshu.guardiansathi.Global.presentation.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

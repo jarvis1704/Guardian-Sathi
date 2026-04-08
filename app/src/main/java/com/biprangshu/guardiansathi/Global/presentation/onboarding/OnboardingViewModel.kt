@@ -1,8 +1,8 @@
-package com.biprangshu.guardiansathi.feature.auth.presentation.onboarding
+package com.biprangshu.guardiansathi.Global.presentation.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.biprangshu.guardiansathi.core.domain.SessionRepository
+import com.biprangshu.guardiansathi.Global.core.domain.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

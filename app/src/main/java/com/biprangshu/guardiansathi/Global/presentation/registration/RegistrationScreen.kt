@@ -1,4 +1,4 @@
-package com.biprangshu.guardiansathi.feature.auth.presentation.registration
+package com.biprangshu.guardiansathi.Global.presentation.registration
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

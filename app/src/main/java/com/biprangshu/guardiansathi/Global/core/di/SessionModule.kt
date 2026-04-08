@@ -1,7 +1,7 @@
-package com.biprangshu.guardiansathi.core.di
+package com.biprangshu.guardiansathi.Global.core.di
 
-import com.biprangshu.guardiansathi.core.data.UserSessionManager
-import com.biprangshu.guardiansathi.core.domain.SessionRepository
+import com.biprangshu.guardiansathi.Global.core.data.UserSessionManager
+import com.biprangshu.guardiansathi.Global.core.domain.SessionRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

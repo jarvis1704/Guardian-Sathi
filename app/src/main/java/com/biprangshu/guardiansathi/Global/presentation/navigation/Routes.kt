@@ -1,4 +1,4 @@
-package com.biprangshu.guardiansathi.feature.auth.presentation.navigation
+package com.biprangshu.guardiansathi.Global.presentation.navigation
 
 import kotlinx.serialization.Serializable
 

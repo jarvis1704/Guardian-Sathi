@@ -1,9 +1,10 @@
-package com.biprangshu.guardiansathi.feature.auth.presentation.registration
+package com.biprangshu.guardiansathi.Global.presentation.registration
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.biprangshu.guardiansathi.core.domain.SessionRepository
+import com.biprangshu.guardiansathi.Global.core.domain.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -56,7 +57,7 @@ class RegistrationViewModel @Inject constructor(
             _state.update { it.copy(isLoading = true) }
             
             // Mock network call
-            kotlinx.coroutines.delay(1000)
+            delay(1000)
             
             sessionRepository.setUserRole(role)
             
