@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.biprangshu.guardiansathi.Global.ui.LanguageSelectionPage
+import com.biprangshu.guardiansathi.Global.ui.LoadingPage
 import com.biprangshu.guardiansathi.Global.ui.theme.GuardianSathiTheme
 import com.psydrite.bugsnap.BugSnap
 import com.psydrite.bugsnap.BugSnapOverlay
@@ -35,10 +37,7 @@ class MainActivity : ComponentActivity() {
             GuardianSathiTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     BugSnapOverlay()
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    LanguageSelectionPage()
                 }
             }
         }
@@ -47,21 +46,5 @@ class MainActivity : ComponentActivity() {
     override fun onDestroy() {
         super.onDestroy()
         BugSnap.stop()  // Clean up resources
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    GuardianSathiTheme {
-        Greeting("Android")
     }
 }
