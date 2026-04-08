@@ -13,36 +13,41 @@ import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
     primary = Color(0xff2771DF),
-    inversePrimary = Color(0xff0058BD),
+    onPrimary = Color.White,
+    primaryContainer = Color(0xff004596),
+    onPrimaryContainer = Color(0xffD6E3FF),
     secondary = PurpleGrey80,
     tertiary = Pink80,
     background = Color(0xff121212),
-    surface = Color.Black
+    onBackground = Color.White,
+    surface = Color(0xff1C1B1F),
+    onSurface = Color.White,
+    surfaceVariant = Color(0xff44474E),
+    onSurfaceVariant = Color(0xffC4C6D0),
+    outline = Color(0xff8E9099)
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Color(0xff0058BD),
-    inversePrimary = Color(0xff2771DF),
+    onPrimary = Color.White,
+    primaryContainer = Color(0xffD6E3FF),
+    onPrimaryContainer = Color(0xff001B3F),
     secondary = PurpleGrey40,
     tertiary = Pink40,
     background = Color(0xffF5F7FA),
-    surface = Color.White
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    onBackground = Color.Black,
+    surface = Color.White,
+    onSurface = Color.Black,
+    surfaceVariant = Color(0xffE1E2EC),
+    onSurfaceVariant = Color(0xff44474E),
+    outline = Color(0xff74777F)
 )
 
 @Composable
 fun GuardianSathiTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    // Set to false by default to ensure your branding colors are used
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

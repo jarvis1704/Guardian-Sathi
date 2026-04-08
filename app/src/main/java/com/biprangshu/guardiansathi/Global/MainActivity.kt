@@ -11,6 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.biprangshu.guardiansathi.Global.Navigation.AppNav
 import com.biprangshu.guardiansathi.Global.ui.LanguageSelectionPage
 import com.biprangshu.guardiansathi.Global.ui.LoadingPage
 import com.biprangshu.guardiansathi.Global.ui.theme.GuardianSathiTheme
@@ -32,12 +36,12 @@ class MainActivity : ComponentActivity() {
             ApiKey = "",
             collectionName = "BugSnap"
         )
-
         setContent {
+            val NavController = rememberNavController()
             GuardianSathiTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     BugSnapOverlay()
-                    LanguageSelectionPage()
+                    AppNav(NavController)
                 }
             }
         }
