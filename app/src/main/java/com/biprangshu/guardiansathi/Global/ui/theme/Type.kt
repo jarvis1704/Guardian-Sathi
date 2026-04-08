@@ -1,4 +1,4 @@
-package com.biprangshu.guardiansathi.ui.theme
+package com.biprangshu.guardiansathi.Global.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
