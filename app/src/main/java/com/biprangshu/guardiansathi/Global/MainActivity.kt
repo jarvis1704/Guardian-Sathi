@@ -16,7 +16,6 @@ import com.biprangshu.guardiansathi.Global.Navigation.AppNav
 import com.biprangshu.guardiansathi.Global.ui.LanguageSelectionPage
 import com.biprangshu.guardiansathi.Global.ui.LoadingPage
 import com.biprangshu.guardiansathi.Global.ui.errorAlert
-import com.biprangshu.guardiansathi.Global.presentation.navigation.AuthNavGraph
 import com.biprangshu.guardiansathi.Global.ui.theme.GuardianSathiTheme
 import com.psydrite.bugsnap.BugSnap
 import com.psydrite.bugsnap.BugSnapOverlay
@@ -51,7 +50,6 @@ class MainActivity : ComponentActivity() {
                     BugSnapOverlay()
                     errorAlert()
                     AppNav(NavController)
-                    AuthNavGraph()
                 }
             }
         }
