@@ -19,7 +19,8 @@ class FirestoreUserDataSource @Inject constructor(
                 "uid" to user.uid,
                 "email" to user.email,
                 "displayName" to user.displayName,
-                "photoUrl" to user.photoUrl
+                "photoUrl" to user.photoUrl,
+                "role" to user.role
             )
             // Use set with merge to create or update the user document without overwriting other fields if they exist
             usersCollection.document(user.uid).set(userData, SetOptions.merge()).await()
@@ -31,12 +32,23 @@ class FirestoreUserDataSource @Inject constructor(
                     uid = document.getString("uid") ?: user.uid,
                     email = document.getString("email"),
                     displayName = document.getString("displayName"),
-                    photoUrl = document.getString("photoUrl")
+                    photoUrl = document.getString("photoUrl"),
+                    role = document.getString("role")
                 )
                 Result.Success(fetchedUser)
             } else {
                 Result.Error(DataError.Network.NOT_FOUND)
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Result.Error(DataError.Network.UNKNOWN)
+        }
+    }
+
+    suspend fun updateUserRole(uid: String, role: String): Result<Unit, DataError.Network> {
+        return try {
+            usersCollection.document(uid).update("role", role).await()
+            Result.Success(Unit)
         } catch (e: Exception) {
             e.printStackTrace()
             Result.Error(DataError.Network.UNKNOWN)
