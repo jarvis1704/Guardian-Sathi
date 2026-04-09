@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
+        
         BugSnap.init(
             activity = this,
             projectKey = "guardian-sathi",      // Firebase Project ID
