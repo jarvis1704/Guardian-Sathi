@@ -2,9 +2,9 @@ package com.biprangshu.guardiansathi.Global.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.biprangshu.guardiansathi.Global.core.domain.AuthRepository
 import com.biprangshu.guardiansathi.Global.domain.SessionRepository
-import com.biprangshu.guardiansathi.Global.domain.AuthRepository
-import com.biprangshu.guardiansathi.Global.domain.Result
+import com.biprangshu.guardiansathi.Global.core.domain.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -3,8 +3,8 @@ package com.biprangshu.guardiansathi.Global.presentation.navigation
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.biprangshu.guardiansathi.Global.core.domain.SessionRepository
-import com.biprangshu.guardiansathi.Global.setAppLanguage
+import com.biprangshu.guardiansathi.Global.core.setAppLanguage
+import com.biprangshu.guardiansathi.Global.domain.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

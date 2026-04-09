@@ -24,47 +24,47 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class LanguageSelectionViewModel @Inject constructor(
-    private val sessionRepository: SessionRepository
-) : ViewModel() {
+//@HiltViewModel
+//class LanguageSelectionViewModel @Inject constructor(
+//    private val sessionRepository: SessionRepository
+//) : ViewModel() {
+//
+//    private val _events = MutableSharedFlow<Unit>()
+//    val events = _events.asSharedFlow()
+//
+//    fun onLanguageSelected() {
+//        viewModelScope.launch {
+//            sessionRepository.setLanguageSelected(true)
+//            _events.emit(Unit)
+//        }
+//    }
+//}
 
-    private val _events = MutableSharedFlow<Unit>()
-    val events = _events.asSharedFlow()
-
-    fun onLanguageSelected() {
-        viewModelScope.launch {
-            sessionRepository.setLanguageSelected(true)
-            _events.emit(Unit)
-        }
-    }
-}
-
-@Composable
-fun LanguageSelectionPlaceholderRoot(
-    onNavigateNext: () -> Unit,
-    viewModel: LanguageSelectionViewModel = hiltViewModel()
-) {
-    LaunchedEffect(Unit) {
-        viewModel.events.collect {
-            onNavigateNext()
-        }
-    }
-
-    Scaffold { padding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(text = "Language Selection")
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = { viewModel.onLanguageSelected() }) {
-                Text("Select English & Continue")
-            }
-        }
-    }
-}
+//@Composable
+//fun LanguageSelectionPlaceholderRoot(
+//    onNavigateNext: () -> Unit,
+//    viewModel: LanguageSelectionViewModel = hiltViewModel()
+//) {
+//    LaunchedEffect(Unit) {
+//        viewModel.events.collect {
+//            onNavigateNext()
+//        }
+//    }
+//
+//    Scaffold { padding ->
+//        Column(
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .padding(padding)
+//                .padding(16.dp),
+//            horizontalAlignment = Alignment.CenterHorizontally,
+//            verticalArrangement = Arrangement.Center
+//        ) {
+//            Text(text = "Language Selection")
+//            Spacer(modifier = Modifier.height(16.dp))
+//            Button(onClick = { viewModel.onLanguageSelected() }) {
+//                Text("Select English & Continue")
+//            }
+//        }
+//    }
+//}

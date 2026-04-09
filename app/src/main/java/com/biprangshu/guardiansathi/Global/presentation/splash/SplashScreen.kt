@@ -3,7 +3,6 @@ package com.biprangshu.guardiansathi.Global.presentation.splash
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.biprangshu.guardiansathi.Global.ui.LoadingPage
 
 @Composable
 fun SplashRoot(
