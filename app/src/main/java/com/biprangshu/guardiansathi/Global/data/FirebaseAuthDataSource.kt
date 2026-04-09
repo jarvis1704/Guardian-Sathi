@@ -26,4 +26,8 @@ class FirebaseAuthDataSource @Inject constructor(
             Result.Error(DataError.Network.UNAUTHORIZED)
         }
     }
+
+    fun getCurentUserUid(): String? {
+        return firebaseAuth.currentUser?.uid
+    }
 }

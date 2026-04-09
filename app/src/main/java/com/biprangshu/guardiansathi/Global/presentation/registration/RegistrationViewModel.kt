@@ -2,6 +2,7 @@ package com.biprangshu.guardiansathi.Global.presentation.registration
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.biprangshu.guardiansathi.Global.core.domain.AuthRepository
 import com.biprangshu.guardiansathi.Global.domain.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -29,7 +30,8 @@ sealed interface RegistrationEvent {
 
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
-    private val sessionRepository: SessionRepository
+    private val sessionRepository: SessionRepository,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(RegistrationState())
@@ -56,10 +58,10 @@ class RegistrationViewModel @Inject constructor(
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
             
-            // Mock network call
-            delay(1000)
+
             
             sessionRepository.setUserRole(role)
+            authRepository.updateUserRole(role)
             
             _state.update { it.copy(isLoading = false) }
             _events.emit(RegistrationEvent.NavigateToMain)
