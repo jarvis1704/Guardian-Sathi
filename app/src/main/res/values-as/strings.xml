@@ -12,4 +12,10 @@
     <string name="login_title">আপোনাৰ ব্যক্তিগত সুৰক্ষা ইয়াৰ পৰাই আৰম্ভ হয়</string>
     <string name="login_sub">বুদ্ধিমান সুৰক্ষা, তৎক্ষণাৎ সতর্কবাণী আৰু মনৰ শান্তি।</string>
     <string name="login_button">Google ৰ সৈতে আগবঢ়ক</string>
+    <string name="registration_type_T">আপুনি কোন?</string>
+    <string name="registration_type_S">আগবঢ়িবলৈ আপোনাৰ ভূমিকা বাছনি কৰক</string>
+    <string name="registration_type_elder_T">মই এজন জ্যেষ্ঠ নাগৰিক</string>
+    <string name="registration_type_elder_S">মই যত্ন পাব বিচাৰো আৰু মৃদু দিশ-নির্দেশনাৰে মোৰ স্বতন্ত্ৰতা বজাই ৰাখিব বিচাৰো</string>
+    <string name="registration_type_guardian_T">মই এজন অভিভাৱক</string>
+    <string name="registration_type_guardian_S">মই কোনো এজনৰ যত্ন ল’ব বিচাৰো আৰু যিকোনো ঠাইৰ পৰা তেওঁলোকৰ সুস্থতাৰ খবৰ ৰাখিব বিচাৰো</string>
 </resources>

@@ -96,6 +96,7 @@ fun LanguageSelectionPage(
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
+                    .padding(horizontal = 16.dp)
             ) {
                 Button(
                     onClick = {

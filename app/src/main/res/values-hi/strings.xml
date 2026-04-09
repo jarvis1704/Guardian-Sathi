@@ -12,4 +12,10 @@
     <string name="login_title">आपकी व्यक्तिगत सुरक्षा यहीं से शुरू होती है</string>
     <string name="login_sub">स्मार्ट सुरक्षा, तुरंत अलर्ट और मन की शांति</string>
     <string name="login_button">Google के साथ जारी रखें</string>
+    <string name="registration_type_T">आप कौन हैं?</string>
+    <string name="registration_type_S">जारी रखने के लिए अपनी भूमिका चुनें</string>
+    <string name="registration_type_elder_T">मैं एक बुजुर्ग हूँ</string>
+    <string name="registration_type_elder_S">मैं देखभाल पाना चाहता/चाहती हूँ और मार्गदर्शन के साथ अपनी स्वतंत्रता बनाए रखना चाहता/चाहती हूँ</string>
+    <string name="registration_type_guardian_T">मैं एक अभिभावक हूँ</string>
+    <string name="registration_type_guardian_S">मैं किसी की देखभाल करना चाहता/चाहती हूँ और कहीं से भी उनके स्वास्थ्य पर नज़र रखना चाहता/चाहती हूँ</string>
 </resources>

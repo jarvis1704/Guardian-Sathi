@@ -12,5 +12,10 @@
     <string name="login_title">Your personal safety starts here</string>
     <string name="login_sub">Smart protection, instant alerts, and peace of mind</string>
     <string name="login_button">Continue with Google</string>
-
+    <string name="registration_type_T">Who are you?</string>
+    <string name="registration_type_S">Select your role to continue</string>
+    <string name="registration_type_elder_T">I am an Elder</string>
+    <string name="registration_type_elder_S">I want to be cared for and maintain my independence with gentle guidance</string>
+    <string name="registration_type_guardian_T">I am a Guardian</string>
+    <string name="registration_type_guardian_S">I want to care for someone and monitor their well-being from anywhere</string>
 </resources>
