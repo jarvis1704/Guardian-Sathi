@@ -24,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,9 +35,8 @@ import com.biprangshu.guardiansathi.R
 
 @Composable
 fun LanguageSelectionPage(
-    goto_loading: () -> Unit
+    onContinue: (String) -> Unit
 ) {
-    val context = LocalContext.current
     val languages = listOf(
         Language("English", "English", "en"),
         Language("Hindi", "हिन्दी", "hi"),
@@ -101,8 +99,7 @@ fun LanguageSelectionPage(
             ) {
                 Button(
                     onClick = {
-                        setAppLanguage(context, selected.code)
-                        goto_loading()
+                        onContinue(selected.code)
                     },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -161,11 +158,3 @@ fun LanguageItem(
         }
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun LanguagePagePreview() {
-//    GuardianSathiTheme(dynamicColor = false) {
-//        LanguageSelectionPage()
-//    }
-//}

@@ -1,13 +1,9 @@
 package com.biprangshu.guardiansathi.Global.presentation.splash
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.biprangshu.guardiansathi.Global.ui.LoadingPage
 
 @Composable
 fun SplashRoot(
@@ -35,7 +31,5 @@ fun SplashRoot(
 
 @Composable
 fun SplashScreen() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        CircularProgressIndicator()
-    }
+    LoadingPage()
 }

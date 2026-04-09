@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -19,19 +18,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.biprangshu.guardiansathi.R
-import kotlinx.coroutines.delay
-
 
 @Composable
-fun LoadingPage(
-    goto_selectlanguage: () -> Unit
-){
-    LaunchedEffect(Unit) {
-        delay(1000)
-        if (true){
-            goto_selectlanguage()
-        }
-    }
+fun LoadingPage(){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -52,11 +41,3 @@ fun LoadingPage(
         )
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun LoadingPagePreview() {
-//    GuardianSathiTheme {
-//        LoadingPage()
-//    }
-//}

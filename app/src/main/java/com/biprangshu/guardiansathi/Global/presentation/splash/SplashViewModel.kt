@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 sealed interface SplashEvent {
@@ -32,6 +33,7 @@ class SplashViewModel @Inject constructor(
 
     private fun determineNextScreen() {
         viewModelScope.launch {
+            delay(1000)
             val isLanguageSelected = sessionRepository.isLanguageSelected.first()
             val hasCompletedOnboarding = sessionRepository.hasCompletedOnboarding.first()
             val isLoggedIn = sessionRepository.isLoggedIn.first()

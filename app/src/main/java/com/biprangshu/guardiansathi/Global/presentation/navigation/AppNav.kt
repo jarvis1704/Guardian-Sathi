@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
@@ -23,6 +24,15 @@ import com.biprangshu.guardiansathi.Global.presentation.splash.LoadingPage
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.OstrichAlgorithm
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.errorMessage
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.isErrorAlert
+import com.biprangshu.guardiansathi.Global.presentation.navigation.LanguageSelectionRoute
+import com.biprangshu.guardiansathi.Global.presentation.navigation.LanguageSelectionViewModel
+import com.biprangshu.guardiansathi.Global.presentation.navigation.LoginRoute
+import com.biprangshu.guardiansathi.Global.presentation.navigation.MainRoute
+import com.biprangshu.guardiansathi.Global.presentation.navigation.OnboardingRoute
+import com.biprangshu.guardiansathi.Global.presentation.navigation.RegistrationRoute
+import com.biprangshu.guardiansathi.Global.presentation.navigation.SplashRoute
+
+import com.biprangshu.guardiansathi.Global.presentation.navigation.RegistrationGraph
 
 // ROUTES (keep centralized)
 
@@ -40,13 +50,12 @@ fun AppNav(
 
     NavHost(
         navController = navController,
-        startDestination = Routes.REGISTRATION
+        startDestination = RegistrationGraph
     ) {
 
         // 🔹 Registration Flow
-        navigation(
-            startDestination = NavScreensObj_Registration.LOADINGPAGE,
-            route = Routes.REGISTRATION
+        navigation<RegistrationGraph>(
+            startDestination = SplashRoute
         ) {
             registrationNav(navController)
         }
@@ -70,23 +79,6 @@ fun AppNav(
 }
 
 fun NavGraphBuilder.registrationNav(navController: NavController) {
-
-    composable(
-        NavScreensObj_Registration.LOADINGPAGE
-    ) {
-        LoadingPage(
-            goto_selectlanguage = {
-                navController.navigate(NavScreensObj_Registration.SELECTLANGUAGEPAGE)
-            }
-        )
-    }
-    composable(NavScreensObj_Registration.SELECTLANGUAGEPAGE) {
-        LanguageSelectionPage(
-            goto_loading = {
-                navController.navigate(NavScreensObj_Registration.LOADINGPAGE)
-            }
-        )
-    }
 
     composable<SplashRoute> {
         SplashRoot(
@@ -119,16 +111,11 @@ fun NavGraphBuilder.registrationNav(navController: NavController) {
     }
 
     composable<LanguageSelectionRoute> {
-        // Using a simple placeholder instead of the original one for demo,
-        // or we could integrate the existing LanguageSelectionPage here if needed.
-        // But we need to update the data store. Let's just create an inline one for now.
-        val sessionRepo = hiltViewModel<SplashViewModel>() // We don't inject session repo directly into composable ideally
-        // Instead we should make a LanguageSelectionViewModel.
-        LanguageSelectionPlaceholderRoot(
-            onNavigateNext = {
-                navController.navigate(OnboardingRoute) {
-                    popUpTo(LanguageSelectionRoute) { inclusive = true }
-                }
+        val viewModel = hiltViewModel<LanguageSelectionViewModel>()
+        val context = LocalContext.current
+        LanguageSelectionPage(
+            onContinue = { languageCode ->
+                viewModel.onLanguageSelected(context, languageCode)
             }
         )
     }
