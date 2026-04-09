@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">অভিভাৱক সাৰথি</string>
     <string name="continue_button">আগবাঢ়ক</string>
+    <string name="onboarding_1_T">Continue</string>
+    <string name="onboarding_1_S">Continue</string>
+    <string name="onboarding_2_T">Continue</string>
+    <string name="onboarding_2_S">Continue</string>
+    <string name="onboarding_3_T">Continue</string>
+    <string name="onboarding_3_S">Continue</string>
+    <string name="onboarding_B1">Continue</string>
+    <string name="onboarding_B2">Continue</string>
+    <string name="login_title">আপোনাৰ ব্যক্তিগত সুৰক্ষা ইয়াৰ পৰাই আৰম্ভ হয়</string>
+    <string name="login_sub">বুদ্ধিমান সুৰক্ষা, তৎক্ষণাৎ সতর্কবাণী আৰু মনৰ শান্তি।</string>
+    <string name="login_button">Google ৰ সৈতে আগবঢ়ক</string>
 </resources>

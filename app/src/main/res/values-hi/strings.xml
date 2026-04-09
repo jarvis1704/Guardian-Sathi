@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">संरक्षक साथी</string>
     <string name="continue_button">आगे बढ़ें</string>
+    <string name="onboarding_1_T">Continue</string>
+    <string name="onboarding_1_S">Continue</string>
+    <string name="onboarding_2_T">Continue</string>
+    <string name="onboarding_2_S">Continue</string>
+    <string name="onboarding_3_T">Continue</string>
+    <string name="onboarding_3_S">Continue</string>
+    <string name="onboarding_B1">Continue</string>
+    <string name="onboarding_B2">Continue</string>
+    <string name="login_title">आपकी व्यक्तिगत सुरक्षा यहीं से शुरू होती है</string>
+    <string name="login_sub">स्मार्ट सुरक्षा, तुरंत अलर्ट और मन की शांति</string>
+    <string name="login_button">Google के साथ जारी रखें</string>
 </resources>
