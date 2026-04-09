@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
         BugSnap.init(
             activity = this,
             projectKey = "guardian-sathi",      // Firebase Project ID
-            FBstorageUrl = "gs://guardian-sathi.firebasestorage.app",  // Storage bucket
+            FBstorageUrl = "guardian-sathi.firebasestorage.app",  // Storage bucket
             ApiKey = "",
             collectionName = "BugSnap"
         )
