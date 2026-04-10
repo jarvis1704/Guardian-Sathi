@@ -64,7 +64,7 @@ class FirestoreLinkDataSource @Inject constructor(
         }
     }
 
-    /** Atomically updates both user documents and deletes the linkCode in one batch. */
+    /** Atomically updates both user documents and deletes the linkCode in one batch., linkcode is set to expiry of 24 hours*/
     suspend fun linkUsers(
         guardianUid: String,
         elderUid: String,
