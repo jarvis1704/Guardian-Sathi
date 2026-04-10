@@ -18,4 +18,15 @@
     <string name="registration_type_elder_S">মই যত্ন পাব বিচাৰো আৰু মৃদু দিশ-নির্দেশনাৰে মোৰ স্বতন্ত্ৰতা বজাই ৰাখিব বিচাৰো</string>
     <string name="registration_type_guardian_T">মই এজন অভিভাৱক</string>
     <string name="registration_type_guardian_S">মই কোনো এজনৰ যত্ন ল’ব বিচাৰো আৰু যিকোনো ঠাইৰ পৰা তেওঁলোকৰ সুস্থতাৰ খবৰ ৰাখিব বিচাৰো</string>
+
+    <string name="LinkGuardian_T">আপোনাৰ অভিভাৱকৰ সৈতে সংযোগ কৰক</string>
+    <string name="LinkGuardian_S">আপোনাৰ অভিভাৱকক এই কোডটো স্কেন কৰিবলৈ কওক</string>
+    <string name="LinkGuardian_S2">বেকআপ সংযোগ কোড</string>
+    <string name="LinkGuardian_S3">সংযোগৰ বাবে অপেক্ষা কৰি আছে...</string>
+    <string name="LinkGuardian_Share">লিংক শ্বেয়াৰ কৰক</string>
+    <string name="LinkGuardian_Share_S">আপোনাৰ অভিভাৱকে আপোনাৰ সুৰক্ষা আৰু স্বাস্থ্য আপডেট পৰ্যবেক্ষণ কৰিবলৈ এটা সুৰক্ষিত নিমন্ত্ৰণ লাভ কৰিব।</string>
+    <string name="LinkGuardian_Share_Message">হেই, মই মোৰ সুৰক্ষাৰ বাবে Guardian Saathi ব্যৱহাৰ কৰি আছো। আপুনি মোৰ অভিভাৱক হিচাপে সংযোগ কৰিব পাৰিবনে?
+\nGuardian Saathi ডাউনলোড কৰক: [Link]
+\n\nআপুনি মোৰ সুৰক্ষা আৰু স্বাস্থ্য আপডেটৰ সৈতে আপডেট থাকিব পাৰিব।
+\nকোড: </string>
 </resources>

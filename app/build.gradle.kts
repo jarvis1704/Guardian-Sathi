@@ -40,6 +40,13 @@ android {
 }
 
 dependencies {
+    // generating qr codes
+    implementation("com.google.zxing:core:3.5.4")
+
+    // Material Icons
+    implementation("androidx.compose.material:material-icons-core:1.7.8")
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
+
     //datastore
     implementation(libs.androidx.datastore.preferences)
 

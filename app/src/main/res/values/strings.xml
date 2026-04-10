@@ -18,4 +18,15 @@
     <string name="registration_type_elder_S">I want to be cared for and maintain my independence with gentle guidance</string>
     <string name="registration_type_guardian_T">I am a Guardian</string>
     <string name="registration_type_guardian_S">I want to care for someone and monitor their well-being from anywhere</string>
+
+    <string name="LinkGuardian_T">Connect to your Guardian</string>
+    <string name="LinkGuardian_S">Ask your guardian to scan this code</string>
+    <string name="LinkGuardian_S2">BACKUP CONNECTION CODE</string>
+    <string name="LinkGuardian_S3">Waiting for connection...</string>
+    <string name="LinkGuardian_Share">Share Link</string>
+    <string name="LinkGuardian_Share_S">Your guardian will receive a secure invitation to monitor your  safety and health updates.</string>
+    <string name="LinkGuardian_Share_Message">Hey I’m using Guardian Saathi for my safety. Can you connect as my guardian?
+        \nDownload Guardian Saathi: [Link]
+        \n\nYou’ll be able to stay updated on my safety and health.
+        \nCode: </string>
 </resources>

@@ -18,4 +18,15 @@
     <string name="registration_type_elder_S">मैं देखभाल पाना चाहता/चाहती हूँ और मार्गदर्शन के साथ अपनी स्वतंत्रता बनाए रखना चाहता/चाहती हूँ</string>
     <string name="registration_type_guardian_T">मैं एक अभिभावक हूँ</string>
     <string name="registration_type_guardian_S">मैं किसी की देखभाल करना चाहता/चाहती हूँ और कहीं से भी उनके स्वास्थ्य पर नज़र रखना चाहता/चाहती हूँ</string>
+
+    <string name="LinkGuardian_T">अपने अभिभावक से कनेक्ट करें</string>
+    <string name="LinkGuardian_S">अपने अभिभावक से इस कोड को स्कैन करने के लिए कहें</string>
+    <string name="LinkGuardian_S2">बैकअप कनेक्शन कोड</string>
+    <string name="LinkGuardian_S3">कनेक्शन की प्रतीक्षा हो रही है...</string>
+    <string name="LinkGuardian_Share">लिंक साझा करें</string>
+    <string name="LinkGuardian_Share_S">आपके अभिभावक को आपकी सुरक्षा और स्वास्थ्य अपडेट की निगरानी के लिए एक सुरक्षित निमंत्रण प्राप्त होगा।</string>
+    <string name="LinkGuardian_Share_Message">नमस्ते, मैं अपनी सुरक्षा के लिए Guardian Saathi का उपयोग कर रहा/रही हूँ। क्या आप मेरे अभिभावक के रूप में कनेक्ट कर सकते हैं?
+\nGuardian Saathi डाउनलोड करें: [Link]
+\n\nआप मेरी सुरक्षा और स्वास्थ्य अपडेट से जुड़े रह सकेंगे।
+\nकोड: </string>
 </resources>
