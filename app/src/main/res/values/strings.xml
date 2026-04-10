@@ -38,4 +38,8 @@
     <string name="LinkElder_Share_S">You will be securely connected to monitor their safety and health updates.</string>
     <string name="LinkElder_Cam_Per">Camera access is needed to scan QR codes</string>
     <string name="LinkElder_Cam_Per_Button">Grant Permission</string>
+
+    <string name="ConnectionSuccess_H">Connected Successfully</string>
+    <string name="ConnectionSuccess_D">You\'re now connected with:</string>
+    <string name="ConnectionSuccess_retry">Not the right person? Try again</string>
 </resources>

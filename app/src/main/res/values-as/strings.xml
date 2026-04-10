@@ -38,4 +38,8 @@
     <string name="LinkElder_Share_S">আপুনি তেওঁলোকৰ সুৰক্ষা আৰু স্বাস্থ্য আপডেট পৰ্যবেক্ষণ কৰিবলৈ সুৰক্ষিতভাৱে সংযুক্ত হ\'ব।</string>
     <string name="LinkElder_Cam_Per">QR কোড স্কেন কৰিবলৈ কেমেৰা অনুমতি প্রয়োজন</string>
     <string name="LinkElder_Cam_Per_Button">অনুমতি দিয়ক</string>
+
+    <string name="ConnectionSuccess_H">সফলতাৰে সংযুক্ত হ\'ল</string>
+    <string name="ConnectionSuccess_D">আপুনি এতিয়া ইয়াৰ সৈতে সংযুক্ত হৈছে:</string>
+    <string name="ConnectionSuccess_retry">এইজন সঠিক ব্যক্তি নহয়? পুনৰ চেষ্টা কৰক</string>
 </resources>

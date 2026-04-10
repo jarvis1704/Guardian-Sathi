@@ -28,11 +28,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -41,13 +39,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.biprangshu.guardiansathi.Elder.core.generateQrCodeAsBitmap
 import com.biprangshu.guardiansathi.Elder.core.shareQrCodeToWhatsApp
+import com.biprangshu.guardiansathi.Global.presentation.ui.components.ConnectionSuccessDialog
 import com.biprangshu.guardiansathi.Global.core.isGestureNav
-import com.biprangshu.guardiansathi.Global.presentation.registration.RegistrationScreen
-import com.biprangshu.guardiansathi.Global.presentation.registration.RegistrationState
 import com.biprangshu.guardiansathi.R
 
 @Composable
 fun LinkGuardianPage(){
+    //connection success dialogue
+    if (true){
+        ConnectionSuccessDialog(
+            name = "Person",
+            photourl_1 = "",
+            photourl_2 = "",
+            onContinue = {},
+            onRetry = {},
+            onDismiss = {}
+        )
+    }
+
+
     //qr code generation, this is a test user id
     val userId = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     val qrBitmap: Bitmap = remember(userId) {
