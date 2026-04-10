@@ -26,6 +26,7 @@ class UserSessionManager @Inject constructor(
         val HAS_COMPLETED_ONBOARDING = booleanPreferencesKey("has_completed_onboarding")
         val IS_LOGGED_IN = booleanPreferencesKey("is_logged_in")
         val USER_ROLE = stringPreferencesKey("user_role")
+        val IS_LINKED = booleanPreferencesKey("is_linked")
     }
 
     override val isLanguageSelected: Flow<Boolean> = context.dataStore.data.map { preferences ->
@@ -42,6 +43,10 @@ class UserSessionManager @Inject constructor(
 
     override val userRole: Flow<String?> = context.dataStore.data.map { preferences ->
         preferences[PreferencesKeys.USER_ROLE]
+    }
+
+    override val isLinked: Flow<Boolean> = context.dataStore.data.map { preferences ->
+        preferences[PreferencesKeys.IS_LINKED] ?: false
     }
 
     override suspend fun setLanguageSelected(selected: Boolean) {
@@ -69,6 +74,12 @@ class UserSessionManager @Inject constructor(
             } else {
                 preferences[PreferencesKeys.USER_ROLE] = role
             }
+        }
+    }
+
+    override suspend fun setLinked(linked: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[PreferencesKeys.IS_LINKED] = linked
         }
     }
 }

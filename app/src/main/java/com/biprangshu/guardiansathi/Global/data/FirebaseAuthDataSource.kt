@@ -30,4 +30,8 @@ class FirebaseAuthDataSource @Inject constructor(
     fun getCurentUserUid(): String? {
         return firebaseAuth.currentUser?.uid
     }
+
+    fun getCurrentUserPhotoUrl(): String? {
+        return firebaseAuth.currentUser?.photoUrl?.toString()
+    }
 }
