@@ -40,6 +40,15 @@ android {
 }
 
 dependencies {
+    // camera
+    implementation("androidx.camera:camera-camera2:1.6.0")
+    implementation("androidx.camera:camera-lifecycle:1.6.0")
+    implementation("androidx.camera:camera-view:1.6.0")
+    implementation("com.google.mlkit:barcode-scanning:17.3.0")
+
+    // Permission handling
+    implementation("com.google.accompanist:accompanist-permissions:0.37.3")
+
     // generating qr codes
     implementation("com.google.zxing:core:3.5.4")
 

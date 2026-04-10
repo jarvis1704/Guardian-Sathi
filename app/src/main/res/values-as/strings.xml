@@ -29,4 +29,13 @@
 \nGuardian Saathi ডাউনলোড কৰক: [Link]
 \n\nআপুনি মোৰ সুৰক্ষা আৰু স্বাস্থ্য আপডেটৰ সৈতে আপডেট থাকিব পাৰিব।
 \nকোড: </string>
+
+    <string name="LinkElder_T">এজন জ্যেষ্ঠ ব্যক্তিৰ সৈতে সংযোগ কৰক</string>
+    <string name="LinkElder_S">ইয়াত তেওঁলোকৰ QR কোড স্কেন কৰক</string>
+    <string name="LinkElder_S2">নহ\'লে, ইয়াত সংযোগ কোড লিখক:</string>
+    <string name="LinkElder_Share">গেলাৰী পৰা QR কোড স্কেন কৰক</string>
+    <string name="LinkElder_Share_cam">আপোনাৰ কেমেৰা QR কোডত ধৰি ৰাখক</string>
+    <string name="LinkElder_Share_S">আপুনি তেওঁলোকৰ সুৰক্ষা আৰু স্বাস্থ্য আপডেট পৰ্যবেক্ষণ কৰিবলৈ সুৰক্ষিতভাৱে সংযুক্ত হ\'ব।</string>
+    <string name="LinkElder_Cam_Per">QR কোড স্কেন কৰিবলৈ কেমেৰা অনুমতি প্রয়োজন</string>
+    <string name="LinkElder_Cam_Per_Button">অনুমতি দিয়ক</string>
 </resources>
