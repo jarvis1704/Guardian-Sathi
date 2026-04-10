@@ -1,268 +1,260 @@
 package com.biprangshu.guardiansathi.Guardian.presentation.screens
 
-import android.graphics.Bitmap
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
+import androidx.annotation.OptIn
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ExperimentalGetImage
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.biprangshu.guardiansathi.Elder.core.generateQrCodeAsBitmap
-import com.biprangshu.guardiansathi.Elder.core.shareQrCodeToWhatsApp
-import com.biprangshu.guardiansathi.Global.core.isGestureNav
-import com.biprangshu.guardiansathi.R
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.isGranted
-import com.google.accompanist.permissions.rememberPermissionState
-import com.google.accompanist.permissions.shouldShowRationale
-import androidx.camera.core.*
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.PreviewView
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.material.icons.filled.PhotoLibrary
-import androidx.compose.material.icons.filled.QrCodeScanner
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.modifier.modifierLocalConsumer
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
-import com.biprangshu.guardiansathi.Global.presentation.ui.components.errorMessage
-import com.biprangshu.guardiansathi.Guardian.core.QrCodeAnalyzer
-import com.biprangshu.guardiansathi.Guardian.core.scanQrFromUri
-import com.google.accompanist.permissions.*
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.LinkElderAction
+import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.LinkElderEvent
+import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.LinkElderState
+import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.LinkElderViewModel
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.barcode.common.Barcode
+import com.google.mlkit.vision.common.InputImage
 import java.util.concurrent.Executors
 
-
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun LinkElderPage(){
-    //camera permission to scan directly
-    val cameraPermission = rememberPermissionState(android.Manifest.permission.CAMERA)
+fun LinkElderRoot(
+    onNavigateToGuardianHome: () -> Unit,
+    viewModel: LinkElderViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
     LaunchedEffect(Unit) {
-        cameraPermission.launchPermissionRequest()
-    }
-
-    //scan image from gallery
-    val context = LocalContext.current
-    val galleryLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.PickVisualMedia()
-    ) { uri ->
-        uri?.let {
-            scanQrFromUri(
-                context = context,
-                uri = it,
-                onScanned = {
-                    errorMessage = "test error, scanned successfully= $it"
-                },
-                onFailure = { msg -> errorMessage = msg }
-            )
-        }
-    }
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp)
-            .padding(top = 50.dp)
-            .background(MaterialTheme.colorScheme.background),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        Text(
-            text = stringResource(R.string.LinkElder_T),
-            fontSize = 22.sp,
-            fontWeight = FontWeight.Bold
-        )
-
-        Spacer(modifier = Modifier.height(6.dp))
-
-        Text(
-            text = stringResource(R.string.LinkElder_S),
-            fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(0.6f)
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // QR Card
-        Box(
-            modifier = Modifier
-                .size(260.dp)
-                .border(
-                    width = 4.dp,
-                    color = MaterialTheme.colorScheme.surface,
-                    shape = RoundedCornerShape(24.dp)
-                ),
-            contentAlignment = Alignment.Center
-        ) {
-            // Replace with your QR image
-            Column(
-                modifier = Modifier
-                    .size(180.dp)
-                    .aspectRatio(1f)
-            ) {
-                when {
-                    cameraPermission.status.isGranted -> {
-                        CameraPreview(onScanned = {
-                            errorMessage = "test error, scanned successfully"
-                        })
-                    }
-                    cameraPermission.status.shouldShowRationale -> {
-                        PermissionRationaleScreen(onRequest = { cameraPermission.launchPermissionRequest() })
-                    }
-                    else -> {
-                        PermissionRationaleScreen(onRequest = { cameraPermission.launchPermissionRequest() })
-                    }
-                }
+        viewModel.events.collect { event ->
+            when (event) {
+                is LinkElderEvent.NavigateToGuardianHome -> onNavigateToGuardianHome()
+                is LinkElderEvent.ShowError -> { /* error shown via state */ }
             }
         }
+    }
 
-        Spacer(modifier = Modifier.height(20.dp))
+    LinkElderPage(
+        state = state,
+        onCodeInputChange = { viewModel.onAction(LinkElderAction.OnCodeInputChange(it)) },
+        onSubmitCode = { viewModel.onAction(LinkElderAction.OnSubmitCode) },
+        onQrScanned = { viewModel.onAction(LinkElderAction.OnQrScanned(it)) },
+        onToggleScanner = { viewModel.onAction(LinkElderAction.OnToggleScanner) }
+    )
+}
 
-        Text(
-            text = stringResource(R.string.LinkElder_S2),
-            fontSize = 12.sp,
-            color = Color.Gray
+@Composable
+fun LinkElderPage(
+    state: LinkElderState,
+    onCodeInputChange: (String) -> Unit,
+    onSubmitCode: () -> Unit,
+    onQrScanned: (String) -> Unit,
+    onToggleScanner: () -> Unit
+) {
+    val context = LocalContext.current
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    val cameraGranted = remember(context) {
+        ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) ==
+                PackageManager.PERMISSION_GRANTED
+    }
+    var cameraPermGranted by remember { mutableStateOf(cameraGranted) }
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        cameraPermGranted = granted
+        if (granted) onToggleScanner()
+    }
+
+    if (state.showScanner && cameraPermGranted) {
+        QrScannerView(
+            onQrDetected = onQrScanned,
+            onDismiss = onToggleScanner
         )
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        // Code box
-        Box(
-            modifier = Modifier
-                .clip(RoundedCornerShape(20.dp))
-                .background(MaterialTheme.colorScheme.surface),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "code",
-                modifier = Modifier
-                    .padding(20.dp)
-                    .padding(horizontal = 6.dp),
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                letterSpacing = 2.sp,
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        // Waiting status
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .clip(RoundedCornerShape(20.dp))
-                .background(MaterialTheme.colorScheme.surface)
-                .padding(horizontal = 16.dp, vertical = 10.dp)
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(8.dp)
-                    .background(MaterialTheme.colorScheme.primary, shape = CircleShape)
-            )
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Text(
-                text = stringResource(R.string.LinkGuardian_S3),
-                fontSize = 14.sp
-            )
-        }
-
-        Spacer(modifier = Modifier.weight(1f))
-
-        // gallery button
-        Button(
-            onClick = {
-                galleryLauncher.launch(
-                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                )
+    } else {
+        LinkElderMainContent(
+            state = state,
+            onCodeInputChange = onCodeInputChange,
+            onSubmitCode = {
+                keyboardController?.hide()
+                onSubmitCode()
             },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(55.dp),
-            shape = RoundedCornerShape(30.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary
-            )
-        ) {
-            Icon(
-                imageVector = Icons.Default.QrCodeScanner,
-                contentDescription = null,
-                tint = Color.White
-            )
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Text(
-                text = stringResource(R.string.LinkElder_Share),
-                fontSize = 16.sp,
-                color = Color.White
-            )
-        }
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        Text(
-            text = stringResource(R.string.LinkElder_Share_S),
-            fontSize = 12.sp,
-            color = Color.Gray,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .padding(bottom = if (isGestureNav) 20.dp else 70.dp)
+            onScanClick = {
+                if (cameraPermGranted) {
+                    onToggleScanner()
+                } else {
+                    permissionLauncher.launch(Manifest.permission.CAMERA)
+                }
+            }
         )
     }
 }
 
 @Composable
-private fun CameraPreview(onScanned: (String) -> Unit) {
+private fun LinkElderMainContent(
+    state: LinkElderState,
+    onCodeInputChange: (String) -> Unit,
+    onSubmitCode: () -> Unit,
+    onScanClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .padding(24.dp)
+            .padding(top = 50.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top
+    ) {
+        Text(
+            text = "Link to Elder",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = "Enter the connection code from your Elder's device, or scan their QR code.",
+            fontSize = 14.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(0.7f),
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(modifier = Modifier.height(40.dp))
+
+        OutlinedButton(
+            onClick = onScanClick,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            shape = RoundedCornerShape(16.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.QrCodeScanner,
+                contentDescription = null,
+                modifier = Modifier.size(20.dp)
+            )
+            Text(text = "  Scan QR Code", fontSize = 16.sp)
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = "— or enter code manually —",
+            fontSize = 13.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(0.5f)
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        OutlinedTextField(
+            value = state.codeInput,
+            onValueChange = onCodeInputChange,
+            label = { Text("Connection Code") },
+            placeholder = { Text("SAATHI-XXXXXX") },
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true,
+            isError = state.error != null,
+            supportingText = {
+                if (state.error != null) {
+                    Text(state.error, color = MaterialTheme.colorScheme.error)
+                }
+            },
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Characters,
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(onDone = { onSubmitCode() }),
+            shape = RoundedCornerShape(12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Button(
+            onClick = onSubmitCode,
+            enabled = state.codeInput.isNotBlank() && !state.isLoading,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            shape = RoundedCornerShape(16.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            )
+        ) {
+            if (state.isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(20.dp),
+                    color = Color.White,
+                    strokeWidth = 2.dp
+                )
+            } else {
+                Text(text = "Link Now", fontSize = 16.sp, color = Color.White)
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalGetImage::class)
+@Composable
+private fun QrScannerView(
+    onQrDetected: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val cameraExecutor = remember { Executors.newSingleThreadExecutor() }
-    val analyzer = remember { QrCodeAnalyzer(onQrCodeScanned = onScanned) }
+    var hasScanned by remember { mutableStateOf(false) }
 
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .aspectRatio(1f)) {
-
-        // Live camera feed
+    Box(modifier = Modifier.fillMaxSize()) {
         AndroidView(
             factory = { ctx ->
                 val previewView = PreviewView(ctx)
@@ -270,20 +262,39 @@ private fun CameraPreview(onScanned: (String) -> Unit) {
 
                 cameraProviderFuture.addListener({
                     val cameraProvider = cameraProviderFuture.get()
-
-                    val preview = Preview
-                        .Builder()
-                        .setTargetAspectRatio(AspectRatio.RATIO_4_3)
-                        .build()
-                        .also {
-                        it.setSurfaceProvider(previewView.surfaceProvider)
+                    val preview = Preview.Builder().build().also {
+                        it.surfaceProvider = previewView.surfaceProvider
                     }
-
+                    val barcodeScanner = BarcodeScanning.getClient()
                     val imageAnalysis = ImageAnalysis.Builder()
-                        .setTargetAspectRatio(AspectRatio.RATIO_4_3)
                         .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                         .build()
-                        .also { it.setAnalyzer(cameraExecutor, analyzer) }
+                        .also { analysis ->
+                            analysis.setAnalyzer(cameraExecutor) { imageProxy ->
+                                val mediaImage = imageProxy.image
+                                if (mediaImage != null && !hasScanned) {
+                                    val image = InputImage.fromMediaImage(
+                                        mediaImage,
+                                        imageProxy.imageInfo.rotationDegrees
+                                    )
+                                    barcodeScanner.process(image)
+                                        .addOnSuccessListener { barcodes ->
+                                            val qr = barcodes.firstOrNull {
+                                                it.format == Barcode.FORMAT_QR_CODE
+                                            }
+                                            qr?.rawValue?.let { value ->
+                                                if (!hasScanned) {
+                                                    hasScanned = true
+                                                    onQrDetected(value)
+                                                }
+                                            }
+                                        }
+                                        .addOnCompleteListener { imageProxy.close() }
+                                } else {
+                                    imageProxy.close()
+                                }
+                            }
+                        }
 
                     try {
                         cameraProvider.unbindAll()
@@ -300,45 +311,22 @@ private fun CameraPreview(onScanned: (String) -> Unit) {
 
                 previewView
             },
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f)
+            modifier = Modifier.fillMaxSize()
         )
 
-        // Overlay UI
-        ScannerOverlay()
-    }
-}
-
-@Composable
-private fun ScannerOverlay() {
-    Box(modifier = Modifier.fillMaxSize()) {
-        Column(
+        Box(
             modifier = Modifier
-                .align(Alignment.Center)
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween
+                .fillMaxSize()
+                .padding(24.dp),
+            contentAlignment = Alignment.BottomCenter
         ) {
-            Text(
-                text = stringResource(R.string.LinkElder_Share_cam),
-                style = MaterialTheme.typography.bodyMedium,
-                color = Color.White.copy(alpha = 0.8f),
-                textAlign = TextAlign.Center
-            )
+            OutlinedButton(
+                onClick = onDismiss,
+                shape = RoundedCornerShape(16.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Cancel", color = Color.White)
+            }
         }
-    }
-}
-
-@Composable
-private fun PermissionRationaleScreen(onRequest: () -> Unit) {
-    Column(
-        modifier = Modifier.fillMaxSize().padding(24.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(stringResource(R.string.LinkElder_Cam_Per))
-        Spacer(Modifier.height(16.dp))
-        Button(onClick = onRequest) { Text(stringResource(R.string.LinkElder_Cam_Per_Button)) }
     }
 }

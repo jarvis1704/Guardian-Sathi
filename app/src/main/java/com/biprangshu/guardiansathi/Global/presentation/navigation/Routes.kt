@@ -22,3 +22,23 @@ data object RegistrationRoute
 
 @Serializable
 data object MainRoute
+
+// Elder graph
+@Serializable
+data object ElderGraph
+
+@Serializable
+data object LinkGuardianRoute
+
+@Serializable
+data object ElderHomeRoute
+
+// Guardian graph
+@Serializable
+data object GuardianGraph
+
+@Serializable
+data object LinkElderRoute
+
+@Serializable
+data object GuardianHomeRoute

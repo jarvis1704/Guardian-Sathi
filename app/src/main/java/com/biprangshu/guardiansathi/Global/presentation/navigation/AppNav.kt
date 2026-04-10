@@ -3,6 +3,7 @@ package com.biprangshu.guardiansathi.Global.presentation.navigation
 import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -10,40 +11,30 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.*
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
+import com.biprangshu.guardiansathi.Elder.presentation.screens.LinkGuardianRoot
+import com.biprangshu.guardiansathi.Guardian.presentation.screens.LinkElderRoot
 import com.biprangshu.guardiansathi.Global.presentation.login.LoginRoot
 import com.biprangshu.guardiansathi.Global.presentation.onboarding.OnboardingRoot
+import com.biprangshu.guardiansathi.Global.presentation.onboarding.LanguageSelectionPage
 import com.biprangshu.guardiansathi.Global.presentation.registration.RegistrationRoot
 import com.biprangshu.guardiansathi.Global.presentation.splash.SplashRoot
-import com.biprangshu.guardiansathi.Global.presentation.splash.SplashViewModel
-import com.biprangshu.guardiansathi.Global.presentation.onboarding.LanguageSelectionPage
-import com.biprangshu.guardiansathi.Global.presentation.splash.LoadingPage
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.OstrichAlgorithm
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.errorMessage
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.isErrorAlert
-import com.biprangshu.guardiansathi.Global.presentation.navigation.LanguageSelectionRoute
-import com.biprangshu.guardiansathi.Global.presentation.navigation.LanguageSelectionViewModel
-import com.biprangshu.guardiansathi.Global.presentation.navigation.LoginRoute
-import com.biprangshu.guardiansathi.Global.presentation.navigation.MainRoute
-import com.biprangshu.guardiansathi.Global.presentation.navigation.OnboardingRoute
-import com.biprangshu.guardiansathi.Global.presentation.navigation.RegistrationRoute
-import com.biprangshu.guardiansathi.Global.presentation.navigation.SplashRoute
-
-import com.biprangshu.guardiansathi.Global.presentation.navigation.RegistrationGraph
-
-// ROUTES (keep centralized)
 
 @Composable
 fun AppNav(
     navController: NavHostController
 ) {
-    //for errorMessage
     LaunchedEffect(key1 = errorMessage) {
-        if (errorMessage !="" && errorMessage !in OstrichAlgorithm){
-            isErrorAlert =true
+        if (errorMessage != "" && errorMessage !in OstrichAlgorithm) {
+            isErrorAlert = true
             Log.d("apperror", errorMessage)
         }
     }
@@ -53,26 +44,18 @@ fun AppNav(
         startDestination = RegistrationGraph
     ) {
 
-        // 🔹 Registration Flow
-        navigation<RegistrationGraph>(
-            startDestination = SplashRoute
-        ) {
+        // Registration / onboarding flow
+        navigation<RegistrationGraph>(startDestination = SplashRoute) {
             registrationNav(navController)
         }
 
-        // 🔹 Elder Flow
-        navigation(
-            startDestination = "elder_home",
-            route = Routes.ELDER
-        ) {
+        // Elder flow
+        navigation<ElderGraph>(startDestination = LinkGuardianRoute) {
             elderNav(navController)
         }
 
-        // 🔹 Guardian Flow
-        navigation(
-            startDestination = "guardian_home",
-            route = Routes.GUARDIAN
-        ) {
+        // Guardian flow
+        navigation<GuardianGraph>(startDestination = LinkElderRoute) {
             guardianNav(navController)
         }
     }
@@ -103,8 +86,29 @@ fun NavGraphBuilder.registrationNav(navController: NavController) {
                 }
             },
             onNavigateToMain = {
-                navController.navigate(MainRoute) {
+                // Safety fallback — should not be reached in normal flow
+                navController.navigate(RegistrationRoute) {
                     popUpTo(SplashRoute) { inclusive = true }
+                }
+            },
+            onNavigateToLinkGuardian = {
+                navController.navigate(ElderGraph) {
+                    popUpTo(RegistrationGraph) { inclusive = true }
+                }
+            },
+            onNavigateToLinkElder = {
+                navController.navigate(GuardianGraph) {
+                    popUpTo(RegistrationGraph) { inclusive = true }
+                }
+            },
+            onNavigateToElderHome = {
+                navController.navigate(ElderHomeRoute) {
+                    popUpTo(RegistrationGraph) { inclusive = true }
+                }
+            },
+            onNavigateToGuardianHome = {
+                navController.navigate(GuardianHomeRoute) {
+                    popUpTo(RegistrationGraph) { inclusive = true }
                 }
             }
         )
@@ -143,30 +147,67 @@ fun NavGraphBuilder.registrationNav(navController: NavController) {
     composable<RegistrationRoute> {
         RegistrationRoot(
             onNavigateToMain = {
-                navController.navigate(MainRoute) {
-                    popUpTo(RegistrationRoute) { inclusive = true }
+                // After role selection, clear entire back stack and re-run Splash
+                // so SplashViewModel checks link status and routes correctly.
+                navController.navigate(SplashRoute) {
+                    popUpTo(0) { inclusive = true }
                 }
             }
         )
     }
 
     composable<MainRoute> {
+        // Safety fallback
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text("Main App Flow (Placeholder)")
+            CircularProgressIndicator()
         }
     }
 }
 
 fun NavGraphBuilder.elderNav(navController: NavController) {
 
-    composable("elder_home") {
-//        ElderHomeScreen()
+    composable<LinkGuardianRoute> {
+        LinkGuardianRoot(
+            onNavigateToElderHome = {
+                navController.navigate(ElderHomeRoute) {
+                    popUpTo(LinkGuardianRoute) { inclusive = true }
+                }
+            }
+        )
+    }
+
+    composable<ElderHomeRoute> {
+        ElderHomePlaceholder()
     }
 }
 
 fun NavGraphBuilder.guardianNav(navController: NavController) {
 
-    composable("guardian_home") {
-//        GuardianHomeScreen()
+    composable<LinkElderRoute> {
+        LinkElderRoot(
+            onNavigateToGuardianHome = {
+                navController.navigate(GuardianHomeRoute) {
+                    popUpTo(LinkElderRoute) { inclusive = true }
+                }
+            }
+        )
+    }
+
+    composable<GuardianHomeRoute> {
+        GuardianHomePlaceholder()
+    }
+}
+
+@Composable
+private fun ElderHomePlaceholder() {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Text("Elder Home — Connected!")
+    }
+}
+
+@Composable
+private fun GuardianHomePlaceholder() {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Text("Guardian Home — Connected!")
     }
 }

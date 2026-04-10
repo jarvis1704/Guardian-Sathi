@@ -52,6 +52,16 @@ dependencies {
     // generating qr codes
     implementation("com.google.zxing:core:3.5.4")
 
+    // ML Kit barcode scanning (QR)
+    implementation("com.google.mlkit:barcode-scanning:17.3.0")
+
+    // CameraX
+    implementation("androidx.camera:camera-core:1.4.1")
+    implementation("androidx.camera:camera-camera2:1.4.1")
+    implementation("androidx.camera:camera-lifecycle:1.4.1")
+    implementation("androidx.camera:camera-view:1.4.1")
+
+
     // Material Icons
     implementation("androidx.compose.material:material-icons-core:1.7.8")
     implementation("androidx.compose.material:material-icons-extended:1.7.8")

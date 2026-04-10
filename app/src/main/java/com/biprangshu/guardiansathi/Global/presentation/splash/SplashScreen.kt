@@ -11,6 +11,10 @@ fun SplashRoot(
     onNavigateToLogin: () -> Unit,
     onNavigateToRegistration: () -> Unit,
     onNavigateToMain: () -> Unit,
+    onNavigateToLinkGuardian: () -> Unit,
+    onNavigateToLinkElder: () -> Unit,
+    onNavigateToElderHome: () -> Unit,
+    onNavigateToGuardianHome: () -> Unit,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -21,6 +25,10 @@ fun SplashRoot(
                 is SplashEvent.NavigateToLogin -> onNavigateToLogin()
                 is SplashEvent.NavigateToRegistration -> onNavigateToRegistration()
                 is SplashEvent.NavigateToMain -> onNavigateToMain()
+                is SplashEvent.NavigateToLinkGuardian -> onNavigateToLinkGuardian()
+                is SplashEvent.NavigateToLinkElder -> onNavigateToLinkElder()
+                is SplashEvent.NavigateToElderHome -> onNavigateToElderHome()
+                is SplashEvent.NavigateToGuardianHome -> onNavigateToGuardianHome()
             }
         }
     }
