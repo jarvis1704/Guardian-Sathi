@@ -45,6 +45,25 @@ class FirestoreUserDataSource @Inject constructor(
         }
     }
 
+    suspend fun getUserById(uid: String): Result<User, DataError.Network> {
+        return try {
+            val doc = usersCollection.document(uid).get().await()
+            if (!doc.exists()) return Result.Error(DataError.Network.NOT_FOUND)
+            Result.Success(
+                User(
+                    uid = uid,
+                    email = doc.getString("email"),
+                    displayName = doc.getString("displayName"),
+                    photoUrl = doc.getString("photoUrl"),
+                    role = doc.getString("role")
+                )
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Result.Error(DataError.Network.UNKNOWN)
+        }
+    }
+
     suspend fun updateUserRole(uid: String, role: String): Result<Unit, DataError.Network> {
         return try {
             usersCollection.document(uid).update("role", role).await()

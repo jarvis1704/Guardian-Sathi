@@ -3,6 +3,7 @@ package com.biprangshu.guardiansathi.Guardian.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.biprangshu.guardiansathi.Global.core.data.FirebaseAuthDataSource
+import com.biprangshu.guardiansathi.Global.core.data.FirestoreUserDataSource
 import com.biprangshu.guardiansathi.Global.core.domain.DataError
 import com.biprangshu.guardiansathi.Global.core.domain.LinkRepository
 import com.biprangshu.guardiansathi.Global.core.domain.Result
@@ -32,6 +33,11 @@ sealed interface LinkElderAction {
 
 sealed interface LinkElderEvent {
     data object NavigateToGuardianHome : LinkElderEvent
+    data class ShowConnectionSuccess(
+        val connectedName: String,
+        val myPhotoUrl: String,
+        val connectedPhotoUrl: String
+    ) : LinkElderEvent
     data class ShowError(val message: String) : LinkElderEvent
 }
 
@@ -39,7 +45,8 @@ sealed interface LinkElderEvent {
 class LinkElderViewModel @Inject constructor(
     private val linkRepository: LinkRepository,
     private val sessionRepository: SessionRepository,
-    private val firebaseAuthDataSource: FirebaseAuthDataSource
+    private val firebaseAuthDataSource: FirebaseAuthDataSource,
+    private val firestoreUserDataSource: FirestoreUserDataSource
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(LinkElderState())
@@ -85,7 +92,19 @@ class LinkElderViewModel @Inject constructor(
                 is Result.Success -> {
                     sessionRepository.setLinked(true)
                     _state.update { it.copy(isLoading = false) }
-                    _events.emit(LinkElderEvent.NavigateToGuardianHome)
+                    val linkedUid = when (val s = linkRepository.getLinkStatus(guardianUid)) {
+                        is Result.Success -> s.data.linkedUid
+                        else -> null
+                    }
+                    if (linkedUid != null) {
+                        val connectedUser = firestoreUserDataSource.getUserById(linkedUid)
+                        val myPhotoUrl = firebaseAuthDataSource.getCurrentUserPhotoUrl() ?: ""
+                        val connectedName = (connectedUser as? Result.Success)?.data?.displayName ?: ""
+                        val connectedPhoto = (connectedUser as? Result.Success)?.data?.photoUrl ?: ""
+                        _events.emit(LinkElderEvent.ShowConnectionSuccess(connectedName, myPhotoUrl, connectedPhoto))
+                    } else {
+                        _events.emit(LinkElderEvent.NavigateToGuardianHome)
+                    }
                 }
                 is Result.Error -> {
                     val message = when (result.error) {

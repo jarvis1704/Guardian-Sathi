@@ -39,6 +39,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -56,6 +57,7 @@ import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.biprangshu.guardiansathi.Global.presentation.ui.components.ConnectionSuccessDialog
 import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.LinkElderAction
 import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.LinkElderEvent
 import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.LinkElderState
@@ -71,11 +73,13 @@ fun LinkElderRoot(
     viewModel: LinkElderViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    var successDialog by remember { mutableStateOf<LinkElderEvent.ShowConnectionSuccess?>(null) }
 
     LaunchedEffect(Unit) {
         viewModel.events.collect { event ->
             when (event) {
                 is LinkElderEvent.NavigateToGuardianHome -> onNavigateToGuardianHome()
+                is LinkElderEvent.ShowConnectionSuccess -> successDialog = event
                 is LinkElderEvent.ShowError -> { /* error shown via state */ }
             }
         }
@@ -88,6 +92,20 @@ fun LinkElderRoot(
         onQrScanned = { viewModel.onAction(LinkElderAction.OnQrScanned(it)) },
         onToggleScanner = { viewModel.onAction(LinkElderAction.OnToggleScanner) }
     )
+
+    successDialog?.let { data ->
+        ConnectionSuccessDialog(
+            name = data.connectedName,
+            photourl_1 = data.myPhotoUrl,
+            photourl_2 = data.connectedPhotoUrl,
+            onContinue = {
+                successDialog = null
+                onNavigateToGuardianHome()
+            },
+            onRetry = { successDialog = null },
+            onDismiss = { successDialog = null }
+        )
+    }
 }
 
 @Composable

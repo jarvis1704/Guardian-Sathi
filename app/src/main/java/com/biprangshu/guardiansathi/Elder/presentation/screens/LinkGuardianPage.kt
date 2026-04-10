@@ -35,7 +35,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -57,6 +59,7 @@ import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.LinkGuardianEve
 import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.LinkGuardianState
 import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.LinkGuardianViewModel
 import com.biprangshu.guardiansathi.Global.core.isGestureNav
+import com.biprangshu.guardiansathi.Global.presentation.ui.components.ConnectionSuccessDialog
 import com.biprangshu.guardiansathi.R
 
 @Composable
@@ -67,11 +70,13 @@ fun LinkGuardianRoot(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val shareMessagePrefix = stringResource(R.string.LinkGuardian_Share_Message)
+    var successDialog by remember { mutableStateOf<LinkGuardianEvent.ShowConnectionSuccess?>(null) }
 
     LaunchedEffect(Unit) {
         viewModel.events.collect { event ->
             when (event) {
                 is LinkGuardianEvent.NavigateToElderHome -> onNavigateToElderHome()
+                is LinkGuardianEvent.ShowConnectionSuccess -> successDialog = event
             }
         }
     }
@@ -87,6 +92,20 @@ fun LinkGuardianRoot(
         },
         onRetryClick = { viewModel.onAction(LinkGuardianAction.OnRetryGenerateCode) }
     )
+
+    successDialog?.let { data ->
+        ConnectionSuccessDialog(
+            name = data.connectedName,
+            photourl_1 = data.myPhotoUrl,
+            photourl_2 = data.connectedPhotoUrl,
+            onContinue = {
+                successDialog = null
+                onNavigateToElderHome()
+            },
+            onRetry = { successDialog = null },
+            onDismiss = { successDialog = null }
+        )
+    }
 }
 
 @Composable

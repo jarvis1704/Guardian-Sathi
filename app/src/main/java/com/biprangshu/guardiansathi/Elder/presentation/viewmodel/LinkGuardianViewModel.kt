@@ -3,6 +3,7 @@ package com.biprangshu.guardiansathi.Elder.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.biprangshu.guardiansathi.Global.core.data.FirebaseAuthDataSource
+import com.biprangshu.guardiansathi.Global.core.data.FirestoreUserDataSource
 import com.biprangshu.guardiansathi.Global.core.domain.LinkRepository
 import com.biprangshu.guardiansathi.Global.core.domain.Result
 import com.biprangshu.guardiansathi.Global.domain.SessionRepository
@@ -25,6 +26,11 @@ data class LinkGuardianState(
 
 sealed interface LinkGuardianEvent {
     data object NavigateToElderHome : LinkGuardianEvent
+    data class ShowConnectionSuccess(
+        val connectedName: String,
+        val myPhotoUrl: String,
+        val connectedPhotoUrl: String
+    ) : LinkGuardianEvent
 }
 
 sealed interface LinkGuardianAction {
@@ -35,7 +41,8 @@ sealed interface LinkGuardianAction {
 class LinkGuardianViewModel @Inject constructor(
     private val linkRepository: LinkRepository,
     private val sessionRepository: SessionRepository,
-    private val firebaseAuthDataSource: FirebaseAuthDataSource
+    private val firebaseAuthDataSource: FirebaseAuthDataSource,
+    private val firestoreUserDataSource: FirestoreUserDataSource
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(LinkGuardianState())
@@ -78,7 +85,16 @@ class LinkGuardianViewModel @Inject constructor(
                 if (linkStatus.isLinked) {
                     sessionRepository.setLinked(true)
                     _state.update { it.copy(isWaiting = false) }
-                    _events.emit(LinkGuardianEvent.NavigateToElderHome)
+                    val linkedUid = linkStatus.linkedUid
+                    if (linkedUid != null) {
+                        val connectedUser = firestoreUserDataSource.getUserById(linkedUid)
+                        val myPhotoUrl = firebaseAuthDataSource.getCurrentUserPhotoUrl() ?: ""
+                        val connectedName = (connectedUser as? Result.Success)?.data?.displayName ?: ""
+                        val connectedPhoto = (connectedUser as? Result.Success)?.data?.photoUrl ?: ""
+                        _events.emit(LinkGuardianEvent.ShowConnectionSuccess(connectedName, myPhotoUrl, connectedPhoto))
+                    } else {
+                        _events.emit(LinkGuardianEvent.NavigateToElderHome)
+                    }
                 }
             }
         }
