@@ -40,6 +40,9 @@ android {
 }
 
 dependencies {
+    //compose bom
+    implementation(platform("androidx.compose:compose-bom:2026.03.01"))
+
     // camera
     implementation("androidx.camera:camera-camera2:1.6.0")
     implementation("androidx.camera:camera-lifecycle:1.6.0")

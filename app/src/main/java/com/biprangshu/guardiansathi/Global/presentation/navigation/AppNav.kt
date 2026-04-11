@@ -27,6 +27,7 @@ import com.biprangshu.guardiansathi.Global.presentation.splash.SplashRoot
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.OstrichAlgorithm
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.errorMessage
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.isErrorAlert
+import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianHomeScreen
 
 @Composable
 fun AppNav(
@@ -194,7 +195,7 @@ fun NavGraphBuilder.guardianNav(navController: NavController) {
     }
 
     composable<GuardianHomeRoute> {
-        GuardianHomePlaceholder()
+        GuardianHomeScreen()
     }
 }
 
@@ -202,12 +203,5 @@ fun NavGraphBuilder.guardianNav(navController: NavController) {
 private fun ElderHomePlaceholder() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text("Elder Home — Connected!")
-    }
-}
-
-@Composable
-private fun GuardianHomePlaceholder() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Guardian Home — Connected!")
     }
 }
