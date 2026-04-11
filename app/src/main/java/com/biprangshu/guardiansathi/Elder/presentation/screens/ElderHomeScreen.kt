@@ -19,7 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.biprangshu.guardiansathi.Elder.core.GuardianService
+import com.biprangshu.guardiansathi.Elder.core.getDetailedBatteryInfo
+import com.biprangshu.guardiansathi.Elder.core.getLocationFlow
 import com.biprangshu.guardiansathi.Elder.presentation.Components.PermissionAlertDialog
+import kotlinx.coroutines.launch
 
 @Composable
 fun ElderHomeScreen() {
@@ -55,10 +58,8 @@ fun ElderHomeScreen() {
         // Start service regardless (background location is optional but recommended)
         startGuardianService(context)
         serviceStarted = true
+        //todo
     }
-    PermissionAlertDialog(
-        onContinue = {}
-    )
     LaunchedEffect(Unit) {
         // Request basic permissions first
         val permissionsToRequest = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -73,7 +74,7 @@ fun ElderHomeScreen() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
         }
-//        basicPermissionLauncher.launch(permissionsToRequest)
+        basicPermissionLauncher.launch(permissionsToRequest)
     }
 
     // Request background location after basic permissions are granted
@@ -83,46 +84,63 @@ fun ElderHomeScreen() {
         }
     }
 
+    //UI part starts here:
+    var currentLocation by remember { mutableStateOf<android.location.Location?>(null) }
+    LaunchedEffect(Unit) {
+        getLocationFlow(context).collect { location ->
+            currentLocation = location
+        }
+    }
+
+    val batteryinfo = getDetailedBatteryInfo(context)
+
+
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        when {
-            serviceStarted -> {
-                Text("Elder Home - Guardian Service Active! ✓")
-            }
-            basicPermissionsGranted && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("Background location permission needed")
-                    Text("This allows us to protect you even when the app is closed")
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Button(onClick = {
-                        backgroundLocationLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-                    }) {
-                        Text("Grant Background Location")
-                    }
+        Column(
+
+        ) {
+            when {
+                serviceStarted -> {
+                    Text("Elder Home - Guardian Service Active! ✓")
                 }
-            }
-            else -> {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("Permissions required for your protection")
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Button(onClick = {
-                        val permissionsToRequest = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                            arrayOf(
-                                Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.ACCESS_COARSE_LOCATION,
-                                Manifest.permission.POST_NOTIFICATIONS
-                            )
-                        } else {
-                            arrayOf(
-                                Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.ACCESS_COARSE_LOCATION
-                            )
+                basicPermissionsGranted && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text("Background location permission needed")
+                        Text("This allows us to protect you even when the app is closed")
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Button(onClick = {
+                            backgroundLocationLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                        }) {
+                            Text("Grant Background Location")
                         }
-                        basicPermissionLauncher.launch(permissionsToRequest)
-                    }) {
-                        Text("Grant Permissions")
+                    }
+                }
+                else -> {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text("Permissions required for your protection")
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Button(onClick = {
+                            val permissionsToRequest = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                arrayOf(
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                                    Manifest.permission.POST_NOTIFICATIONS
+                                )
+                            } else {
+                                arrayOf(
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION
+                                )
+                            }
+                            basicPermissionLauncher.launch(permissionsToRequest)
+                        }) {
+                            Text("Grant Permissions")
+                        }
                     }
                 }
             }
+            Text("Battery info: $batteryinfo")
+            Text("Current location: $currentLocation")
         }
     }
 }
