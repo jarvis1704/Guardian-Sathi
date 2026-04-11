@@ -36,6 +36,7 @@
     <string name="LinkElder_Share">गैलरी से QR कोड स्कैन करें</string>
     <string name="LinkElder_Share_cam">अपने कैमरे को QR कोड पर रखें</string>
     <string name="LinkElder_Share_S">आप उनकी सुरक्षा और स्वास्थ्य अपडेट की निगरानी के लिए सुरक्षित रूप से कनेक्ट हो जाएंगे।</string>
+    <string name="LinkElder_button">लिंक करें</string>
     <string name="LinkElder_Cam_Per">QR कोड स्कैन करने के लिए कैमरा एक्सेस आवश्यक है</string>
     <string name="LinkElder_Cam_Per_Button">अनुमति दें</string>
 

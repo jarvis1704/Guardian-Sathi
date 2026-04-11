@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -46,6 +47,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -62,6 +64,7 @@ import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.LinkElderAct
 import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.LinkElderEvent
 import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.LinkElderState
 import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.LinkElderViewModel
+import com.biprangshu.guardiansathi.R
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
@@ -173,7 +176,7 @@ private fun LinkElderMainContent(
         verticalArrangement = Arrangement.Top
     ) {
         Text(
-            text = "Link to Elder",
+            text = stringResource(R.string.LinkElder_T),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold
         )
@@ -181,7 +184,7 @@ private fun LinkElderMainContent(
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "Enter the connection code from your Elder's device, or scan their QR code.",
+            text = stringResource(R.string.LinkElder_Share_S),
             fontSize = 14.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(0.7f),
             textAlign = TextAlign.Center
@@ -201,13 +204,14 @@ private fun LinkElderMainContent(
                 contentDescription = null,
                 modifier = Modifier.size(20.dp)
             )
-            Text(text = "  Scan QR Code", fontSize = 16.sp)
+            Spacer(Modifier.width(6.dp))
+            Text(text = stringResource(R.string.LinkElder_S), fontSize = 16.sp)
         }
 
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "— or enter code manually —",
+            text = stringResource(R.string.LinkElder_S2),
             fontSize = 13.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(0.5f)
         )
@@ -255,7 +259,7 @@ private fun LinkElderMainContent(
                     strokeWidth = 2.dp
                 )
             } else {
-                Text(text = "Link Now", fontSize = 16.sp, color = Color.White)
+                Text(text = stringResource(R.string.LinkElder_button), fontSize = 16.sp, color = Color.White)
             }
         }
     }

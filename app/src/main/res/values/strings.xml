@@ -36,6 +36,7 @@
     <string name="LinkElder_Share">Scan Code from Gallery</string>
     <string name="LinkElder_Share_cam">Point your camera at the QR code</string>
     <string name="LinkElder_Share_S">You will be securely connected to monitor their safety and health updates.</string>
+    <string name="LinkElder_button">Link Now</string>
     <string name="LinkElder_Cam_Per">Camera access is needed to scan QR codes</string>
     <string name="LinkElder_Cam_Per_Button">Grant Permission</string>
 
