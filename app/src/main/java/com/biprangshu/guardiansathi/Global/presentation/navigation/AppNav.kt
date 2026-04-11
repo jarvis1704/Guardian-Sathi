@@ -17,6 +17,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import com.biprangshu.guardiansathi.Elder.presentation.screens.ElderHomeScreen
 import com.biprangshu.guardiansathi.Elder.presentation.screens.LinkGuardianRoot
 import com.biprangshu.guardiansathi.Guardian.presentation.screens.LinkElderRoot
 import com.biprangshu.guardiansathi.Global.presentation.login.LoginRoot
@@ -178,7 +179,7 @@ fun NavGraphBuilder.elderNav(navController: NavController) {
     }
 
     composable<ElderHomeRoute> {
-        ElderHomePlaceholder()
+        ElderHomeScreen()
     }
 }
 
@@ -196,12 +197,5 @@ fun NavGraphBuilder.guardianNav(navController: NavController) {
 
     composable<GuardianHomeRoute> {
         GuardianHomeScreen()
-    }
-}
-
-@Composable
-private fun ElderHomePlaceholder() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Elder Home — Connected!")
     }
 }
