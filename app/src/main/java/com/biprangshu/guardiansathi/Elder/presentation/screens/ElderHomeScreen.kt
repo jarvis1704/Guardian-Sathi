@@ -58,23 +58,10 @@ fun ElderHomeScreen() {
         // Start service regardless (background location is optional but recommended)
         startGuardianService(context)
         serviceStarted = true
-        //todo
     }
     LaunchedEffect(Unit) {
         // Request basic permissions first
-        val permissionsToRequest = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.POST_NOTIFICATIONS
-            )
-        } else {
-            arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-        }
-        basicPermissionLauncher.launch(permissionsToRequest)
+
     }
 
     // Request background location after basic permissions are granted
