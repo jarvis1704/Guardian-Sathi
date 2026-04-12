@@ -1,14 +1,16 @@
 <resources>
     <string name="app_name">संरक्षक साथी</string>
     <string name="continue_button">आगे बढ़ें</string>
-    <string name="onboarding_1_T">Continue</string>
-    <string name="onboarding_1_S">Continue</string>
-    <string name="onboarding_2_T">Continue</string>
-    <string name="onboarding_2_S">Continue</string>
-    <string name="onboarding_3_T">Continue</string>
-    <string name="onboarding_3_S">Continue</string>
-    <string name="onboarding_B1">Continue</string>
-    <string name="onboarding_B2">Continue</string>
+    <string name="onboarding_1_T">आपके बुजुर्ग, हमेशा सुरक्षित</string>
+    <string name="onboarding_1_S">गार्डियन साथी आपके बुजुर्ग प्रियजनों की 24/7 निगरानी करता है, तुरंत आपातकालीन अलर्ट के साथ—यहां तक कि जब आप उनके साथ नहीं होते।</string>
+    <string name="onboarding_2_T">जुड़े रहें, निश्चिंत रहें</string>
+    <string name="onboarding_2_S">दवाइयों की याद दिलाने, बैटरी स्थिति और लोकेशन के रियल-टाइम अपडेट प्राप्त करें। बिना बार-बार कॉल किए जानें कि वे सुरक्षित हैं।</string>
+    <string name="onboarding_3_T">वास्तव में सुरक्षा देने वाला AI</string>
+    <string name="onboarding_3_S">हमारा बुद्धिमान गार्डियन धोखाधड़ी का पता लगाता है, असामान्य लेन-देन की निगरानी करता है और संभावित खतरों के बारे में आपको सचेत करता है।</string>
+    <string name="onboarding_B1">आगे</string>
+    <string name="onboarding_B2">छोड़ें</string>
+    <string name="onboarding_B3">शुरू करें</string>
+
     <string name="login_title">आपकी व्यक्तिगत सुरक्षा यहीं से शुरू होती है</string>
     <string name="login_sub">स्मार्ट सुरक्षा, तुरंत अलर्ट और मन की शांति</string>
     <string name="login_button">Google के साथ जारी रखें</string>

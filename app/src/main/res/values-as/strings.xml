@@ -1,14 +1,16 @@
 <resources>
     <string name="app_name">অভিভাৱক সাৰথি</string>
     <string name="continue_button">আগবাঢ়ক</string>
-    <string name="onboarding_1_T">Continue</string>
-    <string name="onboarding_1_S">Continue</string>
-    <string name="onboarding_2_T">Continue</string>
-    <string name="onboarding_2_S">Continue</string>
-    <string name="onboarding_3_T">Continue</string>
-    <string name="onboarding_3_S">Continue</string>
-    <string name="onboarding_B1">Continue</string>
-    <string name="onboarding_B2">Continue</string>
+    <string name="onboarding_1_T">আপোনাৰ জ্যেষ্ঠসকল, সদায় সুৰক্ষিত</string>
+    <string name="onboarding_1_S">গাৰ্ডিয়ান সাথী আপোনাৰ জ্যেষ্ঠ প্ৰিয়জনসকলক ২৪/৭ নজৰ ৰাখে আৰু তৎক্ষণাত জৰুৰী সতর্কতা দিয়ে—যেতিয়াও আপুনি ওচৰত নাথাকিলেও।</string>
+    <string name="onboarding_2_T">সংযুক্ত থাকক, নিশ্চিন্ত থাকক</string>
+    <string name="onboarding_2_S">ঔষধৰ স্মৰণিকা, বেটাৰী অৱস্থা আৰু লোকেচনৰ বাস্তৱ-সময় আপডেট লাভ কৰক। ঘন ঘন ফোন নকৰাকৈয়ে তেওঁলোক সুৰক্ষিত বুলি জানক।</string>
+    <string name="onboarding_3_T">প্ৰকৃততে সুৰক্ষা দিয়া AI</string>
+    <string name="onboarding_3_S">আমাৰ বুদ্ধিমান গাৰ্ডিয়ানে ঠগবাজি চিনাক্ত কৰে, অস্বাভাৱিক লেন-দেন নজৰ ৰাখে আৰু সম্ভাৱ্য বিপদৰ বিষয়ে আপোনাক সতর্ক কৰে।</string>
+    <string name="onboarding_B1">পিছলৈ</string>
+    <string name="onboarding_B2">এৰি দিয়ক</string>
+    <string name="onboarding_B3">আৰম্ভ কৰক</string>
+
     <string name="login_title">আপোনাৰ ব্যক্তিগত সুৰক্ষা ইয়াৰ পৰাই আৰম্ভ হয়</string>
     <string name="login_sub">বুদ্ধিমান সুৰক্ষা, তৎক্ষণাৎ সতর্কবাণী আৰু মনৰ শান্তি</string>
     <string name="login_button">Google ৰ সৈতে আগবঢ়ক</string>

@@ -1,14 +1,16 @@
 <resources>
     <string name="app_name">Guardian Saathi</string>
     <string name="continue_button">Continue</string>
-    <string name="onboarding_1_T">Continue</string>
-    <string name="onboarding_1_S">Continue</string>
-    <string name="onboarding_2_T">Continue</string>
-    <string name="onboarding_2_S">Continue</string>
-    <string name="onboarding_3_T">Continue</string>
-    <string name="onboarding_3_S">Continue</string>
-    <string name="onboarding_B1">Continue</string>
-    <string name="onboarding_B2">Continue</string>
+    <string name="onboarding_1_T">Your Elders, Always Protected</string>
+    <string name="onboarding_1_S">Guardian Saathi watches over your elderly loved ones 24/7 with instant emergency alerts—even when you can\'t be there.</string>
+    <string name="onboarding_2_T">Stay Connected, Stay Calm</string>
+    <string name="onboarding_2_S">Get real-time updates on medicine reminders, battery status, and location. Know they\'re safe without constant phone calls</string>
+    <string name="onboarding_3_T">AI That Actually Protects</string>
+    <string name="onboarding_3_S">Our intelligent guardian detects scams, monitors unusual transactions, and alerts you to potential dangers</string>
+    <string name="onboarding_B1">Next</string>
+    <string name="onboarding_B2">Skip</string>
+    <string name="onboarding_B3">Get Started</string>
+
     <string name="login_title">Your personal safety starts here</string>
     <string name="login_sub">Smart protection, instant alerts, and peace of mind</string>
     <string name="login_button">Continue with Google</string>
