@@ -10,27 +10,51 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Accessibility
 import androidx.compose.material.icons.rounded.BatteryChargingFull
+import androidx.compose.material.icons.rounded.BatteryFull
+import androidx.compose.material.icons.rounded.Call
+import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.ManageHistory
 import androidx.compose.material.icons.rounded.MarkChatUnread
+import androidx.compose.material.icons.rounded.Mic
 import androidx.compose.material.icons.rounded.NotificationsActive
 import androidx.compose.material.icons.rounded.NotificationsNone
 import androidx.compose.material.icons.rounded.PhoneInTalk
 import androidx.compose.material.icons.rounded.PinDrop
+import androidx.compose.material.icons.rounded.Shield
 import androidx.compose.material.icons.rounded.TrackChanges
 import androidx.compose.material.icons.rounded.VerifiedUser
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -272,62 +296,171 @@ fun ElderHomeScreen(
 
 
     //UI part starts here:
-    var currentLocation by remember { mutableStateOf<android.location.Location?>(null) }
-    LaunchedEffect(Unit) {
-        getLocationFlow(context).collect { location ->
-            currentLocation = location
+
+    Scaffold() { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(horizontal = 24.dp, vertical = 32.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            // greeting
+            Text(
+                text = "Good morning",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "elderName",
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            // shield
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .size(180.dp)
+                    .background(
+                        color = MaterialTheme.colorScheme.primaryContainer,
+                        shape = CircleShape
+                    )
+                    .border(
+                        width = 2.dp,
+                        color = MaterialTheme.colorScheme.primary,
+                        shape = CircleShape
+                    )
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.Shield,
+                    contentDescription = "Protection active",
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(88.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Text(
+                text = "You are protected",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "Protected by guardianName",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // status pills
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                StatusPill(
+                    icon = Icons.Rounded.BatteryFull,
+                    label = "80%"
+                )
+                StatusPill(
+                    icon = Icons.Rounded.LocationOn,
+                    label = if (true) "Location on" else "Location off"
+                )
+            }
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            // voice assistant button
+            OutlinedButton(
+                onClick = {},
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp),
+                shape = RoundedCornerShape(50),
+                border = BorderStroke(
+                    1.dp,
+                    MaterialTheme.colorScheme.outline
+                )
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.Mic,
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp)
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                Text(
+                    text = "Talk to assistant",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Medium
+                )
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // SOS button
+            Button(
+                onClick = {},
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(68.dp),
+                shape = RoundedCornerShape(50),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.errorContainer,
+                    contentColor = MaterialTheme.colorScheme.error
+                ),
+                border = BorderStroke(
+                    2.dp,
+                    MaterialTheme.colorScheme.error
+                )
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.Call,
+                    contentDescription = null,
+                    modifier = Modifier.size(26.dp)
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                Text(
+                    text = "SOS — I need help",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
         }
     }
+}
 
-    val batteryinfo = getDetailedBatteryInfo(context)
-
-
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Column(
-
+@Composable
+private fun StatusPill(
+    icon: ImageVector,
+    label: String
+) {
+    Surface(
+        shape = RoundedCornerShape(50),
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outlineVariant)
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            when {
-                false -> {
-                    Text("Elder Home - Guardian Service Active! ✓")
-                }
-                false && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("Background location permission needed")
-                        Text("This allows us to protect you even when the app is closed")
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Button(onClick = {
-//                            backgroundLocationLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-                        }) {
-                            Text("Grant Background Location")
-                        }
-                    }
-                }
-                else -> {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("Permissions required for your protection")
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Button(onClick = {
-                            val permissionsToRequest = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                                arrayOf(
-                                    Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                                    Manifest.permission.POST_NOTIFICATIONS
-                                )
-                            } else {
-                                arrayOf(
-                                    Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION
-                                )
-                            }
-//                            basicPermissionLauncher.launch(permissionsToRequest)
-                        }) {
-                            Text("Grant Permissions")
-                        }
-                    }
-                }
-            }
-            Text("Battery info: $batteryinfo")
-            Text("Current location: $currentLocation")
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.size(16.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            Text(
+                text = label,
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 }
