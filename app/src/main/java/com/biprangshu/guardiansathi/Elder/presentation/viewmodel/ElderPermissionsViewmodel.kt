@@ -18,6 +18,11 @@ data class ElderPermissionsState(
     val notificationPermissionGranted: Boolean = false,
 )
 
+data class ElderPermissionAlert(
+    val showLocationAlert: Boolean = false,
+    val showBackgroundLocationAlert: Boolean = false,
+    val showNotificationAlert: Boolean = false
+)
 
 @HiltViewModel
 class ElderPermissionsViewmodel @Inject constructor(
@@ -25,6 +30,9 @@ class ElderPermissionsViewmodel @Inject constructor(
 ): ViewModel() {
     private val _permissionstate = MutableStateFlow(ElderPermissionsState())
     val permissionstate = _permissionstate.asStateFlow()
+
+    private val _permissionAlertState = MutableStateFlow(ElderPermissionAlert())
+    val permissionAlertState = _permissionAlertState.asStateFlow()
 
 
     fun checkPermissions(){
@@ -34,25 +42,6 @@ class ElderPermissionsViewmodel @Inject constructor(
         _permissionstate.update {
             it.copy(isUpdating = true)
         }
-
-        //check each permission
-//        val permissionsToRequest = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-//            arrayOf(
-//                Manifest.permission.ACCESS_FINE_LOCATION,
-//                Manifest.permission.ACCESS_COARSE_LOCATION,
-//                Manifest.permission.POST_NOTIFICATIONS
-//            )
-//        } else {
-//            arrayOf(
-//                Manifest.permission.ACCESS_FINE_LOCATION,
-//                Manifest.permission.ACCESS_COARSE_LOCATION
-//            )
-//        }
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-//            _permissionstate.update {
-//                it.copy(notificationPermissionGranted = true)
-//            }
-//        }
 
         val locationGranted = permissionManager.isPermissionGranted(
             Manifest.permission.ACCESS_FINE_LOCATION
@@ -73,6 +62,45 @@ class ElderPermissionsViewmodel @Inject constructor(
                 notificationPermissionGranted = notificationGranted
             )
         }
+        AskRequiredPermissions()
+    }
 
+    fun AskRequiredPermissions(){
+        if (!_permissionstate.value.locationPermissionGranted){
+            _permissionAlertState.update {
+                it.copy(
+                    showLocationAlert = true
+                )
+            }
+        }
+        if (!_permissionstate.value.backgroundLocationPermissionGranted){
+            _permissionAlertState.update {
+                it.copy(
+                    showBackgroundLocationAlert = true
+                )
+            }
+        }
+        if (!_permissionstate.value.notificationPermissionGranted){
+            _permissionAlertState.update {
+                it.copy(
+                    showNotificationAlert = true
+                )
+            }
+        }
+    }
+
+    fun onLocationPermissionResult(granted: Boolean) {
+        _permissionstate.update { it.copy(locationPermissionGranted = granted) }
+        _permissionAlertState.update { it.copy(showLocationAlert = false) }
+    }
+
+    fun onBackgroundLocationPermissionResult(granted: Boolean) {
+        _permissionstate.update { it.copy(backgroundLocationPermissionGranted = granted) }
+        _permissionAlertState.update { it.copy(showBackgroundLocationAlert = false) }
+    }
+
+    fun onNotificationPermissionResult(granted: Boolean) {
+        _permissionstate.update { it.copy(notificationPermissionGranted = granted) }
+        _permissionAlertState.update { it.copy(showNotificationAlert = false) }
     }
 }

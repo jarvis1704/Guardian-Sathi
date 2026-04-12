@@ -18,58 +18,132 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.biprangshu.guardiansathi.Elder.core.GuardianService
 import com.biprangshu.guardiansathi.Elder.core.getDetailedBatteryInfo
 import com.biprangshu.guardiansathi.Elder.core.getLocationFlow
 import com.biprangshu.guardiansathi.Elder.presentation.Components.PermissionAlertDialog
+import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.ElderPermissionsViewmodel
 import kotlinx.coroutines.launch
 
 @Composable
-fun ElderHomeScreen() {
-    val context = LocalContext.current
-    var basicPermissionsGranted by remember { mutableStateOf(false) }
-    var backgroundPermissionGranted by remember { mutableStateOf(false) }
-    var serviceStarted by remember { mutableStateOf(false) }
-
-    // Launcher for basic permissions (location + notification)
-    val basicPermissionLauncher = rememberLauncherForActivityResult(
+fun ElderHomeScreen(
+    elderPermissionsViewmodel: ElderPermissionsViewmodel = hiltViewModel()
+) {
+    //basic permission launchers
+    val locationPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
-        val allGranted = permissions.values.all { it }
-        basicPermissionsGranted = allGranted
-
-        if (allGranted) {
-            // If Android 10+ (Q), need to request background location separately
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                // Will request background location next
-            } else {
-                // For older versions, start service directly
-                startGuardianService(context)
-                serviceStarted = true
-            }
-        }
+        val granted = permissions.values.all { it }
+        elderPermissionsViewmodel.onLocationPermissionResult(granted)
     }
 
-    // Launcher for background location (Android 10+)
     val backgroundLocationLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        backgroundPermissionGranted = isGranted
-        // Start service regardless (background location is optional but recommended)
-        startGuardianService(context)
-        serviceStarted = true
+    ) { granted ->
+        elderPermissionsViewmodel.onBackgroundLocationPermissionResult(granted)
     }
-    LaunchedEffect(Unit) {
-        // Request basic permissions first
 
+    val notificationLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        elderPermissionsViewmodel.onNotificationPermissionResult(granted)
     }
+
+    LaunchedEffect(Unit) {
+        elderPermissionsViewmodel.checkPermissions()
+    }
+    val context = LocalContext.current
+
+    val permissionState by elderPermissionsViewmodel.permissionstate.collectAsStateWithLifecycle()
+    val permissionAlertState by elderPermissionsViewmodel.permissionAlertState.collectAsStateWithLifecycle()
+
+    if (permissionAlertState.showLocationAlert){
+        PermissionAlertDialog(
+            title = "give location permission",
+            onContinue = {
+                locationPermissionLauncher.launch(
+                    arrayOf(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    )
+                )
+            }
+        )
+    }
+    if (permissionAlertState.showBackgroundLocationAlert){
+        PermissionAlertDialog(
+            title = "give background location permission",
+            onContinue = {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    backgroundLocationLauncher.launch(
+                        Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                    )
+                }
+            }
+        )
+    }
+    if (permissionAlertState.showNotificationAlert){
+        PermissionAlertDialog(
+            title = "give notification permission",
+            onContinue = {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    notificationLauncher.launch(
+                        Manifest.permission.POST_NOTIFICATIONS
+                    )
+                }
+            }
+        )
+    }
+
+
+
+
+
+//    var basicPermissionsGranted by remember { mutableStateOf(false) }
+//    var backgroundPermissionGranted by remember { mutableStateOf(false) }
+//    var serviceStarted by remember { mutableStateOf(false) }
+
+    // Launcher for basic permissions (location + notification)
+//    val basicPermissionLauncher = rememberLauncherForActivityResult(
+//        contract = ActivityResultContracts.RequestMultiplePermissions()
+//    ) { permissions ->
+//        val allGranted = permissions.values.all { it }
+//        basicPermissionsGranted = allGranted
+//
+//        if (allGranted) {
+//             If Android 10+ (Q), need to request background location separately
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//                 Will request background location next
+//            } else {
+//                 For older versions, start service directly
+//                startGuardianService(context)
+//                serviceStarted = true
+//            }
+//        }
+//    }
+
+    // Launcher for background location (Android 10+)
+//    val backgroundLocationLauncher = rememberLauncherForActivityResult(
+//        contract = ActivityResultContracts.RequestPermission()
+//    ) { isGranted ->
+//        backgroundPermissionGranted = isGranted
+//        // Start service regardless (background location is optional but recommended)
+//        startGuardianService(context)
+//        serviceStarted = true
+//    }
+//    LaunchedEffect(Unit) {
+//        // Request basic permissions first
+//
+//    }
 
     // Request background location after basic permissions are granted
-    LaunchedEffect(basicPermissionsGranted) {
-        if (basicPermissionsGranted && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            backgroundLocationLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-        }
-    }
+//    LaunchedEffect(basicPermissionsGranted) {
+//        if (basicPermissionsGranted && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//            backgroundLocationLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+//        }
+//    }
 
     //UI part starts here:
     var currentLocation by remember { mutableStateOf<android.location.Location?>(null) }
@@ -87,16 +161,16 @@ fun ElderHomeScreen() {
 
         ) {
             when {
-                serviceStarted -> {
+                false -> {
                     Text("Elder Home - Guardian Service Active! ✓")
                 }
-                basicPermissionsGranted && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
+                false && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text("Background location permission needed")
                         Text("This allows us to protect you even when the app is closed")
                         Spacer(modifier = Modifier.height(16.dp))
                         Button(onClick = {
-                            backgroundLocationLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+//                            backgroundLocationLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
                         }) {
                             Text("Grant Background Location")
                         }
@@ -119,7 +193,7 @@ fun ElderHomeScreen() {
                                     Manifest.permission.ACCESS_COARSE_LOCATION
                                 )
                             }
-                            basicPermissionLauncher.launch(permissionsToRequest)
+//                            basicPermissionLauncher.launch(permissionsToRequest)
                         }) {
                             Text("Grant Permissions")
                         }

@@ -1,9 +1,9 @@
-package com.biprangshu.guardiansathi.Global.di
+package com.biprangshu.guardiansathi.Elder.di
 
 import com.biprangshu.guardiansathi.Elder.data.PermissionManagerRepository
 import com.biprangshu.guardiansathi.Elder.data.PermissionManagerRepositoryImpl
-import com.google.android.datatransport.runtime.dagger.Binds
-import com.google.android.datatransport.runtime.dagger.Module
+import dagger.Binds
+import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import jakarta.inject.Singleton

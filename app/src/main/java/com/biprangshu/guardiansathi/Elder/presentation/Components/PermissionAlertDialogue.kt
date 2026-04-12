@@ -25,6 +25,7 @@ import com.biprangshu.guardiansathi.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PermissionAlertDialog(
+    title: String,
     onContinue: () -> Unit
 ) {
     AlertDialog(
@@ -45,7 +46,7 @@ fun PermissionAlertDialog(
 
                 // Header
                 Text(
-                    text = "This is a header text",
+                    text = title,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
