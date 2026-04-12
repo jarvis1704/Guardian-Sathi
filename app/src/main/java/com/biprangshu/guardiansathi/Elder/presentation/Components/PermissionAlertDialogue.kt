@@ -41,7 +41,7 @@ fun PermissionAlertDialog(
     reason1: String,
     reason2: String,
     disclaimer: String,
-    buttonText: String = "Allow access",
+    buttonText: String = "Allow permission",
     icon: ImageVector,
     onContinue: () -> Unit
 ) {
@@ -49,7 +49,7 @@ fun PermissionAlertDialog(
         Surface(
             shape = RoundedCornerShape(24.dp),
             tonalElevation = 0.dp,
-            color = MaterialTheme.colorScheme.surface,
+            color = MaterialTheme.colorScheme.background,
             modifier = Modifier.fillMaxWidth()
         ) {
             Column {
@@ -65,8 +65,7 @@ fun PermissionAlertDialog(
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Surface(
                             shape = CircleShape,
-                            color = MaterialTheme.colorScheme.surface,
-                            border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outlineVariant),
+                            color = MaterialTheme.colorScheme.background,
                             modifier = Modifier.size(56.dp)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
@@ -93,7 +92,7 @@ fun PermissionAlertDialog(
                         Text(
                             text = subtitle,
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
+                            color = Color.White
                         )
                     }
                 }
@@ -104,8 +103,7 @@ fun PermissionAlertDialog(
                     // reason bullets card
                     Surface(
                         shape = RoundedCornerShape(12.dp),
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        border = BorderStroke(0.5.dp, MaterialTheme.colorScheme.outlineVariant)
+                        color = MaterialTheme.colorScheme.surface,
                     ) {
                         Column(modifier = Modifier.padding(14.dp)) {
                             ReasonRow(text = reason1)
@@ -119,7 +117,7 @@ fun PermissionAlertDialog(
                     Text(
                         text = disclaimer,
                         style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = MaterialTheme.colorScheme.onSurface,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth()
                     )

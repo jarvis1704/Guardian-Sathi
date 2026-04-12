@@ -2,6 +2,7 @@ package com.biprangshu.guardiansathi.Elder.presentation.viewmodel
 
 import android.Manifest
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.biprangshu.guardiansathi.Elder.data.PermissionManagerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,6 +33,16 @@ data class ElderPermissionAlert(
     val showPhoneLogAlert: Boolean = false,
 )
 
+data class SpecialElderPermissionState(
+    val isBatteryOptimizationIgnored: Boolean = false,
+    val isNotificationListenerEnabled: Boolean = false
+)
+
+data class SpecialPermissionAlertState(
+    val showBatteryOptimizationAlert: Boolean = false,
+    val showNotificationListenerAlert: Boolean = false,
+)
+
 @HiltViewModel
 class ElderPermissionsViewmodel @Inject constructor(
     private val permissionManager: PermissionManagerRepository
@@ -42,7 +53,17 @@ class ElderPermissionsViewmodel @Inject constructor(
     private val _permissionAlertState = MutableStateFlow(ElderPermissionAlert())
     val permissionAlertState = _permissionAlertState.asStateFlow()
 
+    private val _specialPermissionState = MutableStateFlow(SpecialElderPermissionState())
+    val specialPermissionState = _specialPermissionState.asStateFlow()
 
+    private val _specialPermissionAlertState = MutableStateFlow(SpecialPermissionAlertState())
+    val specialPermissionAlertState = _specialPermissionAlertState.asStateFlow()
+
+    private var hasInitialCheckRun = false
+
+    init {
+        checkPermissions()
+    }
     fun checkPermissions(){
         if (_permissionstate.value.isUpdating){
             return
@@ -54,9 +75,13 @@ class ElderPermissionsViewmodel @Inject constructor(
         val locationGranted = permissionManager.isPermissionGranted(
             Manifest.permission.ACCESS_FINE_LOCATION
         )
-        val backgroundLocationGranted = permissionManager.isPermissionGranted(
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        )
+        val backgroundLocationGranted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            permissionManager.isPermissionGranted(
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            )
+        } else {
+            true
+        }
         val notificationGranted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
             permissionManager.isPermissionGranted(Manifest.permission.POST_NOTIFICATIONS)
         } else {
@@ -67,9 +92,6 @@ class ElderPermissionsViewmodel @Inject constructor(
         } else {
             permissionManager.isPermissionGranted(Manifest.permission.ACTIVITY_RECOGNITION)
         }
-        val smsSendGranted = permissionManager.isPermissionGranted(
-            Manifest.permission.SEND_SMS
-        )
         val smsReadGranted = permissionManager.isPermissionGranted(
             Manifest.permission.READ_SMS
         )
@@ -92,10 +114,7 @@ class ElderPermissionsViewmodel @Inject constructor(
                 phoneLogPermissionGranted = phoneLogPermissionGranted
             )
         }
-        AskRequiredPermissions()
-    }
 
-    fun AskRequiredPermissions(){
         if (!_permissionstate.value.locationPermissionGranted){
             _permissionAlertState.update {
                 it.copy(
@@ -144,6 +163,28 @@ class ElderPermissionsViewmodel @Inject constructor(
                     showPhoneLogAlert = true
                 )
             }
+        }
+
+        checkSpecialPermissions()
+    }
+
+    fun checkSpecialPermissions() {
+        val batteryOp = permissionManager.isBatteryOptimizationIgnored()
+        val notifListener = permissionManager.isNotificationListenerEnabled()
+
+        _specialPermissionState.update {
+            Log.d("SpecialPermCheck", "Updating specialPermissionState")
+            it.copy(
+                isBatteryOptimizationIgnored = batteryOp,
+                isNotificationListenerEnabled = notifListener
+            )
+        }
+
+        _specialPermissionAlertState.update {
+            it.copy(
+                showBatteryOptimizationAlert = !batteryOp,
+                showNotificationListenerAlert = !notifListener
+            )
         }
     }
 
