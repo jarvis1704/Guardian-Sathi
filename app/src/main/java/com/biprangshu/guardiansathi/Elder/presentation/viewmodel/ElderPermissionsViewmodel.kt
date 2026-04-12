@@ -4,10 +4,15 @@ import android.Manifest
 import android.os.Build
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.biprangshu.guardiansathi.Elder.data.PermissionManagerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
@@ -59,13 +64,33 @@ class ElderPermissionsViewmodel @Inject constructor(
     private val _specialPermissionAlertState = MutableStateFlow(SpecialPermissionAlertState())
     val specialPermissionAlertState = _specialPermissionAlertState.asStateFlow()
 
-    private var hasInitialCheckRun = false
+
+    val allPermissionsGranted: StateFlow<Boolean> = combine(
+        _permissionstate,
+        _specialPermissionState
+    ) { permState, specialState ->
+        permState.locationPermissionGranted
+                && permState.notificationPermissionGranted
+                && permState.backgroundLocationPermissionGranted
+                && permState.activityRecognitionGranted
+                && permState.smsReadGranted
+                && permState.phonePermissionsGranted
+                && permState.phoneLogPermissionGranted
+                && specialState.isBatteryOptimizationIgnored
+                && specialState.isNotificationListenerEnabled
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = false
+    )
+
 
     init {
         checkPermissions()
     }
-    fun checkPermissions(){
-        if (_permissionstate.value.isUpdating){
+
+    fun checkPermissions() {
+        if (_permissionstate.value.isUpdating) {
             return
         }
         _permissionstate.update {
@@ -82,12 +107,12 @@ class ElderPermissionsViewmodel @Inject constructor(
         } else {
             true
         }
-        val notificationGranted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+        val notificationGranted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             permissionManager.isPermissionGranted(Manifest.permission.POST_NOTIFICATIONS)
         } else {
             true
         }
-        val activityGranted = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
+        val activityGranted = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             true
         } else {
             permissionManager.isPermissionGranted(Manifest.permission.ACTIVITY_RECOGNITION)
@@ -115,21 +140,21 @@ class ElderPermissionsViewmodel @Inject constructor(
             )
         }
 
-        if (!_permissionstate.value.locationPermissionGranted){
+        if (!_permissionstate.value.locationPermissionGranted) {
             _permissionAlertState.update {
                 it.copy(
                     showLocationAlert = true
                 )
             }
         }
-        if (!_permissionstate.value.backgroundLocationPermissionGranted){
+        if (!_permissionstate.value.backgroundLocationPermissionGranted) {
             _permissionAlertState.update {
                 it.copy(
                     showBackgroundLocationAlert = true
                 )
             }
         }
-        if (!_permissionstate.value.notificationPermissionGranted){
+        if (!_permissionstate.value.notificationPermissionGranted) {
             _permissionAlertState.update {
                 it.copy(
                     showNotificationAlert = true
@@ -146,7 +171,7 @@ class ElderPermissionsViewmodel @Inject constructor(
         if (!_permissionstate.value.smsReadGranted) {
             _permissionAlertState.update {
                 it.copy(
-                    showReadSmsAlert =  true
+                    showReadSmsAlert = true
                 )
             }
         }

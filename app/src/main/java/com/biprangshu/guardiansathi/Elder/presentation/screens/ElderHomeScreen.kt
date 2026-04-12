@@ -52,10 +52,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.biprangshu.guardiansathi.Elder.core.GuardianService
@@ -68,6 +73,12 @@ import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import coil.compose.AsyncImage
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.biprangshu.guardiansathi.R
 
 @Composable
@@ -294,6 +305,9 @@ fun ElderHomeScreen(
         )
     }
 
+    val allPermissionsGranted by elderPermissionsViewmodel
+        .allPermissionsGranted
+        .collectAsStateWithLifecycle()
 
     //UI part starts here:
 
@@ -301,48 +315,64 @@ fun ElderHomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
-                .padding(horizontal = 24.dp, vertical = 32.dp),
+                .background(MaterialTheme.colorScheme.background)
+                .padding(horizontal = 24.dp, vertical = 32.dp)
+                .padding(top = 30.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            // greeting
-            Text(
-                text = "Good morning",
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = "elderName",
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-
-            Spacer(modifier = Modifier.weight(1f))
-
             // shield
             Box(
-                contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .size(180.dp)
-                    .background(
-                        color = MaterialTheme.colorScheme.primaryContainer,
-                        shape = CircleShape
-                    )
-                    .border(
-                        width = 2.dp,
-                        color = MaterialTheme.colorScheme.primary,
-                        shape = CircleShape
-                    )
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Shield,
-                    contentDescription = "Protection active",
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.size(88.dp)
+                    .padding(top = 30.dp)
+            ){
+                val composition by rememberLottieComposition(
+                    LottieCompositionSpec.RawRes(if (allPermissionsGranted) R.raw.lottie_shield_green else R.raw.lottie_shield_red)
                 )
+                val progress by animateLottieCompositionAsState(
+                    composition = composition,
+                    iterations = LottieConstants.IterateForever,
+                    speed = 0.4f
+                )
+                LottieAnimation(
+                    composition = composition,
+                    progress = { progress },
+                    modifier = Modifier
+                        .size(210.dp)
+                        .align(Alignment.Center)
+                )
+                Row(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .padding(top = 28.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.surface.copy(0.8f))
+                        .border(1.dp, MaterialTheme.colorScheme.onSurface, CircleShape),
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .padding(12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        AsyncImage(
+                            model = "",
+                            contentDescription = "Profile",
+                            modifier = Modifier
+                                .size(30.dp)
+                                .clip(CircleShape),
+                            contentScale = ContentScale.Crop,
+                            error = painterResource(R.drawable.ic_profile_placeholder),
+                            placeholder = painterResource(R.drawable.ic_profile_placeholder)
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(
+                            "Guardian name",
+                            fontSize = 16.sp,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+                }
             }
 
             Spacer(modifier = Modifier.height(24.dp))
