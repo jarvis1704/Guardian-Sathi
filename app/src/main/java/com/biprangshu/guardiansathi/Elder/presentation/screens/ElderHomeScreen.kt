@@ -13,6 +13,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Accessibility
+import androidx.compose.material.icons.rounded.ManageHistory
+import androidx.compose.material.icons.rounded.MarkChatUnread
+import androidx.compose.material.icons.rounded.NotificationsActive
+import androidx.compose.material.icons.rounded.PhoneInTalk
+import androidx.compose.material.icons.rounded.PinDrop
+import androidx.compose.material.icons.rounded.TrackChanges
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
@@ -51,6 +59,30 @@ fun ElderHomeScreen(
         elderPermissionsViewmodel.onNotificationPermissionResult(granted)
     }
 
+    val activityRecognitionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        elderPermissionsViewmodel.onActivityRecognitionPermissionResult(granted)
+    }
+
+    val smsReadLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        elderPermissionsViewmodel.onSmsReadPermissionResult(granted)
+    }
+
+    val phonePermissionsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        elderPermissionsViewmodel.onPhonePermissionResult(granted)
+    }
+
+    val phoneLogPermissionsLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        elderPermissionsViewmodel.onPhoneLogPermissionResult(granted)
+    }
+
     LaunchedEffect(Unit) {
         elderPermissionsViewmodel.checkPermissions()
     }
@@ -59,9 +91,15 @@ fun ElderHomeScreen(
     val permissionState by elderPermissionsViewmodel.permissionstate.collectAsStateWithLifecycle()
     val permissionAlertState by elderPermissionsViewmodel.permissionAlertState.collectAsStateWithLifecycle()
 
-    if (permissionAlertState.showLocationAlert){
+    if (permissionAlertState.showLocationAlert) {
         PermissionAlertDialog(
-            title = "give location permission",
+            title = "Location Access",
+            subtitle = "Needed for your safety",
+            reason1 = "Your guardian can see your location in real time",
+            reason2 = "Required for emergency SOS and geo-fence alerts",
+            disclaimer = "Your location is only shared with your trusted guardian. We never share it with anyone else.",
+            buttonText = "Allow location access",
+            icon = Icons.Rounded.PinDrop,
             onContinue = {
                 locationPermissionLauncher.launch(
                     arrayOf(
@@ -72,9 +110,16 @@ fun ElderHomeScreen(
             }
         )
     }
-    if (permissionAlertState.showBackgroundLocationAlert){
+
+    if (permissionAlertState.showBackgroundLocationAlert) {
         PermissionAlertDialog(
-            title = "give background location permission",
+            title = "Always-On Location",
+            subtitle = "Protection even when app is closed",
+            reason1 = "Geo-fence alerts work even when GuardianSathi is in the background",
+            reason2 = "Your guardian is notified if you leave a safe area at any time",
+            disclaimer = "Background location is only used for safety monitoring and is never sold or shared.",
+            buttonText = "Allow background location",
+            icon = Icons.Rounded.TrackChanges,
             onContinue = {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     backgroundLocationLauncher.launch(
@@ -84,9 +129,16 @@ fun ElderHomeScreen(
             }
         )
     }
-    if (permissionAlertState.showNotificationAlert){
+
+    if (permissionAlertState.showNotificationAlert) {
         PermissionAlertDialog(
-            title = "give notification permission",
+            title = "Stay Notified",
+            subtitle = "Important alerts need your attention",
+            reason1 = "Receive medicine reminders and health check-in alerts on time",
+            reason2 = "Your guardian can send you urgent messages instantly",
+            disclaimer = "We only send notifications that matter to your safety and health.",
+            buttonText = "Allow notifications",
+            icon = Icons.Rounded.NotificationsActive,
             onContinue = {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     notificationLauncher.launch(
@@ -97,53 +149,76 @@ fun ElderHomeScreen(
         )
     }
 
+    if (permissionAlertState.showActivityRecognitionAlert) {
+        PermissionAlertDialog(
+            title = "Fall Detection",
+            subtitle = "We watch over you silently",
+            reason1 = "Detects sudden falls and immediately alerts your guardian",
+            reason2 = "Monitors movement patterns to identify unusual stillness after a fall",
+            disclaimer = "Motion data is processed on your device and never uploaded to any server.",
+            buttonText = "Enable fall detection",
+            icon = Icons.Rounded.Accessibility,
+            onContinue = {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    activityRecognitionLauncher.launch(
+                        Manifest.permission.ACTIVITY_RECOGNITION
+                    )
+                }
+            }
+        )
+    }
 
+    if (permissionAlertState.showReadSmsAlert) {
+        PermissionAlertDialog(
+            title = "SMS Protection",
+            subtitle = "Guard against scam messages",
+            reason1 = "Scans incoming messages for known scam and phishing patterns",
+            reason2 = "Alerts your guardian before you accidentally respond to a fraud",
+            disclaimer = "Your messages are scanned locally on your device. We never read or store your personal SMS.",
+            buttonText = "Enable SMS protection",
+            icon = Icons.Rounded.MarkChatUnread,
+            onContinue = {
+                smsReadLauncher.launch(
+                    Manifest.permission.READ_SMS
+                )
+            }
+        )
+    }
 
+    if (permissionAlertState.showPhoneAlert) {
+        PermissionAlertDialog(
+            title = "Call Protection",
+            subtitle = "Detect scam calls in real time",
+            reason1 = "Identifies incoming calls from known scam and fraud numbers",
+            reason2 = "Your guardian is alerted when a suspicious call is received",
+            disclaimer = "Call data is only used for scam detection and is never stored or shared.",
+            buttonText = "Enable call protection",
+            icon = Icons.Rounded.PhoneInTalk,
+            onContinue = {
+                phonePermissionsLauncher.launch(
+                    Manifest.permission.READ_PHONE_STATE
+                )
+            }
+        )
+    }
 
+    if (permissionAlertState.showPhoneLogAlert) {
+        PermissionAlertDialog(
+            title = "Call History Access",
+            subtitle = "Identify suspicious call patterns",
+            reason1 = "Analyzes call history to detect repeated contact from fraud numbers",
+            reason2 = "Helps your guardian understand unusual calling patterns over time",
+            disclaimer = "Call history is analyzed locally and only flagged entries are shared with your guardian.",
+            buttonText = "Allow call history access",
+            icon = Icons.Rounded.ManageHistory,
+            onContinue = {
+                phoneLogPermissionsLauncher.launch(
+                    Manifest.permission.READ_CALL_LOG
+                )
+            }
+        )
+    }
 
-//    var basicPermissionsGranted by remember { mutableStateOf(false) }
-//    var backgroundPermissionGranted by remember { mutableStateOf(false) }
-//    var serviceStarted by remember { mutableStateOf(false) }
-
-    // Launcher for basic permissions (location + notification)
-//    val basicPermissionLauncher = rememberLauncherForActivityResult(
-//        contract = ActivityResultContracts.RequestMultiplePermissions()
-//    ) { permissions ->
-//        val allGranted = permissions.values.all { it }
-//        basicPermissionsGranted = allGranted
-//
-//        if (allGranted) {
-//             If Android 10+ (Q), need to request background location separately
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-//                 Will request background location next
-//            } else {
-//                 For older versions, start service directly
-//                startGuardianService(context)
-//                serviceStarted = true
-//            }
-//        }
-//    }
-
-    // Launcher for background location (Android 10+)
-//    val backgroundLocationLauncher = rememberLauncherForActivityResult(
-//        contract = ActivityResultContracts.RequestPermission()
-//    ) { isGranted ->
-//        backgroundPermissionGranted = isGranted
-//        // Start service regardless (background location is optional but recommended)
-//        startGuardianService(context)
-//        serviceStarted = true
-//    }
-//    LaunchedEffect(Unit) {
-//        // Request basic permissions first
-//
-//    }
-
-    // Request background location after basic permissions are granted
-//    LaunchedEffect(basicPermissionsGranted) {
-//        if (basicPermissionsGranted && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-//            backgroundLocationLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-//        }
-//    }
 
     //UI part starts here:
     var currentLocation by remember { mutableStateOf<android.location.Location?>(null) }

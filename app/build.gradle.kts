@@ -40,6 +40,9 @@ android {
 }
 
 dependencies {
+    //extra icons
+    implementation("androidx.compose.material:material-icons-extended")
+
     // WorkManager
     implementation("androidx.work:work-runtime-ktx:2.11.2")
 
