@@ -43,4 +43,61 @@
     <string name="ConnectionSuccess_H">Connected Successfully</string>
     <string name="ConnectionSuccess_D">You\'re now connected with:</string>
     <string name="ConnectionSuccess_retry">Not the right person? Try again</string>
+
+    <string name="ElderPermission_button">Allow permission</string>
+    <string name="ElderPermission_1_T">Disable Battery Restrictions</string>
+    <string name="ElderPermission_1_S">Keep GuardianSathi always active</string>
+    <string name="ElderPermission_1_R1">Prevents Android from stopping your protection in the background. Ensures fall detection and location work even with battery saver on.</string>
+    <string name="ElderPermission_1_R2">A screen will appear asking to allow GuardianSathi to run unrestricted. Tap \"Allow\" to confirm.</string>
+    <string name="ElderPermission_1_D">This does not significantly affect your battery life. It only prevents Android from force-stopping the app.</string>
+
+    <string name="ElderPermission_2_T">Notification Access</string>
+    <string name="ElderPermission_2_S">Detect scams in other apps</string>
+    <string name="ElderPermission_2_R1">Scans notifications from WhatsApp and SMS apps for suspicious links and phishing patterns before you accidentally open them.</string>
+    <string name="ElderPermission_2_R2">In the next screen, find \"GuardianSathi\" in the list and toggle it on. Tap \"Allow\" on the confirmation popup.</string>
+    <string name="ElderPermission_2_D">We only analyze notifications for scam patterns. Your personal messages are never read or stored.</string>
+
+    <string name="ElderPermission_3_T">Location Access</string>
+    <string name="ElderPermission_3_S">Needed for your safety</string>
+    <string name="ElderPermission_3_R1">Your guardian can see your location in real time.</string>
+    <string name="ElderPermission_3_R2">Required for emergency SOS and geo-fence alerts.</string>
+    <string name="ElderPermission_3_D">Your location is only shared with your trusted guardian. We never share it with anyone else.</string>
+
+    <string name="ElderPermission_4_T">Always-On Location</string>
+    <string name="ElderPermission_4_S">Protection even when app is closed</string>
+    <string name="ElderPermission_4_R1">Geo-fence alerts work even when GuardianSathi is in the background.</string>
+    <string name="ElderPermission_4_R2">Your guardian is notified if you leave a safe area at any time.</string>
+    <string name="ElderPermission_4_D">Background location is only used for safety monitoring and is never sold or shared.</string>
+
+    <string name="ElderPermission_5_T">Stay Notified</string>
+    <string name="ElderPermission_5_S">Important alerts need your attention</string>
+    <string name="ElderPermission_5_R1">Receive medicine reminders and health check-in alerts on time.</string>
+    <string name="ElderPermission_5_R2">Your guardian can send you urgent messages instantly.</string>
+    <string name="ElderPermission_5_D">We only send notifications that matter to your safety and health.</string>
+
+    <string name="ElderPermission_6_T">Fall Detection</string>
+    <string name="ElderPermission_6_S">We watch over you silently</string>
+    <string name="ElderPermission_6_R1">Detects sudden falls and immediately alerts your guardian.</string>
+    <string name="ElderPermission_6_R2">Monitors movement patterns to identify unusual stillness after a fall.</string>
+    <string name="ElderPermission_6_D">Motion data is processed on your device and never uploaded to any server.</string>
+
+    <string name="ElderPermission_7_T">SMS Protection</string>
+    <string name="ElderPermission_7_S">Guard against scam messages</string>
+    <string name="ElderPermission_7_R1">Scans incoming messages for known scam and phishing patterns.</string>
+    <string name="ElderPermission_7_R2">Alerts your guardian before you accidentally respond to a fraud.</string>
+    <string name="ElderPermission_7_D">Your messages are scanned locally on your device. We never read or store your personal SMS.</string>
+
+    <string name="ElderPermission_8_T">Call Protection</string>
+    <string name="ElderPermission_8_S">Detect scam calls in real time</string>
+    <string name="ElderPermission_8_R1">Identifies incoming calls from known scam and fraud numbers.</string>
+    <string name="ElderPermission_8_R2">Your guardian is alerted when a suspicious call is received.</string>
+    <string name="ElderPermission_8_D">Call data is only used for scam detection and is never stored or shared.</string>
+
+    <string name="ElderPermission_9_T">Call History Access</string>
+    <string name="ElderPermission_9_S">Identify suspicious call patterns</string>
+    <string name="ElderPermission_9_R1">Analyzes call history to detect repeated contact from fraud numbers.</string>
+    <string name="ElderPermission_9_R2">Helps your guardian understand unusual calling patterns over time.</string>
+    <string name="ElderPermission_9_D">Call history is analyzed locally and only flagged entries are shared with your guardian.</string>
+
+
 </resources>

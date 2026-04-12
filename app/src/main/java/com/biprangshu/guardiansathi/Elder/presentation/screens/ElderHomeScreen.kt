@@ -30,6 +30,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -43,6 +44,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.biprangshu.guardiansathi.R
 
 @Composable
 fun ElderHomeScreen(
@@ -117,11 +119,11 @@ fun ElderHomeScreen(
     //all permission alert dialogues
     if (specialPermissionAlertState.showBatteryOptimizationAlert) {
         PermissionAlertDialog(
-            title = "Disable Battery Restrictions",
-            subtitle = "Keep GuardianSathi always active",
-            reason1 = "Prevents Android from stopping your protection in the background. Ensures fall detection and location work even with battery saver on.",
-            reason2 = "A screen will appear asking to allow GuardianSathi to run unrestricted. Tap \"Allow\" to confirm.",
-            disclaimer = "This does not significantly affect your battery life. It only prevents Android from force-stopping the app.",
+            title = stringResource(R.string.ElderPermission_1_T),
+            subtitle = stringResource(R.string.ElderPermission_1_S),
+            reason1 = stringResource(R.string.ElderPermission_1_R1),
+            reason2 = stringResource(R.string.ElderPermission_1_R2),
+            disclaimer = stringResource(R.string.ElderPermission_1_D),
             icon = Icons.Rounded.BatteryChargingFull,
             onContinue = {
                 val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
@@ -134,11 +136,11 @@ fun ElderHomeScreen(
 
     if (specialPermissionAlertState.showNotificationListenerAlert) {
         PermissionAlertDialog(
-            title = "Notification Access",
-            subtitle = "Detect scams in other apps",
-            reason1 = "Scans notifications from WhatsApp and SMS apps for suspicious links and phishing patterns before you accidentally open them.",
-            reason2 = "In the next screen, find \"GuardianSathi\" in the list and toggle it on. Tap \"Allow\" on the confirmation popup.",
-            disclaimer = "We only analyze notifications for scam patterns. Your personal messages are never read or stored.",
+            title = stringResource(R.string.ElderPermission_2_T),
+            subtitle = stringResource(R.string.ElderPermission_2_S),
+            reason1 = stringResource(R.string.ElderPermission_2_R1),
+            reason2 = stringResource(R.string.ElderPermission_2_R2),
+            disclaimer = stringResource(R.string.ElderPermission_2_D),
             icon = Icons.Rounded.NotificationsNone,
             onContinue = {
                 val intent = Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
@@ -147,31 +149,31 @@ fun ElderHomeScreen(
         )
     }
 
-    //now basic alerts
-    if (permissionAlertState.showBackgroundLocationAlert) {
+    if (permissionState.locationPermissionGranted &&
+        permissionAlertState.showBackgroundLocationAlert &&
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         PermissionAlertDialog(
-            title = "Always-On Location",
-            subtitle = "Protection even when app is closed",
-            reason1 = "Geo-fence alerts work even when GuardianSathi is in the background",
-            reason2 = "Your guardian is notified if you leave a safe area at any time",
-            disclaimer = "Background location is only used for safety monitoring and is never sold or shared.",
+            title = stringResource(R.string.ElderPermission_4_T),
+            subtitle = stringResource(R.string.ElderPermission_4_S),
+            reason1 = stringResource(R.string.ElderPermission_4_R1),
+            reason2 = stringResource(R.string.ElderPermission_4_R2),
+            disclaimer = stringResource(R.string.ElderPermission_4_D),
             icon = Icons.Rounded.TrackChanges,
             onContinue = {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    backgroundLocationLauncher.launch(
-                        Manifest.permission.ACCESS_BACKGROUND_LOCATION
-                    )
-                }
+                backgroundLocationLauncher.launch(
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                )
             }
         )
     }
+
     if (permissionAlertState.showLocationAlert) {
         PermissionAlertDialog(
-            title = "Location Access",
-            subtitle = "Needed for your safety",
-            reason1 = "Your guardian can see your location in real time",
-            reason2 = "Required for emergency SOS and geo-fence alerts",
-            disclaimer = "Your location is only shared with your trusted guardian. We never share it with anyone else.",
+            title = stringResource(R.string.ElderPermission_3_T),
+            subtitle = stringResource(R.string.ElderPermission_3_S),
+            reason1 = stringResource(R.string.ElderPermission_3_R1),
+            reason2 = stringResource(R.string.ElderPermission_3_R2),
+            disclaimer = stringResource(R.string.ElderPermission_3_D),
             icon = Icons.Rounded.PinDrop,
             onContinue = {
                 locationPermissionLauncher.launch(
@@ -186,11 +188,11 @@ fun ElderHomeScreen(
 
     if (permissionAlertState.showNotificationAlert) {
         PermissionAlertDialog(
-            title = "Stay Notified",
-            subtitle = "Important alerts need your attention",
-            reason1 = "Receive medicine reminders and health check-in alerts on time",
-            reason2 = "Your guardian can send you urgent messages instantly",
-            disclaimer = "We only send notifications that matter to your safety and health.",
+            title = stringResource(R.string.ElderPermission_5_T),
+            subtitle = stringResource(R.string.ElderPermission_5_S),
+            reason1 = stringResource(R.string.ElderPermission_5_R1),
+            reason2 = stringResource(R.string.ElderPermission_5_R2),
+            disclaimer = stringResource(R.string.ElderPermission_5_D),
             icon = Icons.Rounded.NotificationsActive,
             onContinue = {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -204,11 +206,11 @@ fun ElderHomeScreen(
 
     if (permissionAlertState.showActivityRecognitionAlert) {
         PermissionAlertDialog(
-            title = "Fall Detection",
-            subtitle = "We watch over you silently",
-            reason1 = "Detects sudden falls and immediately alerts your guardian",
-            reason2 = "Monitors movement patterns to identify unusual stillness after a fall",
-            disclaimer = "Motion data is processed on your device and never uploaded to any server.",
+            title = stringResource(R.string.ElderPermission_6_T),
+            subtitle = stringResource(R.string.ElderPermission_6_S),
+            reason1 = stringResource(R.string.ElderPermission_6_R1),
+            reason2 = stringResource(R.string.ElderPermission_6_R2),
+            disclaimer = stringResource(R.string.ElderPermission_6_D),
             icon = Icons.Rounded.Accessibility,
             onContinue = {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -222,11 +224,11 @@ fun ElderHomeScreen(
 
     if (permissionAlertState.showReadSmsAlert) {
         PermissionAlertDialog(
-            title = "SMS Protection",
-            subtitle = "Guard against scam messages",
-            reason1 = "Scans incoming messages for known scam and phishing patterns",
-            reason2 = "Alerts your guardian before you accidentally respond to a fraud",
-            disclaimer = "Your messages are scanned locally on your device. We never read or store your personal SMS.",
+            title = stringResource(R.string.ElderPermission_7_T),
+            subtitle = stringResource(R.string.ElderPermission_7_S),
+            reason1 = stringResource(R.string.ElderPermission_7_R1),
+            reason2 = stringResource(R.string.ElderPermission_7_R2),
+            disclaimer = stringResource(R.string.ElderPermission_7_D),
             icon = Icons.Rounded.MarkChatUnread,
             onContinue = {
                 smsReadLauncher.launch(
@@ -238,11 +240,11 @@ fun ElderHomeScreen(
 
     if (permissionAlertState.showPhoneAlert) {
         PermissionAlertDialog(
-            title = "Call Protection",
-            subtitle = "Detect scam calls in real time",
-            reason1 = "Identifies incoming calls from known scam and fraud numbers",
-            reason2 = "Your guardian is alerted when a suspicious call is received",
-            disclaimer = "Call data is only used for scam detection and is never stored or shared.",
+            title = stringResource(R.string.ElderPermission_8_T),
+            subtitle = stringResource(R.string.ElderPermission_8_S),
+            reason1 = stringResource(R.string.ElderPermission_8_R1),
+            reason2 = stringResource(R.string.ElderPermission_8_R2),
+            disclaimer = stringResource(R.string.ElderPermission_8_D),
             icon = Icons.Rounded.PhoneInTalk,
             onContinue = {
                 phonePermissionsLauncher.launch(
@@ -254,11 +256,11 @@ fun ElderHomeScreen(
 
     if (permissionAlertState.showPhoneLogAlert) {
         PermissionAlertDialog(
-            title = "Call History Access",
-            subtitle = "Identify suspicious call patterns",
-            reason1 = "Analyzes call history to detect repeated contact from fraud numbers",
-            reason2 = "Helps your guardian understand unusual calling patterns over time",
-            disclaimer = "Call history is analyzed locally and only flagged entries are shared with your guardian.",
+            title = stringResource(R.string.ElderPermission_9_T),
+            subtitle = stringResource(R.string.ElderPermission_9_S),
+            reason1 = stringResource(R.string.ElderPermission_9_R1),
+            reason2 = stringResource(R.string.ElderPermission_9_R2),
+            disclaimer = stringResource(R.string.ElderPermission_9_D),
             icon = Icons.Rounded.ManageHistory,
             onContinue = {
                 phoneLogPermissionsLauncher.launch(

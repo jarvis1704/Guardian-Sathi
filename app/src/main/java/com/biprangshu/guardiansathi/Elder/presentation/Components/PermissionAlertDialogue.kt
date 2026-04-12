@@ -29,9 +29,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.biprangshu.guardiansathi.R
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,7 +44,7 @@ fun PermissionAlertDialog(
     reason1: String,
     reason2: String,
     disclaimer: String,
-    buttonText: String = "Allow permission",
+    buttonText: String = stringResource(R.string.ElderPermission_button),
     icon: ImageVector,
     onContinue: () -> Unit
 ) {
@@ -54,85 +57,85 @@ fun PermissionAlertDialog(
         ) {
             Column {
 
-                // coloured header block
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(MaterialTheme.colorScheme.primaryContainer)
-                        .padding(top = 28.dp, bottom = 20.dp),
+                        .padding(top = 32.dp, bottom = 24.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Surface(
                             shape = CircleShape,
                             color = MaterialTheme.colorScheme.background,
-                            modifier = Modifier.size(56.dp)
+                            modifier = Modifier.size(68.dp)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
                                 Icon(
                                     imageVector = icon,
                                     contentDescription = null,
                                     tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(26.dp)
+                                    modifier = Modifier.size(32.dp)
                                 )
                             }
                         }
 
-                        Spacer(modifier = Modifier.height(12.dp))
+                        Spacer(modifier = Modifier.height(14.dp))
 
                         Text(
                             text = title,
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Medium,
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.SemiBold,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
 
-                        Spacer(modifier = Modifier.height(2.dp))
+                        Spacer(modifier = Modifier.height(4.dp))
 
                         Text(
                             text = subtitle,
-                            style = MaterialTheme.typography.bodySmall,
+                            style = MaterialTheme.typography.bodyMedium,
                             color = Color.White
                         )
                     }
                 }
 
-                // body
                 Column(modifier = Modifier.padding(20.dp)) {
 
-                    // reason bullets card
                     Surface(
                         shape = RoundedCornerShape(12.dp),
                         color = MaterialTheme.colorScheme.surface,
                     ) {
-                        Column(modifier = Modifier.padding(14.dp)) {
+                        Column(modifier = Modifier.padding(16.dp)) {
                             ReasonRow(text = reason1)
-                            Spacer(modifier = Modifier.height(8.dp))
+                            Spacer(modifier = Modifier.height(12.dp))
                             ReasonRow(text = reason2)
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(14.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
                         text = disclaimer,
-                        style = MaterialTheme.typography.labelSmall,
+                        style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurface,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth()
                     )
 
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
 
-                    // primary button
                     Button(
                         onClick = onContinue,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(48.dp),
+                            .height(54.dp),
                         shape = RoundedCornerShape(50)
                     ) {
-                        Text(buttonText, style = MaterialTheme.typography.bodyMedium)
+                        Text(
+                            buttonText,
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontWeight = FontWeight.Medium
+                        )
                     }
 
                     Spacer(modifier = Modifier.height(8.dp))
@@ -147,19 +150,19 @@ private fun ReasonRow(text: String) {
     Row(verticalAlignment = Alignment.Top) {
         Box(
             modifier = Modifier
-                .padding(top = 6.dp)
-                .size(6.dp)
+                .padding(top = 7.dp)
+                .size(7.dp)
                 .background(
                     color = MaterialTheme.colorScheme.primary,
                     shape = CircleShape
                 )
         )
-        Spacer(modifier = Modifier.width(10.dp))
+        Spacer(modifier = Modifier.width(12.dp))
         Text(
             text = text,
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurface,
-            lineHeight = 20.sp
+            lineHeight = 24.sp
         )
     }
 }

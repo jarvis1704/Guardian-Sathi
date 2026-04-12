@@ -43,4 +43,59 @@
     <string name="ConnectionSuccess_H">सफलतापूर्वक कनेक्ट हो गया</string>
     <string name="ConnectionSuccess_D">आप अब इससे कनेक्ट हो चुके हैं:</string>
     <string name="ConnectionSuccess_retry">यह सही व्यक्ति नहीं है? फिर से प्रयास करें</string>
+
+    <string name="ElderPermission_button">अनुमति दें</string>
+    <string name="ElderPermission_1_T">बैटरी प्रतिबंध बंद करें</string>
+    <string name="ElderPermission_1_S">Guardian Saathi को हमेशा सक्रिय रखें</string>
+    <string name="ElderPermission_1_R1">Android को बैकग्राउंड में आपकी सुरक्षा बंद करने से रोकता है। बैटरी सेवर चालू होने पर भी गिरने की पहचान और लोकेशन काम करती है।</string>
+    <string name="ElderPermission_1_R2">एक स्क्रीन दिखाई देगी जहाँ Guardian Saathi को बिना प्रतिबंध चलाने की अनुमति मांगी जाएगी। पुष्टि के लिए "Allow" पर टैप करें।</string>
+    <string name="ElderPermission_1_D">इससे बैटरी पर ज्यादा असर नहीं पड़ता। यह सिर्फ Android को ऐप को जबरदस्ती बंद करने से रोकता है।</string>
+
+    <string name="ElderPermission_2_T">नोटिफिकेशन एक्सेस</string>
+    <string name="ElderPermission_2_S">अन्य ऐप्स में स्कैम पहचानें</string>
+    <string name="ElderPermission_2_R1">WhatsApp और SMS ऐप्स के नोटिफिकेशन में संदिग्ध लिंक और फिशिंग पैटर्न को स्कैन करता है, ताकि आप गलती से उन्हें न खोलें।</string>
+    <string name="ElderPermission_2_R2">अगली स्क्रीन में "Guardian Saathi" खोजें और उसे ऑन करें। पुष्टि पॉपअप में "Allow" पर टैप करें।</string>
+    <string name="ElderPermission_2_D">हम केवल स्कैम पैटर्न का विश्लेषण करते हैं। आपके व्यक्तिगत संदेश कभी पढ़े या स्टोर नहीं किए जाते।</string>
+
+    <string name="ElderPermission_3_T">लोकेशन एक्सेस</string>
+    <string name="ElderPermission_3_S">आपकी सुरक्षा के लिए आवश्यक</string>
+    <string name="ElderPermission_3_R1">आपका संरक्षक आपकी लोकेशन रियल-टाइम में देख सकता है।</string>
+    <string name="ElderPermission_3_R2">इमरजेंसी SOS और जियो-फेंस अलर्ट के लिए जरूरी।</string>
+    <string name="ElderPermission_3_D">आपकी लोकेशन केवल आपके विश्वसनीय संरक्षक के साथ साझा की जाती है। हम इसे किसी और के साथ साझा नहीं करते।</string>
+
+    <string name="ElderPermission_4_T">हमेशा चालू लोकेशन</string>
+    <string name="ElderPermission_4_S">ऐप बंद होने पर भी सुरक्षा</string>
+    <string name="ElderPermission_4_R1">Guardian Saathi बैकग्राउंड में होने पर भी जियो-फेंस अलर्ट काम करता है।</string>
+    <string name="ElderPermission_4_R2">अगर आप सुरक्षित क्षेत्र से बाहर जाते हैं तो आपके संरक्षक को तुरंत सूचना मिलती है।</string>
+    <string name="ElderPermission_4_D">बैकग्राउंड लोकेशन केवल सुरक्षा निगरानी के लिए उपयोग होती है और कभी बेची या साझा नहीं की जाती।</string>
+
+    <string name="ElderPermission_5_T">सूचित रहें</string>
+    <string name="ElderPermission_5_S">महत्वपूर्ण अलर्ट पर ध्यान दें</string>
+    <string name="ElderPermission_5_R1">समय पर दवाई रिमाइंडर और स्वास्थ्य जांच अलर्ट प्राप्त करें।</string>
+    <string name="ElderPermission_5_R2">आपका संरक्षक आपको तुरंत जरूरी संदेश भेज सकता है।</string>
+    <string name="ElderPermission_5_D">हम केवल वही नोटिफिकेशन भेजते हैं जो आपकी सुरक्षा और स्वास्थ्य के लिए जरूरी हैं।</string>
+
+    <string name="ElderPermission_6_T">गिरने की पहचान</string>
+    <string name="ElderPermission_6_S">हम चुपचाप आपकी देखभाल करते हैं</string>
+    <string name="ElderPermission_6_R1">अचानक गिरने का पता लगाकर तुरंत आपके संरक्षक को सूचित करता है।</string>
+    <string name="ElderPermission_6_R2">गिरने के बाद असामान्य स्थिरता की पहचान के लिए मूवमेंट पैटर्न मॉनिटर करता है।</string>
+    <string name="ElderPermission_6_D">मोशन डेटा आपके डिवाइस पर ही प्रोसेस होता है और किसी सर्वर पर अपलोड नहीं होता।</string>
+
+    <string name="ElderPermission_7_T">SMS सुरक्षा</string>
+    <string name="ElderPermission_7_S">धोखाधड़ी संदेशों से सुरक्षा</string>
+    <string name="ElderPermission_7_R1">आने वाले संदेशों को स्कैम और फिशिंग पैटर्न के लिए स्कैन करता है।</string>
+    <string name="ElderPermission_7_R2">आपके गलती से जवाब देने से पहले आपके संरक्षक को अलर्ट करता है।</string>
+    <string name="ElderPermission_7_D">आपके संदेश डिवाइस पर ही स्कैन होते हैं। हम आपके निजी SMS कभी नहीं पढ़ते या स्टोर करते।</string>
+
+    <string name="ElderPermission_8_T">कॉल सुरक्षा</string>
+    <string name="ElderPermission_8_S">रीयल-टाइम में स्कैम कॉल पहचानें</string>
+    <string name="ElderPermission_8_R1">ज्ञात धोखाधड़ी नंबरों से आने वाली कॉल की पहचान करता है।</string>
+    <string name="ElderPermission_8_R2">संदिग्ध कॉल मिलने पर आपके संरक्षक को अलर्ट किया जाता है।</string>
+    <string name="ElderPermission_8_D">कॉल डेटा केवल स्कैम पहचान के लिए उपयोग होता है और कभी स्टोर या साझा नहीं किया जाता।</string>
+
+    <string name="ElderPermission_9_T">कॉल हिस्ट्री एक्सेस</string>
+    <string name="ElderPermission_9_S">संदिग्ध कॉल पैटर्न पहचानें</string>
+    <string name="ElderPermission_9_R1">कॉल हिस्ट्री का विश्लेषण करके धोखाधड़ी नंबरों से बार-बार संपर्क का पता लगाता है।</string>
+    <string name="ElderPermission_9_R2">समय के साथ असामान्य कॉलिंग पैटर्न समझने में आपके संरक्षक की मदद करता है।</string>
+    <string name="ElderPermission_9_D">कॉल हिस्ट्री लोकली विश्लेषित होती है और केवल फ्लैग किए गए डेटा ही संरक्षक के साथ साझा होते हैं।</string>
 </resources>

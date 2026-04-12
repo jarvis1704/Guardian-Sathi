@@ -43,4 +43,59 @@
     <string name="ConnectionSuccess_H">সফলতাৰে সংযুক্ত হ\'ল</string>
     <string name="ConnectionSuccess_D">আপুনি এতিয়া ইয়াৰ সৈতে সংযুক্ত হৈছে:</string>
     <string name="ConnectionSuccess_retry">এইজন সঠিক ব্যক্তি নহয়? পুনৰ চেষ্টা কৰক</string>
+
+    <string name="ElderPermission_button">অনুমতি দিয়ক</string>
+    <string name="ElderPermission_1_T">ব্যাটাৰী নিষেধাজ্ঞা বন্ধ কৰক</string>
+    <string name="ElderPermission_1_S">Guardian Saathi সদায় সক্ৰিয় ৰাখক</string>
+    <string name="ElderPermission_1_R1">Android-এ পৃষ্ঠভূমিত আপোনাৰ সুৰক্ষা বন্ধ নকৰিবলৈ সহায় কৰে। ব্যাটাৰী ছেভাৰ অন থাকিলেও পতন চিনাক্তকৰণ আৰু লোকেচন কাম কৰে।</string>
+    <string name="ElderPermission_1_R2">এটা স্ক্ৰীন আহিব য\'ত Guardian Saathi-কে নিষেধবিহীনভাৱে চলিবলৈ অনুমতি বিচাৰিব। নিশ্চিত কৰিবলৈ "Allow" টেপ কৰক।</string>
+    <string name="ElderPermission_1_D">ই ব্যাটাৰীত বিশেষ প্ৰভাৱ নপৰে। ই কেৱল Android-এ এপটো জোৰকৈ বন্ধ কৰাটো ৰোধ কৰে।</string>
+
+    <string name="ElderPermission_2_T">নোটিফিকেশন এক্সেছ</string>
+    <string name="ElderPermission_2_S">আন এপত স্কেম চিনাক্ত কৰক</string>
+    <string name="ElderPermission_2_R1">WhatsApp আৰু SMS-ৰ নোটিফিকেশনত সন্দেহজনক লিংক আৰু ফিছিং পেটাৰ্ণ স্কেন কৰে।</string>
+    <string name="ElderPermission_2_R2">পিছৰ স্ক্ৰীনত "Guardian Saathi" বিচাৰি অন কৰক। নিশ্চিত কৰিবলৈ "Allow" টেপ কৰক।</string>
+    <string name="ElderPermission_2_D">আমি কেৱল স্কেম পেটাৰ্ণ বিশ্লেষণ কৰোঁ। আপোনাৰ ব্যক্তিগত বাৰ্তা কেতিয়াও পঢ়া বা সংৰক্ষণ কৰা নহয়।</string>
+
+    <string name="ElderPermission_3_T">লোকেচন এক্সেছ</string>
+    <string name="ElderPermission_3_S">আপোনাৰ সুৰক্ষাৰ বাবে প্ৰয়োজনীয়</string>
+    <string name="ElderPermission_3_R1">আপোনাৰ অভিভাৱকে আপোনাৰ লোকেচন বাস্তৱ সময়ত চাব পাৰে।</string>
+    <string name="ElderPermission_3_R2">ইমাৰ্জেন্সি SOS আৰু জিঅ\'-ফেন্স এলাৰ্টৰ বাবে প্ৰয়োজন।</string>
+    <string name="ElderPermission_3_D">আপোনাৰ লোকেচন কেৱল বিশ্বাসযোগ্য অভিভাৱকৰ সৈতে শ্বেয়াৰ কৰা হয়। আমি ইয়াক আন কাৰোবাৰ সৈতে শ্বেয়াৰ নকৰোঁ।</string>
+
+    <string name="ElderPermission_4_T">সদায় চালু লোকেচন</string>
+    <string name="ElderPermission_4_S">এপ বন্ধ থাকিলেও সুৰক্ষা</string>
+    <string name="ElderPermission_4_R1">Guardian Saathi পৃষ্ঠভূমিত থাকিলেও জিঅ\'-ফেন্স এলাৰ্ট কাম কৰে।</string>
+    <string name="ElderPermission_4_R2">আপুনি নিৰাপদ এলেকাৰ বাহিৰলৈ গ\'লে আপোনাৰ অভিভাৱকক জনোৱা হয়।</string>
+    <string name="ElderPermission_4_D">পৃষ্ঠভূমি লোকেচন কেৱল সুৰক্ষা মনিটৰিঙৰ বাবে ব্যৱহাৰ কৰা হয়।</string>
+
+    <string name="ElderPermission_5_T">সতৰ্ক থাকক</string>
+    <string name="ElderPermission_5_S">গুৰুত্বপূৰ্ণ এলাৰ্টৰ ওপৰত দৃষ্টি ৰাখক</string>
+    <string name="ElderPermission_5_R1">সময়মতে ঔষধ ৰিমাইণ্ডাৰ আৰু স্বাস্থ্য পৰীক্ষা এলাৰ্ট লাভ কৰক।</string>
+    <string name="ElderPermission_5_R2">আপোনাৰ অভিভাৱকে আপোনালৈ তৎক্ষণাত বাৰ্তা পঠাব পাৰে।</string>
+    <string name="ElderPermission_5_D">আমি কেৱল সুৰক্ষা আৰু স্বাস্থ্যৰ বাবে গুৰুত্বপূৰ্ণ নোটিফিকেশন পঠাওঁ।</string>
+
+    <string name="ElderPermission_6_T">পতন চিনাক্তকৰণ</string>
+    <string name="ElderPermission_6_S">আমি নিঃশব্দে আপোনাক লক্ষ্য ৰাখোঁ</string>
+    <string name="ElderPermission_6_R1">হঠাৎ পৰি যোৱা চিনাক্ত কৰি তৎক্ষণাত অভিভাৱকক জনায়।</string>
+    <string name="ElderPermission_6_R2">অস্বাভাৱিক স্থিৰতা চিনাক্ত কৰিবলৈ গতি পেটাৰ্ণ পৰ্যবেক্ষণ কৰে।</string>
+    <string name="ElderPermission_6_D">মোচন ডাটা ডিভাইচত প্ৰসেছ হয় আৰু কেতিয়াও আপলোড কৰা নহয়।</string>
+
+    <string name="ElderPermission_7_T">SMS সুৰক্ষা</string>
+    <string name="ElderPermission_7_S">প্ৰতাৰণা বাৰ্তাৰ পৰা সুৰক্ষা</string>
+    <string name="ElderPermission_7_R1">আহি থকা বাৰ্তা স্কেম আৰু ফিছিং পেটাৰ্ণৰ বাবে স্কেন কৰে।</string>
+    <string name="ElderPermission_7_R2">আপুনি ভুলতে উত্তৰ দিয়াৰ আগতে অভিভাৱকক সতৰ্ক কৰে।</string>
+    <string name="ElderPermission_7_D">আপোনাৰ বাৰ্তা লোকেলি স্কেন কৰা হয়। আমি ব্যক্তিগত SMS সংৰক্ষণ নকৰোঁ।</string>
+
+    <string name="ElderPermission_8_T">কল সুৰক্ষা</string>
+    <string name="ElderPermission_8_S">বাস্তৱ সময়ত স্কেম কল চিনাক্ত কৰক</string>
+    <string name="ElderPermission_8_R1">জনা প্ৰতাৰণামূলক নম্বৰৰ পৰা আহা কল চিনাক্ত কৰে।</string>
+    <string name="ElderPermission_8_R2">সন্দেহজনক কল আহিলে অভিভাৱকক জনোৱা হয়।</string>
+    <string name="ElderPermission_8_D">কল ডাটা কেৱল স্কেম চিনাক্তকৰণৰ বাবে ব্যৱহাৰ কৰা হয়।</string>
+
+    <string name="ElderPermission_9_T">কল ইতিহাস এক্সেছ</string>
+    <string name="ElderPermission_9_S">সন্দেহজনক কল পেটাৰ্ণ চিনাক্ত কৰক</string>
+    <string name="ElderPermission_9_R1">কল ইতিহাস বিশ্লেষণ কৰি প্ৰতাৰণামূলক নম্বৰৰ পুনৰাবৃত্তি চিনাক্ত কৰে।</string>
+    <string name="ElderPermission_9_R2">সময়ৰ সৈতে অস্বাভাৱিক কল পেটাৰ্ণ বুজিবলৈ সহায় কৰে।</string>
+    <string name="ElderPermission_9_D">কল ইতিহাস লোকেলি বিশ্লেষণ কৰা হয় আৰু কেৱল চিহ্নিত ডাটা শ্বেয়াৰ কৰা হয়।</string>
 </resources>
