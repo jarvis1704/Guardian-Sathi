@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -19,6 +21,21 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            localProperties.load(localPropertiesFile.inputStream())
+        }
+
+        buildConfigField(
+            "String",
+            "MAPS_API_KEY",
+            "\"${localProperties["MAPS_API_KEY"]}\""
+        )
+        manifestPlaceholders["MAPS_API_KEY"] =
+            localProperties["MAPS_API_KEY"]?.toString() ?: ""
+
     }
 
     buildTypes {
@@ -38,12 +55,12 @@ android {
         compose = true
         buildConfig = true
     }
-    defaultConfig {
-        buildConfigField("String", "MAPS_API_KEY","\"${properties["MAPS_API_KEY"]}\"")
-    }
 }
 
 dependencies {
+    //places api
+    implementation("com.google.android.libraries.places:places:5.2.0")
+
     //lottie animations
     implementation("com.airbnb.android:lottie-compose:6.7.1")
 

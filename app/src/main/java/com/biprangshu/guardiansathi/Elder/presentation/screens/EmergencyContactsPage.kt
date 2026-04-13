@@ -38,6 +38,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import com.biprangshu.guardiansathi.R
 import androidx.core.net.toUri
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.EmergencyNumbersViewmodel
 
 
 data class EmergencyContactUi(
@@ -46,8 +49,19 @@ data class EmergencyContactUi(
     val phone: String
 )
 
+data class EmergencyNumber(
+    val name: String,
+    val phoneNumber: String,
+    val address: String = "",
+    val distanceMeters: Double = 0.0,
+    val isLocal: Boolean = false // true = Places API, false = hardcoded national
+)
+
 @Composable
-fun EmergencyContactsPage(){
+fun EmergencyContactsPage(
+    viewModel: EmergencyNumbersViewmodel = hiltViewModel()
+){
+
     val context = LocalContext.current
     val onCallClick = { phoneNumber: String ->
         val intent = Intent(Intent.ACTION_DIAL).apply {
@@ -65,6 +79,13 @@ fun EmergencyContactsPage(){
         EmergencyContactUi("Women Helpline",  "1091",  "1091"),
     )
 
+    val state by viewModel.emergencyNumbersState.collectAsStateWithLifecycle()
+    LaunchedEffect(Unit) {
+        viewModel.loadEmergencyNumbers(
+            latitude = 26.7509,
+            longitude = 94.2037
+        )
+    }
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
