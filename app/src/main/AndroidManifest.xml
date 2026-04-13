@@ -73,6 +73,16 @@
                 <action android:name="android.service.notification.NotificationListenerService"/>
             </intent-filter>
         </service>
+        <receiver
+            android:name=".Elder.core.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
