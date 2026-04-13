@@ -1,6 +1,7 @@
 package com.biprangshu.guardiansathi.Elder.data
 
 import android.Manifest
+import android.app.NotificationManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
@@ -53,5 +54,15 @@ class PermissionManagerRepositoryImpl @Inject constructor(
             "enabled_notification_listeners"
         )
         return flat?.contains(context.packageName) == true
+    }
+
+    override fun isFullScreenIntentEnabled(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE)
+                    as NotificationManager
+            notificationManager.canUseFullScreenIntent()
+        } else {
+            true // automatically granted below Android 14
+        }
     }
 }

@@ -33,6 +33,7 @@ import androidx.compose.material.icons.rounded.BatteryChargingFull
 import androidx.compose.material.icons.rounded.BatteryFull
 import androidx.compose.material.icons.rounded.Call
 import androidx.compose.material.icons.rounded.Emergency
+import androidx.compose.material.icons.rounded.Fullscreen
 import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.ManageHistory
 import androidx.compose.material.icons.rounded.MarkChatUnread
@@ -175,7 +176,6 @@ fun ElderHomeScreen(
             }
         )
     }
-
     if (specialPermissionAlertState.showNotificationListenerAlert) {
         PermissionAlertDialog(
             title = stringResource(R.string.ElderPermission_2_T),
@@ -190,6 +190,27 @@ fun ElderHomeScreen(
             }
         )
     }
+    if (specialPermissionAlertState.showFullScreenIntentAlert) {
+        PermissionAlertDialog(
+            title = stringResource(R.string.ElderPermission_10_T),
+            subtitle = stringResource(R.string.ElderPermission_10_S),
+            reason1 = stringResource(R.string.ElderPermission_10_R1),
+            reason2 = stringResource(R.string.ElderPermission_10_R2),
+            disclaimer = stringResource(R.string.ElderPermission_10_D),
+            icon = Icons.Rounded.Fullscreen,
+            onContinue = {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                    val intent = Intent(
+                        Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT,
+                        "package:${context.packageName}".toUri()
+                    )
+                    context.startActivity(intent)
+                }
+            }
+        )
+    }
+
+
 
     if (permissionState.locationPermissionGranted &&
         permissionAlertState.showBackgroundLocationAlert &&

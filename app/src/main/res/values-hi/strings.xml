@@ -101,6 +101,12 @@
     <string name="ElderPermission_9_R2">समय के साथ असामान्य कॉलिंग पैटर्न समझने में आपके संरक्षक की मदद करता है।</string>
     <string name="ElderPermission_9_D">कॉल हिस्ट्री लोकली विश्लेषित होती है और केवल फ्लैग किए गए डेटा ही संरक्षक के साथ साझा होते हैं।</string>
 
+    <string name="ElderPermission_10_T">फुल स्क्रीन अलर्ट</string>
+    <string name="ElderPermission_10_S">आपातकालीन अलर्ट तुरंत देखें</string>
+    <string name="ElderPermission_10_R1">SOS और गिरने का पता चलने वाले अलर्ट को फोन लॉक होने या किसी अन्य ऐप के खुले होने पर भी आपकी स्क्रीन पर दिखने की अनुमति देता है।</string>
+    <string name="ElderPermission_10_R2">अगली स्क्रीन में \"GuardianSathi\" खोजें और \"Allow full screen intents\" चालू करें।</string>
+    <string name="ElderPermission_10_D">यह केवल महत्वपूर्ण सुरक्षा अलर्ट के लिए उपयोग किया जाता है। GuardianSathi कभी भी इसका उपयोग विज्ञापन या अनावश्यक पॉपअप दिखाने के लिए नहीं करेगा।</string>
+
     <string name="ElderHome_1">अनुमतियाँ नहीं मिलीं</string>
     <string name="ElderHome_2">आप सुरक्षित हैं</string>
     <string name="ElderHome_3">सहायक से बात करें</string>

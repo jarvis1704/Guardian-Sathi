@@ -101,6 +101,12 @@
     <string name="ElderPermission_9_R2">সময়ৰ সৈতে অস্বাভাৱিক কল পেটাৰ্ণ বুজিবলৈ সহায় কৰে।</string>
     <string name="ElderPermission_9_D">কল ইতিহাস লোকেলি বিশ্লেষণ কৰা হয় আৰু কেৱল চিহ্নিত ডাটা শ্বেয়াৰ কৰা হয়।</string>
 
+    <string name="ElderPermission_10_T">ফুল স্ক্ৰিন এলাৰ্ট</string>
+    <string name="ElderPermission_10_S">জৰুৰী এলাৰ্ট তৎক্ষণাত চাওক</string>
+    <string name="ElderPermission_10_R1">SOS আৰু পৰি যোৱা ধৰা পেলোৱা এলাৰ্টসমূহ আপোনাৰ স্ক্ৰিনত দেখুৱাবলৈ অনুমতি দিয়ে, যদিও ফোনটো লক হৈ থাকে বা আন এটা এপ খোলা থাকে।</string>
+    <string name="ElderPermission_10_R2">পৰৱৰ্তী স্ক্ৰিনত \"GuardianSathi\" বিচাৰক আৰু \"Allow full screen intents\" অন কৰক।</string>
+    <string name="ElderPermission_10_D">ই কেৱল গুৰুত্বপূৰ্ণ সুৰক্ষা এলাৰ্টৰ বাবে ব্যৱহাৰ কৰা হয়। GuardianSathi কেতিয়াও ইয়াক বিজ্ঞাপন বা অপ্রয়োজনীয় পপআপ দেখুৱাবলৈ ব্যৱহাৰ নকৰে।</string>
+
     <string name="ElderHome_1">অনুমতি নাই</string>
     <string name="ElderHome_2">আপুনি সুৰক্ষিত</string>
     <string name="ElderHome_3">সহায়কৰ সৈতে কথা পাতক</string>

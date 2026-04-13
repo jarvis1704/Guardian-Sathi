@@ -14,6 +14,7 @@ import android.os.IBinder
 import android.os.SystemClock
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.biprangshu.guardiansathi.Elder.ui.FallAlarmActivity
 import com.biprangshu.guardiansathi.Global.MainActivity
 import com.biprangshu.guardiansathi.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,23 +60,39 @@ class GuardianService : Service() {
     }
 
     private fun onFallDetected() {
-        Log.w("GuardianService", "🚨 FALL DETECTED — triggering alert")
-        // Show a notification for now (Toast won't work from a Service)
-        showFallNotification()
+        Log.w("GuardianService", "🚨 FALL DETECTED")
+        val intent = Intent(this, FallAlarmActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                    Intent.FLAG_ACTIVITY_NO_HISTORY
+        }
+        startActivity(intent)
     }
 
-    private fun showFallNotification() {
-        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("⚠️ Fall Detected!")
-            .setContentText("A possible fall was detected. Are you okay?")
-            .setSmallIcon(R.drawable.ic_guardian)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setAutoCancel(true)
-            .build()
-
-        getSystemService(NotificationManager::class.java)
-            ?.notify(2001, notification)
-    }
+//    private fun showFallNotification() {
+//        // This intent launches the activity over the lock screen
+//        val fullScreenIntent = Intent(this, FallAlertActivity::class.java).apply {
+//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_USER_ACTION
+//        }
+//        val fullScreenPendingIntent = PendingIntent.getActivity(
+//            this, 2001, fullScreenIntent,
+//            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+//        )
+//
+//        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+//            .setContentTitle("⚠️ Fall Detected!")
+//            .setContentText("Tap to confirm you're okay")
+//            .setSmallIcon(R.drawable.ic_guardian)
+//            .setPriority(NotificationCompat.PRIORITY_MAX)
+//            .setCategory(NotificationCompat.CATEGORY_ALARM)  // key — treated like incoming call
+//            .setFullScreenIntent(fullScreenPendingIntent, true)
+//            .setAutoCancel(true)
+//            .build()
+//
+//        getSystemService(NotificationManager::class.java)?.notify(2001, notification)
+//
+//        // Also directly launch the activity (belt-and-suspenders)
+//        FallAlertActivity.launch(this)
+//    }
 
     // KEY FIX 1: START_STICKY makes Android restart the service if killed
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

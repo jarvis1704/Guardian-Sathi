@@ -40,12 +40,14 @@ data class ElderPermissionAlert(
 
 data class SpecialElderPermissionState(
     val isBatteryOptimizationIgnored: Boolean = false,
-    val isNotificationListenerEnabled: Boolean = false
+    val isNotificationListenerEnabled: Boolean = false,
+    val isFullScreenIntentGranted: Boolean = false
 )
 
 data class SpecialPermissionAlertState(
     val showBatteryOptimizationAlert: Boolean = false,
     val showNotificationListenerAlert: Boolean = false,
+    val showFullScreenIntentAlert: Boolean = false
 )
 
 @HiltViewModel
@@ -78,6 +80,8 @@ class ElderPermissionsViewmodel @Inject constructor(
                 && permState.phoneLogPermissionGranted
                 && specialState.isBatteryOptimizationIgnored
                 && specialState.isNotificationListenerEnabled
+                && specialState.isFullScreenIntentGranted
+
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
@@ -140,54 +144,16 @@ class ElderPermissionsViewmodel @Inject constructor(
             )
         }
 
-        if (!_permissionstate.value.locationPermissionGranted) {
-            _permissionAlertState.update {
-                it.copy(
-                    showLocationAlert = true
-                )
-            }
-        }
-        if (!_permissionstate.value.backgroundLocationPermissionGranted) {
-            _permissionAlertState.update {
-                it.copy(
-                    showBackgroundLocationAlert = true
-                )
-            }
-        }
-        if (!_permissionstate.value.notificationPermissionGranted) {
-            _permissionAlertState.update {
-                it.copy(
-                    showNotificationAlert = true
-                )
-            }
-        }
-        if (!_permissionstate.value.activityRecognitionGranted) {
-            _permissionAlertState.update {
-                it.copy(
-                    showActivityRecognitionAlert = true
-                )
-            }
-        }
-        if (!_permissionstate.value.smsReadGranted) {
-            _permissionAlertState.update {
-                it.copy(
-                    showReadSmsAlert = true
-                )
-            }
-        }
-        if (!_permissionstate.value.phonePermissionsGranted) {
-            _permissionAlertState.update {
-                it.copy(
-                    showPhoneAlert = true
-                )
-            }
-        }
-        if (!_permissionstate.value.phoneLogPermissionGranted) {
-            _permissionAlertState.update {
-                it.copy(
-                    showPhoneLogAlert = true
-                )
-            }
+        _permissionAlertState.update {
+            it.copy(
+                showLocationAlert = !locationGranted,
+                showBackgroundLocationAlert = !backgroundLocationGranted,
+                showNotificationAlert = !notificationGranted,
+                showActivityRecognitionAlert = !activityGranted,
+                showReadSmsAlert = !smsReadGranted,
+                showPhoneAlert = !phonePermissionsGranted,
+                showPhoneLogAlert = !phoneLogPermissionGranted
+            )
         }
 
         checkSpecialPermissions()
@@ -196,19 +162,22 @@ class ElderPermissionsViewmodel @Inject constructor(
     fun checkSpecialPermissions() {
         val batteryOp = permissionManager.isBatteryOptimizationIgnored()
         val notifListener = permissionManager.isNotificationListenerEnabled()
+        val fullScreenIntent = permissionManager.isFullScreenIntentEnabled()
 
         _specialPermissionState.update {
             Log.d("SpecialPermCheck", "Updating specialPermissionState")
             it.copy(
                 isBatteryOptimizationIgnored = batteryOp,
-                isNotificationListenerEnabled = notifListener
+                isNotificationListenerEnabled = notifListener,
+                isFullScreenIntentGranted = fullScreenIntent
             )
         }
 
         _specialPermissionAlertState.update {
             it.copy(
                 showBatteryOptimizationAlert = !batteryOp,
-                showNotificationListenerAlert = !notifListener
+                showNotificationListenerAlert = !notifListener,
+                showFullScreenIntentAlert = !fullScreenIntent
             )
         }
     }

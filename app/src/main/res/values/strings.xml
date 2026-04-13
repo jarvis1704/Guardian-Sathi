@@ -101,6 +101,12 @@
     <string name="ElderPermission_9_R2">Helps your guardian understand unusual calling patterns over time.</string>
     <string name="ElderPermission_9_D">Call history is analyzed locally and only flagged entries are shared with your guardian.</string>
 
+    <string name="ElderPermission_10_T">Full Screen Alerts</string>
+    <string name="ElderPermission_10_S">See emergency alerts instantly</string>
+    <string name="ElderPermission_10_R1">Allows SOS and fall detection alerts to appear on your screen even when the phone is locked or another app is open.</string>
+    <string name="ElderPermission_10_R2">In the next screen, find \"GuardianSathi\" and toggle \"Allow full screen intents\" on.</string>
+    <string name="ElderPermission_10_D">This is only used for critical safety alerts. GuardianSathi will never use this to show advertisements or unnecessary popups.</string>
+
     <string name="ElderHome_1">Missing Permissions</string>
     <string name="ElderHome_2">You are protected</string>
     <string name="ElderHome_3">Talk to assistant</string>
