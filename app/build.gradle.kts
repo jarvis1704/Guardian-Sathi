@@ -36,6 +36,10 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
+    }
+    defaultConfig {
+        buildConfigField("String", "MAPS_API_KEY","\"${properties["MAPS_API_KEY"]}\"")
     }
 }
 

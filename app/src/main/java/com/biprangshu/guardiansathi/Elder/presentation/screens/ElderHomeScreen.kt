@@ -31,6 +31,7 @@ import androidx.compose.material.icons.rounded.Accessibility
 import androidx.compose.material.icons.rounded.BatteryChargingFull
 import androidx.compose.material.icons.rounded.BatteryFull
 import androidx.compose.material.icons.rounded.Call
+import androidx.compose.material.icons.rounded.Emergency
 import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.ManageHistory
 import androidx.compose.material.icons.rounded.MarkChatUnread
@@ -50,6 +51,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -79,10 +81,12 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.biprangshu.guardiansathi.Global.core.isGestureNav
 import com.biprangshu.guardiansathi.R
 
 @Composable
 fun ElderHomeScreen(
+    onNavigateToEmergencyContacts: () -> Unit,
     elderPermissionsViewmodel: ElderPermissionsViewmodel = hiltViewModel()
 ) {
     // re-check special permissions every time user returns to screen
@@ -375,7 +379,7 @@ fun ElderHomeScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(18.dp))
 
             Text(
                 text = "You are protected",
@@ -385,81 +389,137 @@ fun ElderHomeScreen(
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "Protected by guardianName",
+                text = "Guardian Saathi",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // status pills
-            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                StatusPill(
-                    icon = Icons.Rounded.BatteryFull,
-                    label = "80%"
-                )
-                StatusPill(
-                    icon = Icons.Rounded.LocationOn,
-                    label = if (true) "Location on" else "Location off"
-                )
-            }
+//            // status pills
+//            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+//                StatusPill(
+//                    icon = Icons.Rounded.BatteryFull,
+//                    label = "80%"
+//                )
+//                StatusPill(
+//                    icon = Icons.Rounded.LocationOn,
+//                    label = if (true) "Location on" else "Location off"
+//                )
+//            }
 
-            Spacer(modifier = Modifier.weight(1f))
-
-            // voice assistant button
-            OutlinedButton(
-                onClick = {},
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(60.dp),
-                shape = RoundedCornerShape(50),
-                border = BorderStroke(
-                    1.dp,
-                    MaterialTheme.colorScheme.outline
-                )
+                    .weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+//                verticalArrangement = Arrangement.SpaceAround
             ) {
-                Icon(
-                    imageVector = Icons.Rounded.Mic,
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp)
-                )
-                Spacer(modifier = Modifier.width(12.dp))
-                Text(
-                    text = "Talk to assistant",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Medium
-                )
-            }
+                Spacer(Modifier.weight(1f))
+                // voice assistant button
+                Button(
+                    onClick = {},
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    shape = RoundedCornerShape(50),
+                    border = BorderStroke(
+                        1.dp,
+                        MaterialTheme.colorScheme.outline
+                    ),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = Color.White
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.Mic,
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = "Talk to assistant",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+                Spacer(Modifier.height(24.dp))
 
-            Spacer(modifier = Modifier.height(12.dp))
+                //Emergency contacts
+                Button(
+                    onClick = {
+                        onNavigateToEmergencyContacts()
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    shape = RoundedCornerShape(50),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.surface,
+                        contentColor = MaterialTheme.colorScheme.onSurface
+                    ),
+                    border = BorderStroke(
+                        2.dp,
+                        MaterialTheme.colorScheme.onSurface
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.Emergency,
+                        contentDescription = null,
+                        modifier = Modifier.size(26.dp)
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = "Emergency Contacts",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+                Spacer(Modifier.weight(1f))
+//                Spacer(Modifier.height(26.dp))
+                // SOS button
+                Button(
+                    onClick = {},
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(78.dp),
+                    shape = RoundedCornerShape(50),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Red,
+                        contentColor = Color.White
+                    ),
+                    border = BorderStroke(
+                        2.dp,
+                        Color.White
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.Call,
+                        contentDescription = null,
+                        modifier = Modifier.size(26.dp)
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = "SOS — I need help",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+                Spacer(Modifier.weight(0.3f))
 
-            // SOS button
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(68.dp),
-                shape = RoundedCornerShape(50),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                    contentColor = MaterialTheme.colorScheme.error
-                ),
-                border = BorderStroke(
-                    2.dp,
-                    MaterialTheme.colorScheme.error
-                )
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Call,
-                    contentDescription = null,
-                    modifier = Modifier.size(26.dp)
-                )
-                Spacer(modifier = Modifier.width(12.dp))
-                Text(
-                    text = "SOS — I need help",
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.SemiBold
-                )
+                //small settings button
+                TextButton(
+                    onClick = {
+
+                    }
+                ) {
+                    Text(
+                        "Settings",
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
+                Spacer(Modifier.height(if (isGestureNav) 30.dp else 80.dp))
             }
         }
     }

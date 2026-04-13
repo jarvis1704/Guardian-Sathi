@@ -33,6 +33,10 @@ data object LinkGuardianRoute
 @Serializable
 data object ElderHomeRoute
 
+@Serializable
+data object EmergencyContactsRoute
+
+
 // Guardian graph
 @Serializable
 data object GuardianGraph

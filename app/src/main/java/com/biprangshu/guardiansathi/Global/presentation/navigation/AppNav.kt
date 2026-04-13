@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.biprangshu.guardiansathi.Elder.presentation.screens.ElderHomeScreen
+import com.biprangshu.guardiansathi.Elder.presentation.screens.EmergencyContactsPage
 import com.biprangshu.guardiansathi.Elder.presentation.screens.LinkGuardianRoot
 import com.biprangshu.guardiansathi.Guardian.presentation.screens.LinkElderRoot
 import com.biprangshu.guardiansathi.Global.presentation.login.LoginRoot
@@ -179,7 +180,15 @@ fun NavGraphBuilder.elderNav(navController: NavController) {
     }
 
     composable<ElderHomeRoute> {
-        ElderHomeScreen()
+        ElderHomeScreen(
+            onNavigateToEmergencyContacts = {
+                navController.navigate(EmergencyContactsRoute)
+            }
+        )
+    }
+
+    composable<EmergencyContactsRoute>{
+        EmergencyContactsPage()
     }
 }
 
