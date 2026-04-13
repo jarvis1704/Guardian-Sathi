@@ -1,7 +1,15 @@
 package com.biprangshu.guardiansathi.Elder.data
 
 import android.util.Log
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FireTruck
+import androidx.compose.material.icons.filled.LocalHospital
+import androidx.compose.material.icons.filled.LocalPolice
+import androidx.compose.material.icons.filled.MedicalServices
+import androidx.compose.material.icons.filled.Medication
+import androidx.compose.ui.res.stringResource
 import com.biprangshu.guardiansathi.Elder.presentation.screens.EmergencyNumber
+import com.biprangshu.guardiansathi.R
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.model.CircularBounds
 import com.google.android.libraries.places.api.model.Place
@@ -83,8 +91,24 @@ class GoogleLocationRepositoryImpl @Inject constructor(
                     Log.d("PlacesAPI", "  Place: ${place.displayName} | phone: ${place.nationalPhoneNumber}")
 
                     if (!place.nationalPhoneNumber.isNullOrEmpty()) {
+                        var icon = Icons.Default.LocalPolice
+                        when(type){
+                            "police" -> {
+                                icon = Icons.Default.LocalPolice
+                            }
+                            "hospital" -> {
+                                icon = Icons.Default.MedicalServices
+                            }
+                            "fire_station" -> {
+                                icon = Icons.Default.FireTruck
+                            }
+                            "pharmacy" -> {
+                                icon = Icons.Default.Medication
+                            }
+                        }
                         EmergencyNumber(
                             type =type,
+                            icon = icon,
                             name = place.displayName ?: type,
                             phoneNumber = place.nationalPhoneNumber!!,
                             address = place.formattedAddress ?: "",

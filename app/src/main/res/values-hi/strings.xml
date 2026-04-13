@@ -107,4 +107,22 @@
     <string name="ElderHome_4">आपातकालीन संपर्क</string>
     <string name="ElderHome_5">SOS — मुझे मदद चाहिए</string>
     <string name="ElderHome_6">सेटिंग्स</string>
+
+    <string name="EmergencyType_1">पुलिस स्टेशन</string>
+    <string name="EmergencyType_2">अस्पताल</string>
+    <string name="EmergencyType_3">फायर स्टेशन</string>
+    <string name="EmergencyType_4">फार्मेसी</string>
+
+    <string name="EmergencyCon_1">व्यक्तिगत</string>
+    <string name="EmergencyCon_2">अभी तक कोई व्यक्तिगत संपर्क नहीं जोड़ा गया</string>
+    <string name="EmergencyCon_3">आपके आस-पास</string>
+    <string name="EmergencyCon_4">कॉल करें</string>
+    <string name="EmergencyCon_5">राष्ट्रीय हेल्पलाइन</string>
+    <string name="EmergencyCon_6">पुलिस स्टेशन</string>
+    <string name="EmergencyCon_7">एम्बुलेंस</string>
+    <string name="EmergencyCon_8">फायर ब्रिगेड</string>
+    <string name="EmergencyCon_9">वरिष्ठ नागरिक हेल्पलाइन</string>
+    <string name="EmergencyCon_10">महिला हेल्पलाइन</string>
+    <string name="EmergencyCon_11">नजदीकी हेल्पलाइन खोजी जा रही है</string>
+    <string name="EmergencyCon_12">कोई नजदीकी हेल्पलाइन नहीं मिली</string>
 </resources>

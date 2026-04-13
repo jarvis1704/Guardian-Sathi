@@ -108,4 +108,23 @@
     <string name="ElderHome_5">SOS — I need help</string>
     <string name="ElderHome_6">Settings</string>
 
+    <string name="EmergencyType_1">Police Station</string>
+    <string name="EmergencyType_2">Hospital</string>
+    <string name="EmergencyType_3">Fire Station</string>
+    <string name="EmergencyType_4">Pharmacy</string>
+
+    <string name="EmergencyCon_1">PERSONAL</string>
+    <string name="EmergencyCon_2">No personal contacts added yet</string>
+    <string name="EmergencyCon_3">NEAREST TO YOU</string>
+    <string name="EmergencyCon_4">Call</string>
+    <string name="EmergencyCon_5">NATIONAL HELPLINES</string>
+    <string name="EmergencyCon_6">Police Station</string>
+    <string name="EmergencyCon_7">Ambulance</string>
+    <string name="EmergencyCon_8">Fire Brigade</string>
+    <string name="EmergencyCon_9">Elder Helpline</string>
+    <string name="EmergencyCon_10">Women Helpline</string>
+    <string name="EmergencyCon_11">Fetching nearby helplines</string>
+    <string name="EmergencyCon_12">No nearby helplines found</string>
+
+
 </resources>

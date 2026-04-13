@@ -107,4 +107,22 @@
     <string name="ElderHome_4">জৰুৰী যোগাযোগ</string>
     <string name="ElderHome_5">SOS — মোক সহায় লাগে</string>
     <string name="ElderHome_6">ছেটিংছ</string>
+
+    <string name="EmergencyType_1">পুলিচ ষ্টেচন</string>
+    <string name="EmergencyType_2">হাসপাতাল</string>
+    <string name="EmergencyType_3">অগ্নিনিৰ্বাপক কেন্দ্ৰ</string>
+    <string name="EmergencyType_4">ফাৰ্মেচি</string>
+
+    <string name="EmergencyCon_1">ব্যক্তিগত</string>
+    <string name="EmergencyCon_2">এতিয়ালৈ কোনো ব্যক্তিগত যোগাযোগ যোগ কৰা হোৱা নাই</string>
+    <string name="EmergencyCon_3">আপোনাৰ ওচৰত</string>
+    <string name="EmergencyCon_4">কল কৰক</string>
+    <string name="EmergencyCon_5">ৰাষ্ট্ৰীয় সহায় লাইন</string>
+    <string name="EmergencyCon_6">পুলিচ ষ্টেচন</string>
+    <string name="EmergencyCon_7">এম্বুলেন্স</string>
+    <string name="EmergencyCon_8">অগ্নিনিৰ্বাপক বাহিনী</string>
+    <string name="EmergencyCon_9">বয়োজ্যেষ্ঠ সহায় লাইন</string>
+    <string name="EmergencyCon_10">মহিলা সহায় লাইন</string>
+    <string name="EmergencyCon_11">ওচৰৰ সহায় লাইন বিচাৰি আছে</string>
+    <string name="EmergencyCon_12">কোনো ওচৰৰ সহায় লাইন পোৱা নগ’ল</string>
 </resources>
