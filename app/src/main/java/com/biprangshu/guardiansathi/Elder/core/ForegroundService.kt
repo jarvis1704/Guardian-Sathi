@@ -30,7 +30,6 @@ import kotlin.jvm.java
 
 @AndroidEntryPoint
 class GuardianService : Service() {
-
     private val serviceScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
     companion object {
@@ -47,10 +46,35 @@ class GuardianService : Service() {
         }
     }
 
+    private lateinit var fallDetector: FallDetector
+
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
         startForeground(NOTIFICATION_ID, buildNotification())
+        fallDetector = FallDetector(this){
+            onFallDetected()
+        }
+        fallDetector.start()
+    }
+
+    private fun onFallDetected() {
+        Log.w("GuardianService", "🚨 FALL DETECTED — triggering alert")
+        // Show a notification for now (Toast won't work from a Service)
+        showFallNotification()
+    }
+
+    private fun showFallNotification() {
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle("⚠️ Fall Detected!")
+            .setContentText("A possible fall was detected. Are you okay?")
+            .setSmallIcon(R.drawable.ic_guardian)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+            .build()
+
+        getSystemService(NotificationManager::class.java)
+            ?.notify(2001, notification)
     }
 
     // KEY FIX 1: START_STICKY makes Android restart the service if killed
@@ -137,6 +161,7 @@ class GuardianService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        fallDetector.stop()
         serviceScope.cancel()
     }
 }
