@@ -12,6 +12,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import android.os.SystemClock
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.biprangshu.guardiansathi.Global.MainActivity
 import com.biprangshu.guardiansathi.R
@@ -54,6 +55,7 @@ class GuardianService : Service() {
 
     // KEY FIX 1: START_STICKY makes Android restart the service if killed
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        Log.d("GuardianService", "✅ Service started — monitoring is active")
         startMonitoring()
         return START_STICKY
     }
@@ -81,21 +83,21 @@ class GuardianService : Service() {
     }
 
     private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                CHANNEL_ID,
-                "Guardian Saathi Protection",
-                NotificationManager.IMPORTANCE_LOW  // Low = no sound, but persistent
-            ).apply {
-                description = "Keeps Guardian Saathi running in background"
-                setShowBadge(false)
-            }
-            getSystemService(NotificationManager::class.java)
-                ?.createNotificationChannel(channel)
+        val channel = NotificationChannel(
+            CHANNEL_ID,
+            "Guardian Saathi Protection",
+            NotificationManager.IMPORTANCE_LOW  // Low = no sound, but persistent
+        ).apply {
+            description = "Keeps Guardian Saathi running in background"
+            setShowBadge(false)
+            lockscreenVisibility = Notification.VISIBILITY_PUBLIC
         }
+        getSystemService(NotificationManager::class.java)
+            ?.createNotificationChannel(channel)
     }
 
     private fun buildNotification(): Notification {
+        Log.d("GuardianService", "trying to build notification")
         val pendingIntent = PendingIntent.getActivity(
             this, 0,
             Intent(this, MainActivity::class.java),
@@ -104,10 +106,12 @@ class GuardianService : Service() {
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Guardian Saathi Active")
-            .setContentText("Monitoring is on")
+            .setContentText("You are protected")
             .setSmallIcon(R.drawable.ic_guardian)
             .setContentIntent(pendingIntent)
             .setOngoing(true)           // Can't be swiped away
+            .setSilent(true)
+            .setAutoCancel(false)
             .setForegroundServiceBehavior(
                 NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE  // Shows instantly, no delay
             )

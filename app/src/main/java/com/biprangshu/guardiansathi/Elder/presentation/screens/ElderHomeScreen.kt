@@ -10,6 +10,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -81,13 +82,15 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.ElderForegroundServiceViewmodel
 import com.biprangshu.guardiansathi.Global.core.isGestureNav
 import com.biprangshu.guardiansathi.R
 
 @Composable
 fun ElderHomeScreen(
     onNavigateToEmergencyContacts: () -> Unit,
-    elderPermissionsViewmodel: ElderPermissionsViewmodel = hiltViewModel()
+    elderPermissionsViewmodel: ElderPermissionsViewmodel = hiltViewModel(),
+    foregroundServiceViewmodel: ElderForegroundServiceViewmodel = hiltViewModel()
 ) {
     // re-check special permissions every time user returns to screen
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -312,6 +315,14 @@ fun ElderHomeScreen(
     val allPermissionsGranted by elderPermissionsViewmodel
         .allPermissionsGranted
         .collectAsStateWithLifecycle()
+
+    val isForegroundServiceRunning = foregroundServiceViewmodel.serviceState.collectAsStateWithLifecycle()
+    LaunchedEffect(allPermissionsGranted) {
+        if (allPermissionsGranted){
+            Log.d("GuardianService", "trying to start service")
+            foregroundServiceViewmodel.startService()
+        }
+    }
 
     //UI part starts here:
 
