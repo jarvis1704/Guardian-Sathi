@@ -100,4 +100,11 @@
     <string name="ElderPermission_9_R1">कॉल हिस्ट्री का विश्लेषण करके धोखाधड़ी नंबरों से बार-बार संपर्क का पता लगाता है।</string>
     <string name="ElderPermission_9_R2">समय के साथ असामान्य कॉलिंग पैटर्न समझने में आपके संरक्षक की मदद करता है।</string>
     <string name="ElderPermission_9_D">कॉल हिस्ट्री लोकली विश्लेषित होती है और केवल फ्लैग किए गए डेटा ही संरक्षक के साथ साझा होते हैं।</string>
+
+    <string name="ElderHome_1">अनुमतियाँ नहीं मिलीं</string>
+    <string name="ElderHome_2">आप सुरक्षित हैं</string>
+    <string name="ElderHome_3">सहायक से बात करें</string>
+    <string name="ElderHome_4">आपातकालीन संपर्क</string>
+    <string name="ElderHome_5">SOS — मुझे मदद चाहिए</string>
+    <string name="ElderHome_6">सेटिंग्स</string>
 </resources>

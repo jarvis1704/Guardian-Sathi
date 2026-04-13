@@ -382,14 +382,14 @@ fun ElderHomeScreen(
             Spacer(modifier = Modifier.height(18.dp))
 
             Text(
-                text = "You are protected",
+                text = if (allPermissionsGranted) stringResource(R.string.ElderHome_2) else stringResource(R.string.ElderHome_1),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "Guardian Saathi",
+                text = stringResource(R.string.app_name),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -439,7 +439,7 @@ fun ElderHomeScreen(
                     )
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(
-                        text = "Talk to assistant",
+                        text = stringResource(R.string.ElderHome_3),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Medium
                     )
@@ -471,13 +471,12 @@ fun ElderHomeScreen(
                     )
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(
-                        text = "Emergency Contacts",
+                        text = stringResource(R.string.ElderHome_4),
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.SemiBold
                     )
                 }
                 Spacer(Modifier.weight(1f))
-//                Spacer(Modifier.height(26.dp))
                 // SOS button
                 Button(
                     onClick = {},
@@ -501,7 +500,7 @@ fun ElderHomeScreen(
                     )
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(
-                        text = "SOS — I need help",
+                        text = stringResource(R.string.ElderHome_5),
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -515,7 +514,7 @@ fun ElderHomeScreen(
                     }
                 ) {
                     Text(
-                        "Settings",
+                        stringResource(R.string.ElderHome_6),
                         color = MaterialTheme.colorScheme.onBackground
                     )
                 }

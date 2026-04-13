@@ -101,5 +101,11 @@
     <string name="ElderPermission_9_R2">Helps your guardian understand unusual calling patterns over time.</string>
     <string name="ElderPermission_9_D">Call history is analyzed locally and only flagged entries are shared with your guardian.</string>
 
+    <string name="ElderHome_1">Missing Permissions</string>
+    <string name="ElderHome_2">You are protected</string>
+    <string name="ElderHome_3">Talk to assistant</string>
+    <string name="ElderHome_4">Emergency Contacts</string>
+    <string name="ElderHome_5">SOS — I need help</string>
+    <string name="ElderHome_6">Settings</string>
 
 </resources>

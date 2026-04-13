@@ -84,6 +84,7 @@ class GoogleLocationRepositoryImpl @Inject constructor(
 
                     if (!place.nationalPhoneNumber.isNullOrEmpty()) {
                         EmergencyNumber(
+                            type =type,
                             name = place.displayName ?: type,
                             phoneNumber = place.nationalPhoneNumber!!,
                             address = place.formattedAddress ?: "",

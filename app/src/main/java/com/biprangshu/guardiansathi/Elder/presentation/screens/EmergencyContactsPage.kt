@@ -1,6 +1,5 @@
 package com.biprangshu.guardiansathi.Elder.presentation.screens
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,7 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import android.content.Intent
-import android.net.Uri
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,12 +31,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.rounded.Call
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
-import com.biprangshu.guardiansathi.R
 import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -50,6 +51,7 @@ data class EmergencyContactUi(
 )
 
 data class EmergencyNumber(
+    val type: String,
     val name: String,
     val phoneNumber: String,
     val address: String = "",
@@ -71,20 +73,17 @@ fun EmergencyContactsPage(
     }
     val personalContacts: List<EmergencyContactUi> = emptyList()
 
-    val localHelplines = listOf(
+    val nationalHelplines = listOf(
         EmergencyContactUi("Police Station",  "100",   "100"),
-        EmergencyContactUi("Fire Brigade",    "101",   "101"),
         EmergencyContactUi("Ambulance",       "108",   "108"),
+        EmergencyContactUi("Fire Brigade",    "101",   "101"),
         EmergencyContactUi("Elder Helpline",  "14567", "14567"),
         EmergencyContactUi("Women Helpline",  "1091",  "1091"),
     )
 
     val state by viewModel.emergencyNumbersState.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {
-        viewModel.loadEmergencyNumbers(
-            latitude = 26.7509,
-            longitude = 94.2037
-        )
+        viewModel.loadEmergencyNumbers(context)
     }
     LazyColumn(
         modifier = Modifier
@@ -114,7 +113,7 @@ fun EmergencyContactsPage(
             )
         }
         items(personalContacts) { contact ->
-            ContactRow(
+            NationalContactRow(
                 name = contact.name,
                 subtitle = contact.subtitle,
                 onCallClick = { onCallClick(contact.phone) }
@@ -140,12 +139,53 @@ fun EmergencyContactsPage(
                 color = MaterialTheme.colorScheme.tertiary
             )
         }
-        items(localHelplines) { contact ->
-            ContactRow(
+        if (state.isFetching){
+            item {
+                Row (
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(20))
+                        .background(MaterialTheme.colorScheme.surface),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        "Fetching nearby places",
+                        modifier = Modifier.padding(12.dp))
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+        }else{
+            items(state.emergencyNumbers) { number ->
+                LocalContactRow(
+                    title = number.type,
+                    name = number.name,
+                    subtitle = number.phoneNumber,
+                    onCallClick = { onCallClick(number.phoneNumber) }
+                )
+            }
+        }
+
+        // national helplines section
+        item {
+            Spacer(modifier = Modifier.height(8.dp))
+            SectionHeader(
+                icon = Icons.Rounded.LocationOn,
+                label = "National Helplines",
+                color = MaterialTheme.colorScheme.tertiary
+            )
+        }
+        items(nationalHelplines) { contact ->
+            NationalContactRow(
                 name = contact.name,
                 subtitle = contact.phone,
                 onCallClick = { onCallClick(contact.phone) }
             )
+        }
+        item {
+            Spacer(Modifier.height(100.dp))
         }
     }
 }
@@ -178,14 +218,14 @@ private fun SectionHeader(
 }
 
 @Composable
-private fun ContactRow(
+private fun NationalContactRow(
     name: String,
     subtitle: String,
     onCallClick: () -> Unit
 ) {
     Surface(
         shape = RoundedCornerShape(16.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant,
+        color = MaterialTheme.colorScheme.surface,
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(
@@ -203,15 +243,83 @@ private fun ContactRow(
                 Text(
                     text = subtitle,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
             Button(
                 onClick = onCallClick,
                 shape = RoundedCornerShape(50),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.primary
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = Color.White
+                ),
+                contentPadding = PaddingValues(horizontal = 18.dp, vertical = 10.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Rounded.Call,
+                    contentDescription = "Call",
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Text(
+                    text = "Call",
+                    style = MaterialTheme.typography.labelLarge,
+                    fontWeight = FontWeight.Medium
+                )
+            }
+        }
+    }
+}
+
+
+
+@Composable
+private fun LocalContactRow(
+    title: String,
+    name: String,
+    subtitle: String,
+    onCallClick: () -> Unit
+) {
+    Surface(
+        shape = RoundedCornerShape(16.dp),
+        color = MaterialTheme.colorScheme.surface,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 14.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column (
+                modifier = Modifier
+                    .fillMaxWidth(0.65f)
+            ){
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(Modifier.height(6.dp))
+
+                Text(
+                    text = name,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    text = subtitle,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+            Button(
+                onClick = onCallClick,
+                shape = RoundedCornerShape(50),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = Color.White
                 ),
                 contentPadding = PaddingValues(horizontal = 18.dp, vertical = 10.dp)
             ) {

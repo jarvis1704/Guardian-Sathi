@@ -100,4 +100,11 @@
     <string name="ElderPermission_9_R1">কল ইতিহাস বিশ্লেষণ কৰি প্ৰতাৰণামূলক নম্বৰৰ পুনৰাবৃত্তি চিনাক্ত কৰে।</string>
     <string name="ElderPermission_9_R2">সময়ৰ সৈতে অস্বাভাৱিক কল পেটাৰ্ণ বুজিবলৈ সহায় কৰে।</string>
     <string name="ElderPermission_9_D">কল ইতিহাস লোকেলি বিশ্লেষণ কৰা হয় আৰু কেৱল চিহ্নিত ডাটা শ্বেয়াৰ কৰা হয়।</string>
+
+    <string name="ElderHome_1">অনুমতি নাই</string>
+    <string name="ElderHome_2">আপুনি সুৰক্ষিত</string>
+    <string name="ElderHome_3">সহায়কৰ সৈতে কথা পাতক</string>
+    <string name="ElderHome_4">জৰুৰী যোগাযোগ</string>
+    <string name="ElderHome_5">SOS — মোক সহায় লাগে</string>
+    <string name="ElderHome_6">ছেটিংছ</string>
 </resources>
