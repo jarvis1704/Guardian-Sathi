@@ -33,8 +33,16 @@ android {
             "MAPS_API_KEY",
             "\"${localProperties["MAPS_API_KEY"]}\""
         )
+        buildConfigField(
+            "String",
+            "GEMINI_API_KEY",
+            "\"${localProperties["GEMINI_API_KEY"]}\""
+        )
+
         manifestPlaceholders["MAPS_API_KEY"] =
             localProperties["MAPS_API_KEY"]?.toString() ?: ""
+        manifestPlaceholders["GEMINI_API_KEY"] =
+            localProperties["GEMINI_API_KEY"]?.toString() ?: ""
 
     }
 
@@ -58,6 +66,9 @@ android {
 }
 
 dependencies {
+    //gemini
+    implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
+
     // Room
     implementation("androidx.room:room-runtime:2.8.4")
     implementation("androidx.room:room-ktx:2.6.1")

@@ -22,6 +22,7 @@ import com.biprangshu.guardiansathi.Elder.presentation.screens.ElderSettingsPage
 import com.biprangshu.guardiansathi.Elder.presentation.screens.EmergencyContactsPage
 import com.biprangshu.guardiansathi.Elder.presentation.screens.LinkGuardianRoot
 import com.biprangshu.guardiansathi.Elder.presentation.screens.PanicSOSPage
+import com.biprangshu.guardiansathi.Elder.presentation.screens.VoiceAssistantPage
 import com.biprangshu.guardiansathi.Guardian.presentation.screens.LinkElderRoot
 import com.biprangshu.guardiansathi.Global.presentation.login.LoginRoot
 import com.biprangshu.guardiansathi.Global.presentation.onboarding.OnboardingRoot
@@ -191,6 +192,9 @@ fun NavGraphBuilder.elderNav(navController: NavController) {
             },
             onNavigateToSettings = {
                 navController.navigate(ElderSettingsRoute)
+            },
+            onNavigateToVoiceAssistant = {
+                navController.navigate(VoiceAssistantRoute)
             }
         )
     }
@@ -217,6 +221,10 @@ fun NavGraphBuilder.elderNav(navController: NavController) {
                 navController.popBackStack()
             }
         )
+    }
+
+    composable<VoiceAssistantRoute>{
+        VoiceAssistantPage()
     }
 }
 

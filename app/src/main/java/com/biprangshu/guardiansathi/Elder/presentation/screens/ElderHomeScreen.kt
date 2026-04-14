@@ -97,6 +97,7 @@ fun ElderHomeScreen(
     onNavigateToEmergencyContacts: () -> Unit,
     onNavigateToPanicSOS: () -> Unit,
     onNavigateToSettings: () -> Unit,
+    onNavigateToVoiceAssistant: () -> Unit,
     elderPermissionsViewmodel: ElderPermissionsViewmodel = hiltViewModel(),
     foregroundServiceViewmodel: ElderForegroundServiceViewmodel = hiltViewModel(),
     roomDBViewmodel: RoomDBViewmodel = hiltViewModel()
@@ -458,7 +459,9 @@ fun ElderHomeScreen(
                 Spacer(Modifier.weight(1f))
                 // voice assistant button
                 Button(
-                    onClick = {},
+                    onClick = {
+                        onNavigateToVoiceAssistant()
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(60.dp),

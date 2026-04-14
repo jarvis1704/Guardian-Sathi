@@ -42,6 +42,9 @@ data object PanicSOSRoute
 @Serializable
 data object ElderSettingsRoute
 
+@Serializable
+data object VoiceAssistantRoute
+
 
 // Guardian graph
 @Serializable
