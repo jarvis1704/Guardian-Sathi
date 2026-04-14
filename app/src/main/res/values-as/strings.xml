@@ -131,4 +131,10 @@
     <string name="EmergencyCon_10">মহিলা সহায় লাইন</string>
     <string name="EmergencyCon_11">ওচৰৰ সহায় লাইন বিচাৰি আছে</string>
     <string name="EmergencyCon_12">কোনো ওচৰৰ সহায় লাইন পোৱা নগ’ল</string>
+
+    <string name="FallAlert_1">আপুনি পৰি গ’ল নেকি?</string>
+    <string name="FallAlert_2">অভিভাৱকক জনোৱা হ’ব</string>
+    <string name="FallAlert_3">✅ মই ঠিক আছোঁ</string>
+    <string name="FallAlert_4">⚠️ পৰি যোৱা চিনাক্ত কৰা হৈছে</string>
+    <string name="FallAlert_5">আপুনি পৰি গ’ল নেকি? অভিভাৱকক ১০ ছেকেণ্ডত জনোৱা হ’ব</string>
 </resources>

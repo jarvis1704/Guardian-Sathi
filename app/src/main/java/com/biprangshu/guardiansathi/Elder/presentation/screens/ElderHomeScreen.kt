@@ -90,6 +90,7 @@ import com.biprangshu.guardiansathi.R
 @Composable
 fun ElderHomeScreen(
     onNavigateToEmergencyContacts: () -> Unit,
+    onNavigateToPanicSOS: () -> Unit,
     elderPermissionsViewmodel: ElderPermissionsViewmodel = hiltViewModel(),
     foregroundServiceViewmodel: ElderForegroundServiceViewmodel = hiltViewModel()
 ) {
@@ -511,7 +512,9 @@ fun ElderHomeScreen(
                 Spacer(Modifier.weight(1f))
                 // SOS button
                 Button(
-                    onClick = {},
+                    onClick = {
+                        onNavigateToPanicSOS()
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(78.dp),

@@ -132,5 +132,11 @@
     <string name="EmergencyCon_11">Fetching nearby helplines</string>
     <string name="EmergencyCon_12">No nearby helplines found</string>
 
+    <string name="FallAlert_1">Did you fall?</string>
+    <string name="FallAlert_2">Guardian will be alerted in</string>
+    <string name="FallAlert_3">✅  I\'m okay</string>
+    <string name="FallAlert_4">⚠️ Fall Detected</string>
+    <string name="FallAlert_5">Did you fall? Guardian will be alerted in 10 seconds</string>
+
 
 </resources>

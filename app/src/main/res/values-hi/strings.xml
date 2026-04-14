@@ -131,4 +131,11 @@
     <string name="EmergencyCon_10">महिला हेल्पलाइन</string>
     <string name="EmergencyCon_11">नजदीकी हेल्पलाइन खोजी जा रही है</string>
     <string name="EmergencyCon_12">कोई नजदीकी हेल्पलाइन नहीं मिली</string>
+
+    <string name="FallAlert_1">क्या आप गिर गए?</string>
+    <string name="FallAlert_2">अभिभावक को सूचित किया जाएगा</string>
+    <string name="FallAlert_3">✅ मैं ठीक हूँ</string>
+    <string name="FallAlert_4">⚠️ गिरावट का पता चला</string>
+    <string name="FallAlert_5">क्या आप गिर गए? अभिभावक को 10 सेकंड में सूचित किया जाएगा</string>
+
 </resources>

@@ -102,8 +102,8 @@ class GuardianService : Service() {
         )
 
         val notification = NotificationCompat.Builder(this, FALL_ALERT_CHANNEL_ID)
-            .setContentTitle("⚠️ Fall Detected")
-            .setContentText("Did you fall? Tap to respond.")
+            .setContentTitle(getString(R.string.FallAlert_4))
+            .setContentText(getString(R.string.FallAlert_5))
             .setSmallIcon(R.drawable.ic_guardian)
             .setPriority(NotificationCompat.PRIORITY_MAX)          // must be MAX
             .setCategory(NotificationCompat.CATEGORY_CALL)         // CATEGORY_CALL gets special treatment
@@ -113,7 +113,7 @@ class GuardianService : Service() {
             .addAction(
                 NotificationCompat.Action.Builder(
                     R.drawable.ic_guardian,
-                    "✅ I'm Okay",
+                    getString(R.string.FallAlert_3),
                     dismissPendingIntent
                 ).build()
             )
