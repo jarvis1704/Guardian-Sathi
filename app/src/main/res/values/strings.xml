@@ -138,5 +138,13 @@
     <string name="FallAlert_4">⚠️ Fall Detected</string>
     <string name="FallAlert_5">Did you fall? Guardian will be alerted in 10 seconds</string>
 
+    <!-- Elder Settings Screen -->
+    <string name="Settings_Title">Settings</string>
+    <string name="Settings_EmergencyContacts">Emergency Contacts</string>
+    <string name="Settings_AddNewContact">Add New Contact</string>
+    <string name="Settings_Preferences">Preferences</string>
+    <string name="Settings_ChangeLanguage">Change Language</string>
+    <string name="Settings_HelpSupport">Get Help &amp; Support</string>
+    <string name="Settings_Logout">Logout</string>
 
 </resources>

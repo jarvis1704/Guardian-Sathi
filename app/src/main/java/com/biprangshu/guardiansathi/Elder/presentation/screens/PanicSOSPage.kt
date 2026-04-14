@@ -1,6 +1,5 @@
 package com.biprangshu.guardiansathi.Elder.presentation.screens
 
-import android.os.CountDownTimer
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -30,24 +29,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.biprangshu.guardiansathi.R
+import kotlinx.coroutines.delay
 
 
 @Composable
 fun PanicSOSPage(
+    onNavigateBack: () -> Unit = {},
     onImOkay: () -> Unit = {},
     onTimerFinished: () -> Unit = {}
 ) {
     var secondsLeft by remember { mutableIntStateOf(10) }
+    var timerFinished by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(Unit) {
-        object : CountDownTimer(10_000L, 1000L) {
-            override fun onTick(millisUntilFinished: Long) {
-                secondsLeft = (millisUntilFinished / 1000).toInt() + 1
-            }
-            override fun onFinish() {
-                onTimerFinished()
-            }
-        }.start()
+        for (i in 10 downTo 1) {
+            secondsLeft = i
+            delay(1000L)
+        }
+        timerFinished = 1
+        onTimerFinished()
+        onNavigateBack()
     }
 
     val progress by animateFloatAsState(
@@ -91,7 +92,10 @@ fun PanicSOSPage(
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = onImOkay,
+                onClick = {
+                    onImOkay()
+                    onNavigateBack()
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(64.dp),

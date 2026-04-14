@@ -39,6 +39,8 @@ data object EmergencyContactsRoute
 @Serializable
 data object PanicSOSRoute
 
+@Serializable
+data object ElderSettingsRoute
 
 
 // Guardian graph

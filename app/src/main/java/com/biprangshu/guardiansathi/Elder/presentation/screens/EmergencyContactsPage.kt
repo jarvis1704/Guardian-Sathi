@@ -4,10 +4,16 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -31,9 +37,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.rounded.Call
 import androidx.compose.material.icons.rounded.Phone
 import androidx.compose.material3.Button
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
@@ -63,11 +69,12 @@ data class EmergencyNumber(
     val isLocal: Boolean = false // true = Places API, false = hardcoded national
 )
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EmergencyContactsPage(
+    onNavigateBack: () -> Unit = {},
     viewModel: EmergencyNumbersViewmodel = hiltViewModel()
 ){
-
     val context = LocalContext.current
     val onCallClick = { phoneNumber: String ->
         val intent = Intent(Intent.ACTION_DIAL).apply {
@@ -89,24 +96,33 @@ fun EmergencyContactsPage(
     LaunchedEffect(Unit) {
         viewModel.loadEmergencyNumbers(context)
     }
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 20.dp),
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-        contentPadding = PaddingValues(vertical = 24.dp)
-    ) {
-        item {
-            Spacer(Modifier.height(50.dp))
-        }
-        item {
-            Text(
-                text = stringResource(R.string.ElderHome_4),
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(bottom = 8.dp)
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(stringResource(R.string.ElderHome_4)) },
+                navigationIcon = {
+                    IconButton(onClick = onNavigateBack) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = null)
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                    titleContentColor = MaterialTheme.colorScheme.onBackground,
+                    navigationIconContentColor = MaterialTheme.colorScheme.onBackground,
+                    actionIconContentColor = MaterialTheme.colorScheme.onBackground
+                )
             )
         }
+    ) { padding ->
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .padding(horizontal = 20.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            contentPadding = PaddingValues(vertical = 24.dp)
+        ) {
 
         // personal section
         item {
@@ -206,6 +222,7 @@ fun EmergencyContactsPage(
         }
         item {
             Spacer(Modifier.height(100.dp))
+        }
         }
     }
 }

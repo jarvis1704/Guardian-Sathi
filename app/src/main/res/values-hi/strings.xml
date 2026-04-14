@@ -138,4 +138,12 @@
     <string name="FallAlert_4">⚠️ गिरावट का पता चला</string>
     <string name="FallAlert_5">क्या आप गिर गए? अभिभावक को 10 सेकंड में सूचित किया जाएगा</string>
 
+    <string name="Settings_Title">सेटिंग्स</string>
+    <string name="Settings_EmergencyContacts">आपातकालीन संपर्क</string>
+    <string name="Settings_AddNewContact">नया संपर्क जोड़ें</string>
+    <string name="Settings_Preferences">प्राथमिकताएँ</string>
+    <string name="Settings_ChangeLanguage">भाषा बदलें</string>
+    <string name="Settings_HelpSupport">सहायता और समर्थन प्राप्त करें</string>
+    <string name="Settings_Logout">लॉगआउट</string>
+
 </resources>

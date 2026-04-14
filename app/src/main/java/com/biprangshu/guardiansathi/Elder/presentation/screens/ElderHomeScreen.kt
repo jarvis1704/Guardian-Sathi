@@ -91,6 +91,7 @@ import com.biprangshu.guardiansathi.R
 fun ElderHomeScreen(
     onNavigateToEmergencyContacts: () -> Unit,
     onNavigateToPanicSOS: () -> Unit,
+    onNavigateToSettings: () -> Unit,
     elderPermissionsViewmodel: ElderPermissionsViewmodel = hiltViewModel(),
     foregroundServiceViewmodel: ElderForegroundServiceViewmodel = hiltViewModel()
 ) {
@@ -545,7 +546,7 @@ fun ElderHomeScreen(
                 //small settings button
                 TextButton(
                     onClick = {
-
+                        onNavigateToSettings()
                     }
                 ) {
                     Text(

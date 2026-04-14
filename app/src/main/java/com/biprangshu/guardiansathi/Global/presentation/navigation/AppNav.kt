@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.biprangshu.guardiansathi.Elder.presentation.screens.ElderHomeScreen
+import com.biprangshu.guardiansathi.Elder.presentation.screens.ElderSettingsPage
 import com.biprangshu.guardiansathi.Elder.presentation.screens.EmergencyContactsPage
 import com.biprangshu.guardiansathi.Elder.presentation.screens.LinkGuardianRoot
 import com.biprangshu.guardiansathi.Elder.presentation.screens.PanicSOSPage
@@ -187,16 +188,35 @@ fun NavGraphBuilder.elderNav(navController: NavController) {
             },
             onNavigateToPanicSOS = {
                 navController.navigate(PanicSOSRoute)
+            },
+            onNavigateToSettings = {
+                navController.navigate(ElderSettingsRoute)
             }
         )
     }
 
     composable<EmergencyContactsRoute>{
-        EmergencyContactsPage()
+        EmergencyContactsPage(
+            onNavigateBack = {
+                navController.popBackStack()
+            }
+        )
     }
 
     composable<PanicSOSRoute>{
-        PanicSOSPage()
+        PanicSOSPage(
+            onNavigateBack = {
+                navController.popBackStack()
+            }
+        )
+    }
+
+    composable<ElderSettingsRoute>{
+        ElderSettingsPage(
+            onNavigateBack = {
+                navController.popBackStack()
+            }
+        )
     }
 }
 
