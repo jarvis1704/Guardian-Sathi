@@ -8,6 +8,8 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.provider.ContactsContract
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.FileOutputStream
@@ -69,5 +71,38 @@ fun shareQrCodeToWhatsApp(context: Context, bitmap: Bitmap, message: String) {
 
     } catch (e: Exception) {
         e.printStackTrace()
+    }
+}
+
+
+fun resolveContactName(context: Context, uri: Uri): String? {
+    return context.contentResolver.query(
+        uri, arrayOf(ContactsContract.Contacts.DISPLAY_NAME), null, null, null
+    )?.use { cursor ->
+        if (cursor.moveToFirst())
+            cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME))
+        else null
+    }
+}
+
+fun resolveContactPhone(context: Context, uri: Uri): String? {
+    val contactId = context.contentResolver.query(
+        uri, arrayOf(ContactsContract.Contacts._ID), null, null, null
+    )?.use { cursor ->
+        if (cursor.moveToFirst())
+            cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID))
+        else null
+    } ?: return null
+
+    return context.contentResolver.query(
+        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+        arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER),
+        "${ContactsContract.CommonDataKinds.Phone.CONTACT_ID} = ?",
+        arrayOf(contactId),
+        null
+    )?.use { cursor ->
+        if (cursor.moveToFirst())
+            cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))
+        else null
     }
 }

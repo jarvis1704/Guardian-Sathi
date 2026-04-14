@@ -50,6 +50,7 @@ import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.EmergencyNumbersViewmodel
+import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.RoomDBViewmodel
 import com.biprangshu.guardiansathi.R
 
 
@@ -73,7 +74,8 @@ data class EmergencyNumber(
 @Composable
 fun EmergencyContactsPage(
     onNavigateBack: () -> Unit = {},
-    viewModel: EmergencyNumbersViewmodel = hiltViewModel()
+    viewModel: EmergencyNumbersViewmodel = hiltViewModel(),
+    roomDBViewmodel: RoomDBViewmodel = hiltViewModel()
 ){
     val context = LocalContext.current
     val onCallClick = { phoneNumber: String ->
@@ -82,7 +84,8 @@ fun EmergencyContactsPage(
         }
         context.startActivity(intent)
     }
-    val personalContacts: List<EmergencyContactUi> = emptyList()
+    val personalContacts by roomDBViewmodel.contacts.collectAsStateWithLifecycle()
+
 
     val nationalHelplines = listOf(
         EmergencyContactUi(stringResource(R.string.EmergencyCon_6),  "100",   "100"),
@@ -135,7 +138,7 @@ fun EmergencyContactsPage(
         items(personalContacts) { contact ->
             NationalContactRow(
                 name = contact.name,
-                subtitle = contact.subtitle,
+                subtitle = contact.phone,
                 onCallClick = { onCallClick(contact.phone) }
             )
         }

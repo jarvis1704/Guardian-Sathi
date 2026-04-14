@@ -2,6 +2,10 @@ package com.biprangshu.guardiansathi.Elder.presentation.screens
 
 
 // Core Compose
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -29,14 +33,20 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import com.biprangshu.guardiansathi.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-
-
+import androidx.core.content.ContextCompat
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.biprangshu.guardiansathi.Elder.core.resolveContactName
+import com.biprangshu.guardiansathi.Elder.core.resolveContactPhone
+import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.RoomDBViewmodel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -46,8 +56,35 @@ fun ElderSettingsPage(
     onNavigateToAddContact: () -> Unit = {},
     onNavigateToLanguage: () -> Unit = {},
     onNavigateToHelp: () -> Unit = {},
-    onLogout: () -> Unit = {}
+    onLogout: () -> Unit = {},
+    roomDBViewmodel: RoomDBViewmodel = hiltViewModel()
 ) {
+    val contacts by roomDBViewmodel.contacts.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+
+    // Contact picker launcher — opens native contacts app
+    val contactPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickContact()
+    ) { uri ->
+        uri?.let {
+            // Read name + phone from the returned contact URI
+            val name = resolveContactName(context, uri)
+            val phone = resolveContactPhone(context, uri)
+            if (name != null && phone != null) {
+                roomDBViewmodel.addContact(name, phone)
+            }
+        }
+    }
+
+    // Permission launcher
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) {
+            contactPickerLauncher.launch(null)
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -99,7 +136,18 @@ fun ElderSettingsPage(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .clickable { onNavigateToAddContact() }
+                                .clickable {
+                                    when {
+                                        ContextCompat.checkSelfPermission(
+                                            context, Manifest.permission.READ_CONTACTS
+                                        ) == PackageManager.PERMISSION_GRANTED -> {
+                                            contactPickerLauncher.launch(null)
+                                        }
+                                        else -> {
+                                            permissionLauncher.launch(Manifest.permission.READ_CONTACTS)
+                                        }
+                                    }
+                                }
                                 .padding(16.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -131,15 +179,17 @@ fun ElderSettingsPage(
                             color = MaterialTheme.colorScheme.outlineVariant
                         )
 
-                        // Existing contacts list
-                        ContactItem(name = "Rahul (Son)", phone = "+91 98765 43210", onDelete = {})
+                        contacts.forEach { contact ->
+                            ContactItem(name = contact.name, phone = contact.phone, onDelete = {
+                                roomDBViewmodel.deletecontact(contact)
+                            })
 
-                        HorizontalDivider(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            color = MaterialTheme.colorScheme.outlineVariant
-                        )
+                            HorizontalDivider(
+                                modifier = Modifier.padding(horizontal = 16.dp),
+                                color = MaterialTheme.colorScheme.outlineVariant
+                            )
+                        }
 
-                        ContactItem(name = "Dr. Mehta", phone = "+91 91234 56789", onDelete = {})
                     }
                 }
             }
