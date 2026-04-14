@@ -1,10 +1,14 @@
 package com.biprangshu.guardiansathi.Global.core.data
 
+import android.util.Log
 import com.biprangshu.guardiansathi.Global.core.domain.AuthRepository
 import com.biprangshu.guardiansathi.Global.core.domain.DataError
 import com.biprangshu.guardiansathi.Global.core.domain.Result
 import com.biprangshu.guardiansathi.Global.core.domain.User
 import com.biprangshu.guardiansathi.Global.data.UserSessionManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject
 
@@ -27,6 +31,7 @@ class AuthRepositoryImpl @Inject constructor(
                     photoUrl = firebaseUser.photoUrl?.toString(),
                     role = userRole
                 )
+                fetchAndSaveToken()
                 firestoreUserDataSource.saveOrUpdateUser(user)
             }
             is Result.Error -> {
@@ -38,5 +43,20 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun updateUserRole(role: String): Result<Unit, DataError.Network> {
         val uid = firebaseAuthDataSource.getCurentUserUid() ?: return Result.Error(DataError.Network.UNAUTHORIZED)
         return firestoreUserDataSource.updateUserRole(uid, role)
+    }
+
+    override fun fetchAndSaveToken() {
+        FirebaseMessaging.getInstance().token
+            .addOnSuccessListener { token ->
+                Log.d("FCM", "Current token: $token")
+                val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return@addOnSuccessListener
+                FirebaseDatabase.getInstance().reference
+                    .child(uid)
+                    .child("device_token")
+                    .setValue(token)
+            }
+            .addOnFailureListener { e ->
+                Log.e("FCM", "Failed to get token: ${e.message}")
+            }
     }
 }

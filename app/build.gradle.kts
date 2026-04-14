@@ -127,6 +127,8 @@ dependencies {
     implementation(libs.retrofit.gson)
     implementation(libs.hilt.android)
     implementation(libs.appcompat)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.messaging)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.androidx.activity.compose)
