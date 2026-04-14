@@ -37,6 +37,9 @@ class GuardianService : Service() {
         const val NOTIFICATION_ID = 1001
         const val CHANNEL_ID = "GUARDIAN_SERVICE_CHANNEL"
 
+        const val FALL_ALERT_CHANNEL_ID = "FALL_ALERT_CHANNEL"
+        const val FALL_NOTIFICATION_ID = 2001
+
         fun start(context: Context) {
             val intent = Intent(context, GuardianService::class.java)
             context.startForegroundService(intent)
@@ -45,6 +48,11 @@ class GuardianService : Service() {
         fun stop(context: Context) {
             context.stopService(Intent(context, GuardianService::class.java))
         }
+
+        fun cancelFallNotification(context: Context) {
+            context.getSystemService(NotificationManager::class.java)
+                ?.cancel(FALL_NOTIFICATION_ID)
+        }
     }
 
     private lateinit var fallDetector: FallDetector
@@ -52,6 +60,7 @@ class GuardianService : Service() {
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
+        createFallAlertChannel()
         startForeground(NOTIFICATION_ID, buildNotification())
         fallDetector = FallDetector(this){
             onFallDetected()
@@ -61,11 +70,57 @@ class GuardianService : Service() {
 
     private fun onFallDetected() {
         Log.w("GuardianService", "🚨 FALL DETECTED")
-        val intent = Intent(this, FallAlarmActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or
-                    Intent.FLAG_ACTIVITY_NO_HISTORY
+
+        //check permissions
+        val nm = getSystemService(NotificationManager::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            val canUse = nm?.canUseFullScreenIntent() ?: false
+            Log.w("GuardianService", "canUseFullScreenIntent: $canUse")
+            if (!canUse) {
+                Log.e("GuardianService", "❌ Full screen intent permission NOT granted — this is why activity isn't launching")
+            }
         }
-        startActivity(intent)
+
+        // Create intent for the alarm activity
+        val fullScreenIntent = Intent(this, FallAlarmActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY
+        }
+
+        val fullScreenPendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            fullScreenIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val dismissIntent = Intent(this, FallDismissReceiver::class.java).apply {
+            action = "ACTION_FALL_DISMISS"
+        }
+        val dismissPendingIntent = PendingIntent.getBroadcast(
+            this, 1, dismissIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val notification = NotificationCompat.Builder(this, FALL_ALERT_CHANNEL_ID)
+            .setContentTitle("⚠️ Fall Detected")
+            .setContentText("Did you fall? Tap to respond.")
+            .setSmallIcon(R.drawable.ic_guardian)
+            .setPriority(NotificationCompat.PRIORITY_MAX)          // must be MAX
+            .setCategory(NotificationCompat.CATEGORY_CALL)         // CATEGORY_CALL gets special treatment
+            .setFullScreenIntent(fullScreenPendingIntent, true)    // true = high urgency
+            .setAutoCancel(false)
+            .setOngoing(true)
+            .addAction(
+                NotificationCompat.Action.Builder(
+                    R.drawable.ic_guardian,
+                    "✅ I'm Okay",
+                    dismissPendingIntent
+                ).build()
+            )
+            .build()
+
+        getSystemService(NotificationManager::class.java)
+            ?.notify(FALL_NOTIFICATION_ID, notification)
     }
 
 //    private fun showFallNotification() {
@@ -132,6 +187,20 @@ class GuardianService : Service() {
             description = "Keeps Guardian Saathi running in background"
             setShowBadge(false)
             lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+        }
+        getSystemService(NotificationManager::class.java)
+            ?.createNotificationChannel(channel)
+    }
+
+    private fun createFallAlertChannel() {
+        val channel = NotificationChannel(
+            FALL_ALERT_CHANNEL_ID,
+            "Fall Alerts",
+            NotificationManager.IMPORTANCE_HIGH   // must be HIGH, not LOW
+        ).apply {
+            description = "Emergency fall detection alerts"
+            lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+            setShowBadge(true)
         }
         getSystemService(NotificationManager::class.java)
             ?.createNotificationChannel(channel)

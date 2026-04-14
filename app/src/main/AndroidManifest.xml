@@ -90,6 +90,13 @@
             android:showOnLockScreen="true"
             android:turnScreenOn="true"
             android:theme="@style/Theme.GuardianSathi" />
+        <receiver
+            android:name=".Elder.core.FallDismissReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="ACTION_FALL_DISMISS"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
