@@ -83,9 +83,14 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.biprangshu.guardiansathi.Elder.presentation.Components.SetUpEmergencyContAlert
 import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.ElderForegroundServiceViewmodel
+import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.RoomDBViewmodel
 import com.biprangshu.guardiansathi.Global.core.isGestureNav
 import com.biprangshu.guardiansathi.R
+
+
+var askFirstTime = mutableStateOf(false)
 
 @Composable
 fun ElderHomeScreen(
@@ -93,7 +98,8 @@ fun ElderHomeScreen(
     onNavigateToPanicSOS: () -> Unit,
     onNavigateToSettings: () -> Unit,
     elderPermissionsViewmodel: ElderPermissionsViewmodel = hiltViewModel(),
-    foregroundServiceViewmodel: ElderForegroundServiceViewmodel = hiltViewModel()
+    foregroundServiceViewmodel: ElderForegroundServiceViewmodel = hiltViewModel(),
+    roomDBViewmodel: RoomDBViewmodel = hiltViewModel()
 ) {
     // re-check special permissions every time user returns to screen
     val lifecycleOwner = LocalLifecycleOwner.current
