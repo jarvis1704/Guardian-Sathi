@@ -68,7 +68,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.biprangshu.guardiansathi.Elder.core.GuardianService
-import com.biprangshu.guardiansathi.Elder.core.getDetailedBatteryInfo
 import com.biprangshu.guardiansathi.Elder.core.getLocationFlow
 import com.biprangshu.guardiansathi.Elder.presentation.Components.PermissionAlertDialog
 import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.ElderPermissionsViewmodel
@@ -90,7 +89,6 @@ import com.biprangshu.guardiansathi.Global.core.isGestureNav
 import com.biprangshu.guardiansathi.R
 
 
-var askFirstTime = mutableStateOf(false)
 
 @Composable
 fun ElderHomeScreen(

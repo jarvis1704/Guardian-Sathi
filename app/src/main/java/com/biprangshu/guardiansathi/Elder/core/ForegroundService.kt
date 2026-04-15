@@ -14,9 +14,11 @@ import android.os.IBinder
 import android.os.SystemClock
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.biprangshu.guardiansathi.Elder.data.ElderFirebaseRepository
 import com.biprangshu.guardiansathi.Elder.ui.FallAlarmActivity
 import com.biprangshu.guardiansathi.Global.MainActivity
 import com.biprangshu.guardiansathi.R
+import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,13 +28,14 @@ import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.jvm.java
 
 
 @AndroidEntryPoint
 class GuardianService : Service() {
     private val serviceScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
-
+    @Inject lateinit var firebaseRepository: ElderFirebaseRepository
     companion object {
         const val NOTIFICATION_ID = 1001
         const val CHANNEL_ID = "GUARDIAN_SERVICE_CHANNEL"
@@ -163,14 +166,28 @@ class GuardianService : Service() {
         serviceScope.launch {
             while (isActive) {
                 // TODO: sendLocationToGuardians()
-                delay(15 * 60 * 1000L)
+                val location = getLastKnownLocation(this@GuardianService)
+                val lat = location?.first?:0.0
+                val long = location?.second?:0.0
+
+                if (lat !=0.0 && long !=0.0){
+                    firebaseRepository.sendDataToFirebaseDatabase("location_lat",lat.toString())
+                    firebaseRepository.sendDataToFirebaseDatabase("location_long",long.toString())
+                    firebaseRepository.updateFirebaseTimestamp("location_lastSeen")
+                }
+
+                delay(3 * 60 * 1000L)
             }
         }
 
         serviceScope.launch {
             while (isActive) {
                 // TODO: sendBatteryStatus()
-                delay(30 * 60 * 1000L)
+                val batterydata = readBattery(this@GuardianService)
+                firebaseRepository.sendDataToFirebaseDatabase("battery_level",batterydata.level.toString())
+                firebaseRepository.sendDataToFirebaseDatabase("battery_isCharging",batterydata.isCharging.toString())
+                firebaseRepository.updateFirebaseTimestamp("battery_lastSeen")
+                delay(5 * 60 * 1000L)
             }
         }
 

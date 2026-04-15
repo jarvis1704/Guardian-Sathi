@@ -1,5 +1,7 @@
 package com.biprangshu.guardiansathi.Elder.di
 
+import com.biprangshu.guardiansathi.Elder.data.ElderFirebaseRepository
+import com.biprangshu.guardiansathi.Elder.data.ElderFirebaseRepositoryImpl
 import com.biprangshu.guardiansathi.Elder.data.ElderForegroundServiceRepository
 import com.biprangshu.guardiansathi.Elder.data.ElderForegroundServiceRepositoryImpl
 import dagger.Binds
@@ -17,4 +19,10 @@ abstract class ElderServiceModule {
     abstract fun bindElderForegroundServiceRepository(
         elderForegroundServiceRepositoryImpl: ElderForegroundServiceRepositoryImpl
     ): ElderForegroundServiceRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindElderFirebaseRepository(
+        elderFirebaseRepositoryImpl: ElderFirebaseRepositoryImpl
+    ): ElderFirebaseRepository
 }

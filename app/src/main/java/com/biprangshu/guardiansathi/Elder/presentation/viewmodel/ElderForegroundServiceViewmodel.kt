@@ -1,6 +1,7 @@
 package com.biprangshu.guardiansathi.Elder.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.biprangshu.guardiansathi.Elder.data.ElderFirebaseRepository
 import com.biprangshu.guardiansathi.Elder.data.ElderForegroundServiceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +15,8 @@ data class ElderServiceState(
 
 @HiltViewModel
 class ElderForegroundServiceViewmodel @Inject constructor(
-    private val repository: ElderForegroundServiceRepository
+    private val repository: ElderForegroundServiceRepository,
+    private val firebaseRepository: ElderFirebaseRepository
 ) : ViewModel() {
 
     private val _serviceState = MutableStateFlow(ElderServiceState())
