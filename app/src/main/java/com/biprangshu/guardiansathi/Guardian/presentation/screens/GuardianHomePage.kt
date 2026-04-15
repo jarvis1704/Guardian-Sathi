@@ -35,7 +35,7 @@ import com.biprangshu.guardiansathi.R
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun GuardianHomeScreen() {
+fun GuardianHomePage() {
     Box(
         modifier = Modifier
             .fillMaxSize()

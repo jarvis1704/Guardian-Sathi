@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -32,7 +31,7 @@ import com.biprangshu.guardiansathi.Global.presentation.splash.SplashRoot
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.OstrichAlgorithm
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.errorMessage
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.isErrorAlert
-import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianHomeScreen
+import com.biprangshu.guardiansathi.Guardian.Navigation.GuardianShell
 
 @Composable
 fun AppNav(
@@ -112,8 +111,8 @@ fun NavGraphBuilder.registrationNav(navController: NavController) {
                     popUpTo(RegistrationGraph) { inclusive = true }
                 }
             },
-            onNavigateToGuardianHome = {
-                navController.navigate(GuardianHomeRoute) {
+            onNavigateToGuardianShell = {
+                navController.navigate(GuardianShellRoute) {
                     popUpTo(RegistrationGraph) { inclusive = true }
                 }
             }
@@ -237,14 +236,14 @@ fun NavGraphBuilder.guardianNav(navController: NavController) {
     composable<LinkElderRoute> {
         LinkElderRoot(
             onNavigateToGuardianHome = {
-                navController.navigate(GuardianHomeRoute) {
+                navController.navigate(GuardianShellRoute) {
                     popUpTo(LinkElderRoute) { inclusive = true }
                 }
             }
         )
     }
 
-    composable<GuardianHomeRoute> {
-        GuardianHomeScreen()
+    composable<GuardianShellRoute>{
+        GuardianShell(navController)
     }
 }

@@ -53,5 +53,4 @@ data object GuardianGraph
 @Serializable
 data object LinkElderRoute
 
-@Serializable
-data object GuardianHomeRoute
+@Serializable object GuardianShellRoute

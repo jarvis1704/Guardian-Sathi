@@ -14,7 +14,7 @@ fun SplashRoot(
     onNavigateToLinkGuardian: () -> Unit,
     onNavigateToLinkElder: () -> Unit,
     onNavigateToElderHome: () -> Unit,
-    onNavigateToGuardianHome: () -> Unit,
+    onNavigateToGuardianShell: () -> Unit,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
@@ -28,7 +28,7 @@ fun SplashRoot(
                 is SplashEvent.NavigateToLinkGuardian -> onNavigateToLinkGuardian()
                 is SplashEvent.NavigateToLinkElder -> onNavigateToLinkElder()
                 is SplashEvent.NavigateToElderHome -> onNavigateToElderHome()
-                is SplashEvent.NavigateToGuardianHome -> onNavigateToGuardianHome()
+                is SplashEvent.NavigateToGuardianHome -> onNavigateToGuardianShell()
             }
         }
     }
