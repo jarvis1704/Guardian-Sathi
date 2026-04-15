@@ -8,16 +8,17 @@ import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.content
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.util.Locale
-import com.biprangshu.guardiansathi.BuildConfig
+import javax.inject.Inject
 
+// ─── State ─────────────────────────────────────────────────────────────────
 
 data class VoiceAssistantState(
     val isListening: Boolean = false,
@@ -34,7 +35,13 @@ data class Message(
     val timestamp: Long = System.currentTimeMillis()
 )
 
-class VoiceAssistantViewmodel(application: Application) : AndroidViewModel(application) {
+// ─── ViewModel ─────────────────────────────────────────────────────────────
+
+@HiltViewModel
+class VoiceAssistantViewModel @Inject constructor(
+    application: Application,
+    private val generativeModel: GenerativeModel
+) : androidx.lifecycle.AndroidViewModel(application) {
 
     private val _state = MutableStateFlow(VoiceAssistantState())
     val state: StateFlow<VoiceAssistantState> = _state
@@ -43,115 +50,95 @@ class VoiceAssistantViewmodel(application: Application) : AndroidViewModel(appli
     private var textToSpeech: TextToSpeech? = null
     private var ttsInitialized = false
 
-    // Gemini API setup
-    private val generativeModel = GenerativeModel(
-        modelName = "gemini-3.1-flash-lite-preview",
-        apiKey = BuildConfig.GEMINI_API_KEY
-    )
-
     init {
         initializeSpeechRecognizer()
         initializeTextToSpeech()
+
+        sendToGemini("")
     }
+
+    // ─── Speech Recognizer ─────────────────────────────────────────────────
 
     private fun initializeSpeechRecognizer() {
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getApplication())
-        speechRecognizer?.setRecognitionListener(object : RecognitionListener{
+        speechRecognizer?.setRecognitionListener(object : RecognitionListener {
+
             override fun onReadyForSpeech(p0: Bundle?) {
-                Log.d("VoiceAssistant", "Ready for speech")
                 _state.value = _state.value.copy(isListening = true, error = null)
             }
 
-            override fun onBeginningOfSpeech() {
-                Log.d("VoiceAssistant", "speech started")
-            }
-
-            override fun onBufferReceived(p0: ByteArray?) {
-
-            }
-
-            override fun onRmsChanged(p0: Float) {
-
-            }
+            override fun onBeginningOfSpeech() {}
+            override fun onBufferReceived(p0: ByteArray?) {}
+            override fun onRmsChanged(p0: Float) {}
 
             override fun onEndOfSpeech() {
-                Log.d("VoiceAssistant","speech ended")
                 _state.value = _state.value.copy(isListening = false)
-
             }
 
             override fun onError(error: Int) {
-                val errorMsg = when(error) {
-                    SpeechRecognizer.ERROR_AUDIO -> "Audio recording error"
-                    SpeechRecognizer.ERROR_CLIENT -> "Client error"
+                val errorMsg = when (error) {
+                    SpeechRecognizer.ERROR_AUDIO                -> "Audio recording error"
+                    SpeechRecognizer.ERROR_CLIENT               -> "Client error"
                     SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS -> "Microphone permission needed"
-                    SpeechRecognizer.ERROR_NETWORK -> "Network error"
-                    SpeechRecognizer.ERROR_NETWORK_TIMEOUT -> "Network timeout"
-                    SpeechRecognizer.ERROR_NO_MATCH -> "No speech detected"
-                    SpeechRecognizer.ERROR_RECOGNIZER_BUSY -> "Recognition service busy"
-                    SpeechRecognizer.ERROR_SERVER -> "Server error"
-                    SpeechRecognizer.ERROR_SPEECH_TIMEOUT -> "No speech input detected"
-                    else -> "Unknown error"
+                    SpeechRecognizer.ERROR_NETWORK              -> "Network error"
+                    SpeechRecognizer.ERROR_NETWORK_TIMEOUT      -> "Network timeout"
+                    SpeechRecognizer.ERROR_NO_MATCH             -> "No speech detected"
+                    SpeechRecognizer.ERROR_RECOGNIZER_BUSY      -> "Recognition service busy"
+                    SpeechRecognizer.ERROR_SERVER               -> "Server error"
+                    SpeechRecognizer.ERROR_SPEECH_TIMEOUT       -> "No speech input detected"
+                    else                                        -> "Unknown error ($error)"
                 }
-                Log.e("VoiceAssistant", "Speech recognition error: $errorMsg")
-                _state.value = _state.value.copy(
-                    isListening = false,
-                    error = errorMsg
-                )
+                Log.e(TAG, "STT error: $errorMsg")
+                _state.value = _state.value.copy(isListening = false, error = errorMsg)
             }
-
 
             override fun onResults(results: Bundle?) {
                 val matches = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                val transcribedText = matches?.firstOrNull() ?: ""
+                val transcribed = matches?.firstOrNull().orEmpty()
+                Log.d(TAG, "Transcribed: $transcribed")
 
-                Log.d("VoiceAssistant", "Transcribed text: $transcribedText")
-
-                if (transcribedText.isNotEmpty()) {
+                if (transcribed.isNotEmpty()) {
                     _state.value = _state.value.copy(
-                        transcribedText = transcribedText,
+                        transcribedText = transcribed,
                         conversationHistory = _state.value.conversationHistory +
-                                Message(transcribedText, isUser = true)
+                                Message(transcribed, isUser = true)
                     )
-
-                    // Send to Gemini
-                    sendToGemini(transcribedText)
+                    sendToGemini(transcribed)
                 }
             }
 
-            override fun onPartialResults(partialResults: Bundle?) {
-                // Optional: Show partial results in real-time
-            }
-
+            override fun onPartialResults(partialResults: Bundle?) {}
             override fun onEvent(eventType: Int, params: Bundle?) {}
         })
     }
 
+    // ─── TTS ───────────────────────────────────────────────────────────────
+
     private fun initializeTextToSpeech() {
         textToSpeech = TextToSpeech(getApplication()) { status ->
             if (status == TextToSpeech.SUCCESS) {
-                val result = textToSpeech?.setLanguage(Locale("hi", "IN")) //hindi
-
-                if (result == TextToSpeech.LANG_MISSING_DATA ||
-                    result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                    Log.e("VoiceAssistant", "Hindi language not supported, using English")
-                    textToSpeech?.setLanguage(Locale.ENGLISH)
-                }
-
-                // Slow down speech for elderly users
                 textToSpeech?.setSpeechRate(0.8f)
                 textToSpeech?.setPitch(1.0f)
-
                 ttsInitialized = true
-                Log.d("VoiceAssistant", "TTS initialized successfully")
+                Log.d(TAG, "TTS initialized")
             } else {
-                Log.e("VoiceAssistant", "TTS init failed")
+                Log.e(TAG, "TTS init failed")
                 _state.value = _state.value.copy(error = "Text-to-speech not available")
             }
         }
     }
 
-    fun startListening(language: String = "hi-IN") {
+    private fun applyTtsLocale(locale: Locale) {
+        val result = textToSpeech?.setLanguage(locale)
+        if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+            Log.w(TAG, "TTS locale ${locale.language} not supported, falling back to English")
+            textToSpeech?.setLanguage(Locale.ENGLISH)
+        }
+    }
+
+    // ─── Public API ────────────────────────────────────────────────────────
+
+    fun startListening() {
         if (!SpeechRecognizer.isRecognitionAvailable(getApplication())) {
             _state.value = _state.value.copy(error = "Speech recognition not available")
             return
@@ -159,7 +146,9 @@ class VoiceAssistantViewmodel(application: Application) : AndroidViewModel(appli
 
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, language) // "hi-IN" for Hindi, "as-IN" for Assamese
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "hi-IN")
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, "hi-IN")
+            putExtra("android.speech.extra.EXTRA_ADDITIONAL_LANGUAGES", arrayOf("en-IN"))
             putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
             putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1)
             putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, 2000L)
@@ -169,7 +158,7 @@ class VoiceAssistantViewmodel(application: Application) : AndroidViewModel(appli
         try {
             speechRecognizer?.startListening(intent)
         } catch (e: Exception) {
-            Log.e("VoiceAssistant", "Error starting speech recognition", e)
+            Log.e(TAG, "Error starting STT", e)
             _state.value = _state.value.copy(error = "Could not start listening: ${e.message}")
         }
     }
@@ -179,35 +168,47 @@ class VoiceAssistantViewmodel(application: Application) : AndroidViewModel(appli
         _state.value = _state.value.copy(isListening = false)
     }
 
+
+
+    fun clearConversation() {
+        _state.value = VoiceAssistantState()
+    }
+
+    // ─── Gemini ────────────────────────────────────────────────────────────
+
     private fun sendToGemini(userMessage: String) {
         viewModelScope.launch {
             try {
-                // Build conversation history (last 3 messages only to save tokens)
-                val recentHistory = _state.value.conversationHistory.takeLast(6)
+                val recentHistory = _state.value.conversationHistory.takeLast(5)
 
                 val chat = generativeModel.startChat(
                     history = recentHistory.dropLast(1).map { msg ->
-                        content(if (msg.isUser) "user" else "model") {
-                            text(msg.text)
-                        }
+                        content(if (msg.isUser) "user" else "model") { text(msg.text) }
                     }
                 )
 
-                // System prompt embedded in first user message if empty history
                 val prompt = if (recentHistory.size <= 1) {
-                    """You are a helpful voice assistant for elderly users in India. 
-                    |Respond in short, simple sentences (max 2-3 sentences). 
-                    |Be warm, respectful, and patient. 
-                    |Use simple Hindi or English words only.
-                    |User asked: $userMessage""".trimMargin()
+                    """You are a helpful voice assistant for elderly users in India.
+                    |Respond in short, simple sentences (max 2-3 sentences).
+                    |Be warm, respectful, and patient.
+                    |The user may speak in Hindi only, or English. You will reply preferably in Hindi.
+                    |Use simple, common words only. Your response will be fed to a Text-To-speech service so avoid symbols like *,~,/ etc that are purely for bold/italics etc.
+                    |User asked: $userMessage
+                    |conversation history: ${_state.value.conversationHistory}
+                    |""".trimMargin()
                 } else {
-                    userMessage
+                    """You are a helpful voice assistant for elderly users in India.
+                    |Respond in short, simple sentences (max 2-3 sentences).
+                    |Be warm, respectful, and patient.
+                    |The user may speak in Hindi only, or English. You will reply preferably in Hindi.
+                    |Use simple, common words only. Your response will be fed to a Text-To-speech service so avoid symbols like *,~,/ etc that are purely for bold/italics etc.
+                    |If you understood, just reply with 'Namaste, Mai aapki kya sahayata kar sakti hu' in Hindi """.trimMargin()
                 }
 
                 val response = chat.sendMessage(prompt)
                 val assistantResponse = response.text ?: "I didn't understand that."
 
-                Log.d("VoiceAssistant", "Gemini response: $assistantResponse")
+                Log.d(TAG, "Gemini response: $assistantResponse")
 
                 _state.value = _state.value.copy(
                     assistantResponse = assistantResponse,
@@ -215,10 +216,9 @@ class VoiceAssistantViewmodel(application: Application) : AndroidViewModel(appli
                             Message(assistantResponse, isUser = false)
                 )
 
-                // Speak the response
                 speak(assistantResponse)
             } catch (e: Exception) {
-                Log.e("VoiceAssistant", "Gemini API error", e)
+                Log.e(TAG, "Gemini API error", e)
                 _state.value = _state.value.copy(error = "Assistant error: ${e.message}")
                 speak("Sorry, I couldn't process that.")
             }
@@ -226,47 +226,23 @@ class VoiceAssistantViewmodel(application: Application) : AndroidViewModel(appli
     }
 
     private fun speak(text: String) {
-        if (!ttsInitialized) {
-            Log.e("VoiceAssistant", "TTS not initialized")
-            return
-        }
-
+        if (!ttsInitialized) return
         _state.value = _state.value.copy(isSpeaking = true)
 
-        textToSpeech?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "utteranceId")
-
-        textToSpeech?.setOnUtteranceProgressListener(object : android.speech.tts.UtteranceProgressListener() {
-            override fun onStart(utteranceId: String?) {
-                Log.d("VoiceAssistant", "TTS started")
-            }
-
+        textToSpeech?.speak(text, TextToSpeech.QUEUE_FLUSH, null, UTTERANCE_ID)
+        textToSpeech?.setOnUtteranceProgressListener(object :
+            android.speech.tts.UtteranceProgressListener() {
+            override fun onStart(utteranceId: String?) {}
             override fun onDone(utteranceId: String?) {
-                Log.d("VoiceAssistant", "TTS done")
                 _state.value = _state.value.copy(isSpeaking = false)
             }
-
             override fun onError(utteranceId: String?) {
-                Log.e("VoiceAssistant", "TTS error")
                 _state.value = _state.value.copy(isSpeaking = false)
             }
         })
     }
 
-    fun changeLanguage(languageCode: String) {
-        val locale = when (languageCode) {
-            "hi" -> Locale("hi", "IN")
-            "as" -> Locale("as", "IN")
-            "bn" -> Locale("bn", "IN")
-            "ta" -> Locale("ta", "IN")
-            else -> Locale.ENGLISH
-        }
-
-        textToSpeech?.language = locale
-    }
-
-    fun clearConversation() {
-        _state.value = VoiceAssistantState()
-    }
+    // ─── Lifecycle ─────────────────────────────────────────────────────────
 
     override fun onCleared() {
         super.onCleared()
@@ -275,4 +251,8 @@ class VoiceAssistantViewmodel(application: Application) : AndroidViewModel(appli
         textToSpeech?.shutdown()
     }
 
+    companion object {
+        private const val TAG = "VoiceAssistant"
+        private const val UTTERANCE_ID = "utteranceId"
+    }
 }

@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Guardian Saathi</string>
+
+    <string name="app_language">English - UK</string>
+
     <string name="continue_button">Continue</string>
     <string name="onboarding_1_T">Your Elders, Always Protected</string>
     <string name="onboarding_1_S">Guardian Saathi watches over your elderly loved ones 24/7 with instant emergency alerts—even when you can\'t be there.</string>
@@ -146,5 +149,7 @@
     <string name="Settings_ChangeLanguage">Change Language</string>
     <string name="Settings_HelpSupport">Get Help &amp; Support</string>
     <string name="Settings_Logout">Logout</string>
+
+    <string name="VoiceAssistant">Voice Assistant</string>
 
 </resources>

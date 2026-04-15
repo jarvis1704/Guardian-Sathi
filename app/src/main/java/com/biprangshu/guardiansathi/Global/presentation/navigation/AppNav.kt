@@ -224,7 +224,11 @@ fun NavGraphBuilder.elderNav(navController: NavController) {
     }
 
     composable<VoiceAssistantRoute>{
-        VoiceAssistantPage()
+        VoiceAssistantPage(
+            onNavigateBack = {
+                navController.popBackStack()
+            }
+        )
     }
 }
 

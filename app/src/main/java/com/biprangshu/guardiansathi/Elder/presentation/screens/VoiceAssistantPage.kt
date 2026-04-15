@@ -3,6 +3,7 @@ package com.biprangshu.guardiansathi.Elder.presentation.screens
 import android.Manifest
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material3.Card
@@ -25,6 +27,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -35,18 +38,23 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.biprangshu.guardiansathi.Elder.data.AIAssistant.Message
-import com.biprangshu.guardiansathi.Elder.data.AIAssistant.VoiceAssistantViewmodel
+import com.biprangshu.guardiansathi.Elder.data.AIAssistant.VoiceAssistantViewModel
+import com.biprangshu.guardiansathi.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VoiceAssistantPage(
-    viewModel: VoiceAssistantViewmodel = viewModel()
+    onNavigateBack: () -> Unit,
+    viewModel: VoiceAssistantViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val listState = rememberLazyListState()
@@ -70,9 +78,17 @@ fun VoiceAssistantPage(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Voice Assistant") },
+                title = { Text(stringResource(R.string.VoiceAssistant)) },
+                navigationIcon = {
+                    IconButton(onClick = onNavigateBack) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = null)
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor = MaterialTheme.colorScheme.background,
+                    titleContentColor = MaterialTheme.colorScheme.onBackground,
+                    navigationIconContentColor = MaterialTheme.colorScheme.onBackground,
+                    actionIconContentColor = MaterialTheme.colorScheme.onBackground
                 )
             )
         }
@@ -80,6 +96,7 @@ fun VoiceAssistantPage(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
                 .padding(padding)
         ) {
             // Conversation history
@@ -170,15 +187,19 @@ fun MessageBubble(message: Message) {
             ),
             colors = CardDefaults.cardColors(
                 containerColor = if (message.isUser)
-                    MaterialTheme.colorScheme.primaryContainer
+                    MaterialTheme.colorScheme.primary
                 else
-                    MaterialTheme.colorScheme.secondaryContainer
+                    MaterialTheme.colorScheme.surface
             )
         ) {
             Text(
                 text = message.text,
                 modifier = Modifier.padding(12.dp),
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.bodyLarge,
+                color = if (message.isUser)
+                    Color.White
+                else
+                    MaterialTheme.colorScheme.onSurface
             )
         }
     }

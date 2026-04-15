@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">संरक्षक साथी</string>
+
+    <string name="app_language">Hindi - India</string>
+
     <string name="continue_button">आगे बढ़ें</string>
     <string name="onboarding_1_T">आपके बुजुर्ग, हमेशा सुरक्षित</string>
     <string name="onboarding_1_S">गार्डियन साथी आपके बुजुर्ग प्रियजनों की 24/7 निगरानी करता है, तुरंत आपातकालीन अलर्ट के साथ—यहां तक कि जब आप उनके साथ नहीं होते।</string>
@@ -146,4 +149,5 @@
     <string name="Settings_HelpSupport">सहायता और समर्थन प्राप्त करें</string>
     <string name="Settings_Logout">लॉगआउट</string>
 
+    <string name="VoiceAssistant">वॉइस असिस्टेंट</string>
 </resources>

@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">অভিভাৱক সাৰথি</string>
+
+    <string name="app_language">Assamese - India</string>
+
+
     <string name="continue_button">আগবাঢ়ক</string>
     <string name="onboarding_1_T">আপোনাৰ জ্যেষ্ঠসকল, সদায় সুৰক্ষিত</string>
     <string name="onboarding_1_S">গাৰ্ডিয়ান সাথী আপোনাৰ জ্যেষ্ঠ প্ৰিয়জনসকলক ২৪/৭ নজৰ ৰাখে আৰু তৎক্ষণাত জৰুৰী সতর্কতা দিয়ে—যেতিয়াও আপুনি ওচৰত নাথাকিলেও।</string>
@@ -145,4 +149,6 @@
     <string name="Settings_ChangeLanguage">ভাষা সলনি কৰক</string>
     <string name="Settings_HelpSupport">সহায় আৰু সমৰ্থন লওক</string>
     <string name="Settings_Logout">লগআউট</string>
+
+    <string name="VoiceAssistant">ভইচ এছিষ্টেণ্ট</string>
 </resources>
