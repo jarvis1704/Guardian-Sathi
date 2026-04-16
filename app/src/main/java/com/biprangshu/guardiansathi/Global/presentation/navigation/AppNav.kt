@@ -224,7 +224,6 @@ fun NavGraphBuilder.elderNav(navController: NavController) {
                 navController.navigate(ChangeLanguageRoute)
             },
             onLogout = {
-
                 navController.navigate(SplashRoute) {
                     popUpTo(0) { inclusive = true }
                 }

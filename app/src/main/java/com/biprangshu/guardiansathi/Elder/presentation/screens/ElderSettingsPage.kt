@@ -46,6 +46,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.biprangshu.guardiansathi.Elder.core.resolveContactName
 import com.biprangshu.guardiansathi.Elder.core.resolveContactPhone
+import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.ElderSettingsViewModel
 import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.RoomDBViewmodel
 import com.biprangshu.guardiansathi.Global.core.LanguageUtils
 
@@ -58,7 +59,8 @@ fun ElderSettingsPage(
     onNavigateToLanguage: () -> Unit = {},
     onNavigateToHelp: () -> Unit = {},
     onLogout: () -> Unit = {},
-    roomDBViewmodel: RoomDBViewmodel = hiltViewModel()
+    roomDBViewmodel: RoomDBViewmodel = hiltViewModel(),
+    elderSettingsViewModel: ElderSettingsViewModel = hiltViewModel()
 ) {
     val contacts by roomDBViewmodel.contacts.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -232,7 +234,10 @@ fun ElderSettingsPage(
                     icon = Icons.Default.Logout,
                     text = stringResource(R.string.Settings_Logout),
                     isDestructive = true,
-                    onClick = onLogout
+                    onClick = {
+                        elderSettingsViewModel.logout()
+                        onLogout()
+                    }
                 )
             }
         }
