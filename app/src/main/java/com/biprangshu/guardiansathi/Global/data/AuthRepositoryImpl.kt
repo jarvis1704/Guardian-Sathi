@@ -59,4 +59,17 @@ class AuthRepositoryImpl @Inject constructor(
                 Log.e("FCM", "Failed to get token: ${e.message}")
             }
     }
+
+    override suspend fun signOut(): Result<Unit, DataError.Network> {
+        return try {
+            firebaseAuthDataSource.signOut()
+            userSessionManager.setLoggedIn(false)
+            userSessionManager.setLinked(false)
+            userSessionManager.setUserRole(null)
+            Result.Success(Unit)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Result.Error(DataError.Network.UNKNOWN)
+        }
+    }
 }
