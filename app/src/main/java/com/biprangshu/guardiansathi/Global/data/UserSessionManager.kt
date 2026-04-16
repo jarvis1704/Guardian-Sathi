@@ -27,6 +27,12 @@ class UserSessionManager @Inject constructor(
         val IS_LOGGED_IN = booleanPreferencesKey("is_logged_in")
         val USER_ROLE = stringPreferencesKey("user_role")
         val IS_LINKED = booleanPreferencesKey("is_linked")
+
+        val GUARDIAN_NAME = stringPreferencesKey("guardian_name")
+        val GUARDIAN_PHOTO_URL = stringPreferencesKey("guardian_photo_url")
+
+        val ELDER_NAME = stringPreferencesKey("elder_name")
+        val ELDER_PHOTO_URL = stringPreferencesKey("elder_photo_url")
     }
 
     override val isLanguageSelected: Flow<Boolean> = context.dataStore.data.map { preferences ->
@@ -47,6 +53,22 @@ class UserSessionManager @Inject constructor(
 
     override val isLinked: Flow<Boolean> = context.dataStore.data.map { preferences ->
         preferences[PreferencesKeys.IS_LINKED] ?: false
+    }
+
+    override val guardianName: Flow<String?> = context.dataStore.data.map { preferences ->
+        preferences[PreferencesKeys.GUARDIAN_NAME]
+    }
+
+    override val guardianPhotoUrl: Flow<String?> = context.dataStore.data.map { preferences ->
+        preferences[PreferencesKeys.GUARDIAN_PHOTO_URL]
+    }
+
+    override val elderName: Flow<String?> = context.dataStore.data.map { preferences ->
+        preferences[PreferencesKeys.ELDER_NAME]
+    }
+
+    override val elderPhotoUrl: Flow<String?> = context.dataStore.data.map { preferences ->
+        preferences[PreferencesKeys.ELDER_PHOTO_URL]
     }
 
     override suspend fun setLanguageSelected(selected: Boolean) {
@@ -82,4 +104,34 @@ class UserSessionManager @Inject constructor(
             preferences[PreferencesKeys.IS_LINKED] = linked
         }
     }
+
+        suspend fun setGuardianInfo(name: String?, photoUrl: String?) {
+            context.dataStore.edit { preferences ->
+                if (name == null) {
+                    preferences.remove(PreferencesKeys.GUARDIAN_NAME)
+                } else {
+                    preferences[PreferencesKeys.GUARDIAN_NAME] = name
+                }
+                if (photoUrl == null) {
+                    preferences.remove(PreferencesKeys.GUARDIAN_PHOTO_URL)
+                } else {
+                    preferences[PreferencesKeys.GUARDIAN_PHOTO_URL] = photoUrl
+                }
+            }
+        }
+
+        suspend fun setElderInfo(name: String?, photoUrl: String?) {
+                context.dataStore.edit { preferences ->
+                    if (name == null) {
+                        preferences.remove(PreferencesKeys.ELDER_NAME)
+                    } else {
+                        preferences[PreferencesKeys.ELDER_NAME] = name
+                    }
+                    if (photoUrl == null) {
+                        preferences.remove(PreferencesKeys.ELDER_PHOTO_URL)
+                    } else {
+                        preferences[PreferencesKeys.ELDER_PHOTO_URL] = photoUrl
+                    }
+                }
+        }
 }

@@ -9,6 +9,12 @@ interface SessionRepository {
     val userRole: Flow<String?>
     val isLinked: Flow<Boolean>
 
+    val guardianName: Flow<String?>
+    val guardianPhotoUrl: Flow<String?>
+    //elder name for future usage
+    val elderName: Flow<String?>
+    val elderPhotoUrl: Flow<String?>
+
     suspend fun setLanguageSelected(selected: Boolean)
     suspend fun setOnboardingCompleted(completed: Boolean)
     suspend fun setLoggedIn(loggedIn: Boolean)
