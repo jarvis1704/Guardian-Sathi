@@ -154,7 +154,7 @@
     <string name="VoiceAssistant">ভইচ এছিষ্টেণ্ট</string>
 
     <!-- Guardian Home Screen -->
-    <string name="guardian_home_title">অভিভাৱক ড্যাশব\'ৰ্ড</string>
+    <string name="guardian_home_title">গাৰ্ডিয়ান কম্পেনিয়ন</string>
     <string name="guardian_home_monitoring_label">এতিয়া নিৰীক্ষণ কৰা হৈছে</string>
     <string name="guardian_home_status_safe">ঘৰত সুৰক্ষিত</string>
     <string name="guardian_home_battery_label">বেটাৰি</string>

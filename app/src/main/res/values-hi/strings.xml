@@ -153,7 +153,7 @@
     <string name="VoiceAssistant">वॉइस असिस्टेंट</string>
 
     <!-- Guardian Home Screen -->
-    <string name="guardian_home_title">गार्जियन डैशबोर्ड</string>
+    <string name="guardian_home_title">गार्डियन साथी</string>
     <string name="guardian_home_monitoring_label">अभी निगरानी कर रहे हैं</string>
     <string name="guardian_home_status_safe">घर पर सुरक्षित</string>
     <string name="guardian_home_battery_label">बैटरी</string>
