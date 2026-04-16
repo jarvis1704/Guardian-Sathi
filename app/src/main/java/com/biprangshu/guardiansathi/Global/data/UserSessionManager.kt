@@ -105,7 +105,7 @@ class UserSessionManager @Inject constructor(
         }
     }
 
-        suspend fun setGuardianInfo(name: String?, photoUrl: String?) {
+        override suspend fun setGuardianInfo(name: String?, photoUrl: String?) {
             context.dataStore.edit { preferences ->
                 if (name == null) {
                     preferences.remove(PreferencesKeys.GUARDIAN_NAME)
@@ -120,7 +120,7 @@ class UserSessionManager @Inject constructor(
             }
         }
 
-        suspend fun setElderInfo(name: String?, photoUrl: String?) {
+        override suspend fun setElderInfo(name: String?, photoUrl: String?) {
                 context.dataStore.edit { preferences ->
                     if (name == null) {
                         preferences.remove(PreferencesKeys.ELDER_NAME)

@@ -20,4 +20,8 @@ interface SessionRepository {
     suspend fun setLoggedIn(loggedIn: Boolean)
     suspend fun setUserRole(role: String?)
     suspend fun setLinked(linked: Boolean)
+
+    suspend fun setGuardianInfo(name: String?, photoUrl: String?)
+
+    suspend fun setElderInfo(name: String?, photoUrl: String?)
 }

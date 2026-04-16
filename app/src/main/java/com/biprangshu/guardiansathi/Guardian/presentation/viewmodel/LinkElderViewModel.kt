@@ -101,6 +101,9 @@ class LinkElderViewModel @Inject constructor(
                         val myPhotoUrl = firebaseAuthDataSource.getCurrentUserPhotoUrl() ?: ""
                         val connectedName = (connectedUser as? Result.Success)?.data?.displayName ?: ""
                         val connectedPhoto = (connectedUser as? Result.Success)?.data?.photoUrl ?: ""
+                        //datastore storing locally
+                        sessionRepository.setGuardianInfo(connectedName, connectedPhoto)
+                        //elder info can also be implemented in the future if needed
                         _events.emit(LinkElderEvent.ShowConnectionSuccess(connectedName, myPhotoUrl, connectedPhoto))
                     } else {
                         _events.emit(LinkElderEvent.NavigateToGuardianHome)
