@@ -266,6 +266,13 @@ fun NavGraphBuilder.guardianNav(navController: NavController) {
     }
 
     composable<GuardianShellRoute>{
-        GuardianShell(navController)
+        GuardianShell(
+            outerNavController = navController,
+            onLogout = {
+                navController.navigate(SplashRoute) {
+                    popUpTo(0) { inclusive = true }
+                }
+            }
+        )
     }
 }

@@ -169,4 +169,32 @@
     <string name="guardian_home_mins_ago">%1$d mins ago</string>
     <string name="guardian_home_hrs_ago">%1$d hrs ago</string>
 
+    <!-- Guardian Alerts Screen -->
+    <string name="guardian_alerts_title">Alerts</string>
+    <string name="guardian_alerts_filter_all">All</string>
+    <string name="guardian_alerts_filter_critical">Critical</string>
+    <string name="guardian_alerts_filter_warning">Warning</string>
+    <string name="guardian_alerts_filter_info">Info</string>
+    <string name="guardian_alerts_empty">All clear — no alerts</string>
+
+    <!-- Guardian Reminders Screen -->
+    <string name="guardian_reminders_title">Reminders</string>
+    <string name="guardian_reminders_today">Today\'s medication schedule</string>
+    <string name="guardian_reminders_add">Add Reminder</string>
+    <string name="guardian_reminders_schedule">Today\'s Schedule</string>
+    <string name="guardian_reminders_status_done">Done</string>
+    <string name="guardian_reminders_status_upcoming">Upcoming</string>
+    <string name="guardian_reminders_status_missed">Missed</string>
+
+    <!-- Guardian Profile Screen -->
+    <string name="guardian_profile_title">Profile</string>
+    <string name="guardian_profile_guardian_badge">Guardian</string>
+    <string name="guardian_profile_linked_elder">Linked Elder</string>
+    <string name="guardian_profile_connection_active">Connection Active</string>
+    <string name="guardian_profile_preferences">Preferences</string>
+    <string name="guardian_profile_notifications">Notifications</string>
+    <string name="guardian_profile_change_language">Change Language</string>
+    <string name="guardian_profile_help">Help &amp; Support</string>
+    <string name="guardian_profile_logout">Logout</string>
+
 </resources>

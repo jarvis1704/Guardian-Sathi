@@ -168,4 +168,32 @@
     <string name="guardian_home_just_now">এইমাত্ৰ</string>
     <string name="guardian_home_mins_ago">%1$d মিনিট আগত</string>
     <string name="guardian_home_hrs_ago">%1$d ঘণ্টা আগত</string>
+
+    <!-- Guardian Alerts Screen -->
+    <string name="guardian_alerts_title">সতৰ্কতা</string>
+    <string name="guardian_alerts_filter_all">সকলো</string>
+    <string name="guardian_alerts_filter_critical">গুৰুতৰ</string>
+    <string name="guardian_alerts_filter_warning">সাৱধানবাণী</string>
+    <string name="guardian_alerts_filter_info">তথ্য</string>
+    <string name="guardian_alerts_empty">কোনো সতৰ্কতা নাই</string>
+
+    <!-- Guardian Reminders Screen -->
+    <string name="guardian_reminders_title">সোঁৱৰণী</string>
+    <string name="guardian_reminders_today">আজিৰ দৰব কাৰ্যসূচী</string>
+    <string name="guardian_reminders_add">সোঁৱৰণী যোগ কৰক</string>
+    <string name="guardian_reminders_schedule">আজিৰ কাৰ্যসূচী</string>
+    <string name="guardian_reminders_status_done">সম্পন্ন</string>
+    <string name="guardian_reminders_status_upcoming">আগন্তুক</string>
+    <string name="guardian_reminders_status_missed">বাদ পৰিছে</string>
+
+    <!-- Guardian Profile Screen -->
+    <string name="guardian_profile_title">প্ৰফাইল</string>
+    <string name="guardian_profile_guardian_badge">অভিভাৱক</string>
+    <string name="guardian_profile_linked_elder">সংযুক্ত বৃদ্ধ</string>
+    <string name="guardian_profile_connection_active">সংযোগ সক্ৰিয়</string>
+    <string name="guardian_profile_preferences">পছন্দসমূহ</string>
+    <string name="guardian_profile_notifications">জাননী</string>
+    <string name="guardian_profile_change_language">ভাষা সলনি কৰক</string>
+    <string name="guardian_profile_help">সহায় আৰু সমৰ্থন</string>
+    <string name="guardian_profile_logout">লগআউট</string>
 </resources>

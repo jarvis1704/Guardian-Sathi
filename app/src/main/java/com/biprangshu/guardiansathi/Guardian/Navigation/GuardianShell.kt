@@ -26,13 +26,13 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianAlertPage
 import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianHomeRoot
-import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianProfilePage
+import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianProfileRoot
 import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianReminderPage
 
 // guardian/navigation/GuardianShell.kt
 
 @Composable
-fun GuardianShell(outerNavController: NavController) {
+fun GuardianShell(outerNavController: NavController, onLogout: () -> Unit = {}) {
     val guardianNavController = rememberNavController()
     val navBackStackEntry by guardianNavController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -60,7 +60,7 @@ fun GuardianShell(outerNavController: NavController) {
                 GuardianAlertPage()
             }
             composable<SettingsRoute> {
-                GuardianProfilePage()
+                GuardianProfileRoot(onLogout = onLogout)
             }
         }
     }

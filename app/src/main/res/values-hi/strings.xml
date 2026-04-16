@@ -167,4 +167,32 @@
     <string name="guardian_home_just_now">अभी-अभी</string>
     <string name="guardian_home_mins_ago">%1$d मिनट पहले</string>
     <string name="guardian_home_hrs_ago">%1$d घंटे पहले</string>
+
+    <!-- Guardian Alerts Screen -->
+    <string name="guardian_alerts_title">अलर्ट</string>
+    <string name="guardian_alerts_filter_all">सभी</string>
+    <string name="guardian_alerts_filter_critical">गंभीर</string>
+    <string name="guardian_alerts_filter_warning">चेतावनी</string>
+    <string name="guardian_alerts_filter_info">जानकारी</string>
+    <string name="guardian_alerts_empty">कोई अलर्ट नहीं</string>
+
+    <!-- Guardian Reminders Screen -->
+    <string name="guardian_reminders_title">अनुस्मारक</string>
+    <string name="guardian_reminders_today">आज का दवा कार्यक्रम</string>
+    <string name="guardian_reminders_add">अनुस्मारक जोड़ें</string>
+    <string name="guardian_reminders_schedule">आज का कार्यक्रम</string>
+    <string name="guardian_reminders_status_done">हो गया</string>
+    <string name="guardian_reminders_status_upcoming">आगामी</string>
+    <string name="guardian_reminders_status_missed">छूट गया</string>
+
+    <!-- Guardian Profile Screen -->
+    <string name="guardian_profile_title">प्रोफ़ाइल</string>
+    <string name="guardian_profile_guardian_badge">अभिभावक</string>
+    <string name="guardian_profile_linked_elder">जुड़े बुज़ुर्ग</string>
+    <string name="guardian_profile_connection_active">कनेक्शन सक्रिय</string>
+    <string name="guardian_profile_preferences">प्राथमिकताएँ</string>
+    <string name="guardian_profile_notifications">सूचनाएँ</string>
+    <string name="guardian_profile_change_language">भाषा बदलें</string>
+    <string name="guardian_profile_help">सहायता और समर्थन</string>
+    <string name="guardian_profile_logout">लॉगआउट</string>
 </resources>
