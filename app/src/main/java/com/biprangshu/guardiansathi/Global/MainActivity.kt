@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.biprangshu.guardiansathi.Global.core.LanguageUtils
+import com.biprangshu.guardiansathi.Global.core.NotificationHelper
 import com.biprangshu.guardiansathi.Global.core.isGestureNav
 import com.biprangshu.guardiansathi.Global.core.isGestureNavigationEnabled
 import com.biprangshu.guardiansathi.Global.presentation.navigation.AppNav
@@ -32,7 +33,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        
+        NotificationHelper.createChannels(this)
         BugSnap.init(
             activity = this,
             projectKey = "guardian-sathi",      // Firebase Project ID
