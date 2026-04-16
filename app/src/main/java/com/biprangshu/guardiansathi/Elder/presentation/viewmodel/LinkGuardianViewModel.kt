@@ -91,6 +91,8 @@ class LinkGuardianViewModel @Inject constructor(
                         val myPhotoUrl = firebaseAuthDataSource.getCurrentUserPhotoUrl() ?: ""
                         val connectedName = (connectedUser as? Result.Success)?.data?.displayName ?: ""
                         val connectedPhoto = (connectedUser as? Result.Success)?.data?.photoUrl ?: ""
+                        // persist guardian info locally for Elder persona
+                        sessionRepository.setGuardianInfo(connectedName, connectedPhoto)
                         _events.emit(LinkGuardianEvent.ShowConnectionSuccess(connectedName, myPhotoUrl, connectedPhoto))
                     } else {
                         _events.emit(LinkGuardianEvent.NavigateToElderHome)
