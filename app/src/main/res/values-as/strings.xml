@@ -152,4 +152,20 @@
     <string name="apply_button">প্ৰয়োগ কৰক</string>
 
     <string name="VoiceAssistant">ভইচ এছিষ্টেণ্ট</string>
+
+    <!-- Guardian Home Screen -->
+    <string name="guardian_home_title">অভিভাৱক ড্যাশব\'ৰ্ড</string>
+    <string name="guardian_home_monitoring_label">এতিয়া নিৰীক্ষণ কৰা হৈছে</string>
+    <string name="guardian_home_status_safe">ঘৰত সুৰক্ষিত</string>
+    <string name="guardian_home_battery_label">বেটাৰি</string>
+    <string name="guardian_home_location_label">অৱস্থান</string>
+    <string name="guardian_home_location_safe_zone">সুৰক্ষিত এলেকা</string>
+    <string name="guardian_home_last_active_label">শেষবাৰ সক্ৰিয়</string>
+    <string name="guardian_home_upcoming_label">পৰৱৰ্তী</string>
+    <string name="guardian_home_confirm">নিশ্চিত কৰক</string>
+    <string name="guardian_home_recent_activity">শেহতীয়া কাৰ্যকলাপ</string>
+    <string name="guardian_home_see_all">সকলো ইতিহাস চাওক</string>
+    <string name="guardian_home_just_now">এইমাত্ৰ</string>
+    <string name="guardian_home_mins_ago">%1$d মিনিট আগত</string>
+    <string name="guardian_home_hrs_ago">%1$d ঘণ্টা আগত</string>
 </resources>

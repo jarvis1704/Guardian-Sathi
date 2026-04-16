@@ -1,7 +1,7 @@
 package com.biprangshu.guardiansathi.Guardian.presentation.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,232 +19,456 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.BatteryFull
+import androidx.compose.material.icons.outlined.CheckCircle
+import androidx.compose.material.icons.outlined.History
+import androidx.compose.material.icons.outlined.LocationOn
+import androidx.compose.material.icons.outlined.MedicalServices
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Shield
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil.compose.AsyncImage
+import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.GuardianHomeAction
+import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.GuardianHomeState
+import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.GuardianHomeViewModel
+import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.toLastActiveText
 import com.biprangshu.guardiansathi.R
+import com.biprangshu.guardiansathi.Global.presentation.ui.theme.GuardianSathiTheme
+
+private val SafeGreen = Color(0xFF4CAF50)
+
+@Composable
+fun GuardianHomeRoot(
+    viewModel: GuardianHomeViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    GuardianHomeScreen(state = state, onAction = viewModel::onAction)
+}
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun GuardianHomePage() {
-    Box(
+fun GuardianHomeScreen(
+    state: GuardianHomeState,
+    onAction: (GuardianHomeAction) -> Unit
+) {
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 16.dp, vertical = 20.dp)
     ) {
-
-        // top Content
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-                .verticalScroll(rememberScrollState())
+        // Top bar
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            // 🔝 Top Section
-            Column (
+            Text(
+                text = stringResource(R.string.guardian_home_title),
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.weight(1f)
+            )
+            if (state.guardianPhotoUrl != null) {
+                AsyncImage(
+                    model = state.guardianPhotoUrl,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(CircleShape),
+                    contentScale = ContentScale.Crop,
+                    error = painterResource(R.drawable.ic_profile_placeholder),
+                    placeholder = painterResource(R.drawable.ic_profile_placeholder)
+                )
+            } else {
+                Icon(
+                    imageVector = Icons.Outlined.Person,
+                    contentDescription = null,
+                    modifier = Modifier.size(36.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
+        Spacer(Modifier.height(20.dp))
+
+        // Elder profile card
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(24.dp),
+            color = MaterialTheme.colorScheme.surfaceVariant
+        ) {
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top=50.dp),
+                    .padding(vertical = 28.dp, horizontal = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
-            ){
-                Text(
-                    text = "Currently Monitoring",
-                    fontSize = 14.sp,
-                    color = Color.White
-                )
-
-                Row(
-                    modifier = Modifier
-                        .padding(top = 24.dp, bottom = 4.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column(
-                        Modifier
-                            .size(40.dp)
+            ) {
+                // Elder photo with online dot
+                Box(contentAlignment = Alignment.BottomEnd) {
+                    AsyncImage(
+                        model = state.elderPhotoUrl,
+                        contentDescription = stringResource(R.string.guardian_home_monitoring_label),
+                        modifier = Modifier
+                            .size(100.dp)
+                            .clip(RoundedCornerShape(20.dp)),
+                        contentScale = ContentScale.Crop,
+                        error = painterResource(R.drawable.ic_profile_placeholder),
+                        placeholder = painterResource(R.drawable.ic_profile_placeholder)
+                    )
+                    Box(
+                        modifier = Modifier
+                            .size(14.dp)
                             .clip(CircleShape)
-                            .background(Color.Gray)
-                    ) { }
-                    Spacer(Modifier.width(12.dp))
-                    Text(
-                        text = "Elder Name",
-                        fontSize = 24.sp,
-                        color = Color.White.copy(alpha = 0.8f)
+                            .background(SafeGreen)
+                            .border(2.dp, MaterialTheme.colorScheme.surfaceVariant, CircleShape)
                     )
                 }
-                Row(
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(MaterialTheme.colorScheme.surface)
+
+                Spacer(Modifier.height(12.dp))
+
+                Text(
+                    text = stringResource(R.string.guardian_home_monitoring_label),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    letterSpacing = MaterialTheme.typography.labelSmall.letterSpacing
+                )
+
+                Spacer(Modifier.height(4.dp))
+
+                Text(
+                    text = state.elderName.ifBlank { "—" },
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+
+                Spacer(Modifier.height(10.dp))
+
+                // Safe at Home pill
+                Surface(
+                    shape = RoundedCornerShape(50),
+                    color = SafeGreen.copy(alpha = 0.12f)
                 ) {
                     Row(
-                        modifier = Modifier
-                            .padding(9.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                        modifier = Modifier.padding(horizontal = 14.dp, vertical = 6.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
-                        Image(
-                            painter = painterResource(R.drawable.ic_google),
+                        Icon(
+                            imageVector = Icons.Outlined.Shield,
                             contentDescription = null,
-                            modifier = Modifier
-                                .size(16.dp)
+                            modifier = Modifier.size(14.dp),
+                            tint = SafeGreen
                         )
-                        Spacer(Modifier.width(4.dp))
                         Text(
-                            "Safe at Home",
-                            fontSize = 15.sp
+                            text = stringResource(R.string.guardian_home_status_safe),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = SafeGreen,
+                            fontWeight = FontWeight.Medium
                         )
                     }
                 }
             }
+        }
 
-            Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(16.dp))
 
-            FlowRow(
-                maxItemsInEachRow = 2,
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Row(Modifier.weight(1f).padding(end = 6.dp)) {
-                    HomeCard(
-                        R.drawable.ic_google,
-                        title = "85%",
-                        sub = "Battery",
-                        onclick = {}
-                    )
-                }
-                Row(Modifier.weight(1f).padding(start = 6.dp)) {
-                    HomeCard(
-                        R.drawable.ic_google,
-                        title = "SafeZone",
-                        sub = "Location",
-                        onclick = {}
-                    )
-                }
-                Row(Modifier.weight(1f).padding(end = 6.dp)) {
-                    HomeCard(
-                        R.drawable.ic_google,
-                        title = "Active",
-                        sub = "Fall guard active",
-                        onclick = {}
-                    )
-                }
-                Row(Modifier.weight(1f).padding(start = 6.dp)) {
-                    HomeCard(
-                        R.drawable.ic_google,
-                        title = "In 30 Mins",
-                        sub = "Medicine reminder",
-                        onclick = {}
-                    )
-                }
-            }
+        //Stats grid
+        FlowRow(
+            modifier = Modifier.fillMaxWidth(),
+            maxItemsInEachRow = 2,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            StatCard(
+                icon = Icons.Outlined.BatteryFull,
+                value = "${state.batteryLevel}%",
+                label = stringResource(R.string.guardian_home_battery_label),
+                modifier = Modifier.weight(1f)
+            )
+            StatCard(
+                icon = Icons.Outlined.LocationOn,
+                value = stringResource(R.string.guardian_home_location_safe_zone),
+                label = stringResource(R.string.guardian_home_location_label),
+                modifier = Modifier.weight(1f)
+            )
+            StatCard(
+                icon = Icons.Outlined.History,
+                value = state.lastActiveTimestamp.toLastActiveText(),
+                label = stringResource(R.string.guardian_home_last_active_label),
+                modifier = Modifier.weight(1f)
+            )
+        }
 
-            Spacer(Modifier.height(12.dp))
+        Spacer(Modifier.height(16.dp))
 
-            //upcoming section
-            Column(
+        //Upcoming reminder card(to be replaced)
+        // TODO: Replace with real reminder data when reminders feature is built
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            )
+        ) {
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(20.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    "Upcoming",
-                    Modifier.padding(bottom = 6.dp))
-                repeat(4){
-                    UpcomingCard(
-                        icon = R.drawable.ic_google,
-                        title = "fasdf",
-                        sub = "thosajf",
-                        onclick = {}
+                Column(modifier = Modifier.weight(1f)) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.MedicalServices,
+                            contentDescription = null,
+                            modifier = Modifier.size(14.dp),
+                            tint = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
+                        )
+                        Text(
+                            text = stringResource(R.string.guardian_home_upcoming_label),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
+                        )
+                    }
+                    Spacer(Modifier.height(6.dp))
+                    Text(
+                        text = "Atenolol at\n8:00 PM",
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        text = "Heart health & BP management",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
+                    )
+                }
+                Spacer(Modifier.width(12.dp))
+                OutlinedButton(
+                    onClick = { onAction(GuardianHomeAction.OnConfirmReminder) },
+                    shape = RoundedCornerShape(50),
+                    border = androidx.compose.foundation.BorderStroke(
+                        1.5.dp,
+                        MaterialTheme.colorScheme.onPrimary
+                    ),
+                    colors = ButtonDefaults.outlinedButtonColors(
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    )
+                ) {
+                    Text(
+                        text = stringResource(R.string.guardian_home_confirm),
+                        fontWeight = FontWeight.Medium
                     )
                 }
             }
         }
+
+        Spacer(Modifier.height(20.dp))
+
+        // ── Recent Activity ──────────────────────────────────────────────────
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = stringResource(R.string.guardian_home_recent_activity),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground,
+                modifier = Modifier.weight(1f)
+            )
+            TextButton(onClick = { onAction(GuardianHomeAction.OnSeeAllHistory) }) {
+                Text(
+                    text = stringResource(R.string.guardian_home_see_all),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
+
+        Spacer(Modifier.height(8.dp))
+
+        // TODO: Replace with real activity log data when activity logging is built
+        ActivityItem(
+            icon = Icons.Outlined.LocationOn,
+            iconTint = MaterialTheme.colorScheme.primary,
+            title = "Geofence entered",
+            subtitle = "Main Residence Area",
+            time = "10:30 AM"
+        )
+
+        Spacer(Modifier.height(8.dp))
+
+        ActivityItem(
+            icon = Icons.Outlined.CheckCircle,
+            iconTint = SafeGreen,
+            title = "Safety check-in",
+            subtitle = "Response received via app",
+            time = "9:00 AM"
+        )
+
+        Spacer(Modifier.height(16.dp))
     }
 }
 
 @Composable
-fun HomeCard(
-    icon: Int,
-    title: String,
-    sub: String,
-    onclick:()-> Unit
+private fun StatCard(
+    icon: ImageVector,
+    value: String,
+    label: String,
+    modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = modifier,
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
-        )
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-        ) {
-            Image(
-                painter = painterResource(icon),
+        Column(modifier = Modifier.padding(16.dp)) {
+            Icon(
+                imageVector = icon,
                 contentDescription = null,
-                modifier = Modifier
-                    .size(24.dp)
+                modifier = Modifier.size(20.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                text = value,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface
             )
             Text(
-                text = title,
-                modifier = Modifier.padding(2.dp),
-                fontSize = 24.sp
-            )
-            Text(
-                text = sub,
-                modifier = Modifier.padding(2.dp),
-                style = MaterialTheme.typography.bodyLarge
+                text = label,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }
 }
 
 @Composable
-fun UpcomingCard(
-    icon: Int,
+private fun ActivityItem(
+    icon: ImageVector,
+    iconTint: Color,
     title: String,
-    sub: String,
-    onclick:()-> Unit
-){
+    subtitle: String,
+    time: String
+) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
-        )
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
-        Column(
+        Row(
             modifier = Modifier
-                .padding(16.dp)
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 14.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(icon),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(24.dp)
-            )
+            Surface(
+                shape = CircleShape,
+                color = iconTint.copy(alpha = 0.12f),
+                modifier = Modifier.size(40.dp)
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = iconTint
+                    )
+                }
+            }
+            Spacer(Modifier.width(12.dp))
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    text = subtitle,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
             Text(
-                text = title,
-                modifier = Modifier.padding(2.dp),
-                fontSize = 24.sp
-            )
-            Text(
-                text = sub,
-                modifier = Modifier.padding(2.dp),
-                style = MaterialTheme.typography.bodyLarge
+                text = time,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontWeight = FontWeight.Medium
             )
         }
     }
 }
+
+//@Preview(showBackground = true)
+//@Composable
+//private fun GuardianHomeScreenLightPreview() {
+//    GuardianSathiTheme(darkTheme = false) {
+//        GuardianHomeScreen(
+//            state = GuardianHomeState(
+//                elderName = "Ramesh (Father)",
+//                batteryLevel = 85,
+//                isCharging = false,
+//                lastBatterySeen = System.currentTimeMillis() - 2 * 60 * 1000L
+//            ),
+//            onAction = {}
+//        )
+//    }
+//}
+
+//@Preview(showBackground = true)
+//@Composable
+//private fun GuardianHomeScreenDarkPreview() {
+//    GuardianSathiTheme(darkTheme = true) {
+//        GuardianHomeScreen(
+//            state = GuardianHomeState(
+//                elderName = "Ramesh (Father)",
+//                batteryLevel = 85,
+//                isCharging = false,
+//                lastBatterySeen = System.currentTimeMillis() - 2 * 60 * 1000L
+//            ),
+//            onAction = {}
+//        )
+//    }
+//}

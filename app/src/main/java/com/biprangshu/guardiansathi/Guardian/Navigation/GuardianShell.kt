@@ -25,7 +25,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianAlertPage
-import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianHomePage
+import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianHomeRoot
 import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianProfilePage
 import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianReminderPage
 
@@ -51,7 +51,7 @@ fun GuardianShell(outerNavController: NavController) {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable<DashboardRoute> {
-                GuardianHomePage()
+                GuardianHomeRoot()
             }
             composable<LocationRoute> {
                 GuardianReminderPage()

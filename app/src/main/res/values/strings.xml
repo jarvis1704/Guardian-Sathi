@@ -153,4 +153,20 @@
 
     <string name="VoiceAssistant">Voice Assistant</string>
 
+    <!-- Guardian Home Screen -->
+    <string name="guardian_home_title">Guardian Saathi</string>
+    <string name="guardian_home_monitoring_label">CURRENTLY MONITORING</string>
+    <string name="guardian_home_status_safe">Safe at Home</string>
+    <string name="guardian_home_battery_label">Battery</string>
+    <string name="guardian_home_location_label">Location</string>
+    <string name="guardian_home_location_safe_zone">Safe Zone</string>
+    <string name="guardian_home_last_active_label">Last Active</string>
+    <string name="guardian_home_upcoming_label">UP NEXT</string>
+    <string name="guardian_home_confirm">Confirm</string>
+    <string name="guardian_home_recent_activity">Recent Activity</string>
+    <string name="guardian_home_see_all">See All History</string>
+    <string name="guardian_home_just_now">Just now</string>
+    <string name="guardian_home_mins_ago">%1$d mins ago</string>
+    <string name="guardian_home_hrs_ago">%1$d hrs ago</string>
+
 </resources>
