@@ -149,6 +149,7 @@
     <string name="Settings_ChangeLanguage">ভাষা সলনি কৰক</string>
     <string name="Settings_HelpSupport">সহায় আৰু সমৰ্থন লওক</string>
     <string name="Settings_Logout">লগআউট</string>
+    <string name="apply_button">প্ৰয়োগ কৰক</string>
 
     <string name="VoiceAssistant">ভইচ এছিষ্টেণ্ট</string>
 </resources>

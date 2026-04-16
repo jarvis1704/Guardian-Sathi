@@ -16,6 +16,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import com.biprangshu.guardiansathi.Elder.presentation.screens.ChangeLanguagePage
 import com.biprangshu.guardiansathi.Elder.presentation.screens.ElderHomeScreen
 import com.biprangshu.guardiansathi.Elder.presentation.screens.ElderSettingsPage
 import com.biprangshu.guardiansathi.Elder.presentation.screens.EmergencyContactsPage
@@ -216,6 +217,17 @@ fun NavGraphBuilder.elderNav(navController: NavController) {
 
     composable<ElderSettingsRoute>{
         ElderSettingsPage(
+            onNavigateBack = {
+                navController.popBackStack()
+            },
+            onNavigateToLanguage = {
+                navController.navigate(ChangeLanguageRoute)
+            }
+        )
+    }
+
+    composable<ChangeLanguageRoute> {
+        ChangeLanguagePage(
             onNavigateBack = {
                 navController.popBackStack()
             }

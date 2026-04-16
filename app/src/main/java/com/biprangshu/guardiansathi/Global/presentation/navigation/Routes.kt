@@ -45,6 +45,9 @@ data object ElderSettingsRoute
 @Serializable
 data object VoiceAssistantRoute
 
+@Serializable
+data object ChangeLanguageRoute
+
 
 // Guardian graph
 @Serializable

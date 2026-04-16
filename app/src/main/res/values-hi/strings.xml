@@ -148,6 +148,7 @@
     <string name="Settings_ChangeLanguage">भाषा बदलें</string>
     <string name="Settings_HelpSupport">सहायता और समर्थन प्राप्त करें</string>
     <string name="Settings_Logout">लॉगआउट</string>
+    <string name="apply_button">लागू करें</string>
 
     <string name="VoiceAssistant">वॉइस असिस्टेंट</string>
 </resources>

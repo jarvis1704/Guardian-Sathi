@@ -149,6 +149,7 @@
     <string name="Settings_ChangeLanguage">Change Language</string>
     <string name="Settings_HelpSupport">Get Help &amp; Support</string>
     <string name="Settings_Logout">Logout</string>
+    <string name="apply_button">Apply</string>
 
     <string name="VoiceAssistant">Voice Assistant</string>
 

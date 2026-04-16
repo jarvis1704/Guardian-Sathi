@@ -47,6 +47,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.biprangshu.guardiansathi.Elder.core.resolveContactName
 import com.biprangshu.guardiansathi.Elder.core.resolveContactPhone
 import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.RoomDBViewmodel
+import com.biprangshu.guardiansathi.Global.core.LanguageUtils
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -204,9 +205,16 @@ fun ElderSettingsPage(
             }
 
             item {
+                val currentLanguageCode = LanguageUtils.getSavedLanguage(context)
+                val currentLanguageName = when (currentLanguageCode) {
+                    "hi" -> "हिन्दी"
+                    "as" -> "অসমীয়া"
+                    else -> "English"
+                }
                 SettingsOption(
                     icon = Icons.Default.Language,
                     text = stringResource(R.string.Settings_ChangeLanguage),
+                    subtitle = currentLanguageName,
                     onClick = onNavigateToLanguage
                 )
             }
@@ -270,6 +278,7 @@ fun ContactItem(name: String, phone: String, onDelete: () -> Unit) {
 fun SettingsOption(
     icon: ImageVector,
     text: String,
+    subtitle: String? = null,
     isDestructive: Boolean = false,
     onClick: () -> Unit
 ) {
@@ -295,12 +304,20 @@ fun SettingsOption(
 
             Spacer(modifier = Modifier.width(12.dp))
 
-            Text(
-                text = text,
-                modifier = Modifier.weight(1f),
-                style = MaterialTheme.typography.bodyLarge,
-                color = if (isDestructive) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
-            )
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = text,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = if (isDestructive) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface
+                )
+                if (subtitle != null) {
+                    Text(
+                        text = subtitle,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
 
             Icon(
                 Icons.Default.KeyboardArrowRight,
