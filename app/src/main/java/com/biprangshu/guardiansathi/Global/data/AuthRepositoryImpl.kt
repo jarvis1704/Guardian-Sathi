@@ -66,6 +66,8 @@ class AuthRepositoryImpl @Inject constructor(
             userSessionManager.setLoggedIn(false)
             userSessionManager.setLinked(false)
             userSessionManager.setUserRole(null)
+            userSessionManager.setGuardianInfo(null, null)
+            userSessionManager.setElderInfo(null, null)
             Result.Success(Unit)
         } catch (e: Exception) {
             e.printStackTrace()

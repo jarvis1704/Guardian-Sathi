@@ -168,8 +168,8 @@ fun ElderHomeScreen(
     val permissionAlertState by elderPermissionsViewmodel.permissionAlertState.collectAsStateWithLifecycle()
     val specialPermissionAlertState by elderPermissionsViewmodel.specialPermissionAlertState.collectAsStateWithLifecycle()
 
-    val guardianPhotoURL = elderHomeScreenViewModel.guardianPhotoUrl
-    val guardianName = elderHomeScreenViewModel.guardianName
+    val guardianPhotoURL by elderHomeScreenViewModel.guardianPhotoUrl.collectAsStateWithLifecycle(initialValue = null)
+    val guardianName by elderHomeScreenViewModel.guardianName.collectAsStateWithLifecycle(initialValue = null)
 
 
     //all permission alert dialogues
@@ -415,7 +415,7 @@ fun ElderHomeScreen(
                         )
                         Spacer(Modifier.width(8.dp))
                         Text(
-                            text = "$guardianName",
+                            text = guardianName ?: "",
                             fontSize = 16.sp,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.SemiBold

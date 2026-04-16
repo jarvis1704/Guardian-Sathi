@@ -3,6 +3,7 @@ package com.biprangshu.guardiansathi.Global.presentation.splash
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.biprangshu.guardiansathi.Global.core.data.FirebaseAuthDataSource
+import com.biprangshu.guardiansathi.Global.core.data.FirestoreUserDataSource
 import com.biprangshu.guardiansathi.Global.core.domain.LinkRepository
 import com.biprangshu.guardiansathi.Global.core.domain.Result
 import com.biprangshu.guardiansathi.Global.domain.SessionRepository
@@ -30,7 +31,8 @@ sealed interface SplashEvent {
 class SplashViewModel @Inject constructor(
     private val sessionRepository: SessionRepository,
     private val linkRepository: LinkRepository,
-    private val firebaseAuthDataSource: FirebaseAuthDataSource
+    private val firebaseAuthDataSource: FirebaseAuthDataSource,
+    private val firestoreUserDataSource: FirestoreUserDataSource
 ) : ViewModel() {
 
     private val _events = MutableSharedFlow<SplashEvent>()
@@ -57,30 +59,45 @@ class SplashViewModel @Inject constructor(
                     val uid = firebaseAuthDataSource.getCurentUserUid()
                         ?: return@launch _events.emit(SplashEvent.NavigateToLogin)
 
-                    // Fast path: check DataStore cache first
-                    val cachedLinked = sessionRepository.isLinked.first()
-                    if (cachedLinked) {
-                        roleToHomeEvent(userRole)
-                    } else {
-                        // Verify against Firestore (handles reinstall / new device)
-                        when (val result = linkRepository.getLinkStatus(uid)) {
-                            is Result.Success -> {
-                                if (result.data.isLinked) {
-                                    sessionRepository.setLinked(true)
-                                    roleToHomeEvent(userRole)
-                                } else {
-                                    roleToLinkEvent(userRole)
-                                }
-                            }
-                            is Result.Error -> {
-                                // Network failure: fall back to unlinked flow
+                    // Verify link status against Firestore (handles reinstall / new device)
+                    when (val result = linkRepository.getLinkStatus(uid)) {
+                        is Result.Success -> {
+                            if (result.data.isLinked) {
+                                sessionRepository.setLinked(true)
+                                syncLinkedUserInfo(result.data.linkedUid, userRole)
+                                roleToHomeEvent(userRole)
+                            } else {
                                 roleToLinkEvent(userRole)
                             }
+                        }
+                        is Result.Error -> {
+                            // Network failure: use DataStore cache
+                            val cachedLinked = sessionRepository.isLinked.first()
+                            if (cachedLinked) roleToHomeEvent(userRole)
+                            else roleToLinkEvent(userRole)
                         }
                     }
                 }
             }
             _events.emit(event)
+        }
+    }
+
+    private suspend fun syncLinkedUserInfo(linkedUid: String?, userRole: String) {
+        linkedUid ?: return
+        val alreadyCached = when (userRole) {
+            "ELDER" -> sessionRepository.guardianName.first() != null
+            "GUARDIAN" -> sessionRepository.elderName.first() != null
+            else -> true
+        }
+        if (alreadyCached) return
+        val user = when (val r = firestoreUserDataSource.getUserById(linkedUid)) {
+            is Result.Success -> r.data
+            is Result.Error -> return
+        }
+        when (userRole) {
+            "ELDER" -> sessionRepository.setGuardianInfo(user.displayName, user.photoUrl)
+            "GUARDIAN" -> sessionRepository.setElderInfo(user.displayName, user.photoUrl)
         }
     }
 
