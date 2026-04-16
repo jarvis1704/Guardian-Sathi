@@ -146,6 +146,11 @@ fun NavGraphBuilder.registrationNav(navController: NavController) {
                 navController.navigate(RegistrationRoute) {
                     popUpTo(LoginRoute) { inclusive = true }
                 }
+            },
+            onNavigateToSplash = {
+                navController.navigate(SplashRoute) {
+                    popUpTo(0) { inclusive = true }
+                }
             }
         )
     }

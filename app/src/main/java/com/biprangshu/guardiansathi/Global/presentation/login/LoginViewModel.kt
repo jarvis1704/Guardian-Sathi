@@ -26,6 +26,7 @@ sealed interface LoginAction {
 
 sealed interface LoginEvent {
     data object NavigateToRegistration : LoginEvent
+    data object NavigateToSplash : LoginEvent
     data class ShowError(val message: String) : LoginEvent
 }
 
@@ -61,7 +62,7 @@ class LoginViewModel @Inject constructor(
                     is Result.Success -> {
                         sessionRepository.setLoggedIn(true)
                         _state.update { it.copy(isLoading = false) }
-                        _events.emit(LoginEvent.NavigateToRegistration)
+                        _events.emit(LoginEvent.NavigateToSplash)
                     }
                     is Result.Error -> {
                         _state.update { it.copy(isLoading = false, error = result.error.toString()) }

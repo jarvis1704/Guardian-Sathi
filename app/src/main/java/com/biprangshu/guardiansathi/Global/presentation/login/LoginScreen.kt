@@ -58,6 +58,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun LoginRoot(
     onNavigateToRegistration: () -> Unit,
+    onNavigateToSplash: () -> Unit,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -67,6 +68,7 @@ fun LoginRoot(
         viewModel.events.collect { event ->
             when (event) {
                 is LoginEvent.NavigateToRegistration -> onNavigateToRegistration()
+                is LoginEvent.NavigateToSplash -> onNavigateToSplash()
                 is LoginEvent.ShowError -> {
                     Toast.makeText(context, event.message, Toast.LENGTH_LONG).show()
                 }

@@ -19,17 +19,30 @@ class AuthRepositoryImpl @Inject constructor(
 ) : AuthRepository {
     override suspend fun signInWithGoogle(idToken: String): Result<User, DataError.Network> {
         val authResult = firebaseAuthDataSource.signInWithGoogle(idToken)
-        val userRole = userSessionManager.userRole.firstOrNull()
-        
+
         return when (authResult) {
             is Result.Success -> {
                 val firebaseUser = authResult.data
+
+                //this will check if role is already stored in firebase, if yes then use that, or else compare with firestore
+                val firestoreRole = (firestoreUserDataSource.getUserById(firebaseUser.uid) as? Result.Success)?.data?.role
+                val localRole = userSessionManager.userRole.firstOrNull()
+
+                //since after logout the local role is cleared to null, so the local role cannot be trusted, so it compares with firestore role
+                val resolvedRole = localRole ?: firestoreRole
+
+                //firestore role not empty -> send firestore role to local, firestore role empty -> send local role to firestore, both empty -> do nothing
+                if (localRole == null && firestoreRole != null) {
+                    userSessionManager.setUserRole(firestoreRole)
+                }
+
                 val user = User(
                     uid = firebaseUser.uid,
                     email = firebaseUser.email,
                     displayName = firebaseUser.displayName,
                     photoUrl = firebaseUser.photoUrl?.toString(),
-                    role = userRole
+                    //use resolved role after deciding which is best, firestore or local and set here
+                    role = resolvedRole
                 )
                 fetchAndSaveToken()
                 firestoreUserDataSource.saveOrUpdateUser(user)
