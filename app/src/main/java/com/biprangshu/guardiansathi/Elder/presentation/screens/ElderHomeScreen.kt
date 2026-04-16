@@ -84,6 +84,7 @@ import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.biprangshu.guardiansathi.Elder.presentation.Components.SetUpEmergencyContAlert
 import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.ElderForegroundServiceViewmodel
+import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.ElderHomeScreenViewModel
 import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.RoomDBViewmodel
 import com.biprangshu.guardiansathi.Global.core.isGestureNav
 import com.biprangshu.guardiansathi.R
@@ -98,7 +99,8 @@ fun ElderHomeScreen(
     onNavigateToVoiceAssistant: () -> Unit,
     elderPermissionsViewmodel: ElderPermissionsViewmodel = hiltViewModel(),
     foregroundServiceViewmodel: ElderForegroundServiceViewmodel = hiltViewModel(),
-    roomDBViewmodel: RoomDBViewmodel = hiltViewModel()
+    roomDBViewmodel: RoomDBViewmodel = hiltViewModel(),
+    elderHomeScreenViewModel: ElderHomeScreenViewModel = hiltViewModel()
 ) {
     // re-check special permissions every time user returns to screen
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -165,6 +167,10 @@ fun ElderHomeScreen(
     val permissionState by elderPermissionsViewmodel.permissionstate.collectAsStateWithLifecycle()
     val permissionAlertState by elderPermissionsViewmodel.permissionAlertState.collectAsStateWithLifecycle()
     val specialPermissionAlertState by elderPermissionsViewmodel.specialPermissionAlertState.collectAsStateWithLifecycle()
+
+    val guardianPhotoURL = elderHomeScreenViewModel.guardianPhotoUrl
+    val guardianName = elderHomeScreenViewModel.guardianName
+
 
     //all permission alert dialogues
     if (specialPermissionAlertState.showBatteryOptimizationAlert) {
@@ -398,7 +404,7 @@ fun ElderHomeScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         AsyncImage(
-                            model = "",
+                            model = guardianPhotoURL,
                             contentDescription = "Profile",
                             modifier = Modifier
                                 .size(30.dp)
@@ -409,7 +415,7 @@ fun ElderHomeScreen(
                         )
                         Spacer(Modifier.width(8.dp))
                         Text(
-                            "Guardian name",
+                            text = "$guardianName",
                             fontSize = 16.sp,
                             color = MaterialTheme.colorScheme.onSurface,
                             fontWeight = FontWeight.SemiBold
