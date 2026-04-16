@@ -222,6 +222,12 @@ fun NavGraphBuilder.elderNav(navController: NavController) {
             },
             onNavigateToLanguage = {
                 navController.navigate(ChangeLanguageRoute)
+            },
+            onLogout = {
+
+                navController.navigate(SplashRoute) {
+                    popUpTo(0) { inclusive = true }
+                }
             }
         )
     }

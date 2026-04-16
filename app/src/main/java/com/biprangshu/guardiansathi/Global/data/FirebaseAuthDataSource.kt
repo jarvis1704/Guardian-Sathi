@@ -34,4 +34,8 @@ class FirebaseAuthDataSource @Inject constructor(
     fun getCurrentUserPhotoUrl(): String? {
         return firebaseAuth.currentUser?.photoUrl?.toString()
     }
+
+    fun signOut() {
+        firebaseAuth.signOut()
+    }
 }
