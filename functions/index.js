@@ -27,5 +27,5 @@ exports.sendNotification = functions.database
       },
     });
 
-    return snapshot.ref.remove();
+    return null;
   });
