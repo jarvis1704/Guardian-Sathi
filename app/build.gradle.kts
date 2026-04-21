@@ -145,6 +145,8 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.firebase.database)
     implementation(libs.firebase.messaging)
+    implementation(libs.maps.compose)
+    implementation(libs.play.services.maps)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.androidx.activity.compose)

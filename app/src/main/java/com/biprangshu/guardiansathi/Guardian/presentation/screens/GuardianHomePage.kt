@@ -320,24 +320,30 @@ fun GuardianHomeScreen(
 
         Spacer(Modifier.height(8.dp))
 
-        // TODO: Replace with real activity log data when activity logging is built
-        ActivityItem(
-            icon = Icons.Outlined.LocationOn,
-            iconTint = MaterialTheme.colorScheme.primary,
-            title = "Geofence entered",
-            subtitle = "Main Residence Area",
-            time = "10:30 AM"
-        )
+        if (state.activityLogs.isEmpty()) {
+            Text(
+                text = "No recent activity",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(vertical = 16.dp)
+            )
+        } else {
+            state.activityLogs.take(5).forEach { log ->
+                val icon = if (log.type == "GEOFENCE_ENTER") Icons.Outlined.LocationOn else Icons.Outlined.LocationOn
+                val tint = if (log.type == "GEOFENCE_ENTER") SafeGreen else MaterialTheme.colorScheme.error
+                val title = if (log.type == "GEOFENCE_ENTER") "Safe Zone Entered" else "Safe Zone Exited"
+                val subtitle = if (log.type == "GEOFENCE_ENTER") "Elder has entered the safe zone" else "Elder has left the safe zone"
 
-        Spacer(Modifier.height(8.dp))
-
-        ActivityItem(
-            icon = Icons.Outlined.CheckCircle,
-            iconTint = SafeGreen,
-            title = "Safety check-in",
-            subtitle = "Response received via app",
-            time = "9:00 AM"
-        )
+                ActivityItem(
+                    icon = icon,
+                    iconTint = tint,
+                    title = title,
+                    subtitle = subtitle,
+                    time = log.formattedTime
+                )
+                Spacer(Modifier.height(8.dp))
+            }
+        }
 
         Spacer(Modifier.height(16.dp))
     }

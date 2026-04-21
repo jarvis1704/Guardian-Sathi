@@ -54,11 +54,11 @@ class ElderFirebaseRepositoryImpl @Inject constructor(
                 // push() auto-generates a unique key like "sdfjalsk234kdskf"
                 val newNotifRef = notificationsRef.push()
 
-                if (isOtp){
+                if (isOtp) {
                     val payload = mapOf(
                         "title" to "OTP Detected",
                         "body" to notificationData.title,
-                        "desc" to notificationData.subText +" | "+notificationData.text,
+                        "desc" to notificationData.subText + " | " + notificationData.text,
                         "imp" to "HIGH",
                         "time" to ServerValue.TIMESTAMP,
                         "appName" to notificationData.appName,
@@ -71,8 +71,7 @@ class ElderFirebaseRepositoryImpl @Inject constructor(
                         .addOnFailureListener { e ->
                             Log.e("ElderFirebaseRepo", "Failed to send notification", e)
                         }
-                }
-                else if (isTransaction){  //check if transaction
+                } else if (isTransaction) {  //check if transaction
                     val payload = mapOf(
                         "title" to notificationData.title,
                         "body" to notificationData.text,
@@ -89,7 +88,7 @@ class ElderFirebaseRepositoryImpl @Inject constructor(
                         .addOnFailureListener { e ->
                             Log.e("ElderFirebaseRepo", "Failed to send notification", e)
                         }
-                }else{
+                } else {
                     //all other messages
                     val payload = mapOf(
                         "title" to notificationData.title,
@@ -111,6 +110,37 @@ class ElderFirebaseRepositoryImpl @Inject constructor(
             }
             .addOnFailureListener { e ->
                 Log.e("ElderFirebaseRepo", "Failed to fetch linkedUid", e)
+            }
+    }
+
+    override fun pushActivityLog(type: String) {
+        val uid = firebaseAuth.uid ?: return
+        val ref = firebaseDatabase.reference.child(uid).child("activity_logs").push()
+        val logData = mapOf(
+            "type" to type,
+            "timestamp" to ServerValue.TIMESTAMP
+        )
+        ref.setValue(logData)
+
+        // Also push a notification to the linked guardian
+        firebaseFirestore.collection("users").document(uid).get()
+            .addOnSuccessListener { doc ->
+                val linkedUid = doc.getString("linkedUid")
+                if (!linkedUid.isNullOrEmpty()) {
+                    val notifRef =
+                        firebaseDatabase.reference.child(linkedUid).child("notifications").push()
+                    val title =
+                        if (type == "GEOFENCE_ENTER") "Safe Zone Entered" else "Safe Zone Exited"
+                    val body =
+                        if (type == "GEOFENCE_ENTER") "Elder has entered the safe zone." else "Elder has left the safe zone."
+                    notifRef.setValue(
+                        mapOf(
+                            "title" to title,
+                            "body" to body,
+                            "timestamp" to ServerValue.TIMESTAMP
+                        )
+                    )
+                }
             }
     }
 }
