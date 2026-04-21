@@ -44,7 +44,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.biprangshu.guardiansathi.R
+import com.biprangshu.guardiansathi.Guardian.presentation.viewmodel.GuardianAlertViewModel
+import com.biprangshu.guardiansathi.Guardian.data.GuardianAlert
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 private val CriticalRed = Color(0xFFE53935)
 private val WarningOrange = Color(0xFFFF9800)
@@ -61,48 +68,48 @@ private data class AlertItem(
     val severity: AlertSeverity
 )
 
-// TODO: Replace with real alert data from Firestore/FCM when alert system is built
-private val placeholderAlerts = listOf(
-    AlertItem(
-        Icons.Outlined.FmdBad,
-        "Fall Detected",
-        "Possible fall event was detected by the device",
-        "2 hours ago",
-        AlertSeverity.CRITICAL
-    ),
-    AlertItem(
-        Icons.Outlined.Battery2Bar,
-        "Battery Low",
-        "Elder device battery is at 12%",
-        "4 hours ago",
-        AlertSeverity.WARNING
-    ),
-    AlertItem(
-        Icons.Outlined.LocationOff,
-        "Geofence Exit",
-        "Elder has left the Main Residence Area",
-        "Yesterday, 6:30 PM",
-        AlertSeverity.WARNING
-    ),
-    AlertItem(
-        Icons.Outlined.CheckCircle,
-        "Safety Check-In",
-        "Elder responded to safety check-in via app",
-        "Yesterday, 9:00 AM",
-        AlertSeverity.SUCCESS
-    ),
-    AlertItem(
-        Icons.Outlined.WarningAmber,
-        "Missed Medicine",
-        "Evening medication not confirmed",
-        "Yesterday, 8:30 PM",
-        AlertSeverity.INFO
+private fun GuardianAlert.toAlertItem(): AlertItem {
+    val severity = when {
+        title.contains("Fall", ignoreCase = true) -> AlertSeverity.CRITICAL
+        imp.equals("HIGH", ignoreCase = true) -> AlertSeverity.WARNING
+        title.contains("Check-In", ignoreCase = true) -> AlertSeverity.SUCCESS
+        else -> AlertSeverity.INFO
+    }
+
+    val icon = when {
+        title.contains("Fall", ignoreCase = true) -> Icons.Outlined.FmdBad
+        title.contains("Battery", ignoreCase = true) -> Icons.Outlined.Battery2Bar
+        title.contains("Zone", ignoreCase = true) -> Icons.Outlined.LocationOff
+        title.contains("Check", ignoreCase = true) -> Icons.Outlined.CheckCircle
+        imp.equals("HIGH", ignoreCase = true) -> Icons.Outlined.WarningAmber
+        else -> Icons.Outlined.Notifications
+    }
+
+    val timeString = if (timestamp > 0) {
+        val formatter = SimpleDateFormat("MMM dd, hh:mm a", Locale.getDefault())
+        formatter.format(Date(timestamp))
+    } else {
+        "Just now"
+    }
+
+    return AlertItem(
+        icon = icon,
+        title = title,
+        description = desc.ifEmpty { body },
+        time = timeString,
+        severity = severity
     )
-)
+}
 
 @Composable
-fun GuardianAlertPage() {
+fun GuardianAlertPage(
+    viewModel: GuardianAlertViewModel = hiltViewModel()
+) {
     var selectedFilter by remember { mutableIntStateOf(0) }
+    val alerts by viewModel.alerts.collectAsStateWithLifecycle()
+    val mappedAlerts = remember(alerts) {
+        alerts.map { it.toAlertItem() }
+    }
     val filters = listOf(
         stringResource(R.string.guardian_alerts_filter_all),
         stringResource(R.string.guardian_alerts_filter_critical),
@@ -111,10 +118,10 @@ fun GuardianAlertPage() {
     )
 
     val displayedAlerts = when (selectedFilter) {
-        1 -> placeholderAlerts.filter { it.severity == AlertSeverity.CRITICAL }
-        2 -> placeholderAlerts.filter { it.severity == AlertSeverity.WARNING }
-        3 -> placeholderAlerts.filter { it.severity == AlertSeverity.INFO || it.severity == AlertSeverity.SUCCESS }
-        else -> placeholderAlerts
+        1 -> mappedAlerts.filter { it.severity == AlertSeverity.CRITICAL }
+        2 -> mappedAlerts.filter { it.severity == AlertSeverity.WARNING }
+        3 -> mappedAlerts.filter { it.severity == AlertSeverity.INFO || it.severity == AlertSeverity.SUCCESS }
+        else -> mappedAlerts
     }
 
     LazyColumn(
