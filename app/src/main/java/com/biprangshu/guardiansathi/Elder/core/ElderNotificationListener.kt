@@ -55,14 +55,38 @@ class ElderNotificationListener : NotificationListenerService() {
 
                 Log.d("NotificationListener", "Captured: ${notificationData.appName} - $title: $text")
 
-                // Send to Firebase for guardians to see
-                sendNotificationToFirebase(notificationData)
+                // check if its an OTP
+                val otpResult = detectOtp(notificationData.title, notificationData.text)
+                val transactionResult = detectTransaction(notificationData.title, notificationData.text)
 
-                // Check for scam patterns
-                if (isPotentialScam(title, text)) {
-                    Log.w("NotificationListener", "⚠️ POTENTIAL SCAM DETECTED")
-                    alertGuardianOfScam(notificationData)
+                if (otpResult.isOtp){
+                    Log.d("NotificationListener", "OTP Detected: ${otpResult.otpValue}")
+                    //immediately send to firebase
+                    sendNotificationToFirebase(notificationData, true)
+
+                }else if (transactionResult.isTransaction && transactionResult.amount!=null) {
+                    //immediately send to firebase if amount is greater than a set value
+                    if (transactionResult.amount >= 100){
+                        val newNotifData = NotificationData(
+                            packageName = notificationData.packageName,
+                            appName = notificationData.appName,
+                            title = transactionResult.type.toString()+" Transaction Detected",
+                            text = "Amount: ${transactionResult.amount}",
+                            subText = notificationData.subText+" | "+notificationData.text,
+                            timestamp = notificationData.timestamp
+                        )
+                        sendNotificationToFirebase(newNotifData, false, true)
+                    }
+                }else{
+                    // Send to Firebase for guardians to see
+//                    sendNotificationToFirebase(notificationData)
+                    // Check for scam patterns
+//                    if (isPotentialScam(title, text)) {
+//                        Log.w("NotificationListener", "⚠️ POTENTIAL SCAM DETECTED")
+//                        alertGuardianOfScam(notificationData)
+//                    }
                 }
+
             }
         }
     }
@@ -106,9 +130,10 @@ class ElderNotificationListener : NotificationListenerService() {
         return scamKeywords.any { keyword -> combinedText.contains(keyword) }
     }
 
-    private fun sendNotificationToFirebase(data: NotificationData) {
+    private fun sendNotificationToFirebase(data: NotificationData, isOtp: Boolean, isTransaction: Boolean = false) {
         serviceScope.launch {
             try {
+                firebaseRepository.sendNotificaitonToGuardian(data, isOtp, isTransaction)
 //                firebaseRepository.sendNotificationLog(
 //                    mapOf(
 //                        "app" to data.appName,
