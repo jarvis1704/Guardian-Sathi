@@ -28,6 +28,7 @@ import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import kotlin.jvm.java
 
@@ -164,8 +165,10 @@ class GuardianService : Service() {
         serviceScope.coroutineContext.cancelChildren()
 
         serviceScope.launch {
+            val uid = com.google.firebase.auth.FirebaseAuth.getInstance().uid
+            var wasInsideGeofence: Boolean? = null
+            
             while (isActive) {
-                // TODO: sendLocationToGuardians()
                 val location = getLastKnownLocation(this@GuardianService)
                 val lat = location?.first?:0.0
                 val long = location?.second?:0.0
@@ -174,6 +177,42 @@ class GuardianService : Service() {
                     firebaseRepository.sendDataToFirebaseDatabase("location_lat",lat.toString())
                     firebaseRepository.sendDataToFirebaseDatabase("location_long",long.toString())
                     firebaseRepository.updateFirebaseTimestamp("location_lastSeen")
+                    
+                    if (uid != null) {
+                        try {
+                            val snapshot = com.google.firebase.database.FirebaseDatabase.getInstance().reference
+                                .child(uid)
+                                .child("geofence")
+                                .get()
+                                .await()
+                            
+                            val isActiveGeofence = snapshot.child("is_active").getValue(Boolean::class.java) ?: false
+                            if (isActiveGeofence) {
+                                val centerLat = snapshot.child("center_lat").getValue(Double::class.java)
+                                val centerLng = snapshot.child("center_long").getValue(Double::class.java)
+                                val radiusMeters = snapshot.child("radius_meters").getValue(Double::class.java)
+                                
+                                if (centerLat != null && centerLng != null && radiusMeters != null) {
+                                    val results = FloatArray(1)
+                                    android.location.Location.distanceBetween(
+                                        lat, long,
+                                        centerLat, centerLng,
+                                        results
+                                    )
+                                    val distance = results[0]
+                                    val isInsideCurrently = distance <= radiusMeters
+                                    
+                                    if (wasInsideGeofence != null && wasInsideGeofence != isInsideCurrently) {
+                                        val type = if (isInsideCurrently) "GEOFENCE_ENTER" else "GEOFENCE_EXIT"
+                                        firebaseRepository.pushActivityLog(type)
+                                    }
+                                    wasInsideGeofence = isInsideCurrently
+                                }
+                            }
+                        } catch (e: Exception) {
+                            Log.e("GuardianService", "Error checking geofence: ${e.message}")
+                        }
+                    }
                 }
 
                 delay(3 * 60 * 1000L)

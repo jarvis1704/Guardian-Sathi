@@ -32,4 +32,30 @@ class ElderFirebaseRepositoryImpl @Inject constructor(
                 .setValue(ServerValue.TIMESTAMP)
         }
     }
+
+    override fun pushActivityLog(type: String) {
+        val uid = firebaseAuth.uid ?: return
+        val ref = firebaseDatabase.reference.child(uid).child("activity_logs").push()
+        val logData = mapOf(
+            "type" to type,
+            "timestamp" to ServerValue.TIMESTAMP
+        )
+        ref.setValue(logData)
+
+        // Also push a notification to the linked guardian
+        firebaseFirestore.collection("users").document(uid).get()
+            .addOnSuccessListener { doc ->
+                val linkedUid = doc.getString("linkedUid")
+                if (!linkedUid.isNullOrEmpty()) {
+                    val notifRef = firebaseDatabase.reference.child(linkedUid).child("notifications").push()
+                    val title = if (type == "GEOFENCE_ENTER") "Safe Zone Entered" else "Safe Zone Exited"
+                    val body = if (type == "GEOFENCE_ENTER") "Elder has entered the safe zone." else "Elder has left the safe zone."
+                    notifRef.setValue(mapOf(
+                        "title" to title,
+                        "body" to body,
+                        "timestamp" to ServerValue.TIMESTAMP
+                    ))
+                }
+            }
+    }
 }
