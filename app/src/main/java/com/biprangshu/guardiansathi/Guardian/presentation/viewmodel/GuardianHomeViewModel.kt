@@ -18,6 +18,13 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+data class ActivityLogUi(
+    val id: String,
+    val type: String,
+    val timestamp: Long,
+    val formattedTime: String
+)
+
 data class GuardianHomeState(
     val elderName: String = "",
     val elderPhotoUrl: String? = null,
@@ -28,6 +35,7 @@ data class GuardianHomeState(
     val locationLat: Double = 0.0,
     val locationLong: Double = 0.0,
     val lastLocationSeen: Long = 0L,
+    val activityLogs: List<ActivityLogUi> = emptyList(),
     val isLoading: Boolean = true,
     val error: String? = null
 ) {
@@ -106,6 +114,30 @@ class GuardianHomeViewModel @Inject constructor(
             elderRef.listenLong("location_lastSeen") { value ->
                 _state.update { it.copy(lastLocationSeen = value) }
             }
+
+            val logsRef = elderRef.child("activity_logs")
+            val logsListener = object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val logs = mutableListOf<ActivityLogUi>()
+                    for (child in snapshot.children) {
+                        val id = child.key ?: continue
+                        val type = child.child("type").getValue(String::class.java) ?: continue
+                        val timestamp = child.child("timestamp").getValue(Long::class.java) ?: continue
+                        logs.add(
+                            ActivityLogUi(
+                                id = id,
+                                type = type,
+                                timestamp = timestamp,
+                                formattedTime = timestamp.toLastActiveText()
+                            )
+                        )
+                    }
+                    _state.update { it.copy(activityLogs = logs.sortedByDescending { log -> log.timestamp }) }
+                }
+                override fun onCancelled(error: DatabaseError) {}
+            }
+            logsRef.addValueEventListener(logsListener)
+            rtdbListeners.add(logsRef to logsListener)
         }
     }
 

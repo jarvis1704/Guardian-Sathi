@@ -27,7 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianAlertPage
 import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianHomeRoot
 import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianProfileRoot
-import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianReminderPage
+import com.biprangshu.guardiansathi.Guardian.presentation.screens.GuardianGeofenceRoot
 
 // guardian/navigation/GuardianShell.kt
 
@@ -54,7 +54,7 @@ fun GuardianShell(outerNavController: NavController, onLogout: () -> Unit = {}) 
                 GuardianHomeRoot()
             }
             composable<LocationRoute> {
-                GuardianReminderPage()
+                GuardianGeofenceRoot()
             }
             composable<AlertsRoute> {
                 GuardianAlertPage()
