@@ -137,7 +137,10 @@ class ElderFirebaseRepositoryImpl @Inject constructor(
                         mapOf(
                             "title" to title,
                             "body" to body,
-                            "timestamp" to ServerValue.TIMESTAMP
+                            "desc" to body,
+                            "imp" to "LOW",
+                            "timestamp" to ServerValue.TIMESTAMP,
+                            "appName" to "Guardian Saathi"
                         )
                     )
                 }
