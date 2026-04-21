@@ -58,7 +58,7 @@ class ElderFirebaseRepositoryImpl @Inject constructor(
                     val payload = mapOf(
                         "title" to "OTP Detected",
                         "body" to notificationData.title,
-                        "desc" to notificationData.subText + " | " + notificationData.text,
+                        "desc" to notificationData.body + " | " + notificationData.desc,
                         "imp" to "HIGH",
                         "time" to ServerValue.TIMESTAMP,
                         "appName" to notificationData.appName,
@@ -74,8 +74,8 @@ class ElderFirebaseRepositoryImpl @Inject constructor(
                 } else if (isTransaction) {  //check if transaction
                     val payload = mapOf(
                         "title" to notificationData.title,
-                        "body" to notificationData.text,
-                        "desc" to notificationData.subText,
+                        "body" to notificationData.desc,
+                        "desc" to notificationData.body,
                         "imp" to "HIGH",
                         "time" to ServerValue.TIMESTAMP,
                         "appName" to notificationData.appName,
@@ -92,8 +92,8 @@ class ElderFirebaseRepositoryImpl @Inject constructor(
                     //all other messages
                     val payload = mapOf(
                         "title" to notificationData.title,
-                        "body" to notificationData.text,
-                        "desc" to notificationData.subText.ifEmpty { notificationData.text },
+                        "body" to notificationData.desc,
+                        "desc" to notificationData.body.ifEmpty { notificationData.desc },
                         "imp" to "LOW",
                         "time" to ServerValue.TIMESTAMP,
                         "appName" to notificationData.appName,

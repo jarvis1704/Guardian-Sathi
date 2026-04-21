@@ -48,16 +48,16 @@ class ElderNotificationListener : NotificationListenerService() {
                     packageName = packageName,
                     appName = getAppName(packageName),
                     title = title,
-                    text = text,
-                    subText = subText,
+                    desc = text,
+                    body = subText,
                     timestamp = System.currentTimeMillis()
                 )
 
                 Log.d("NotificationListener", "Captured: ${notificationData.appName} - $title: $text")
 
                 // check if its an OTP
-                val otpResult = detectOtp(notificationData.title, notificationData.text)
-                val transactionResult = detectTransaction(notificationData.title, notificationData.text)
+                val otpResult = detectOtp(notificationData.title, notificationData.desc)
+                val transactionResult = detectTransaction(notificationData.title, notificationData.desc)
 
                 if (otpResult.isOtp){
                     Log.d("NotificationListener", "OTP Detected: ${otpResult.otpValue}")
@@ -71,8 +71,8 @@ class ElderNotificationListener : NotificationListenerService() {
                             packageName = notificationData.packageName,
                             appName = notificationData.appName,
                             title = transactionResult.type.toString()+" Transaction Detected",
-                            text = "Amount: ${transactionResult.amount}",
-                            subText = notificationData.subText+" | "+notificationData.text,
+                            desc = "Amount: ${transactionResult.amount}",
+                            body = notificationData.body+" | "+notificationData.desc,
                             timestamp = notificationData.timestamp
                         )
                         sendNotificationToFirebase(newNotifData, false, true)
@@ -173,7 +173,7 @@ data class NotificationData(
     val packageName: String,
     val appName: String,
     val title: String,
-    val text: String,
-    val subText: String,
+    val desc: String,
+    val body: String,
     val timestamp: Long
 )
