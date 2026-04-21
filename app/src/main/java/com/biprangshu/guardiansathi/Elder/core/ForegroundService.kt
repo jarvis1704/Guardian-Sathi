@@ -126,31 +126,6 @@ class GuardianService : Service() {
             ?.notify(FALL_NOTIFICATION_ID, notification)
     }
 
-//    private fun showFallNotification() {
-//        // This intent launches the activity over the lock screen
-//        val fullScreenIntent = Intent(this, FallAlertActivity::class.java).apply {
-//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_USER_ACTION
-//        }
-//        val fullScreenPendingIntent = PendingIntent.getActivity(
-//            this, 2001, fullScreenIntent,
-//            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-//        )
-//
-//        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-//            .setContentTitle("⚠️ Fall Detected!")
-//            .setContentText("Tap to confirm you're okay")
-//            .setSmallIcon(R.drawable.ic_guardian)
-//            .setPriority(NotificationCompat.PRIORITY_MAX)
-//            .setCategory(NotificationCompat.CATEGORY_ALARM)  // key — treated like incoming call
-//            .setFullScreenIntent(fullScreenPendingIntent, true)
-//            .setAutoCancel(true)
-//            .build()
-//
-//        getSystemService(NotificationManager::class.java)?.notify(2001, notification)
-//
-//        // Also directly launch the activity (belt-and-suspenders)
-//        FallAlertActivity.launch(this)
-//    }
 
     // KEY FIX 1: START_STICKY makes Android restart the service if killed
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -165,7 +140,6 @@ class GuardianService : Service() {
 
         serviceScope.launch {
             while (isActive) {
-                // TODO: sendLocationToGuardians()
                 val location = getLastKnownLocation(this@GuardianService)
                 val lat = location?.first?:0.0
                 val long = location?.second?:0.0
@@ -182,7 +156,6 @@ class GuardianService : Service() {
 
         serviceScope.launch {
             while (isActive) {
-                // TODO: sendBatteryStatus()
                 val batterydata = readBattery(this@GuardianService)
                 firebaseRepository.sendDataToFirebaseDatabase("battery_level",batterydata.level.toString())
                 firebaseRepository.sendDataToFirebaseDatabase("battery_isCharging",batterydata.isCharging.toString())
