@@ -35,7 +35,7 @@ class ElderFirebaseRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun sendNotificaitonToGuardian(notificationData: NotificationData, isOtp: Boolean, isTransaction: Boolean) {
+    override fun sendNotificaitonToGuardian(notificationData: NotificationData, isOtp: Boolean, isTransaction: Boolean, customImportance: String) {
         val uid = firebaseAuth.uid ?: return
 
         // Step 1: Get linkedUid from Firestore
@@ -94,7 +94,7 @@ class ElderFirebaseRepositoryImpl @Inject constructor(
                         "title" to notificationData.title,
                         "body" to notificationData.body,
                         "desc" to notificationData.desc,
-                        "imp" to "LOW",
+                        "imp" to customImportance,
                         "time" to ServerValue.TIMESTAMP,
                         "appName" to notificationData.appName,
                     )

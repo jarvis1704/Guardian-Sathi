@@ -9,9 +9,11 @@ import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.os.IBinder
 import android.os.SystemClock
+import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.viewModelScope
@@ -45,6 +47,7 @@ class GuardianService : Service() {
     @Inject lateinit var generativeModel: GenerativeModel
     @Inject lateinit var elderNotificationRepository: ElderNotificationRepository
 
+    private var phoneStateReceiver: PhoneStateReceiver? = null
     companion object {
         const val NOTIFICATION_ID = 1001
         const val CHANNEL_ID = "GUARDIAN_SERVICE_CHANNEL"
@@ -78,6 +81,16 @@ class GuardianService : Service() {
             onFallDetected()
         }
         fallDetector.start()
+        registerCallMonitoring()
+    }
+
+    private fun registerCallMonitoring() {
+        phoneStateReceiver = PhoneStateReceiver(firebaseRepository)
+        val filter = IntentFilter().apply {
+            addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED)
+        }
+        registerReceiver(phoneStateReceiver, filter)
+        Log.d("GuardianService", "✅ Call monitoring registered")
     }
 
     private fun onFallDetected() {
@@ -216,7 +229,7 @@ class GuardianService : Service() {
             while (isActive) {
                 //here viewmodel check will be performed every minute
                 geminiScamDetection()
-                delay(1 * 60 * 1000L)
+                delay(2 * 60 * 1000L)
             }
         }
     }
@@ -269,7 +282,7 @@ class GuardianService : Service() {
                         body = it.body,
                         timestamp = it.time
                     )
-                    firebaseRepository.sendNotificaitonToGuardian(notif, false, false)
+                    firebaseRepository.sendNotificaitonToGuardian(notif, false, false, it.imp)
                 }
                 elderNotificationRepository.deleteAllNotifications(queuedNotifs)
             } catch (e: Exception) {
@@ -348,6 +361,9 @@ class GuardianService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         fallDetector.stop()
+        phoneStateReceiver?.let {
+            unregisterReceiver(it)
+        }
         serviceScope.cancel()
     }
 }
