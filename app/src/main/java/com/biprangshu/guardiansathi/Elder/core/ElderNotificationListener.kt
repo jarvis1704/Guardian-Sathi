@@ -58,14 +58,14 @@ class ElderNotificationListener : NotificationListenerService() {
                     timestamp = System.currentTimeMillis()
                 )
 
-                Log.d("NotificationListener", "Captured: ${notificationData.appName} - $title: $text")
+                Log.d("ElderNotificationListener", "Captured: ${notificationData.appName} - $title: $text")
 
                 // check if its an OTP
                 val otpResult = detectOtp(notificationData.title, notificationData.desc)
                 val transactionResult = detectTransaction(notificationData.title, notificationData.desc)
 
                 if (otpResult.isOtp){
-                    Log.d("NotificationListener", "OTP Detected: ${otpResult.otpValue}")
+                    Log.d("ElderNotificationListener", "OTP Detected: ${otpResult.otpValue}")
                     //immediately send to firebase
                     sendNotificationToFirebase(notificationData, true)
 

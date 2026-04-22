@@ -1,4 +1,4 @@
-package com.biprangshu.guardiansathi.Elder.core
+package com.biprangshu.guardiansathi.Guardian.core
 
 import android.app.Notification
 import android.service.notification.NotificationListenerService
