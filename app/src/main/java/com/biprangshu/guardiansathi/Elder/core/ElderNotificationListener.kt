@@ -4,6 +4,8 @@ import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Log
 import com.biprangshu.guardiansathi.Elder.data.ElderFirebaseRepository
+import com.biprangshu.guardiansathi.Elder.data.local.ElderNotification
+import com.biprangshu.guardiansathi.Elder.data.local.ElderNotificationRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +18,9 @@ class ElderNotificationListener : NotificationListenerService() {
 
     @Inject
     lateinit var firebaseRepository: ElderFirebaseRepository
+
+    @Inject
+    lateinit var elderRoomRepository: ElderNotificationRepository
 
     private val serviceScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
@@ -77,16 +82,20 @@ class ElderNotificationListener : NotificationListenerService() {
                         )
                         sendNotificationToFirebase(newNotifData, false, true)
                     }
-                }else{
-                    // Send to Firebase for guardians to see
-//                    sendNotificationToFirebase(notificationData)
-                    // Check for scam patterns
-//                    if (isPotentialScam(title, text)) {
-//                        Log.w("NotificationListener", "⚠️ POTENTIAL SCAM DETECTED")
-//                        alertGuardianOfScam(notificationData)
-//                    }
                 }
-
+                else{
+                    val notif = ElderNotification(
+                        title = notificationData.title,
+                        body = notificationData.body,
+                        desc = notificationData.desc,
+                        imp = "",
+                        appName = notificationData.appName,
+                        time = notificationData.timestamp
+                    )
+                    serviceScope.launch {
+                        elderRoomRepository.insertNotification(notif)
+                    }
+                }
             }
         }
     }

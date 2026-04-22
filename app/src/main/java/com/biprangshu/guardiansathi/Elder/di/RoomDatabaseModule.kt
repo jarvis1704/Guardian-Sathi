@@ -2,6 +2,7 @@ package com.biprangshu.guardiansathi.Elder.di
 
 import android.content.Context
 import androidx.room.Room
+import com.biprangshu.guardiansathi.Elder.data.local.ElderNotificationsDao
 import com.biprangshu.guardiansathi.Elder.data.local.GuardianContactDao
 import com.biprangshu.guardiansathi.Elder.data.local.GuardianSaathiDatabase
 import dagger.Module
@@ -23,11 +24,18 @@ object RoomDatabaseModule {
             context,
             GuardianSaathiDatabase::class.java,
             "guardian_saathi_db"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides
     fun provideGuardianContactDao(db: GuardianSaathiDatabase): GuardianContactDao {
         return db.guardianContactDao()
+    }
+
+    @Provides
+    fun provideElderNotificationsDao(db: GuardianSaathiDatabase): ElderNotificationsDao {
+        return db.elderNotificationDao()
     }
 }
