@@ -92,8 +92,8 @@ class ElderFirebaseRepositoryImpl @Inject constructor(
                     //all other messages
                     val payload = mapOf(
                         "title" to notificationData.title,
-                        "body" to notificationData.desc,
-                        "desc" to notificationData.body.ifEmpty { notificationData.desc },
+                        "body" to notificationData.body,
+                        "desc" to notificationData.desc,
                         "imp" to "LOW",
                         "time" to ServerValue.TIMESTAMP,
                         "appName" to notificationData.appName,

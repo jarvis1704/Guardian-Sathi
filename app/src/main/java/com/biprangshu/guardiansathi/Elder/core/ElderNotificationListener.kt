@@ -84,6 +84,7 @@ class ElderNotificationListener : NotificationListenerService() {
                     }
                 }
                 else{
+                    //store in room db for future checking
                     val notif = ElderNotification(
                         title = notificationData.title,
                         body = notificationData.body,
@@ -113,66 +114,12 @@ class ElderNotificationListener : NotificationListenerService() {
         }
     }
 
-    private fun isPotentialScam(title: String, text: String): Boolean {
-        val combinedText = "$title $text".lowercase()
-
-        val scamKeywords = listOf(
-            "otp",
-            "verify",
-            "urgent",
-            "account blocked",
-            "suspended",
-            "confirm your",
-            "click here",
-            "link expires",
-            "prize",
-            "congratulations",
-            "won",
-            "claim now",
-            "limited time",
-            "act now",
-            "কনফার্ম", // Bengali for confirm
-            "ওটিপি",   // Bengali for OTP
-            "तुरंत",    // Hindi for urgent
-        )
-
-        return scamKeywords.any { keyword -> combinedText.contains(keyword) }
-    }
-
     private fun sendNotificationToFirebase(data: NotificationData, isOtp: Boolean, isTransaction: Boolean = false) {
         serviceScope.launch {
             try {
                 firebaseRepository.sendNotificaitonToGuardian(data, isOtp, isTransaction)
-//                firebaseRepository.sendNotificationLog(
-//                    mapOf(
-//                        "app" to data.appName,
-//                        "title" to data.title,
-//                        "text" to data.text,
-//                        "timestamp" to data.timestamp,
-//                        "packageName" to data.packageName
-//                    )
-//                )
             } catch (e: Exception) {
                 Log.e("NotificationListener", "Failed to send to Firebase", e)
-            }
-        }
-    }
-
-    private fun alertGuardianOfScam(data: NotificationData) {
-        serviceScope.launch {
-            try {
-//                firebaseRepository.sendScamAlert(
-//                    mapOf(
-//                        "type" to "suspicious_notification",
-//                        "app" to data.appName,
-//                        "title" to data.title,
-//                        "text" to data.text,
-//                        "timestamp" to System.currentTimeMillis(),
-//                        "severity" to "high"
-//                    )
-//                )
-            } catch (e: Exception) {
-                Log.e("NotificationListener", "Failed to send scam alert", e)
             }
         }
     }

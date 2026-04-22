@@ -14,10 +14,13 @@ import android.os.IBinder
 import android.os.SystemClock
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.lifecycle.viewModelScope
 import com.biprangshu.guardiansathi.Elder.data.ElderFirebaseRepository
+import com.biprangshu.guardiansathi.Elder.data.local.ElderNotificationRepository
 import com.biprangshu.guardiansathi.Elder.ui.FallAlarmActivity
 import com.biprangshu.guardiansathi.Global.MainActivity
 import com.biprangshu.guardiansathi.R
+import com.google.ai.client.generativeai.GenerativeModel
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -27,6 +30,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -37,6 +41,10 @@ import kotlin.jvm.java
 class GuardianService : Service() {
     private val serviceScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
     @Inject lateinit var firebaseRepository: ElderFirebaseRepository
+
+    @Inject lateinit var generativeModel: GenerativeModel
+    @Inject lateinit var elderNotificationRepository: ElderNotificationRepository
+
     companion object {
         const val NOTIFICATION_ID = 1001
         const val CHANNEL_ID = "GUARDIAN_SERVICE_CHANNEL"
@@ -204,8 +212,70 @@ class GuardianService : Service() {
             }
         }
 
-        // Fall detection will go here (sensor-based, no loop needed)
-        // startFallDetection()
+        serviceScope.launch {
+            while (isActive) {
+                //here viewmodel check will be performed every minute
+                geminiScamDetection()
+                delay(1 * 60 * 1000L)
+            }
+        }
+    }
+
+    private fun geminiScamDetection() {
+        serviceScope.launch {
+            try {
+                val queuedNotifs = elderNotificationRepository.getAllNotifications().first()
+                val chat = generativeModel.startChat()
+                val prompt =
+                    """You are a scam detection assistant integrated into a mobile application.
+                    |Your task is to analyze past user notifications and identify any that may be scams, fraud, or misleading.
+                    |Only return a JSON array. Do NOT include any extra text, explanation, or formatting outside JSON.
+                    |
+                    |Each object must follow this structure:
+                    |[
+                    |  {
+                    |    "title": "notification title",
+                    |    "body": "notification body, something like 'Potential Scam Detected' etc",
+                    |    "desc": "clear explanation why this might be a scam",
+                    |    "imp": "HIGH, MID, or LOW",
+                    |    "appName": "application name",
+                    |    "time": "double value of time"
+                    |  }
+                    |]
+                    |
+                    |If there are no suspicious notifications, return [].
+                    |
+                    |Focus on:
+                    |- Fake rewards, cashback, lottery messages
+                    |- Urgent threats (account block, verify now)
+                    |- Suspicious or unknown links
+                    |- Messages asking for sensitive info
+                    |
+                    |Messages are: $queuedNotifs
+                    |""".trimMargin()
+
+                val response = chat.sendMessage(prompt)
+                val responseText = response.text ?: return@launch
+                Log.d("Scam Detection", "gemini response: $responseText")
+                val notifs = parseScamNotifications(responseText)
+
+                notifs.forEach {
+                    Log.d("Scam Detection", "parsed response: $it")
+                    val notif = NotificationData(
+                        packageName = it.appName,
+                        appName = it.appName,
+                        title = it.title,
+                        desc = it.desc,
+                        body = it.body,
+                        timestamp = it.time
+                    )
+                    firebaseRepository.sendNotificaitonToGuardian(notif, false, false)
+                }
+                elderNotificationRepository.deleteAllNotifications(queuedNotifs)
+            } catch (e: Exception) {
+
+            }
+        }
     }
 
     private fun createNotificationChannel() {
