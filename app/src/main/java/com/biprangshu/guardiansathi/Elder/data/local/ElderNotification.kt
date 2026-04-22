@@ -30,4 +30,7 @@ interface ElderNotificationsDao {
 
     @Query("SELECT * FROM elder_notifications ORDER BY time DESC")
     fun getAllNotifications(): Flow<List<ElderNotification>>
+
+    @Delete
+    suspend fun deleteAllNotifications(notifications: List<ElderNotification>)
 }
