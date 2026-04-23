@@ -28,6 +28,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.ElderSettingsViewModel
 import com.biprangshu.guardiansathi.R
 import kotlinx.coroutines.delay
 
@@ -36,7 +38,8 @@ import kotlinx.coroutines.delay
 fun PanicSOSPage(
     onNavigateBack: () -> Unit = {},
     onImOkay: () -> Unit = {},
-    onTimerFinished: () -> Unit = {}
+    onTimerFinished: () -> Unit = {},
+    elderSettingsViewModel: ElderSettingsViewModel = hiltViewModel()
 ) {
     var secondsLeft by remember { mutableIntStateOf(10) }
     var timerFinished by remember { mutableIntStateOf(0) }
@@ -47,6 +50,7 @@ fun PanicSOSPage(
             delay(1000L)
         }
         timerFinished = 1
+        elderSettingsViewModel.PanicSOS()
         onTimerFinished()
         onNavigateBack()
     }

@@ -25,12 +25,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.biprangshu.guardiansathi.Elder.presentation.viewmodel.ElderSettingsViewModel
 import com.biprangshu.guardiansathi.R
 
 @Composable
 fun FallAlarmScreen(
     onImOkay: () -> Unit,
-    onTimerFinished: () -> Unit
+    onTimerFinished: () -> Unit,
+    elderSettingsViewModel: ElderSettingsViewModel = hiltViewModel()
 ) {
     var secondsLeft by remember { mutableIntStateOf(10) }
 
@@ -40,6 +43,7 @@ fun FallAlarmScreen(
                 secondsLeft = (millisUntilFinished / 1000).toInt() + 1
             }
             override fun onFinish() {
+                elderSettingsViewModel.FallSOS()
                 onTimerFinished()
             }
         }.start()
