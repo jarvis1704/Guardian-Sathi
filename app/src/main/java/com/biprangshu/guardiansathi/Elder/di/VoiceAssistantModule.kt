@@ -16,7 +16,7 @@ object VoiceAssistantModule {
     @Singleton
     fun provideGenerativeModel(): GenerativeModel {
         return GenerativeModel(
-            modelName = "gemini-3.1-flash-lite-preview",  // updated model name
+            modelName = "gemini-2.5-flash-lite",
             apiKey = BuildConfig.GEMINI_API_KEY
         )
     }

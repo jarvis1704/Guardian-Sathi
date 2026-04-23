@@ -238,6 +238,12 @@ class GuardianService : Service() {
         serviceScope.launch {
             try {
                 val queuedNotifs = elderNotificationRepository.getAllNotifications().first()
+
+                if (queuedNotifs.isEmpty()) {
+                    Log.d("Scam Detection", "no queued notifs, returning")
+                    return@launch
+                }
+
                 val chat = generativeModel.startChat()
                 val prompt =
                     """You are a scam detection assistant integrated into a mobile application.
