@@ -47,7 +47,6 @@ class GuardianService : Service() {
     @Inject lateinit var generativeModel: GenerativeModel
     @Inject lateinit var elderNotificationRepository: ElderNotificationRepository
 
-    private var phoneStateReceiver: PhoneStateReceiver? = null
     companion object {
         const val NOTIFICATION_ID = 1001
         const val CHANNEL_ID = "GUARDIAN_SERVICE_CHANNEL"
@@ -81,16 +80,6 @@ class GuardianService : Service() {
             onFallDetected()
         }
         fallDetector.start()
-        registerCallMonitoring()
-    }
-
-    private fun registerCallMonitoring() {
-        phoneStateReceiver = PhoneStateReceiver(firebaseRepository)
-        val filter = IntentFilter().apply {
-            addAction(TelephonyManager.ACTION_PHONE_STATE_CHANGED)
-        }
-        registerReceiver(phoneStateReceiver, filter)
-        Log.d("GuardianService", "✅ Call monitoring registered")
     }
 
     private fun onFallDetected() {
@@ -367,9 +356,6 @@ class GuardianService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         fallDetector.stop()
-        phoneStateReceiver?.let {
-            unregisterReceiver(it)
-        }
         serviceScope.cancel()
     }
 }
