@@ -59,6 +59,9 @@ class SplashViewModel @Inject constructor(
                     val uid = firebaseAuthDataSource.getCurentUserUid()
                         ?: return@launch _events.emit(SplashEvent.NavigateToLogin)
 
+                    // Sync current user info if missing from local cache
+                    syncCurrentUserInfo(userRole)
+
                     // Verify link status against Firestore (handles reinstall / new device)
                     when (val result = linkRepository.getLinkStatus(uid)) {
                         is Result.Success -> {
@@ -80,6 +83,23 @@ class SplashViewModel @Inject constructor(
                 }
             }
             _events.emit(event)
+        }
+    }
+
+    private suspend fun syncCurrentUserInfo(userRole: String) {
+        val alreadyCached = when (userRole) {
+            "ELDER" -> sessionRepository.elderName.first() != null
+            "GUARDIAN" -> sessionRepository.guardianName.first() != null
+            else -> true
+        }
+        if (alreadyCached) return
+
+        val name = firebaseAuthDataSource.getCurrentUserName()
+        val photo = firebaseAuthDataSource.getCurrentUserPhotoUrl()
+
+        when (userRole) {
+            "ELDER" -> sessionRepository.setElderInfo(name, photo)
+            "GUARDIAN" -> sessionRepository.setGuardianInfo(name, photo)
         }
     }
 
