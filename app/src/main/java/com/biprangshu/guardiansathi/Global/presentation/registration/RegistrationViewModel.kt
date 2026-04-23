@@ -2,6 +2,7 @@ package com.biprangshu.guardiansathi.Global.presentation.registration
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.biprangshu.guardiansathi.Global.core.data.FirebaseAuthDataSource
 import com.biprangshu.guardiansathi.Global.core.domain.AuthRepository
 import com.biprangshu.guardiansathi.Global.domain.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,7 +32,8 @@ sealed interface RegistrationEvent {
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
     private val sessionRepository: SessionRepository,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val firebaseAuthDataSource: FirebaseAuthDataSource
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(RegistrationState())
@@ -58,7 +60,13 @@ class RegistrationViewModel @Inject constructor(
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
             
-
+            // Sync current user info before transitioning
+            val name = firebaseAuthDataSource.getCurrentUserName()
+            val photo = firebaseAuthDataSource.getCurrentUserPhotoUrl()
+            when (role) {
+                "ELDER" -> sessionRepository.setElderInfo(name, photo)
+                "GUARDIAN" -> sessionRepository.setGuardianInfo(name, photo)
+            }
             
             sessionRepository.setUserRole(role)
             authRepository.updateUserRole(role)

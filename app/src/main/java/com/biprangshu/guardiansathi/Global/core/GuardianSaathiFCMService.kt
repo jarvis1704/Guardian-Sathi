@@ -24,7 +24,7 @@ class GuardianSaathiFCMService : FirebaseMessagingService() {
         // handle incoming messages here later
 
         val title = remoteMessage.notification?.title
-            ?: remoteMessage.data["titile"]
+            ?: remoteMessage.data["title"]
             ?: "Guardian Saathi"
 
         val body = remoteMessage.notification?.body

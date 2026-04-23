@@ -34,6 +34,11 @@ class AuthRepositoryImpl @Inject constructor(
                 //firestore role not empty -> send firestore role to local, firestore role empty -> send local role to firestore, both empty -> do nothing
                 if (localRole == null && firestoreRole != null) {
                     userSessionManager.setUserRole(firestoreRole)
+                    // Sync profile info for current user
+                    when (firestoreRole) {
+                        "ELDER" -> userSessionManager.setElderInfo(firebaseUser.displayName, firebaseUser.photoUrl?.toString())
+                        "GUARDIAN" -> userSessionManager.setGuardianInfo(firebaseUser.displayName, firebaseUser.photoUrl?.toString())
+                    }
                 }
 
                 val user = User(

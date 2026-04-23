@@ -37,7 +37,7 @@ class NotificationHelper(private val context: Context) {
                     description = "Medicine and health reminders"
                 },
                 NotificationChannel(CHANNEL_GENERAL, "General",
-                    NotificationManager.IMPORTANCE_LOW).apply {
+                    NotificationManager.IMPORTANCE_DEFAULT).apply {
                     description = "General app notifications"
                 }
             ).forEach { manager.createNotificationChannel(it) }
