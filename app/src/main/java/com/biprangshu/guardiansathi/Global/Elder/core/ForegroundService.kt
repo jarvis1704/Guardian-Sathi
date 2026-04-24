@@ -10,9 +10,12 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.location.Location
+import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.os.SystemClock
+import android.provider.CallLog
+import android.provider.ContactsContract
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.biprangshu.guardiansathi.Global.Elder.data.ElderFirebaseRepository
@@ -42,6 +45,9 @@ import kotlin.jvm.java
 @AndroidEntryPoint
 class GuardianService : Service() {
     private val serviceScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+
+    private val alertedUnknownNumbers = mutableMapOf<String, Long>()
+
     @Inject lateinit var firebaseRepository: ElderFirebaseRepository
 
     @Inject lateinit var generativeModel: GenerativeModel
@@ -230,6 +236,102 @@ class GuardianService : Service() {
                 geminiScamDetection()
                 delay(2 * 60 * 1000L)
             }
+        }
+
+        serviceScope.launch {
+            while (isActive){
+                //here check call log for unknown numbers
+                checkCallLogsForUnknownNumbers()
+                delay(2 * 60 * 1000L)
+            }
+        }
+    }
+
+    private fun checkCallLogsForUnknownNumbers() {
+        Log.d("UnknownContact","trying to detect unknown numbers")
+        serviceScope.launch {
+            try {
+                val oneHourAgo = System.currentTimeMillis() - (60 * 60 * 1000L)
+                //evict entries older than 1 hour:
+                alertedUnknownNumbers.entries.removeIf {
+                    System.currentTimeMillis() - it.value > 60 * 60 * 1000L
+                }
+
+                val cursor = contentResolver.query(
+                    CallLog.Calls.CONTENT_URI,
+                    arrayOf(CallLog.Calls.NUMBER, CallLog.Calls.DATE, CallLog.Calls.TYPE),
+                    "${CallLog.Calls.DATE} >= ?",
+                    arrayOf(oneHourAgo.toString()),
+                    "${CallLog.Calls.DATE} DESC"
+                )
+
+                cursor?.use {
+                    while (it.moveToNext()) {
+                        val number = it.getString(it.getColumnIndexOrThrow(CallLog.Calls.NUMBER))
+                        val type = it.getInt(it.getColumnIndexOrThrow(CallLog.Calls.TYPE))
+
+                        if (number.isNullOrBlank()) continue
+                        if (alertedUnknownNumbers.containsKey(number)) continue
+
+                        val isUnknown = isUnknownNumber(this@GuardianService, number)
+
+                        if (isUnknown) {
+                            Log.d("UnknownContact","found an unknwon number: $number")
+                            val notifData = NotificationData(
+                                packageName = "Phone",
+                                appName = "Phone",
+                                title = "Unknown Caller Detected",
+                                desc = "Unknown number called: $number",
+                                body = "Unknown caller: $number, call type: $type",
+                                timestamp = System.currentTimeMillis()
+                            )
+                            firebaseRepository.sendNotificaitonToGuardian(notifData, false, false, "MID")
+                            alertedUnknownNumbers[number] = System.currentTimeMillis()
+
+                            // evict old entries
+                            if (alertedUnknownNumbers.size > 50) {
+                                alertedUnknownNumbers.clear()
+                            }
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("GuardianService", "Call log check failed: ${e.message}")
+            }
+        }
+    }
+
+    private fun isUnknownNumber(context: Context, phoneNumber: String): Boolean {
+        if (phoneNumber == "Unknown" || phoneNumber.isBlank()) return true
+
+        val digits = phoneNumber.replace(Regex("[\\s\\-().+]"), "")
+        val last10 = digits.takeLast(10)
+
+        return try {
+            val cursor = context.contentResolver.query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER),
+                null, null, null
+            )
+
+            var found = false
+            cursor?.use {
+                while (it.moveToNext()) {
+                    val contactNumber = it.getString(0)
+                        ?.replace(Regex("[\\s\\-().+]"), "")
+                        ?.takeLast(10)
+                        ?: continue
+
+                    if (contactNumber == last10) {
+                        found = true
+                        break
+                    }
+                }
+            }
+            !found
+        } catch (e: Exception) {
+            Log.e("GuardianService", "Contact lookup error: ${e.message}")
+            false
         }
     }
 
