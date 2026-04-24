@@ -1,7 +1,5 @@
 package com.biprangshu.guardiansathi.Global.core.di
 
-import com.biprangshu.guardiansathi.Elder.data.ElderForegroundServiceRepository
-import com.biprangshu.guardiansathi.Elder.data.ElderForegroundServiceRepositoryImpl
 import com.biprangshu.guardiansathi.Global.core.data.AuthRepositoryImpl
 import com.biprangshu.guardiansathi.Global.core.domain.AuthRepository
 import com.google.firebase.auth.FirebaseAuth

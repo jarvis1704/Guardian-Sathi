@@ -64,12 +64,12 @@
                 android:resource="@xml/file_paths" />
         </provider>
         <service
-            android:name=".Elder.core.GuardianService"
+            android:name=".Global.Elder.core.GuardianService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="location|health" />
         <service
-            android:name=".Guardian.core.GuardianNotificationListenerService"
+            android:name=".Global.Guardian.core.GuardianNotificationListenerService"
             android:exported="true"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
@@ -77,7 +77,7 @@
             </intent-filter>
         </service>
         <receiver
-            android:name=".Elder.core.BootReceiver"
+            android:name=".Global.Elder.core.BootReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -93,7 +93,7 @@
             android:turnScreenOn="true"
             android:theme="@style/Theme.GuardianSathi" />
         <receiver
-            android:name=".Elder.core.FallDismissReceiver"
+            android:name=".Global.Elder.core.FallDismissReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="ACTION_FALL_DISMISS"/>
@@ -107,7 +107,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".Elder.core.ElderNotificationListener"
+            android:name=".Global.Elder.core.ElderNotificationListener"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
             android:exported="true">
             <intent-filter>
@@ -115,7 +115,7 @@
             </intent-filter>
         </service>
         <receiver
-            android:name=".Elder.core.PhoneStateReceiver"
+            android:name=".Global.Elder.core.PhoneStateReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

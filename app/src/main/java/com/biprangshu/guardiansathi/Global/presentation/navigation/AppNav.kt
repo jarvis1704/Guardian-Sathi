@@ -16,14 +16,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.biprangshu.guardiansathi.Elder.presentation.screens.ChangeLanguagePage
-import com.biprangshu.guardiansathi.Elder.presentation.screens.ElderHomeScreen
-import com.biprangshu.guardiansathi.Elder.presentation.screens.ElderSettingsPage
-import com.biprangshu.guardiansathi.Elder.presentation.screens.EmergencyContactsPage
-import com.biprangshu.guardiansathi.Elder.presentation.screens.LinkGuardianRoot
-import com.biprangshu.guardiansathi.Elder.presentation.screens.PanicSOSPage
-import com.biprangshu.guardiansathi.Elder.presentation.screens.VoiceAssistantPage
-import com.biprangshu.guardiansathi.Guardian.presentation.screens.LinkElderRoot
+import com.biprangshu.guardiansathi.Global.Elder.presentation.screens.ChangeLanguagePage
+import com.biprangshu.guardiansathi.Global.Elder.presentation.screens.ElderHomeScreen
+import com.biprangshu.guardiansathi.Global.Elder.presentation.screens.ElderSettingsPage
+import com.biprangshu.guardiansathi.Global.Elder.presentation.screens.EmergencyContactsPage
+import com.biprangshu.guardiansathi.Global.Elder.presentation.screens.LinkGuardianRoot
+import com.biprangshu.guardiansathi.Global.Elder.presentation.screens.PanicSOSPage
+import com.biprangshu.guardiansathi.Global.Elder.presentation.screens.VoiceAssistantPage
+import com.biprangshu.guardiansathi.Global.Guardian.presentation.screens.LinkElderRoot
 import com.biprangshu.guardiansathi.Global.presentation.login.LoginRoot
 import com.biprangshu.guardiansathi.Global.presentation.onboarding.OnboardingRoot
 import com.biprangshu.guardiansathi.Global.presentation.onboarding.LanguageSelectionPage
@@ -32,7 +32,7 @@ import com.biprangshu.guardiansathi.Global.presentation.splash.SplashRoot
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.OstrichAlgorithm
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.errorMessage
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.isErrorAlert
-import com.biprangshu.guardiansathi.Guardian.Navigation.GuardianShell
+import com.biprangshu.guardiansathi.Global.Guardian.Navigation.GuardianShell
 
 @Composable
 fun AppNav(
