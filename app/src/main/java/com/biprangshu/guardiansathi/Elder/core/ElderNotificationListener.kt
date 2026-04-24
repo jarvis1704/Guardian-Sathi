@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -24,15 +25,43 @@ class ElderNotificationListener : NotificationListenerService() {
 
     private val serviceScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
+    // Deduplication: Track processed notifications
+    private val processedNotifications = ConcurrentHashMap<String, Long>()
+    private val DEDUP_WINDOW_MS = 5000L // 5 seconds
+
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         sbn?.let { notification ->
             val packageName = notification.packageName
             val extras = notification.notification.extras
 
+            // Create unique key for this notification
+            val notificationKey = createNotificationKey(sbn)
+
+            // Check if we've already processed this notification recently
+            if (isDuplicate(notificationKey)) {
+                Log.d("ElderNotificationListener", "⚠️ Skipping duplicate notification: $notificationKey")
+                return
+            }
+
+            // Mark as processed
+            markAsProcessed(notificationKey)
+
             // Extract notification details
             val title = extras.getCharSequence("android.title")?.toString() ?: ""
             val text = extras.getCharSequence("android.text")?.toString() ?: ""
             val subText = extras.getCharSequence("android.subText")?.toString() ?: ""
+
+            // Skip if notification is empty or is a group summary
+            if (title.isEmpty() && text.isEmpty()) {
+                Log.d("ElderNotificationListener", "⚠️ Skipping empty notification")
+                return
+            }
+
+            // Skip group summary notifications
+            if (notification.isGroup && notification.notification.flags and android.app.Notification.FLAG_GROUP_SUMMARY != 0) {
+                Log.d("ElderNotificationListener", "⚠️ Skipping group summary notification")
+                return
+            }
 
             // Filter for important apps (SMS, WhatsApp, calls, banking, etc.)
             val importantApps = listOf(
@@ -97,6 +126,33 @@ class ElderNotificationListener : NotificationListenerService() {
                         elderRoomRepository.insertNotification(notif)
                     }
                 }
+            }
+        }
+    }
+
+    private fun createNotificationKey(sbn: StatusBarNotification): String {
+        val extras = sbn.notification.extras
+        val title = extras.getCharSequence("android.title")?.toString() ?: ""
+        val text = extras.getCharSequence("android.text")?.toString() ?: ""
+
+        // Create a unique key combining package, title, and text hash
+        return "${sbn.packageName}:${title.hashCode()}:${text.hashCode()}"
+    }
+
+    private fun isDuplicate(key: String): Boolean {
+        val lastProcessedTime = processedNotifications[key] ?: return false
+        val timeSinceLastProcess = System.currentTimeMillis() - lastProcessedTime
+        return timeSinceLastProcess < DEDUP_WINDOW_MS
+    }
+
+    private fun markAsProcessed(key: String) {
+        processedNotifications[key] = System.currentTimeMillis()
+
+        // Clean up old entries (keep map from growing indefinitely)
+        if (processedNotifications.size > 100) {
+            val now = System.currentTimeMillis()
+            processedNotifications.entries.removeIf {
+                now - it.value > DEDUP_WINDOW_MS * 2
             }
         }
     }

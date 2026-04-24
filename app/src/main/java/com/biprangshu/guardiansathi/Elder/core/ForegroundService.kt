@@ -134,15 +134,15 @@ class GuardianService : Service() {
             .build()
 
         //alert possible fall
-        val newNotifData = NotificationData(
-            packageName = "Guardian Saathi",
-            appName = "Guardian Saathi",
-            title = "Possible Fall Detected",
-            desc = "Elder's device fell from a high place, assistance might be required",
-            body = "A possible fall is detected",
-            timestamp = 0
-        )
-        firebaseRepository.sendNotificaitonToGuardian(newNotifData, false, false, "MID")
+//        val newNotifData = NotificationData(
+//            packageName = "Guardian Saathi",
+//            appName = "Guardian Saathi",
+//            title = "Possible Fall Detected",
+//            desc = "Elder's device fell from a high place, assistance might be required",
+//            body = "A possible fall is detected",
+//            timestamp = 0
+//        )
+//        firebaseRepository.sendNotificaitonToGuardian(newNotifData, false, false, "MID")
         getSystemService(NotificationManager::class.java)
             ?.notify(FALL_NOTIFICATION_ID, notification)
     }
@@ -253,13 +253,15 @@ class GuardianService : Service() {
                     |[
                     |  {
                     |    "title": "notification title",
-                    |    "body": "notification body, something like 'Potential Scam Detected' etc",
+                    |    "body": "notification body, something like 'Potential Scam Detected' etc.",
                     |    "desc": "clear explanation why this might be a scam",
                     |    "imp": "HIGH, MID, or LOW",
                     |    "appName": "application name",
                     |    "time": "double value of time"
                     |  }
                     |]
+                    |Just content only inside []
+                    |Do not generate same objects of same structure multiple times, just one object for one possible scam
                     |
                     |If there are no suspicious notifications, return [].
                     |
