@@ -230,68 +230,60 @@ fun GuardianHomeScreen(
 
         Spacer(Modifier.height(16.dp))
 
-        //Upcoming reminder card(to be replaced)
-        // TODO: Replace with real reminder data when reminders feature is built
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(20.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primary
-            )
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(20.dp),
-                verticalAlignment = Alignment.CenterVertically
+        //Upcoming reminder card
+        state.nextReminder?.let { reminder ->
+            val nextTime = reminder.times
+                .filter { t -> 
+                    val now = java.util.Calendar.getInstance()
+                    t.hour > now.get(java.util.Calendar.HOUR_OF_DAY) || 
+                    (t.hour == now.get(java.util.Calendar.HOUR_OF_DAY) && t.minute > now.get(java.util.Calendar.MINUTE))
+                }
+                .minByOrNull { t -> t.hour * 60 + t.minute }
+
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(20.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.primary
+                )
             ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.MedicalServices,
-                            contentDescription = null,
-                            modifier = Modifier.size(14.dp),
-                            tint = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
-                        )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.MedicalServices,
+                                contentDescription = null,
+                                modifier = Modifier.size(14.dp),
+                                tint = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
+                            )
+                            Text(
+                                text = stringResource(R.string.guardian_home_upcoming_label),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
+                            )
+                        }
+                        Spacer(Modifier.height(6.dp))
                         Text(
-                            text = stringResource(R.string.guardian_home_upcoming_label),
-                            style = MaterialTheme.typography.labelSmall,
+                            text = "${reminder.name}${nextTime?.let { " at\n${formatMedicineTime(it)}" } ?: ""}",
+                            style = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                        Spacer(Modifier.height(4.dp))
+                        Text(
+                            text = reminder.instructions ?: reminder.dosage,
+                            style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
                         )
                     }
-                    Spacer(Modifier.height(6.dp))
-                    Text(
-                        text = "Atenolol at\n8:00 PM",
-                        style = MaterialTheme.typography.headlineSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                    Spacer(Modifier.height(4.dp))
-                    Text(
-                        text = "Heart health & BP management",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
-                    )
-                }
-                Spacer(Modifier.width(12.dp))
-                OutlinedButton(
-                    onClick = { onAction(GuardianHomeAction.OnConfirmReminder) },
-                    shape = RoundedCornerShape(50),
-                    border = BorderStroke(
-                        1.5.dp,
-                        MaterialTheme.colorScheme.onPrimary
-                    ),
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = MaterialTheme.colorScheme.onPrimary
-                    )
-                ) {
-                    Text(
-                        text = stringResource(R.string.guardian_home_confirm),
-                        fontWeight = FontWeight.Medium
-                    )
                 }
             }
         }
@@ -479,3 +471,11 @@ private fun ActivityItem(
 //        )
 //    }
 //}
+
+private fun formatMedicineTime(time: com.biprangshu.guardiansathi.Global.core.domain.MedicineTime): String {
+    val calendar = java.util.Calendar.getInstance().apply {
+        set(java.util.Calendar.HOUR_OF_DAY, time.hour)
+        set(java.util.Calendar.MINUTE, time.minute)
+    }
+    return java.text.SimpleDateFormat("hh:mm a", java.util.Locale.getDefault()).format(calendar.time)
+}

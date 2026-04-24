@@ -17,54 +17,62 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.Medication
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TimePicker
+import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.biprangshu.guardiansathi.Global.Guardian.presentation.viewmodel.MedicineAction
+import com.biprangshu.guardiansathi.Global.Guardian.presentation.viewmodel.MedicineViewModel
+import com.biprangshu.guardiansathi.Global.core.domain.MedicineReminder
+import com.biprangshu.guardiansathi.Global.core.domain.MedicineTime
 import com.biprangshu.guardiansathi.R
+import java.util.Calendar
 
 private val CompletedGreen = Color(0xFF4CAF50)
 private val UpcomingBlue = Color(0xFF2196F3)
 private val MissedRed = Color(0xFFE53935)
 
-private enum class ReminderStatus { COMPLETED, UPCOMING, MISSED }
-
-private data class ReminderItem(
-    val time: String,
-    val period: String,
-    val medicineName: String,
-    val dose: String,
-    val status: ReminderStatus
-)
-
-// TODO: Replace with real reminder data from Firestore when reminders feature is built
-private val todayReminders = listOf(
-    ReminderItem("8:00 AM", "Morning", "Metformin", "500 mg", ReminderStatus.COMPLETED),
-    ReminderItem("2:00 PM", "Afternoon", "Amlodipine", "5 mg", ReminderStatus.UPCOMING),
-    ReminderItem("8:00 PM", "Evening", "Atenolol", "25 mg", ReminderStatus.UPCOMING),
-    ReminderItem("10:00 PM", "Night", "Rosuvastatin", "10 mg", ReminderStatus.UPCOMING)
-)
-
 @Composable
-fun GuardianReminderPage() {
+fun GuardianReminderPage(
+    viewModel: MedicineViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    var showAddDialog by remember { mutableStateOf(false) }
+
     Scaffold(
         floatingActionButton = {
-            // TODO: wire up actual add reminder flow when reminders feature is built
             FloatingActionButton(
-                onClick = { /* TODO */ },
+                onClick = { showAddDialog = true },
                 shape = RoundedCornerShape(16.dp),
                 containerColor = MaterialTheme.colorScheme.primary,
                 elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 4.dp)
@@ -85,7 +93,6 @@ fun GuardianReminderPage() {
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 16.dp, vertical = 20.dp)
         ) {
-            // ── Title ────────────────────────────────────────────────────────
             Text(
                 text = stringResource(R.string.guardian_reminders_title),
                 style = MaterialTheme.typography.titleLarge,
@@ -103,177 +110,246 @@ fun GuardianReminderPage() {
 
             Spacer(Modifier.height(16.dp))
 
-            // ── Summary strip ─────────────────────────────────────────────────
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-                val completedCount = todayReminders.count { it.status == ReminderStatus.COMPLETED }
-                val upcomingCount = todayReminders.count { it.status == ReminderStatus.UPCOMING }
-                val missedCount = todayReminders.count { it.status == ReminderStatus.MISSED }
-
-                SummaryChip(
-                    count = completedCount,
-                    label = stringResource(R.string.guardian_reminders_status_done),
-                    color = CompletedGreen,
-                    modifier = Modifier.weight(1f)
+            if (state.isLoading) {
+                Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+            } else {
+                // Reminder list
+                Text(
+                    text = stringResource(R.string.guardian_reminders_schedule),
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 10.dp)
                 )
-                SummaryChip(
-                    count = upcomingCount,
-                    label = stringResource(R.string.guardian_reminders_status_upcoming),
-                    color = UpcomingBlue,
-                    modifier = Modifier.weight(1f)
-                )
-                SummaryChip(
-                    count = missedCount,
-                    label = stringResource(R.string.guardian_reminders_status_missed),
-                    color = MissedRed,
-                    modifier = Modifier.weight(1f)
-                )
-            }
 
-            Spacer(Modifier.height(20.dp))
-
-            // ── Reminder list ─────────────────────────────────────────────────
-            Text(
-                text = stringResource(R.string.guardian_reminders_schedule),
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(bottom = 10.dp)
-            )
-
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                todayReminders.forEach { reminder ->
-                    ReminderCard(reminder)
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    state.reminders.forEach { reminder ->
+                        MedicineReminderCard(
+                            reminder = reminder,
+                            onDelete = { viewModel.onAction(MedicineAction.DeleteReminder(reminder.id)) }
+                        )
+                    }
                 }
             }
 
-            Spacer(Modifier.height(80.dp)) // space for FAB
+            Spacer(Modifier.height(80.dp))
+        }
+
+        if (showAddDialog) {
+            AddMedicineDialog(
+                onDismiss = { showAddDialog = false },
+                onSave = { reminder ->
+                    viewModel.onAction(MedicineAction.AddReminder(reminder))
+                    showAddDialog = false
+                }
+            )
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SummaryChip(
-    count: Int,
-    label: String,
-    color: Color,
-    modifier: Modifier = Modifier
+fun AddMedicineDialog(
+    onDismiss: () -> Unit,
+    onSave: (MedicineReminder) -> Unit
 ) {
-    Card(
-        modifier = modifier,
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.cardColors(containerColor = color.copy(alpha = 0.1f)),
-        elevation = CardDefaults.cardElevation(0.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 12.dp, horizontal = 10.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = count.toString(),
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                color = color
-            )
-            Text(
-                text = label,
-                style = MaterialTheme.typography.labelSmall,
-                color = color
-            )
+    var name by remember { mutableStateOf("") }
+    var dosage by remember { mutableStateOf("") }
+    var instructions by remember { mutableStateOf("") }
+    val selectedTimes = remember { mutableStateListOf<MedicineTime>() }
+    var showTimePicker by remember { mutableStateOf(false) }
+
+    val timePickerState = rememberTimePickerState()
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.add_medicine_title)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = { Text(stringResource(R.string.medicine_name_label)) },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                OutlinedTextField(
+                    value = dosage,
+                    onValueChange = { dosage = it },
+                    label = { Text(stringResource(R.string.dosage_label)) },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                OutlinedTextField(
+                    value = instructions,
+                    onValueChange = { instructions = it },
+                    label = { Text(stringResource(R.string.instructions_label)) },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                
+                Text(
+                    text = "Times",
+                    style = MaterialTheme.typography.labelLarge,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+                
+                selectedTimes.forEach { time ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(formatTime(time.hour, time.minute))
+                        IconButton(onClick = { selectedTimes.remove(time) }) {
+                            Icon(Icons.Outlined.Delete, contentDescription = "Remove time")
+                        }
+                    }
+                }
+                
+                TextButton(onClick = { showTimePicker = true }) {
+                    Icon(Icons.Outlined.Add, contentDescription = null)
+                    Spacer(Modifier.width(4.dp))
+                    Text(stringResource(R.string.add_time))
+                }
+            }
+        },
+        confirmButton = {
+            Button(
+                onClick = {
+                    onSave(
+                        MedicineReminder(
+                            name = name,
+                            dosage = dosage,
+                            instructions = instructions,
+                            times = selectedTimes.toList()
+                        )
+                    )
+                },
+                enabled = name.isNotBlank() && dosage.isNotBlank() && selectedTimes.isNotEmpty()
+            ) {
+                Text(stringResource(R.string.save_button))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text(stringResource(R.string.cancel_button))
+            }
         }
+    )
+
+    if (showTimePicker) {
+        AlertDialog(
+            onDismissRequest = { showTimePicker = false },
+            confirmButton = {
+                TextButton(onClick = {
+                    selectedTimes.add(MedicineTime(timePickerState.hour, timePickerState.minute))
+                    showTimePicker = false
+                }) {
+                    Text("OK")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showTimePicker = false }) {
+                    Text("Cancel")
+                }
+            },
+            text = {
+                TimePicker(state = timePickerState)
+            }
+        )
     }
 }
 
 @Composable
-private fun ReminderCard(reminder: ReminderItem) {
-    val (statusColor, statusLabel) = when (reminder.status) {
-        ReminderStatus.COMPLETED -> CompletedGreen to R.string.guardian_reminders_status_done
-        ReminderStatus.UPCOMING -> UpcomingBlue to R.string.guardian_reminders_status_upcoming
-        ReminderStatus.MISSED -> MissedRed to R.string.guardian_reminders_status_missed
-    }
-
+private fun MedicineReminderCard(
+    reminder: MedicineReminder,
+    onDelete: () -> Unit
+) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(0.dp)
+        elevation = CardDefaults.cardElevation(2.dp)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            // Time column
-            Column(
-                modifier = Modifier.width(56.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = reminder.time.substringBefore(" "),
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                Text(
-                    text = reminder.time.substringAfter(" "),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
+                    modifier = Modifier.size(40.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            Icons.Outlined.Medication,
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
 
-            Spacer(Modifier.width(12.dp))
+                Spacer(Modifier.width(12.dp))
 
-            // Pill icon
-            Surface(
-                shape = CircleShape,
-                color = statusColor.copy(alpha = 0.12f),
-                modifier = Modifier.size(40.dp)
-            ) {
-                Box(contentAlignment = Alignment.Center) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = reminder.name,
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = reminder.dosage,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+
+                IconButton(onClick = onDelete) {
                     Icon(
-                        Icons.Outlined.Medication,
-                        contentDescription = null,
-                        modifier = Modifier.size(20.dp),
-                        tint = statusColor
+                        Icons.Outlined.Delete,
+                        contentDescription = "Delete",
+                        tint = MaterialTheme.colorScheme.error
                     )
                 }
             }
 
-            Spacer(Modifier.width(12.dp))
-
-            // Medicine info
-            Column(modifier = Modifier.weight(1f)) {
+            if (reminder.instructions != null) {
                 Text(
-                    text = reminder.medicineName,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                Text(
-                    text = "${reminder.dose} · ${reminder.period}",
+                    text = reminder.instructions,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 8.dp)
                 )
             }
 
-            // Status pill
-            Surface(
-                shape = RoundedCornerShape(50),
-                color = statusColor.copy(alpha = 0.12f)
-            ) {
-                Text(
-                    text = stringResource(statusLabel),
-                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = statusColor,
-                    fontWeight = FontWeight.Medium
-                )
+            Spacer(Modifier.height(8.dp))
+            
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                reminder.times.forEach { time ->
+                    Surface(
+                        shape = RoundedCornerShape(8.dp),
+                        color = MaterialTheme.colorScheme.secondaryContainer
+                    ) {
+                        Text(
+                            text = formatTime(time.hour, time.minute),
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSecondaryContainer
+                        )
+                    }
+                }
             }
         }
     }
+}
+
+private fun formatTime(hour: Int, minute: Int): String {
+    val calendar = Calendar.getInstance().apply {
+        set(Calendar.HOUR_OF_DAY, hour)
+        set(Calendar.MINUTE, minute)
+    }
+    return java.text.SimpleDateFormat("hh:mm a", java.util.Locale.getDefault()).format(calendar.time)
 }

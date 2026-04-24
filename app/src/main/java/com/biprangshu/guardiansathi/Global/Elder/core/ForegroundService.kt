@@ -49,6 +49,7 @@ class GuardianService : Service() {
     private val alertedUnknownNumbers = mutableMapOf<String, Long>()
 
     @Inject lateinit var firebaseRepository: ElderFirebaseRepository
+    @Inject lateinit var medicineRepository: com.biprangshu.guardiansathi.Global.core.domain.MedicineRepository
 
     @Inject lateinit var generativeModel: GenerativeModel
     @Inject lateinit var elderNotificationRepository: ElderNotificationRepository
@@ -165,6 +166,8 @@ class GuardianService : Service() {
         // Cancel any previous loops before starting new ones (safe on restart)
         serviceScope.coroutineContext.cancelChildren()
 
+        startMedicineMonitoring()
+
         serviceScope.launch {
             val uid = FirebaseAuth.getInstance().uid
             var wasInsideGeofence: Boolean? = null
@@ -243,6 +246,59 @@ class GuardianService : Service() {
                 //here check call log for unknown numbers
                 checkCallLogsForUnknownNumbers()
                 delay(2 * 60 * 1000L)
+            }
+        }
+    }
+
+    private fun startMedicineMonitoring() {
+        val uid = FirebaseAuth.getInstance().uid ?: return
+        serviceScope.launch {
+            medicineRepository.getReminders(uid).collect { reminders ->
+                scheduleMedicineAlarms(reminders)
+            }
+        }
+    }
+
+    private fun scheduleMedicineAlarms(reminders: List<com.biprangshu.guardiansathi.Global.core.domain.MedicineReminder>) {
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val calendar = java.util.Calendar.getInstance()
+        val currentDay = calendar.get(java.util.Calendar.DAY_OF_WEEK)
+
+        reminders.filter { it.isActive && it.daysOfWeek.contains(currentDay) }.forEach { reminder ->
+            reminder.times.forEach { time ->
+                calendar.set(java.util.Calendar.HOUR_OF_DAY, time.hour)
+                calendar.set(java.util.Calendar.MINUTE, time.minute)
+                calendar.set(java.util.Calendar.SECOND, 0)
+
+                if (calendar.timeInMillis > System.currentTimeMillis()) {
+                    val intent = Intent(this, MedicineAlarmReceiver::class.java).apply {
+                        putExtra("reminder_id", reminder.id)
+                        putExtra("medicine_name", reminder.name)
+                        putExtra("medicine_dosage", reminder.dosage)
+                        putExtra("instructions", reminder.instructions ?: "")
+                    }
+                    val pendingIntent = PendingIntent.getBroadcast(
+                        this,
+                        (reminder.id.hashCode() + time.hour * 60 + time.minute),
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                    )
+
+                    try {
+                        alarmManager.setExactAndAllowWhileIdle(
+                            AlarmManager.RTC_WAKEUP,
+                            calendar.timeInMillis,
+                            pendingIntent
+                        )
+                    } catch (e: SecurityException) {
+                        // Fallback if SCHEDULE_EXACT_ALARM is not granted on Android 12+
+                        alarmManager.setAndAllowWhileIdle(
+                            AlarmManager.RTC_WAKEUP,
+                            calendar.timeInMillis,
+                            pendingIntent
+                        )
+                    }
+                }
             }
         }
     }

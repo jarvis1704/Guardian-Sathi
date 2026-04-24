@@ -40,6 +40,7 @@ data class GuardianHomeState(
     val locationLong: Double = 0.0,
     val lastLocationSeen: Long = 0L,
     val activityLogs: List<ActivityLogUi> = emptyList(),
+    val nextReminder: com.biprangshu.guardiansathi.Global.core.domain.MedicineReminder? = null,
     val isLoading: Boolean = true,
     val error: String? = null
 ) {
@@ -57,7 +58,8 @@ class GuardianHomeViewModel @Inject constructor(
     private val firebaseAuthDataSource: FirebaseAuthDataSource,
     private val firebaseDatabase: FirebaseDatabase,
     private val firestoreLinkDataSource: FirestoreLinkDataSource,
-    private val sessionRepository: SessionRepository
+    private val sessionRepository: SessionRepository,
+    private val medicineRepository: com.biprangshu.guardiansathi.Global.core.domain.MedicineRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(GuardianHomeState())
@@ -163,6 +165,32 @@ class GuardianHomeViewModel @Inject constructor(
             }
             logsRef.addValueEventListener(logsListener)
             rtdbListeners.add(logsRef to logsListener)
+
+            observeMedicineReminders(elderUid)
+        }
+    }
+
+    private fun observeMedicineReminders(elderUid: String) {
+        viewModelScope.launch {
+            medicineRepository.getReminders(elderUid).collect { reminders ->
+                val now = java.util.Calendar.getInstance()
+                val currentHour = now.get(java.util.Calendar.HOUR_OF_DAY)
+                val currentMinute = now.get(java.util.Calendar.MINUTE)
+                val currentDay = now.get(java.util.Calendar.DAY_OF_WEEK)
+
+                val next = reminders
+                    .filter { it.isActive && it.daysOfWeek.contains(currentDay) }
+                    .flatMap { reminder ->
+                        reminder.times.map { time -> reminder to time }
+                    }
+                    .filter { (_, time) ->
+                        time.hour > currentHour || (time.hour == currentHour && time.minute > currentMinute)
+                    }
+                    .minByOrNull { (_, time) -> time.hour * 60 + time.minute }
+                    ?.first
+
+                _state.update { it.copy(nextReminder = next) }
+            }
         }
     }
 

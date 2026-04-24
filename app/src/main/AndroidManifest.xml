@@ -28,6 +28,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.READ_CALL_LOG"/>
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <application
         android:localeConfig="@xml/locales_config"
         android:name=".Global.GuardianSathiApp"
@@ -97,6 +98,17 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="ACTION_FALL_DISMISS"/>
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".Global.Elder.core.MedicineAlarmReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".Global.Elder.core.MedicineActionReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="ACTION_MEDICINE_TAKEN" />
+                <action android:name="ACTION_MEDICINE_SKIP" />
             </intent-filter>
         </receiver>
         <service

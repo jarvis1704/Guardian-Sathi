@@ -52,6 +52,9 @@ fun GuardianShell(outerNavController: NavController, onLogout: () -> Unit = {}) 
             composable<DashboardRoute> {
                 GuardianHomeRoot()
             }
+            composable<RemindersRoute> {
+                com.biprangshu.guardiansathi.Global.Guardian.presentation.screens.GuardianReminderPage()
+            }
             composable<LocationRoute> {
                 GuardianGeofenceRoot()
             }
