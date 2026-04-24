@@ -33,7 +33,6 @@ import com.biprangshu.guardiansathi.R
 fun FallAlarmScreen(
     onImOkay: () -> Unit,
     onTimerFinished: () -> Unit,
-    elderSettingsViewModel: ElderSettingsViewModel = hiltViewModel()
 ) {
     var secondsLeft by remember { mutableIntStateOf(10) }
 
@@ -43,7 +42,6 @@ fun FallAlarmScreen(
                 secondsLeft = (millisUntilFinished / 1000).toInt() + 1
             }
             override fun onFinish() {
-                elderSettingsViewModel.FallSOS()
                 onTimerFinished()
             }
         }.start()

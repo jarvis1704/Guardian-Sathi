@@ -10,15 +10,25 @@ import android.util.Log
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.biprangshu.guardiansathi.Global.Elder.core.GuardianService
+import com.biprangshu.guardiansathi.Global.Elder.core.NotificationData
+import com.biprangshu.guardiansathi.Global.Elder.data.ElderFirebaseRepository
+import com.biprangshu.guardiansathi.Global.Elder.data.ElderFirebaseRepositoryImpl
 import com.biprangshu.guardiansathi.Global.Elder.presentation.screens.FallAlarmScreen
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.jvm.java
 
+@AndroidEntryPoint
 class FallAlarmActivity : ComponentActivity() {
 
     private var mediaPlayer: MediaPlayer? = null
     private var isMediaPlayerReady = false
     private var countDownTimer: CountDownTimer? = null
+
+    @Inject
+    lateinit var firebaseRepository: ElderFirebaseRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +99,15 @@ class FallAlarmActivity : ComponentActivity() {
     }
 
     private fun sendAlertAndDismiss() {
-        // TODO: trigger FCM/SMS alert to guardian here
+        val newNotifData = NotificationData(
+            packageName = "Guardian Saathi",
+            appName = "Guardian Saathi",
+            title = "Fall Detection SOS",
+            desc = "Elder's device fell from a high place, needs immediate assistance!",
+            body = "Elder needs immediate assistance",
+            timestamp = 0
+        )
+        firebaseRepository.sendNotificaitonToGuardian(newNotifData, false, false, "SOS")
         GuardianService.cancelFallNotification(this)
         dismissAlarm()
     }

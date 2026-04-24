@@ -134,15 +134,15 @@ class GuardianService : Service() {
             .build()
 
         //alert possible fall
-//        val newNotifData = NotificationData(
-//            packageName = "Guardian Saathi",
-//            appName = "Guardian Saathi",
-//            title = "Possible Fall Detected",
-//            desc = "Elder's device fell from a high place, assistance might be required",
-//            body = "A possible fall is detected",
-//            timestamp = 0
-//        )
-//        firebaseRepository.sendNotificaitonToGuardian(newNotifData, false, false, "MID")
+        val newNotifData = NotificationData(
+            packageName = "Guardian Saathi",
+            appName = "Guardian Saathi",
+            title = "Possible Fall Detected",
+            desc = "Elder's device fell from a high place, assistance might be required",
+            body = "A possible fall is detected",
+            timestamp = 0
+        )
+        firebaseRepository.sendNotificaitonToGuardian(newNotifData, false, false, "MID")
         getSystemService(NotificationManager::class.java)
             ?.notify(FALL_NOTIFICATION_ID, notification)
     }
