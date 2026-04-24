@@ -189,22 +189,20 @@ class VoiceAssistantViewModel @Inject constructor(
                     }
                 )
 
-                val prompt = if (recentHistory.size <= 1) {
-                    """You are a helpful voice assistant for elderly users in India.
-                    |Respond in short, simple sentences (max 2-3 sentences).
-                    |Be warm, respectful, and patient.
-                    |The user may speak in Hindi only, or English. You will reply preferably in Hindi.
-                    |Use simple, common words only. Your response will be fed to a Text-To-speech service so avoid symbols like *,~,/ etc that are purely for bold/italics etc.
-                    |User asked: $userMessage
-                    |conversation history: ${_state.value.conversationHistory}
-                    |""".trimMargin()
+                val prompt = if (userMessage.isEmpty() || recentHistory.size <= 1) {
+                    // First load — no user message yet, just greet
+                    "You are a helpful voice assistant for elderly users in India. " +
+                            "Reply only with: 'Namaste, Mai aapki kya sahayata kar sakti hu'"
                 } else {
+                    // Actual conversation
                     """You are a helpful voice assistant for elderly users in India.
-                    |Respond in short, simple sentences (max 2-3 sentences).
-                    |Be warm, respectful, and patient.
-                    |The user may speak in Hindi only, or English. You will reply preferably in Hindi.
-                    |Use simple, common words only. Your response will be fed to a Text-To-speech service so avoid symbols like *,~,/ etc that are purely for bold/italics etc.
-                    |If you understood, just reply with 'Namaste, Mai aapki kya sahayata kar sakti hu' in Hindi """.trimMargin()
+                        |Respond in short, simple sentences (max 2-3 sentences).
+                        |Be warm, respectful, and patient.
+                        |The user may speak in Hindi or English. Reply preferably in Hindi.
+                        |Use simple, common words only. Avoid symbols like *,~,/ etc.
+                        |User asked: $userMessage
+                        |Conversation history: ${_state.value.conversationHistory}
+                        |""".trimMargin()
                 }
 
                 val response = chat.sendMessage(prompt)
