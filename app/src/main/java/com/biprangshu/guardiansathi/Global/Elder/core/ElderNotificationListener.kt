@@ -32,6 +32,7 @@ class ElderNotificationListener : NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         sbn?.let { notification ->
+            Log.d("ElderNotificationListener", "detected a notification")
             val packageName = notification.packageName
             val extras = notification.notification.extras
 
@@ -78,7 +79,7 @@ class ElderNotificationListener : NotificationListenerService() {
                 "com.phonepe.app"               // Banking apps pattern
             )
 
-            if (packageName in importantApps || packageName.contains("bank")) {
+            if (true) {
                 val notificationData = NotificationData(
                     packageName = packageName,
                     appName = getAppName(packageName),
@@ -125,6 +126,7 @@ class ElderNotificationListener : NotificationListenerService() {
                     )
                     serviceScope.launch {
                         elderRoomRepository.insertNotification(notif)
+                        Log.d("ElderNotificationListener", "queing notification: $notif")
                     }
                 }
             }

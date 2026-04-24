@@ -242,6 +242,7 @@ class GuardianService : Service() {
                     Log.d("Scam Detection", "no queued notifs, returning")
                     return@launch
                 }
+                Log.d("Scam Detection", "feeding to gemini: $queuedNotifs")
 
                 val chat = generativeModel.startChat()
                 val prompt =
