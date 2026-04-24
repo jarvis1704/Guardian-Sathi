@@ -66,26 +66,80 @@ class ElderNotificationListener : NotificationListenerService() {
             }
 
             // Filter for important apps (SMS, WhatsApp, calls, banking, etc.)
-            val importantApps = listOf(
-                "com.android.messaging",        // SMS
-                "com.google.android.apps.messaging", // Google Messages
-                "com.whatsapp",                 // WhatsApp
-                "com.truecaller",               // Truecaller
-                "com.phonepe.app",              // PhonePe
-                "com.paytm",                    // Paytm
-                "in.org.npci.upiapp",          // BHIM UPI
-                "com.google.android.apps.nbu.paisa.user", // Google Pay
-                "com.android.phone",            // Phone app
-                "com.phonepe.app"               // Banking apps pattern
+            val importantApps = setOf(
+                // SMS
+                "com.android.messaging",
+                "com.google.android.apps.messaging",
+                "com.samsung.android.messaging",
+                "com.oneplus.mms",
+
+                // WhatsApp family
+                "com.whatsapp",
+                "com.whatsapp.w4b",             // WhatsApp Business
+
+                // Social / Messaging
+                "com.facebook.katana",          // Facebook
+                "com.facebook.lite",
+                "com.facebook.orca",            // Messenger
+                "com.instagram.android",
+                "com.snapchat.android",
+                "org.telegram.messenger",
+                "org.telegram.plus",
+                "com.viber.voip",
+                "com.skype.raider",
+
+                // UPI / Payments
+                "com.phonepe.app",
+                "com.paytm",
+                "in.org.npci.upiapp",           // BHIM
+                "com.google.android.apps.nbu.paisa.user", // GPay
+                "net.one97.paytm",
+                "com.amazon.mShop.android.shopping", // Amazon Pay
+                "com.mobikwik_new",
+                "com.freecharge.android",
+
+                // Banks — Public
+                "com.sbi.SBIFreedomPlus",
+                "com.sbi.lotusintouch",
+                "com.pnb.mbankingplus",
+                "com.boi.Bank_of_India_Mobile_Banking",
+                "com.csam.icici.bank.imobile",  // ICICI
+                "com.snapwork.hdfc",            // HDFC
+                "com.axis.mobile",
+                "com.kotak.mobile.banking",
+                "com.indusind.mobilebanking",
+                "com.rbl.rblmobilebanking",
+                "com.idbi.mPassbook",
+                "com.myairtelapp",              // Airtel Payments Bank
+
+                // Truecaller
+                "com.truecaller",
+
+                // OTP / Auth apps
+                "com.google.android.apps.authenticator2",
+                "com.authy.authy",
             )
 
-            if (true) {
+            val excludeApps = listOf(
+                "com.biprangshu.guardiansathi"
+            )
+
+            val appNameLower = getAppName(packageName).lowercase()
+
+            val isDynamicallyImportant = listOf(
+                "bank", "pay", "upi", "finance", "money", "wallet",
+                "loan", "credit", "debit", "insurance", "mutual fund",
+                "trading", "invest", "sbi", "hdfc", "icici", "axis",
+                "kotak", "paytm", "phonepe", "gpay", "bhim"
+            ).any { keyword -> appNameLower.contains(keyword) }
+
+            if (packageName in importantApps || isDynamicallyImportant) {
                 val notificationData = NotificationData(
                     packageName = packageName,
                     appName = getAppName(packageName),
                     title = title,
-                    desc = text,
-                    body = subText,
+                    desc = "",
+                    body = text,
                     timestamp = System.currentTimeMillis()
                 )
 
