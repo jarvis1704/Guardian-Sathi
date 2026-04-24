@@ -5,8 +5,11 @@ import android.util.Log
 import androidx.annotation.RequiresPermission
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessaging.getInstance
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import kotlinx.coroutines.tasks.await
 
 class GuardianSaathiFCMService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {

@@ -246,33 +246,41 @@ class GuardianService : Service() {
                 val chat = generativeModel.startChat()
                 val prompt =
                     """You are a scam detection assistant integrated into a mobile application.
-                    |Your task is to analyze past user notifications and identify any that may be scams, fraud, or misleading.
-                    |Only return a JSON array. Do NOT include any extra text, explanation, or formatting outside JSON.
-                    |
-                    |Each object must follow this structure:
-                    |[
-                    |  {
-                    |    "title": "notification title",
-                    |    "body": "notification body, something like 'Potential Scam Detected' etc.",
-                    |    "desc": "clear explanation why this might be a scam",
-                    |    "imp": "HIGH, MID, or LOW",
-                    |    "appName": "application name",
-                    |    "time": "double value of time"
-                    |  }
-                    |]
-                    |Just content only inside []
-                    |Do not generate same objects of same structure multiple times, just one object for one possible scam
-                    |
-                    |If there are no suspicious notifications, return [].
-                    |
-                    |Focus on:
-                    |- Fake rewards, cashback, lottery messages
-                    |- Urgent threats (account block, verify now)
-                    |- Suspicious or unknown links
-                    |- Messages asking for sensitive info
-                    |
-                    |Messages are: $queuedNotifs
-                    |""".trimMargin()
+    |Your task is to analyze past user notifications and identify any that may be scams, fraud, or misleading.
+    |
+    |CRITICAL: Return ONLY a valid JSON array. NO markdown, NO code blocks, NO backticks, NO extra text.
+    |Do NOT wrap the response in ```json or ``` tags.
+    |Return the raw JSON array starting with [ and ending with ].
+    |
+    |Each object must follow this structure:
+    |[
+    |  {
+    |    "title": "notification title",
+    |    "body": "notification body, something like 'Potential Scam Detected' etc.",
+    |    "desc": "clear explanation why this might be a scam",
+    |    "imp": "HIGH, MID, or LOW",
+    |    "appName": "application name",
+    |    "time": 1234567890123
+    |  }
+    |]
+    |
+    |Rules:
+    |- Do NOT include duplicate scam notifications
+    |- If there are no suspicious notifications, return []
+    |- Return ONLY valid JSON, nothing else
+    |- NO markdown formatting
+    |- NO explanatory text before or after the JSON
+    |
+    |Focus on:
+    |- Fake rewards, cashback, lottery messages
+    |- Urgent threats (account block, verify now)
+    |- Suspicious or unknown links
+    |- Messages asking for sensitive info (OTP, password, card details)
+    |
+    |Messages to analyze: $queuedNotifs
+    |
+    |Response (raw JSON only):
+    |""".trimMargin()
 
                 val response = chat.sendMessage(prompt)
                 val responseText = response.text ?: return@launch

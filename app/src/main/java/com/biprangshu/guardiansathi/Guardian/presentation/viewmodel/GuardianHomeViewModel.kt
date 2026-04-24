@@ -1,21 +1,25 @@
 package com.biprangshu.guardiansathi.Guardian.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.biprangshu.guardiansathi.Global.core.data.FirebaseAuthDataSource
 import com.biprangshu.guardiansathi.Global.core.data.FirestoreLinkDataSource
 import com.biprangshu.guardiansathi.Global.core.domain.Result
 import com.biprangshu.guardiansathi.Global.domain.SessionRepository
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.messaging.FirebaseMessaging.getInstance
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 data class ActivityLogUi(
@@ -64,6 +68,27 @@ class GuardianHomeViewModel @Inject constructor(
     init {
         collectSessionData()
         attachRtdbListeners()
+    }
+
+    suspend fun getFCMTokenAndSave() {
+        try {
+            getInstance().token.await().let { token ->
+                Log.d("FCM", "Got token: $token")
+                val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
+                val db = FirebaseDatabase.getInstance().reference
+                db.child(uid)
+                    .child("device_token")
+                    .setValue(token)
+                    .addOnSuccessListener {
+                        Log.d("FCM", "Token saved successfully")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.e("FCM", "Failed to save token: ${e.message}")
+                    }
+            }
+        } catch (e: Exception) {
+            Log.e("FCM", "Failed to get FCM token", e)
+        }
     }
 
     private fun collectSessionData() {

@@ -354,6 +354,7 @@ fun ElderHomeScreen(
     LaunchedEffect(allPermissionsGranted) {
         if (allPermissionsGranted){
             Log.d("GuardianService", "trying to start service")
+            elderHomeScreenViewModel.getFCMTokenAndSave()
             foregroundServiceViewmodel.startService()
         }
     }
