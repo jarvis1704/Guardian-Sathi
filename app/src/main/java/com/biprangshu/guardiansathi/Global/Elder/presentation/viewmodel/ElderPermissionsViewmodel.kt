@@ -26,6 +26,7 @@ data class ElderPermissionsState(
     val smsReadGranted: Boolean = false,
     val phonePermissionsGranted: Boolean = false,
     val phoneLogPermissionGranted: Boolean = false,
+    val contactsPermissionGranted: Boolean = false
 )
 
 data class ElderPermissionAlert(
@@ -36,6 +37,7 @@ data class ElderPermissionAlert(
     val showReadSmsAlert: Boolean = false,
     val showPhoneAlert: Boolean = false,
     val showPhoneLogAlert: Boolean = false,
+    val showContactsAlert: Boolean = false
 )
 
 data class SpecialElderPermissionState(
@@ -81,6 +83,7 @@ class ElderPermissionsViewmodel @Inject constructor(
                 && specialState.isBatteryOptimizationIgnored
                 && specialState.isNotificationListenerEnabled
                 && specialState.isFullScreenIntentGranted
+                && permState.contactsPermissionGranted
 
     }.stateIn(
         scope = viewModelScope,
@@ -130,6 +133,9 @@ class ElderPermissionsViewmodel @Inject constructor(
         val phoneLogPermissionGranted = permissionManager.isPermissionGranted(
             Manifest.permission.READ_CALL_LOG
         )
+        val contactsPermissionGranted = permissionManager.isPermissionGranted(
+            Manifest.permission.READ_CONTACTS
+        )
 
         _permissionstate.update {
             it.copy(
@@ -140,7 +146,8 @@ class ElderPermissionsViewmodel @Inject constructor(
                 activityRecognitionGranted = activityGranted,
                 smsReadGranted = smsReadGranted,
                 phonePermissionsGranted = phonePermissionsGranted,
-                phoneLogPermissionGranted = phoneLogPermissionGranted
+                phoneLogPermissionGranted = phoneLogPermissionGranted,
+                contactsPermissionGranted = contactsPermissionGranted
             )
         }
 
@@ -152,7 +159,8 @@ class ElderPermissionsViewmodel @Inject constructor(
                 showActivityRecognitionAlert = !activityGranted,
                 showReadSmsAlert = !smsReadGranted,
                 showPhoneAlert = !phonePermissionsGranted,
-                showPhoneLogAlert = !phoneLogPermissionGranted
+                showPhoneLogAlert = !phoneLogPermissionGranted,
+                showContactsAlert = !contactsPermissionGranted
             )
         }
 
@@ -202,18 +210,6 @@ class ElderPermissionsViewmodel @Inject constructor(
         _permissionAlertState.update { it.copy(showActivityRecognitionAlert = false) }
     }
 
-//    fun onRecordAudioPermissionResult(granted: Boolean) {
-//        _permissionstate.update { it.copy(recordAudioGranted = granted) }
-//        _permissionAlertState.update { it.copy(showRecordAudioAlert = false) }
-//        checkPermissions()
-//    }
-//
-//    fun onCameraPermissionResult(granted: Boolean) {
-//        _permissionstate.update { it.copy(cameraGranted = granted) }
-//        _permissionAlertState.update { it.copy(showCameraAlert = false) }
-//        checkPermissions()
-//    }
-
     fun onSmsReadPermissionResult(granted: Boolean) {
         _permissionstate.update { it.copy(smsReadGranted = granted) }
         _permissionAlertState.update { it.copy(showReadSmsAlert = false) }
@@ -227,5 +223,10 @@ class ElderPermissionsViewmodel @Inject constructor(
     fun onPhoneLogPermissionResult(granted: Boolean) {
         _permissionstate.update { it.copy(phoneLogPermissionGranted = granted) }
         _permissionAlertState.update { it.copy(showPhoneLogAlert = false) }
+    }
+
+    fun onContactsPermissionResult(granted: Boolean) {
+        _permissionstate.update { it.copy(contactsPermissionGranted = granted) }
+        _permissionAlertState.update { it.copy(showContactsAlert = false) }
     }
 }

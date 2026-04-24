@@ -110,6 +110,12 @@
     <string name="ElderPermission_10_R2">In the next screen, find \"GuardianSathi\" and toggle \"Allow full screen intents\" on.</string>
     <string name="ElderPermission_10_D">This is only used for critical safety alerts. GuardianSathi will never use this to show advertisements or unnecessary popups.</string>
 
+    <string name="ElderPermission_11_T">Contacts Access</string>
+    <string name="ElderPermission_11_S">Identify unknown callers</string>
+    <string name="ElderPermission_11_R1">Checks incoming and outgoing calls against your contacts to detect unknown numbers that may be scammers or fraudsters.</string>
+    <string name="ElderPermission_11_R2">Your guardian is alerted when repeated contact from an unsaved number is detected.</string>
+    <string name="ElderPermission_11_D">Your contacts are only checked locally on your device for scam detection. They are never uploaded or shared with anyone.</string>
+
     <string name="ElderHome_1">Missing Permissions</string>
     <string name="ElderHome_2">You are protected</string>
     <string name="ElderHome_3">Talk to assistant</string>

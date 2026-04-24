@@ -30,6 +30,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Accessibility
 import androidx.compose.material.icons.rounded.BatteryChargingFull
 import androidx.compose.material.icons.rounded.Call
+import androidx.compose.material.icons.rounded.Contacts
 import androidx.compose.material.icons.rounded.Emergency
 import androidx.compose.material.icons.rounded.Fullscreen
 import androidx.compose.material.icons.rounded.ManageHistory
@@ -150,9 +151,12 @@ fun ElderHomeScreen(
         elderPermissionsViewmodel.onPhoneLogPermissionResult(granted)
     }
 
-//    LaunchedEffect(Unit) {
-//        elderPermissionsViewmodel.checkPermissions()
-//    }
+    val contactsPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        elderPermissionsViewmodel.onContactsPermissionResult(granted)
+    }
+
     val context = LocalContext.current
 
     val permissionState by elderPermissionsViewmodel.permissionstate.collectAsStateWithLifecycle()
@@ -333,6 +337,20 @@ fun ElderHomeScreen(
                 phoneLogPermissionsLauncher.launch(
                     Manifest.permission.READ_CALL_LOG
                 )
+            }
+        )
+    }
+
+    if (permissionAlertState.showContactsAlert) {
+        PermissionAlertDialog(
+            title = stringResource(R.string.ElderPermission_11_T),
+            subtitle = stringResource(R.string.ElderPermission_11_S),
+            reason1 = stringResource(R.string.ElderPermission_11_R1),
+            reason2 = stringResource(R.string.ElderPermission_11_R2),
+            disclaimer = stringResource(R.string.ElderPermission_11_D),
+            icon = Icons.Rounded.Contacts,
+            onContinue = {
+                contactsPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
             }
         )
     }

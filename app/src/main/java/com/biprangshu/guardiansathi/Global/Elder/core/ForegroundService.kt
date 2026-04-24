@@ -323,11 +323,18 @@ class GuardianService : Service() {
 
                 cursor?.use {
                     while (it.moveToNext()) {
+                        Log.d("UnknownContact","found an entry: $it")
                         val number = it.getString(it.getColumnIndexOrThrow(CallLog.Calls.NUMBER))
                         val type = it.getInt(it.getColumnIndexOrThrow(CallLog.Calls.TYPE))
 
-                        if (number.isNullOrBlank()) continue
-                        if (alertedUnknownNumbers.containsKey(number)) continue
+                        if (number.isNullOrBlank()) {
+                            Log.d("UnknownContact","number is blank")
+                            continue
+                        }
+                        if (alertedUnknownNumbers.containsKey(number)){
+                            Log.d("UnknownContact","key already added")
+                            continue
+                        }
 
                         val isUnknown = isUnknownNumber(this@GuardianService, number)
 
@@ -386,7 +393,7 @@ class GuardianService : Service() {
             }
             !found
         } catch (e: Exception) {
-            Log.e("GuardianService", "Contact lookup error: ${e.message}")
+            Log.e("UnknownContact", "Contact lookup error: ${e.message}")
             false
         }
     }

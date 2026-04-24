@@ -111,6 +111,12 @@
     <string name="ElderPermission_10_R2">পৰৱৰ্তী স্ক্ৰিনত \"GuardianSathi\" বিচাৰক আৰু \"Allow full screen intents\" অন কৰক।</string>
     <string name="ElderPermission_10_D">ই কেৱল গুৰুত্বপূৰ্ণ সুৰক্ষা এলাৰ্টৰ বাবে ব্যৱহাৰ কৰা হয়। GuardianSathi কেতিয়াও ইয়াক বিজ্ঞাপন বা অপ্রয়োজনীয় পপআপ দেখুৱাবলৈ ব্যৱহাৰ নকৰে।</string>
 
+    <string name="ElderPermission_11_T">যোগাযোগসমূহৰ অনুমতি</string>
+    <string name="ElderPermission_11_S">অজানা কলাৰ চিনাক্ত কৰক</string>
+    <string name="ElderPermission_11_R1">আহি থকা আৰু যাওঁ থকা কলসমূহ আপোনাৰ যোগাযোগসমূহৰ সৈতে মিলাই অজানা নম্বৰ চিনাক্ত কৰে, যিবোৰ প্ৰতাৰণা বা জালিয়াতি হ\'ব পাৰে।</string>
+    <string name="ElderPermission_11_R2">যেতিয়া কোনো সংৰক্ষণ নকৰা নম্বৰ পৰা বাৰে বাৰে যোগাযোগ কৰা হয়, তেতিয়া আপোনাৰ অভিভাৱকক জাননী দিয়া হয়।</string>
+    <string name="ElderPermission_11_D">আপোনাৰ যোগাযোগসমূহ কেৱল আপোনাৰ ডিভাইচত স্কাম চিনাক্তকৰণৰ বাবে ব্যৱহাৰ কৰা হয়। এইবোৰ কেতিয়াও আপলোড বা শ্বেয়াৰ কৰা নহয়।</string>
+
     <string name="ElderHome_1">অনুমতি নাই</string>
     <string name="ElderHome_2">আপুনি সুৰক্ষিত</string>
     <string name="ElderHome_3">সহায়কৰ সৈতে কথা পাতক</string>
@@ -185,6 +191,16 @@
     <string name="guardian_reminders_status_done">সম্পন্ন</string>
     <string name="guardian_reminders_status_upcoming">আগন্তুক</string>
     <string name="guardian_reminders_status_missed">বাদ পৰিছে</string>
+    <string name="add_medicine_title">ঔষধ যোগ কৰক</string>
+    <string name="edit_medicine_title">ঔষধ সম্পাদনা কৰক</string>
+    <string name="medicine_name_label">ঔষধৰ নাম</string>
+    <string name="dosage_label">ডোজ (যেনে ১টা গুলি)</string>
+    <string name="instructions_label">নিৰ্দেশনা (ঐচ্ছিক)</string>
+    <string name="select_time">সময় বাছক</string>
+    <string name="add_time">সময় যোগ কৰক</string>
+    <string name="save_button">সংৰক্ষণ কৰক</string>
+    <string name="cancel_button">বাতিল কৰক</string>
+    <string name="delete_medicine_confirm">আপুনি নিশ্চিতনে এই ৰিমাইণ্ডাৰটো মচি পেলাব বিচাৰে?</string>
 
     <!-- Guardian Profile Screen -->
     <string name="guardian_profile_title">প্ৰফাইল</string>
