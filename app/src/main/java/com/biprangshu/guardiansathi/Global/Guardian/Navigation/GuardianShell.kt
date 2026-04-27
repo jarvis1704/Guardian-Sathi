@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -30,6 +31,7 @@ import com.biprangshu.guardiansathi.Global.Guardian.presentation.screens.Guardia
 import com.biprangshu.guardiansathi.Global.Guardian.presentation.screens.GuardianHomeRoot
 import com.biprangshu.guardiansathi.Global.Guardian.presentation.screens.GuardianProfileRoot
 import com.biprangshu.guardiansathi.Global.Guardian.presentation.screens.GuardianReminderPage
+import com.biprangshu.guardiansathi.R
 
 // guardian/navigation/GuardianShell.kt
 
@@ -116,7 +118,15 @@ fun BottomBar(
                         contentDescription = tab.label
                     )
                 },
-                label = { Text(tab.label) }
+                label = {
+                    when (tab.route) {
+                        is DashboardRoute -> Text(stringResource(R.string.guardian_navbar_title_1))
+                        is RemindersRoute -> Text(stringResource(R.string.guardian_navbar_title_2))
+                        is LocationRoute -> Text(stringResource(R.string.guardian_navbar_title_3))
+                        is AlertsRoute -> Text(stringResource(R.string.guardian_navbar_title_4))
+                        is SettingsRoute -> Text(stringResource(R.string.guardian_navbar_title_5))
+                    }
+                }
             )
         }
     }

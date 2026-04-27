@@ -211,4 +211,16 @@
     <string name="guardian_profile_change_language">भाषा बदलें</string>
     <string name="guardian_profile_help">सहायता और समर्थन</string>
     <string name="guardian_profile_logout">लॉगआउट</string>
+
+    <string name="guardian_navbar_title_1">डैशबोर्ड</string>
+    <string name="guardian_navbar_title_2">रिमाइंडर</string>
+    <string name="guardian_navbar_title_3">लोकेशन</string>
+    <string name="guardian_navbar_title_4">अलर्ट्स</string>
+    <string name="guardian_navbar_title_5">सेटिंग्स</string>
+
+    <string name="guardian_geofence_1">जियोफेंस सेटिंग्स</string>
+    <string name="guardian_geofence_2">सुरक्षित क्षेत्र का केंद्र सेट करने के लिए मानचित्र पर टैप करें।</string>
+    <string name="guardian_geofence_3">जियोफेंस सक्षम करें</string>
+    <string name="guardian_geofence_4">त्रिज्या</string>
+    <string name="guardian_geofence_5">कॉन्फ़िगरेशन सहेजें</string>
 </resources>

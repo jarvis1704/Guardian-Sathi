@@ -212,4 +212,16 @@
     <string name="guardian_profile_change_language">ভাষা সলনি কৰক</string>
     <string name="guardian_profile_help">সহায় আৰু সমৰ্থন</string>
     <string name="guardian_profile_logout">লগআউট</string>
+
+    <string name="guardian_navbar_title_1">ডেশব’ৰ্ড</string>
+    <string name="guardian_navbar_title_2">স্মাৰক</string>
+    <string name="guardian_navbar_title_3">অৱস্থান</string>
+    <string name="guardian_navbar_title_4">সতৰ্কবাণী</string>
+    <string name="guardian_navbar_title_5">ছেটিংছ</string>
+
+    <string name="guardian_geofence_1">জিঅ’ফেন্স ছেটিংছ</string>
+    <string name="guardian_geofence_2">সুৰক্ষিত এলেকাৰ কেন্দ্ৰ নিৰ্ধাৰণ কৰিবলৈ মানচিত্ৰত টেপ কৰক।</string>
+    <string name="guardian_geofence_3">জিঅ’ফেন্স সক্ৰিয় কৰক</string>
+    <string name="guardian_geofence_4">ব্যাসাৰ্ধ</string>
+    <string name="guardian_geofence_5">কনফিগাৰেচন সংৰক্ষণ কৰক</string>
 </resources>

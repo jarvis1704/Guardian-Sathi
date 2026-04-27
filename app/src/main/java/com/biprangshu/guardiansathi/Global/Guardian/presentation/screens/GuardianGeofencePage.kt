@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -30,6 +31,7 @@ import com.biprangshu.guardiansathi.Global.Guardian.presentation.viewmodel.Guard
 import com.biprangshu.guardiansathi.Global.Guardian.presentation.viewmodel.GuardianGeofenceEvent
 import com.biprangshu.guardiansathi.Global.Guardian.presentation.viewmodel.GuardianGeofenceState
 import com.biprangshu.guardiansathi.Global.Guardian.presentation.viewmodel.GuardianGeofenceViewModel
+import com.biprangshu.guardiansathi.R
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.Circle
@@ -128,19 +130,19 @@ fun GuardianGeofenceScreen(
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Text(
-                        text = "Geofence Settings",
+                        text = stringResource(R.string.guardian_geofence_1),
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
                     )
                     
-                    Text(text = "Tap on the map to set the safe zone center.")
+                    Text(text = stringResource(R.string.guardian_geofence_2))
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = "Enable Geofence", style = MaterialTheme.typography.bodyLarge)
+                        Text(text = stringResource(R.string.guardian_geofence_3), style = MaterialTheme.typography.bodyLarge)
                         Switch(
                             checked = state.isActive,
                             onCheckedChange = { onAction(GuardianGeofenceAction.OnToggleActive(it)) }
@@ -148,7 +150,7 @@ fun GuardianGeofenceScreen(
                     }
 
                     Column {
-                        Text(text = "Radius: ${state.radiusMeters.toInt()} meters")
+                        Text(text = "${stringResource(R.string.guardian_geofence_4)}: ${state.radiusMeters.toInt()} meters")
                         Slider(
                             value = state.radiusMeters.toFloat(),
                             onValueChange = { onAction(GuardianGeofenceAction.OnRadiusChange(it)) },
@@ -165,7 +167,7 @@ fun GuardianGeofenceScreen(
                         if (state.isLoading) {
                             CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary)
                         } else {
-                            Text("Save Configuration")
+                            Text(stringResource(R.string.guardian_geofence_5))
                         }
                     }
                 }

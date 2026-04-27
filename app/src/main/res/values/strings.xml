@@ -213,4 +213,16 @@
     <string name="guardian_profile_help">Help &amp; Support</string>
     <string name="guardian_profile_logout">Logout</string>
 
+    <string name="guardian_navbar_title_1">Dashboard</string>
+    <string name="guardian_navbar_title_2">Reminders</string>
+    <string name="guardian_navbar_title_3">Location</string>
+    <string name="guardian_navbar_title_4">Alerts</string>
+    <string name="guardian_navbar_title_5">Settings</string>
+
+    <string name="guardian_geofence_1">Geofence Settings</string>
+    <string name="guardian_geofence_2">Tap on the map to set the safe zone center.</string>
+    <string name="guardian_geofence_3">Enable Geofence</string>
+    <string name="guardian_geofence_4">Radius</string>
+    <string name="guardian_geofence_5">Save Configuration</string>
+
 </resources>

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.biprangshu.guardiansathi.Global.core.data.FirebaseAuthDataSource
 import com.biprangshu.guardiansathi.Global.core.data.FirestoreLinkDataSource
 import com.biprangshu.guardiansathi.Global.core.domain.Result
+import com.biprangshu.guardiansathi.Global.presentation.ui.components.errorMessage
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -93,7 +94,9 @@ class GuardianGeofenceViewModel @Inject constructor(
                         _state.update { it.copy(centerLat = lat) }
                     }
                 }
-                override fun onCancelled(error: DatabaseError) {}
+                override fun onCancelled(error: DatabaseError) {
+                    errorMessage = error.message.toString()
+                }
             })
             
             elderRef.child("location_long").addValueEventListener(object : ValueEventListener {
@@ -104,7 +107,9 @@ class GuardianGeofenceViewModel @Inject constructor(
                         _state.update { it.copy(centerLong = lng) }
                     }
                 }
-                override fun onCancelled(error: DatabaseError) {}
+                override fun onCancelled(error: DatabaseError) {
+                    errorMessage = error.message.toString()
+                }
             })
 
             // Load geofence data
