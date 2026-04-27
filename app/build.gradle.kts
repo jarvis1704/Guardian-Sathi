@@ -30,8 +30,8 @@ android {
 
         buildConfigField(
             "String",
-            "MAPS_API_KEY",
-            "\"${localProperties["MAPS_API_KEY"]}\""
+            "MAPS_API_KEY_2",
+            "\"${localProperties["MAPS_API_KEY_2"]}\""
         )
         buildConfigField(
             "String",
@@ -39,8 +39,8 @@ android {
             "\"${localProperties["GEMINI_API_KEY"]}\""
         )
 
-        manifestPlaceholders["MAPS_API_KEY"] =
-            localProperties["MAPS_API_KEY"]?.toString() ?: ""
+        manifestPlaceholders["MAPS_API_KEY_2"] =
+            localProperties["MAPS_API_KEY_2"]?.toString() ?: ""
         manifestPlaceholders["GEMINI_API_KEY"] =
             localProperties["GEMINI_API_KEY"]?.toString() ?: ""
 
