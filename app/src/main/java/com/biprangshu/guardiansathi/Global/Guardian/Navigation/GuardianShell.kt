@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -27,6 +29,7 @@ import com.biprangshu.guardiansathi.Global.Guardian.presentation.screens.Guardia
 import com.biprangshu.guardiansathi.Global.Guardian.presentation.screens.GuardianGeofenceRoot
 import com.biprangshu.guardiansathi.Global.Guardian.presentation.screens.GuardianHomeRoot
 import com.biprangshu.guardiansathi.Global.Guardian.presentation.screens.GuardianProfileRoot
+import com.biprangshu.guardiansathi.Global.Guardian.presentation.screens.GuardianReminderPage
 
 // guardian/navigation/GuardianShell.kt
 
@@ -53,7 +56,7 @@ fun GuardianShell(outerNavController: NavController, onLogout: () -> Unit = {}) 
                 GuardianHomeRoot()
             }
             composable<RemindersRoute> {
-                com.biprangshu.guardiansathi.Global.Guardian.presentation.screens.GuardianReminderPage()
+                GuardianReminderPage()
             }
             composable<LocationRoute> {
                 GuardianGeofenceRoot()
@@ -86,6 +89,15 @@ fun BottomBar(
             } == true
 
             NavigationBarItem(
+                colors = NavigationBarItemColors(
+                    selectedIconColor = Color.White,
+                    selectedTextColor = MaterialTheme.colorScheme.onSurface,
+                    selectedIndicatorColor = MaterialTheme.colorScheme.primary,
+                    unselectedIconColor = MaterialTheme.colorScheme.onSurface,
+                    unselectedTextColor = MaterialTheme.colorScheme.onSurface.copy(0.8f),
+                    disabledIconColor = Color.Black,
+                    disabledTextColor = Color.Green
+                ),
                 selected = selected,
                 onClick = {
                     guardianNavController.navigate(tab.route) {

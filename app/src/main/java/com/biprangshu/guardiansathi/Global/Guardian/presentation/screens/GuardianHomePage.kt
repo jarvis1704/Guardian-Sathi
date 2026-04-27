@@ -123,7 +123,7 @@ fun GuardianHomeScreen(
         Surface(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(24.dp),
-            color = MaterialTheme.colorScheme.surfaceVariant
+            color = Color.Transparent
         ) {
             Column(
                 modifier = Modifier
