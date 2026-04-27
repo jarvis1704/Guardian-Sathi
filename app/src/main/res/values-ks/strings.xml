@@ -1,0 +1,226 @@
+<resources>
+    <string name="app_name">گارڈین ساتھی</string>
+
+    <string name="app_language">انگریزی - یوکے</string>
+
+    <string name="continue_button">جاری رکھو</string>
+    <string name="onboarding_1_T">تُہند بزرگ، ہمیشہ محفوظ</string>
+    <string name="onboarding_1_S">گارڈین ساتھی تُہند بزرگنہٕ 24/7 نگرانی کران، فوری ایمرجنسی الرٹس سان—یہاں تک کہ جب تُہۍ موجود نہٕ ہو۔</string>
+    <string name="onboarding_2_T">جُڑے رہو، پُرسکون رہو</string>
+    <string name="onboarding_2_S">دوائی یاد دہانیاں، بیٹری حالت، تہٕ مقامہٕ متعلق حقیقی وقت اپڈیٹس حاصل کریو۔ بنا بار بار فون کرنہٕ، یقین کرو کہ وہ محفوظ چھن۔</string>
+    <string name="onboarding_3_T">AI یُس واقعی حفاظت کران</string>
+    <string name="onboarding_3_S">ہمُند ذہین گارڈین فراڈ، غیر معمولی لین دین تہٕ ممکنہ خطرنہٕ سُچنہٕ کران تہٕ تُہنٛد خبردار کران۔</string>
+    <string name="onboarding_B1">اگلا</string>
+    <string name="onboarding_B2">چھوڑو</string>
+    <string name="onboarding_B3">شروع کریو</string>
+
+    <string name="login_title">تُہند ذاتی حفاظت یتھہٕ شروع چھُ</string>
+    <string name="login_sub">ذہین حفاظت، فوری الرٹس، تہٕ ذہنی سکون</string>
+    <string name="login_button">گوگل سان جاری رکھو</string>
+    <string name="registration_type_T">تُہۍ کون چھُ؟</string>
+    <string name="registration_type_S">آگے بڑھنہٕ خاظر پننہٕ رول منتخب کریو</string>
+    <string name="registration_type_elder_T">بہٕ چھُ بزرگ</string>
+    <string name="registration_type_elder_S">بہٕ چھُ چاہان کہ مےٚ خیال رکھا جائے تہٕ مےٚ پننی خودمختاری برقرار رہہٕ نرم رہنمائی سان</string>
+    <string name="registration_type_guardian_T">بہٕ چھُ گارڈین</string>
+    <string name="registration_type_guardian_S">بہٕ چھُ چاہان کینٛہہ کسُک خیال رکھنہٕ تہٕ ہر جگہہٕ سٕتۍ اُنٛد حالت دیکھنہٕ</string>
+
+    <string name="LinkGuardian_T">پننہٕ گارڈین سٕتۍ جُڑو</string>
+    <string name="LinkGuardian_S">پننہٕ گارڈین کٕہو یہ کوڈ اسکین کرنہٕ</string>
+    <string name="LinkGuardian_S2">بیک اپ کنکشن کوڈ</string>
+    <string name="LinkGuardian_S3">کنکشن خاظر انتظار…</string>
+    <string name="LinkGuardian_Share">لنک شیئر کریو</string>
+    <string name="LinkGuardian_Share_S">تُہند گارڈین ہُنٛد محفوظ دعوت نامہ ملہٕ یُس تُہند حفاظت تہٕ صحت اپڈیٹس دیکھنہٕ۔</string>
+    <string name="LinkGuardian_Share_Message">ہیے، بہٕ گارڈین ساتھی استعمال کران مےٚ حفاظت خاظر۔ کیا تُہۍ مےٚ گارڈین بننہٕ؟
+\nڈاؤن لوڈ کریو: Guardian Saathi: [Link]
+\n\nتُہۍ مےٚ حفاظت تہٕ صحت متعلق اپڈیٹس دیکھ سکو۔
+\nکوڈ: </string>
+
+    <string name="LinkElder_T">کسی بزرگ سٕتۍ جُڑو</string>
+    <string name="LinkElder_S">اُنٛد QR کوڈ یتھہٕ اسکین کریو</string>
+    <string name="LinkElder_S2">یا، کنکشن کوڈ درج کریو:</string>
+    <string name="LinkElder_Share">گیلری منز کوڈ اسکین کریو</string>
+    <string name="LinkElder_Share_cam">پننہٕ کیمرہ QR کوڈ پٕر رکھو</string>
+    <string name="LinkElder_Share_S">تُہۍ محفوظ طریقہ سان اُنٛد حفاظت تہٕ صحت اپڈیٹس دیکھنہٕ جُڑو۔</string>
+    <string name="LinkElder_button">ابھی جُڑو</string>
+    <string name="LinkElder_Cam_Per">QR کوڈ اسکین کرنہٕ خاظر کیمرہ اجازت ضروری</string>
+    <string name="LinkElder_Cam_Per_Button">اجازت دو</string>
+
+    <string name="ConnectionSuccess_H">کامیابی سان جُڑے</string>
+    <string name="ConnectionSuccess_D">تُہۍ اب جُڑے چھُ:</string>
+    <string name="ConnectionSuccess_retry">صحیح شخص نہٕ؟ دوبارہ کوشش کریو</string>
+
+    <string name="ElderPermission_button">اجازت دو</string>
+    <string name="ElderPermission_1_T">بیٹری پابندیاں بند کریو</string>
+    <string name="ElderPermission_1_S">GuardianSathi ہمیشہ فعال رکھو</string>
+    <string name="ElderPermission_1_R1">اینڈرائیڈ کٕہنہٕ پس منظر منز تُہند حفاظت بند کرنہٕ نٕہٕ دی۔ گرنہٕ معلوم تہٕ مقام فیچر بیٹری سیور سان بھی کام کرن۔</string>
+    <string name="ElderPermission_1_R2">اکھ اسکرین آو یُس GuardianSathi کٕہنہٕ غیر محدود چلنہٕ اجازت مانگہٕ۔ \"Allow\" پٕر ٹیپ کریو۔</string>
+    <string name="ElderPermission_1_D">یہ تُہند بیٹری پٕر خاص اثر نہٕ کران۔ صرف ایپ بند ہونہٕ روکد۔</string>
+
+    <string name="ElderPermission_2_T">نوٹیفیکیشن اجازت</string>
+    <string name="ElderPermission_2_S">دوسری ایپس منز فراڈ پہچانو</string>
+    <string name="ElderPermission_2_R1">WhatsApp تہٕ SMS نوٹیفیکیشنس اسکین کران مشکوک لنکس تہٕ فشنگ پیٹرنز خاظر۔</string>
+    <string name="ElderPermission_2_R2">اگلی اسکرین پٕر \"GuardianSathi\" تلاش کریو تہٕ آن کریو۔ \"Allow\" پٕر ٹیپ کریو۔</string>
+    <string name="ElderPermission_2_D">ہم صرف فراڈ پیٹرنز دیکھان۔ تُہند ذاتی پیغامات نہٕ پڑھان نہٕ محفوظ کران۔</string>
+
+    <string name="ElderPermission_3_T">مقام اجازت</string>
+    <string name="ElderPermission_3_S">تُہند حفاظت خاظر ضروری</string>
+    <string name="ElderPermission_3_R1">تُہند گارڈین تُہند مقام حقیقی وقت منز دیکھ سکہٕ۔</string>
+    <string name="ElderPermission_3_R2">SOS تہٕ جیو فینس الرٹس خاظر ضروری۔</string>
+    <string name="ElderPermission_3_D">مقام صرف تُہند گارڈین سان شیئر کران۔</string>
+
+    <string name="ElderPermission_4_T">ہمیشہ آن مقام</string>
+    <string name="ElderPermission_4_S">ایپ بند ہونے باوجود حفاظت</string>
+    <string name="ElderPermission_4_R1">جیو فینس الرٹس پس منظر منز بھی کام کران۔</string>
+    <string name="ElderPermission_4_R2">تُہند گارڈین خبردار اگر تُہۍ محفوظ علاقہ چھوڑو۔</string>
+    <string name="ElderPermission_4_D">یہ صرف حفاظت خاظر استعمال کران۔</string>
+
+    <string name="ElderPermission_5_T">اطلاع رہو</string>
+    <string name="ElderPermission_5_S">اہم الرٹس خاظر ضروری</string>
+    <string name="ElderPermission_5_R1">دوائی یاد دہانیاں تہٕ صحت الرٹس وقت پٕر ملن۔</string>
+    <string name="ElderPermission_5_R2">گارڈین فوری پیغامات بھیج سکہٕ۔</string>
+    <string name="ElderPermission_5_D">صرف اہم نوٹیفیکیشنس۔</string>
+
+    <string name="ElderPermission_6_T">گرنہٕ معلوم</string>
+    <string name="ElderPermission_6_S">ہم خاموشی سان نگرانی کران</string>
+    <string name="ElderPermission_6_R1">اچانک گرنہٕ پہچان تہٕ فوراً گارڈین خبردار۔</string>
+    <string name="ElderPermission_6_R2">حرکت پیٹرنز دیکھان غیر معمولی خاموشی خاظر۔</string>
+    <string name="ElderPermission_6_D">ڈیٹا صرف ڈیوائس پٕر۔</string>
+
+    <string name="ElderPermission_7_T">SMS حفاظت</string>
+    <string name="ElderPermission_7_S">فراڈ پیغامات خلاف تحفظ</string>
+    <string name="ElderPermission_7_R1">آنے والے پیغامات اسکین کران۔</string>
+    <string name="ElderPermission_7_R2">گارڈین خبردار کران۔</string>
+    <string name="ElderPermission_7_D">ڈیٹا لوکل پٕر۔</string>
+
+    <string name="ElderPermission_8_T">کال حفاظت</string>
+    <string name="ElderPermission_8_S">فراڈ کالز پہچانو</string>
+    <string name="ElderPermission_8_R1">مشکوک نمبرز پہچان۔</string>
+    <string name="ElderPermission_8_R2">گارڈین خبردار۔</string>
+    <string name="ElderPermission_8_D">ڈیٹا محفوظ۔</string>
+
+    <string name="ElderPermission_9_T">کال ہسٹری اجازت</string>
+    <string name="ElderPermission_9_S">مشکوک پیٹرنز پہچانو</string>
+    <string name="ElderPermission_9_R1">کال ہسٹری تجزیہ۔</string>
+    <string name="ElderPermission_9_R2">گارڈین مدد۔</string>
+    <string name="ElderPermission_9_D">لوکل تجزیہ۔</string>
+
+    <string name="ElderPermission_10_T">فل سکرین الرٹس</string>
+    <string name="ElderPermission_10_S">فوری الرٹس دیکھو</string>
+    <string name="ElderPermission_10_R1">لاک سکرین پٕر بھی الرٹس۔</string>
+    <string name="ElderPermission_10_R2">\"Allow full screen intents\" آن کریو۔</string>
+    <string name="ElderPermission_10_D">صرف ایمرجنسی خاظر۔</string>
+
+    <string name="ElderPermission_11_T">رابطہ اجازت</string>
+    <string name="ElderPermission_11_S">نامعلوم کالرز پہچانو</string>
+    <string name="ElderPermission_11_R1">کالز رابطہ لسٹ سان ملان۔</string>
+    <string name="ElderPermission_11_R2">گارڈین خبردار۔</string>
+    <string name="ElderPermission_11_D">ڈیٹا شیئر نہٕ کران۔</string>
+
+
+    <string name="ElderHome_1">اجازت ہند کمی</string>
+    <string name="ElderHome_2">تُہند حِفاظت چھُ</string>
+    <string name="ElderHome_3">اسسٹنٹ سٕتۍ گپ شپ کریو</string>
+    <string name="ElderHome_4">ایمرجنسی رابطہ</string>
+    <string name="ElderHome_5">SOS — مےٚ چھُ مدد ضرورت</string>
+    <string name="ElderHome_6">سیٹنگس</string>
+
+    <string name="EmergencyType_1">پولیس اسٹیشن</string>
+    <string name="EmergencyType_2">ہسپتال</string>
+    <string name="EmergencyType_3">فائر اسٹیشن</string>
+    <string name="EmergencyType_4">فارمیسی</string>
+
+    <string name="EmergencyCon_1">ذاتی</string>
+    <string name="EmergencyCon_2">اَہنٛد ذاتی رابطہ نٕہٕ چھُ شامل</string>
+    <string name="EmergencyCon_3">تُہند نزدیکی</string>
+    <string name="EmergencyCon_4">کال کریو</string>
+    <string name="EmergencyCon_5">قومی ہیلپ لائنز</string>
+    <string name="EmergencyCon_6">پولیس اسٹیشن</string>
+    <string name="EmergencyCon_7">ایمبولینس</string>
+    <string name="EmergencyCon_8">فائر بریگیڈ</string>
+    <string name="EmergencyCon_9">بزرگ ہیلپ لائن</string>
+    <string name="EmergencyCon_10">خواتین ہیلپ لائن</string>
+    <string name="EmergencyCon_11">نزدیکی ہیلپ لائنز تلاش کران</string>
+    <string name="EmergencyCon_12">کونہٕ نزدیکی ہیلپ لائن لبھی</string>
+
+    <string name="FallAlert_1">تُہۍ گرےٕ؟</string>
+    <string name="FallAlert_2">گارڈین چھُ خبردار کرنہٕ</string>
+    <string name="FallAlert_3">✅  مےٚ چھُ ٹھیک</string>
+    <string name="FallAlert_4">⚠️ گرنہٕ معلوم</string>
+    <string name="FallAlert_5">تُہۍ گرےٕ؟ گارڈین چھُ 10 سیکنڈن اندر خبردار کرنہٕ</string>
+
+    <string name="Settings_Title">سیٹنگس</string>
+    <string name="Settings_EmergencyContacts">ایمرجنسی رابطہ</string>
+    <string name="Settings_AddNewContact">نیا رابطہ شامل کریو</string>
+    <string name="Settings_Preferences">ترجیحات</string>
+    <string name="Settings_ChangeLanguage">زبان بدلو</string>
+    <string name="Settings_HelpSupport">مدد تہٕ سپورٹ حاصل کریو</string>
+    <string name="Settings_Logout">لاگ آؤٹ</string>
+    <string name="apply_button">لاگو کریو</string>
+
+    <string name="VoiceAssistant">آواز اسسٹنٹ</string>
+
+    <string name="guardian_home_title">گارڈین ساتھی</string>
+    <string name="guardian_home_monitoring_label">حالَت نگرانی</string>
+    <string name="guardian_home_status_safe">گھرس منز محفوظ</string>
+    <string name="guardian_home_battery_label">بیٹری</string>
+    <string name="guardian_home_location_label">مقام</string>
+    <string name="guardian_home_location_safe_zone">محفوظ علاقہ</string>
+    <string name="guardian_home_last_active_label">آخری سرگرمی</string>
+    <string name="guardian_home_upcoming_label">آگے</string>
+    <string name="guardian_home_confirm">تصدیق</string>
+    <string name="guardian_home_recent_activity">حالیہ سرگرمی</string>
+    <string name="guardian_home_see_all">ساری تاریخ وچھو</string>
+    <string name="guardian_home_just_now">اَبس</string>
+    <string name="guardian_home_mins_ago">%1$d منٹ پہلے</string>
+    <string name="guardian_home_hrs_ago">%1$d گھنٹے پہلے</string>
+
+    <string name="guardian_alerts_title">الرٹس</string>
+    <string name="guardian_alerts_filter_all">سب</string>
+    <string name="guardian_alerts_filter_critical">اہم</string>
+    <string name="guardian_alerts_filter_warning">وارننگ</string>
+    <string name="guardian_alerts_filter_info">معلومات</string>
+    <string name="guardian_alerts_empty">سب ٹھیک — کوئی الرٹ نہٕ</string>
+
+    <string name="guardian_reminders_title">یاد دہانیاں</string>
+    <string name="guardian_reminders_today">آجک ادویات شیڈول</string>
+    <string name="guardian_reminders_add">یاد دہانی شامل کریو</string>
+    <string name="guardian_reminders_schedule">آجک شیڈول</string>
+    <string name="guardian_reminders_status_done">مکمل</string>
+    <string name="guardian_reminders_status_upcoming">آگے</string>
+    <string name="guardian_reminders_status_missed">چھوٹ</string>
+
+    <string name="add_medicine_title">دوائی شامل کریو</string>
+    <string name="edit_medicine_title">دوائی ایڈٹ کریو</string>
+    <string name="medicine_name_label">دوائی ناو</string>
+    <string name="dosage_label">خوراک (مثلاً 1 گولی)</string>
+    <string name="instructions_label">ہدایات (اختیاری)</string>
+    <string name="select_time">وقت منتخب کریو</string>
+    <string name="add_time">وقت شامل کریو</string>
+    <string name="save_button">محفوظ کریو</string>
+    <string name="cancel_button">منسوخ</string>
+    <string name="delete_medicine_confirm">کیا تُہۍ یہ یاد دہانی ختم کرنہٕ چاہتے؟</string>
+
+    <string name="guardian_profile_title">پروفائل</string>
+    <string name="guardian_profile_guardian_badge">گارڈین</string>
+    <string name="guardian_profile_linked_elder">منسلک بزرگ</string>
+    <string name="guardian_profile_connection_active">کنکشن فعال</string>
+    <string name="guardian_profile_preferences">ترجیحات</string>
+    <string name="guardian_profile_notifications">نوٹیفیکیشن</string>
+    <string name="guardian_profile_change_language">زبان بدلو</string>
+    <string name="guardian_profile_help">مدد تہٕ سپورٹ</string>
+    <string name="guardian_profile_logout">لاگ آؤٹ</string>
+
+    <string name="guardian_navbar_title_1">ڈیش بورڈ</string>
+    <string name="guardian_navbar_title_2">یاد دہانیاں</string>
+    <string name="guardian_navbar_title_3">مقام</string>
+    <string name="guardian_navbar_title_4">الرٹس</string>
+    <string name="guardian_navbar_title_5">سیٹنگس</string>
+
+    <string name="guardian_geofence_1">جیو فینس سیٹنگس</string>
+    <string name="guardian_geofence_2">محفوظ علاقہ سیٹ کرنہٕ خاظر نقشہ پٕر ٹیپ کریو۔</string>
+    <string name="guardian_geofence_3">جیو فینس فعال کریو</string>
+    <string name="guardian_geofence_4">ریڈیئس</string>
+    <string name="guardian_geofence_5">کنفیگریشن محفوظ کریو</string>
+
+
+</resources>

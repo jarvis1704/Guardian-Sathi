@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import com.biprangshu.guardiansathi.Global.core.Language
 import com.biprangshu.guardiansathi.Global.core.LanguageUtils
 import com.biprangshu.guardiansathi.Global.core.setAppLanguage
+import com.biprangshu.guardiansathi.Global.presentation.onboarding.AppLanguages
 import com.biprangshu.guardiansathi.Global.presentation.onboarding.LanguageItem
 import com.biprangshu.guardiansathi.R
 
@@ -42,14 +43,10 @@ fun ChangeLanguagePage(
     onNavigateBack: () -> Unit
 ) {
     val context = LocalContext.current
-    val languages = listOf(
-        Language("English", "English", "en"),
-        Language("Hindi", "हिन्दी", "hi"),
-        Language("Assamese", "অসমীয়া", "as")
-    )
+
 
     val currentCode = LanguageUtils.getSavedLanguage(context)
-    val currentLanguage = languages.find { it.code == currentCode } ?: languages[0]
+    val currentLanguage = AppLanguages.find { it.code == currentCode } ?: AppLanguages[0]
     var selected by remember { mutableStateOf(currentLanguage) }
 
     Scaffold(
@@ -81,7 +78,7 @@ fun ChangeLanguagePage(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 item { Spacer(modifier = Modifier.height(8.dp)) }
-                languages.forEach { lang ->
+                AppLanguages.forEach { lang ->
                     item {
                         LanguageItem(
                             language = lang,

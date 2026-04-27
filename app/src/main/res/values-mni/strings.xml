@@ -1,0 +1,222 @@
+<resources>
+    <string name="app_name">Guardian Saathi</string>
+
+    <string name="app_language">ꯏꯪꯂꯤꯁ - UK</string>
+
+    <string name="continue_button">ꯃꯈꯥ ꯆꯠꯂꯨ</string>
+    <string name="onboarding_1_T">ꯑꯗꯣꯝꯒꯤ ꯑꯍꯥꯟꯕꯁꯤꯡ, ꯃꯇꯝ ꯄꯨꯝꯅꯃꯛ ꯉꯥꯛꯁꯤꯜꯂꯦ</string>
+    <string name="onboarding_1_S">Guardian Saathi ꯑꯁꯤꯅ ꯑꯗꯣꯝꯒꯤ ꯑꯍꯥꯟꯕ ꯄꯨꯡ 24/7 ꯃꯇꯝ ꯄꯨꯝꯅꯃꯛ ꯌꯦꯡꯁꯤꯜꯂꯤ, ꯁꯤꯜꯕꯥ ꯑꯄꯥꯛꯄ ꯍꯦꯟꯒꯠꯂꯛꯄ ꯑꯦꯂꯥꯔꯠ ꯑꯃꯁꯨꯡ ꯑꯗꯣꯝ ꯂꯩꯇ꯭ꯔꯕ ꯃꯇꯝꯗꯁꯨ.</string>
+    <string name="onboarding_2_T">ꯃꯔꯛ ꯌꯥꯎꯅ ꯂꯩꯌꯨ, ꯃꯅꯥ ꯄꯤꯌꯨ</string>
+    <string name="onboarding_2_S">ꯃꯦꯗꯤꯁꯤꯟ ꯔꯤꯃꯥꯏꯟꯗꯔ, ꯕꯦꯇꯔꯤ ꯁ꯭ꯇꯦꯇꯁ ꯑꯃꯁꯨꯡ ꯂꯣꯀꯦꯁꯟ ꯑꯗꯨꯒꯤ ꯃꯇꯝ ꯄꯨꯝꯅꯃꯛ ꯑꯄꯗꯦꯠ ꯐꯪꯂꯨ। ꯃꯈꯣꯏ ꯁꯨꯔꯛꯄ ꯌꯥꯕꯅꯤ ꯍꯥꯏꯕ ꯈꯪꯂꯨ ꯃꯍꯥꯛ ꯄꯨꯡ ꯃꯥꯏꯔꯛ ꯄꯣꯟ ꯀꯣꯜ ꯇꯧꯕ ꯇꯥꯕ ꯑꯃꯨꯛ.</string>
+    <string name="onboarding_3_T">ꯉꯥꯛꯁꯤꯜꯂꯛꯄ ꯑꯁꯦꯡꯕ AI</string>
+    <string name="onboarding_3_S">ꯑꯩꯈꯣꯏꯒꯤ ꯃꯁꯤꯡ ꯄꯥꯡꯊꯣꯛꯄ ꯒꯥꯔꯗꯤꯌꯟ ꯑꯁꯤꯅ ꯁ꯭ꯀꯥꯝ ꯈꯪꯕ, ꯑꯆꯨꯝꯕ ꯅꯠꯇꯕ ꯇ꯭ꯔꯥꯟꯖꯦꯛꯁꯟ ꯌꯦꯡꯁꯤꯜꯂꯤ, ꯑꯃꯁꯨꯡ ꯈꯨꯗꯣꯡꯆꯥꯕ ꯌꯥꯕ ꯍꯥꯏꯕ ꯑꯦꯂꯥꯔꯠ ꯄꯤ.</string>
+    <string name="onboarding_B1">ꯃꯈꯥ</string>
+    <string name="onboarding_B2">ꯆꯠꯂꯨ</string>
+    <string name="onboarding_B3">ꯍꯧꯗꯣꯛꯄꯤꯌꯨ</string>
+
+    <string name="login_title">ꯑꯗꯣꯝꯒꯤ ꯑꯃꯨꯛꯍꯟꯕ ꯉꯥꯛꯁꯤꯜꯂꯛꯄ ꯃꯐꯝ ꯃꯁꯤꯗ ꯍꯧꯔꯛꯄꯅꯤ</string>
+    <string name="login_sub">ꯁ꯭ꯃꯥꯔꯠ ꯉꯥꯛꯁꯤꯜꯂꯛꯄ, ꯃꯇꯝ ꯄꯨꯝꯅꯃꯛ ꯑꯦꯂꯥꯔꯠ, ꯑꯃꯁꯨꯡ ꯃꯅꯥ ꯄꯤꯕ</string>
+    <string name="login_button">Google ꯒꯥ ꯃꯈꯥ ꯆꯠꯂꯨ</string>
+    <string name="registration_type_T">ꯑꯗꯣꯝ ꯀꯔꯝꯅꯣ?</string>
+    <string name="registration_type_S">ꯃꯈꯥ ꯆꯠꯅꯕ ꯑꯗꯣꯝꯒꯤ ꯔꯣꯜ ꯈꯜꯂꯨ</string>
+    <string name="registration_type_elder_T">ꯑꯩ ꯑꯍꯥꯟꯕ ꯑꯃꯅꯤ</string>
+    <string name="registration_type_elder_S">ꯑꯩꯅ ꯉꯥꯛꯁꯤꯜꯂꯛꯄ ꯐꯪꯅꯕ ꯑꯃꯁꯨꯡ ꯃꯔꯨꯑꯣꯏꯕ ꯃꯇꯧ ꯃꯑꯣꯡ ꯍꯦꯟꯅ ꯂꯩꯅꯕ ꯄꯥꯝꯃꯤ</string>
+    <string name="registration_type_guardian_T">ꯑꯩ ꯒꯥꯔꯗꯤꯌꯟ ꯑꯃꯅꯤ</string>
+    <string name="registration_type_guardian_S">ꯑꯩꯅ ꯃꯤ ꯑꯃ ꯉꯥꯛꯁꯤꯜꯂꯛꯄ ꯇꯧꯅꯕ ꯑꯃꯁꯨꯡ ꯃꯐꯝ ꯈꯔꯗꯒꯤ ꯃꯈꯣꯏꯒꯤ ꯐꯤꯕꯝ ꯌꯦꯡꯅꯕ ꯄꯥꯝꯃꯤ</string>
+
+    <string name="LinkGuardian_T">ꯑꯗꯣꯝꯒꯤ Guardian ꯒꯥ ꯃꯔꯛ ꯌꯥꯎꯅꯕ</string>
+    <string name="LinkGuardian_S">ꯑꯗꯣꯝꯒꯤ guardian ꯗ ꯀꯣꯗ ꯑꯁꯤ ꯁ꯭ꯀꯦꯟ ꯇꯧꯅꯕ ꯍꯥꯌꯨ</string>
+    <string name="LinkGuardian_S2">ꯕꯦꯛꯑꯞ ꯀꯅꯦꯛꯁꯟ ꯀꯣꯗ</string>
+    <string name="LinkGuardian_S3">ꯃꯔꯛ ꯌꯥꯎꯅꯕ ꯌꯥꯝꯅ ꯉꯥꯛꯂꯤ...</string>
+    <string name="LinkGuardian_Share">ꯂꯤꯡꯛ ꯁꯦꯌꯥꯔ ꯇꯧ</string>
+    <string name="LinkGuardian_Share_S">ꯑꯗꯣꯝꯒꯤ guardian ꯑꯁꯤꯅ ꯑꯗꯣꯝꯒꯤ ꯉꯥꯛꯁꯤꯜꯂꯛꯄ ꯑꯃꯁꯨꯡ ꯍꯦꯜꯊ ꯑꯄꯗꯦꯠ ꯌꯦꯡꯅꯕ ꯁꯦꯛꯌꯨꯔ ꯏꯟꯚꯥꯏꯇꯦꯁꯟ ꯐꯪꯉꯅꯤ.</string>
+    <string name="LinkGuardian_Share_Message">ꯍꯦꯏ, ꯑꯩꯅ Guardian Saathi ꯑꯁꯤ ꯑꯩꯒꯤ ꯉꯥꯛꯁꯤꯜꯂꯛꯄꯒꯤ ꯃꯐꯝꯗ ꯁꯤꯖꯤꯟꯅꯔꯤ। ꯑꯩꯒꯤ guardian ꯑꯣꯏꯅ ꯃꯔꯛ ꯌꯥꯎꯒꯅꯨ?
+        \nGuardian Saathi ꯗꯥꯎꯟꯂꯣꯗ ꯇꯧ: [Link]
+        \n\nꯑꯗꯣꯝꯅ ꯑꯩꯒꯤ ꯉꯥꯛꯁꯤꯜꯂꯛꯄ ꯑꯃꯁꯨꯡ ꯍꯦꯜꯊ ꯑꯄꯗꯦꯠ ꯌꯦꯡꯅꯕ ꯌꯥꯒꯅꯤ।
+        \nCode: </string>
+
+    <string name="LinkElder_T">ꯑꯍꯥꯟꯕ ꯑꯃꯒ ꯃꯔꯛ ꯌꯥꯎꯅꯕ</string>
+    <string name="LinkElder_S">ꯃꯈꯣꯏꯒꯤ QR ꯀꯣꯗ ꯃꯁꯤꯗ ꯁ꯭ꯀꯦꯟ ꯇꯧꯔꯨ</string>
+    <string name="LinkElder_S2">ꯅꯠꯇ꯭ꯔꯒ, ꯃꯔꯛ ꯌꯥꯎꯅꯕ ꯀꯣꯗ ꯃꯁꯤꯗ ꯆꯪꯁꯤꯟꯕꯤꯌꯨ:</string>
+    <string name="LinkElder_Share">Gallery ꯗꯒꯤ ꯀꯣꯗ ꯁ꯭ꯀꯦꯟ ꯇꯧ</string>
+    <string name="LinkElder_Share_cam">ꯑꯗꯣꯝꯒꯤ ꯀꯦꯃꯔꯥꯗ QR ꯀꯣꯗ ꯑꯗꯨ ꯌꯦꯡꯂꯨ</string>
+    <string name="LinkElder_Share_S">ꯑꯗꯣꯝ ꯃꯈꯣꯏꯒꯤ ꯉꯥꯛꯁꯤꯜꯂꯛꯄ ꯑꯃꯁꯨꯡ ꯍꯦꯜꯊ ꯑꯄꯗꯦꯠ ꯌꯦꯡꯅꯕ ꯁꯦꯛꯌꯨꯔ ꯃꯔꯛ ꯌꯥꯎꯒꯅꯤ.</string>
+    <string name="LinkElder_button">ꯍꯧꯖꯤꯛ ꯃꯔꯛ ꯌꯥꯎ</string>
+    <string name="LinkElder_Cam_Per">QR ꯀꯣꯗ ꯁ꯭ꯀꯦꯟ ꯇꯧꯅꯕ ꯀꯦꯃꯔꯥ ꯑꯦꯛꯁꯦꯁ ꯆꯠꯊꯔꯤ</string>
+    <string name="LinkElder_Cam_Per_Button">ꯄꯔꯃꯤꯁꯟ ꯄꯤꯌꯨ</string>
+
+    <string name="ConnectionSuccess_H">ꯃꯔꯛ ꯌꯥꯎꯅꯕ ꯃꯥꯌ ꯄꯥꯛꯅ ꯂꯣꯏꯔꯦ</string>
+    <string name="ConnectionSuccess_D">ꯍꯧꯖꯤꯛ ꯑꯗꯣꯝ ꯃꯔꯛ ꯌꯥꯎꯔꯦ:</string>
+    <string name="ConnectionSuccess_retry">ꯑꯁꯤ ꯑꯗꯣꯝ ꯄꯥꯝꯕ ꯃꯤ ꯑꯗꯨ ꯅꯠꯇ꯭ꯔꯥ? ꯑꯃꯨꯛ ꯍꯣꯠꯅꯕꯤꯌꯨ</string>
+
+    <string name="ElderPermission_button">ꯄꯔꯃꯤꯁꯟ ꯌꯥꯍꯟꯕꯤꯌꯨ</string>
+    <string name="ElderPermission_1_T">Battery Restriction ꯂꯧꯊꯣꯛꯎ</string>
+    <string name="ElderPermission_1_S">GuardianSathi ꯃꯇꯝ ꯄꯨꯝꯅꯃꯛ ꯑꯦꯛꯇꯤꯚ ꯇꯧꯍꯜꯂꯨ</string>
+    <string name="ElderPermission_1_R1">Android ꯑꯁꯤꯅ ꯕꯦꯛꯒ꯭ꯔꯥꯎꯟꯗ ꯑꯗꯨꯗ ꯑꯗꯣꯝꯒꯤ ꯉꯥꯛꯁꯤꯜꯂꯛꯄ ꯂꯦꯞꯄ ꯊꯤꯡꯅꯕ ꯉꯥꯛꯄꯤ। Battery saver ꯍꯥꯡꯕ ꯃꯇꯝꯗꯁꯨ fall detection ꯑꯃꯁꯨꯡ location ꯁꯤꯡ ꯇꯧꯒꯅꯤ.</string>
+    <string name="ElderPermission_1_R2">GuardianSathi ꯑꯁꯤ unrestricted ꯑꯣꯏꯅ ꯆꯠꯅꯕ ꯌꯥꯍꯟꯕ ꯁ꯭ꯀ꯭ꯔꯤꯟ ꯑꯃ ꯎꯠꯂꯛꯀꯅꯤ। “Allow” ꯇꯥꯞ ꯇꯧꯔꯨ.</string>
+    <string name="ElderPermission_1_D">ꯑꯁꯤꯅ ꯑꯗꯣꯝꯒꯤ battery life ꯗ ꯌꯥꯝꯅ ꯑꯐꯦꯛ ꯇꯧꯗꯦ। App ꯑꯁꯤ Android ꯅ force-stop ꯇꯧꯕ ꯈꯛꯇ ꯉꯥꯛꯄꯤ.</string>
+
+    <string name="ElderPermission_2_T">Notification Access</string>
+    <string name="ElderPermission_2_S">ꯑꯇꯣꯞꯄ app ꯁꯤꯡꯗ scam ꯈꯪꯕ</string>
+    <string name="ElderPermission_2_R1">WhatsApp ꯑꯃꯁꯨꯡ SMS app ꯁꯤꯡꯒꯤ notification ꯁꯤꯡ ꯁ꯭ꯀꯦꯟ ꯇꯧꯅ suspicious link ꯑꯃꯁꯨꯡ phishing pattern ꯈꯪꯉꯅꯤ.</string>
+    <string name="ElderPermission_2_R2">ꯃꯈꯥꯒꯤ ꯁ꯭ꯀ꯭ꯔꯤꯟꯗ “GuardianSathi” ꯂꯤꯁ꯭ꯇꯗ ꯊꯤꯕꯤꯌꯨ ꯑꯃꯁꯨꯡ on ꯇꯧꯔꯨ। Confirmation popup ꯗ “Allow” ꯇꯥꯞ ꯇꯧꯔꯨ.</string>
+    <string name="ElderPermission_2_D">ꯑꯩꯈꯣꯏꯅ notification ꯁꯤꯡ scam pattern ꯈꯪꯅꯕ ꯈꯛꯇ analyze ꯇꯧꯏ। ꯑꯗꯣꯝꯒꯤ personal message ꯁꯤꯡ ꯃꯍꯥꯛ ꯄꯥꯔꯦ ꯑꯃꯁꯨꯡ store ꯇꯧꯗꯦ.</string>
+
+    <string name="ElderPermission_3_T">Location Access</string>
+    <string name="ElderPermission_3_S">ꯑꯗꯣꯝꯒꯤ ꯉꯥꯛꯁꯤꯜꯂꯛꯄꯒꯤ ꯃꯇꯨꯡ ꯆꯠꯊꯔꯤ</string>
+    <string name="ElderPermission_3_R1">ꯑꯗꯣꯝꯒꯤ guardian ꯑꯁꯤꯅ ꯑꯗꯣꯝꯒꯤ location ꯃꯇꯝ ꯄꯨꯝꯅꯃꯛ ꯌꯦꯡꯉꯅꯤ.</string>
+    <string name="ElderPermission_3_R2">Emergency SOS ꯑꯃꯁꯨꯡ geo-fence alert ꯁꯤꯡꯒꯤ ꯃꯇꯨꯡ ꯆꯠꯊꯔꯤ.</string>
+    <string name="ElderPermission_3_D">ꯑꯗꯣꯝꯒꯤ location ꯑꯁꯤ trusted guardian ꯈꯛꯇ share ꯇꯧꯏ। ꯑꯩꯈꯣꯏꯅ ꯑꯇꯣꯞꯄ ꯃꯤ ꯑꯃꯗ share ꯇꯧꯗꯦ.</string>
+
+    <string name="ElderPermission_4_T">Always-On Location</string>
+    <string name="ElderPermission_4_S">App ꯂꯣꯏꯁꯤꯟꯕ ꯃꯇꯝꯗꯁꯨ ꯉꯥꯛꯁꯤꯜꯂꯛꯄ</string>
+    <string name="ElderPermission_4_R1">GuardianSathi ꯕꯦꯛꯒ꯭ꯔꯥꯎꯟꯗ ꯑꯣꯏꯕ ꯃꯇꯝꯗꯁꯨ geo-fence alert ꯁꯤꯡ ꯇꯧꯒꯅꯤ.</string>
+    <string name="ElderPermission_4_R2">ꯑꯗꯣꯝ ꯁꯦꯞ ꯑꯦꯔꯤꯌꯥ ꯗꯒꯤ ꯆꯠꯂꯛꯄ ꯃꯇꯝꯗ guardian ꯑꯁꯤꯅ notification ꯐꯪꯉꯅꯤ.</string>
+    <string name="ElderPermission_4_D">Background location ꯑꯁꯤ safety monitoring ꯈꯛꯇ ꯁꯤꯖꯤꯟꯅꯩ ꯑꯃꯁꯨꯡ ꯀꯩꯁꯨꯝ ꯇꯧꯗꯦ.</string>
+
+    <string name="ElderPermission_5_T">Notification ꯐꯪꯍꯜꯂꯨ</string>
+    <string name="ElderPermission_5_S">ꯃꯔꯨꯑꯣꯏꯕ alert ꯁꯤꯡ ꯑꯗꯣꯝꯒꯤ attention ꯄꯥꯝꯃꯤ</string>
+    <string name="ElderPermission_5_R1">Medicine reminder ꯑꯃꯁꯨꯡ health check-in alert ꯁꯤꯡ ꯃꯇꯝꯗ ꯐꯪꯉꯅꯤ.</string>
+    <string name="ElderPermission_5_R2">ꯑꯗꯣꯝꯒꯤ guardian ꯑꯁꯤꯅ urgent message ꯁꯤꯡ ꯃꯇꯝ ꯄꯨꯝꯅꯃꯛ ꯊꯥꯗꯣꯛꯄꯥ ꯌꯥꯏ.</string>
+    <string name="ElderPermission_5_D">ꯑꯩꯈꯣꯏꯅ ꯑꯗꯣꯝꯒꯤ ꯉꯥꯛꯁꯤꯜꯂꯛꯄ ꯑꯃꯁꯨꯡ health ꯗ ꯃꯔꯨꯑꯣꯏꯕ notification ꯈꯛꯇ ꯊꯥꯗꯣꯛꯏ.</string>
+
+    <string name="ElderPermission_6_T">Fall Detection</string>
+    <string name="ElderPermission_6_S">ꯑꯩꯈꯣꯏꯅ ꯑꯗꯣꯝ ꯃꯑꯣꯡ ꯍꯦꯟꯅ ꯌꯦꯡꯁꯤꯜꯂꯤ</string>
+    <string name="ElderPermission_6_R1">ꯍꯠꯂꯛꯄ fall ꯈꯪꯕ ꯑꯃꯁꯨꯡ guardian ꯗ ꯃꯇꯝ ꯄꯨꯝꯅꯃꯛ alert ꯄꯤ.</string>
+    <string name="ElderPermission_6_R2">Fall ꯑꯃ ꯍꯧꯔꯛꯄ ꯃꯇꯝꯗ unusual stillness ꯈꯪꯅꯕ movement pattern ꯌꯦꯡꯁꯤꯜꯂꯤ.</string>
+    <string name="ElderPermission_6_D">Motion data ꯑꯁꯤ ꯑꯗꯣꯝꯒꯤ device ꯗ process ꯇꯧꯏ ꯑꯃꯁꯨꯡ server ꯑꯃꯗ upload ꯇꯧꯗꯦ.</string>
+
+    <string name="ElderPermission_7_T">SMS Protection</string>
+    <string name="ElderPermission_7_S">Scam message ꯁꯤꯡꯗꯒꯤ ꯉꯥꯛꯄꯤ</string>
+    <string name="ElderPermission_7_R1">Incoming message ꯁꯤꯡ known scam ꯑꯃꯁꯨꯡ phishing pattern ꯈꯪꯅꯕ ꯁ꯭ꯀꯦꯟ ꯇꯧꯏ.</string>
+    <string name="ElderPermission_7_R2">Fraud ꯑꯃꯗ accidental respond ꯇꯧꯕ ꯃꯃꯥꯡ guardian ꯗ alert ꯄꯤ.</string>
+    <string name="ElderPermission_7_D">ꯑꯗꯣꯝꯒꯤ message ꯁꯤꯡ device ꯗ local ꯑꯣꯏꯅ scan ꯇꯧꯏ। ꯑꯩꯈꯣꯏꯅ personal SMS ꯄꯥꯔꯦ ꯑꯃꯁꯨꯡ store ꯇꯧꯗꯦ.</string>
+
+    <string name="ElderPermission_8_T">Call Protection</string>
+    <string name="ElderPermission_8_S">Scam call ꯁꯤꯡ ꯃꯇꯝ ꯄꯨꯝꯅꯃꯛ ꯈꯪꯕ</string>
+    <string name="ElderPermission_8_R1">Known scam ꯑꯃꯁꯨꯡ fraud number ꯁꯤꯡꯗꯒꯤ incoming call ꯈꯪꯉꯅꯤ.</string>
+    <string name="ElderPermission_8_R2">Suspicious call ꯐꯪꯂꯛꯄ ꯃꯇꯝꯗ guardian ꯗ alert ꯄꯤ.</string>
+    <string name="ElderPermission_8_D">Call data ꯑꯁꯤ scam detection ꯈꯛꯇ ꯁꯤꯖꯤꯟꯅꯩ ꯑꯃꯁꯨꯡ store ꯑꯃꯁꯨꯡ share ꯇꯧꯗꯦ.</string>
+
+    <string name="ElderPermission_9_T">Call History Access</string>
+    <string name="ElderPermission_9_S">Suspicious call pattern ꯈꯪꯕ</string>
+    <string name="ElderPermission_9_R1">Call history analyze ꯇꯧꯅ fraud number ꯁꯤꯡꯗ repeated contact ꯈꯪꯉꯅꯤ.</string>
+    <string name="ElderPermission_9_R2">Guardian ꯑꯁꯤꯅ unusual calling pattern ꯁꯤꯡ ꯃꯇꯝ ꯆꯥꯅꯕ ꯈꯪꯍꯜꯂꯤ.</string>
+    <string name="ElderPermission_9_D">Call history ꯑꯁꯤ local ꯑꯣꯏꯅ analyze ꯇꯧꯏ ꯑꯃꯁꯨꯡ flagged entry ꯈꯛꯇ guardian ꯗ share ꯇꯧꯏ.</string>
+
+    <string name="ElderPermission_10_T">Full Screen Alert</string>
+    <string name="ElderPermission_10_S">Emergency alert ꯁꯤꯡ ꯃꯇꯝ ꯄꯨꯝꯅꯃꯛ ꯎꯔꯨ</string>
+    <string name="ElderPermission_10_R1">Phone ꯂꯣꯛ ꯑꯣꯏꯕ ꯃꯇꯝꯗ ꯅꯠꯇ꯭ꯔꯒ app ꯑꯇꯣꯞꯄ ꯍꯥꯡꯕ ꯃꯇꯝꯗ SOS ꯑꯃꯁꯨꯡ fall detection alert ꯁꯤꯡ screen ꯗ ꯎꯠꯂꯛꯄ ꯌꯥꯏ.</string>
+    <string name="ElderPermission_10_R2">ꯃꯈꯥꯒꯤ screen ꯗ “GuardianSathi” ꯊꯤꯕꯤꯌꯨ ꯑꯃꯁꯨꯡ “Allow full screen intents” on ꯇꯧꯔꯨ.</string>
+    <string name="ElderPermission_10_D">ꯑꯁꯤ critical safety alert ꯈꯛꯇ ꯁꯤꯖꯤꯟꯅꯩ। GuardianSathi ꯑꯁꯤ advertisement ꯅꯠꯇ꯭ꯔꯒ unnecessary popup ꯎꯠꯄ ꯇꯧꯗꯦ.</string>
+
+    <string name="ElderPermission_11_T">Contacts Access</string>
+    <string name="ElderPermission_11_S">Unknown caller ꯈꯪꯕ</string>
+    <string name="ElderPermission_11_R1">Incoming ꯑꯃꯁꯨꯡ outgoing call ꯁꯤꯡ contacts ꯒꯥ compare ꯇꯧꯅ unknown number ꯁꯤꯡ ꯈꯪꯉꯅꯤ.</string>
+    <string name="ElderPermission_11_R2">Unsaved number ꯑꯃꯗ repeated contact ꯈꯪꯂꯛꯄ ꯃꯇꯝꯗ guardian ꯗ alert ꯄꯤ.</string>
+    <string name="ElderPermission_11_D">Contacts ꯁꯤꯡ device ꯗ local ꯑꯣꯏꯅ check ꯇꯧꯏ scam detection ꯒꯤ ꯃꯇꯨꯡꯗ। ꯑꯁꯤ upload ꯑꯃꯁꯨꯡ share ꯇꯧꯗꯦ.</string>
+
+    <string name="ElderHome_1">Permission ꯂꯩꯇꯦ</string>
+    <string name="ElderHome_2">ꯑꯗꯣꯝ ꯉꯥꯛꯁꯤꯜꯂꯛꯂꯦ</string>
+    <string name="ElderHome_3">Assistant ꯒꯥ ꯋꯥ ꯁꯟꯅꯨ</string>
+    <string name="ElderHome_4">Emergency Contact ꯁꯤꯡ</string>
+    <string name="ElderHome_5">SOS — ꯑꯩꯗ ꯃꯇꯦꯡ ꯄꯥꯝꯃꯤ</string>
+    <string name="ElderHome_6">Settings</string>
+
+    <string name="EmergencyType_1">ꯄꯣꯂꯤꯁ ꯁ꯭ꯇꯦꯁꯟ</string>
+    <string name="EmergencyType_2">ꯍꯣꯁꯄꯤꯇꯜ</string>
+    <string name="EmergencyType_3">ꯐꯥꯏꯔ ꯁ꯭ꯇꯦꯁꯟ</string>
+    <string name="EmergencyType_4">ꯐꯥꯔꯃꯦꯁꯤ</string>
+
+    <string name="EmergencyCon_1">ꯄꯔꯁꯅꯜ</string>
+    <string name="EmergencyCon_2">ꯍꯧꯖꯤꯛ ꯐꯥꯎꯕ personal contact ꯍꯥꯞꯆꯤꯜꯂꯦ</string>
+    <string name="EmergencyCon_3">ꯑꯗꯣꯝꯒꯤ ꯃꯐꯝ ꯅꯛꯄ</string>
+    <string name="EmergencyCon_4">ꯀꯣꯜ ꯇꯧ</string>
+    <string name="EmergencyCon_5">ꯅꯦꯁꯅꯜ ꯍꯦꯜꯄꯂꯥꯏꯟ</string>
+    <string name="EmergencyCon_6">ꯄꯣꯂꯤꯁ ꯁ꯭ꯇꯦꯁꯟ</string>
+    <string name="EmergencyCon_7">ꯑꯦꯝꯕꯨꯂꯦꯟꯁ</string>
+    <string name="EmergencyCon_8">ꯐꯥꯏꯔ ꯕ꯭ꯔꯤꯒꯦꯗ</string>
+    <string name="EmergencyCon_9">ꯑꯍꯥꯟꯕ ꯍꯦꯜꯄꯂꯥꯏꯟ</string>
+    <string name="EmergencyCon_10">ꯅꯨꯄꯤ ꯍꯦꯜꯄꯂꯥꯏꯟ</string>
+    <string name="EmergencyCon_11">ꯃꯐꯝ ꯅꯛꯄ helpline ꯁꯤꯡ ꯐꯪꯉꯅꯕ ꯍꯣꯠꯅꯔꯤ</string>
+    <string name="EmergencyCon_12">ꯃꯐꯝ ꯅꯛꯄ helpline ꯁꯤꯡ ꯐꯪꯗꯦ</string>
+
+    <string name="FallAlert_1">ꯑꯗꯣꯝ ꯈꯨꯡꯂꯛꯄꯥ?</string>
+    <string name="FallAlert_2">Guardian ꯗ ꯑꯦꯂꯥꯔꯠ ꯄꯤꯕꯒꯤ ꯃꯃꯥꯡꯗ</string>
+    <string name="FallAlert_3">✅ ꯑꯩ ꯌꯥꯝꯅ ꯆꯪꯂꯤ</string>
+    <string name="FallAlert_4">⚠️ ꯈꯨꯡꯂꯛꯄ ꯈꯪꯂꯛꯄ</string>
+    <string name="FallAlert_5">ꯑꯗꯣꯝ ꯈꯨꯡꯂꯛꯄꯥ? Guardian ꯗ 10 second ꯒꯤ ꯃꯃꯥꯡꯗ alert ꯄꯤꯒꯅꯤ</string>
+
+    <string name="Settings_Title">ꯁꯦꯇꯤꯡꯁ</string>
+    <string name="Settings_EmergencyContacts">Emergency Contact ꯁꯤꯡ</string>
+    <string name="Settings_AddNewContact">ꯑꯅꯧꯕ Contact ꯍꯥꯞꯄꯤꯌꯨ</string>
+    <string name="Settings_Preferences">Preference ꯁꯤꯡ</string>
+    <string name="Settings_ChangeLanguage">ꯂꯣꯟ ꯍꯣꯡꯗꯣꯛꯎ</string>
+    <string name="Settings_HelpSupport">ꯃꯇꯦꯡ ꯑꯃꯁꯨꯡ Support ꯐꯪꯉꯨ</string>
+    <string name="Settings_Logout">ꯂꯣꯒꯑꯥꯎꯠ</string>
+    <string name="apply_button">ꯑꯦꯄ꯭ꯂꯥꯏ ꯇꯧ</string>
+
+    <string name="VoiceAssistant">ꯚꯣꯏꯁ ꯑꯦꯁꯤꯁꯇꯦꯟꯠ</string>
+
+    <string name="guardian_home_title">Guardian Saathi</string>
+    <string name="guardian_home_monitoring_label">ꯍꯧꯖꯤꯛ ꯃꯣꯅꯤꯇꯔ ꯇꯧꯔꯤ</string>
+    <string name="guardian_home_status_safe">ꯌꯨꯝꯗ ꯁꯨꯔꯛꯄ</string>
+    <string name="guardian_home_battery_label">Battery</string>
+    <string name="guardian_home_location_label">Location</string>
+    <string name="guardian_home_location_safe_zone">ꯁꯦꯞ ꯖꯣꯟ</string>
+    <string name="guardian_home_last_active_label">ꯑꯔꯣꯏꯕ Active</string>
+    <string name="guardian_home_upcoming_label">ꯃꯈꯥꯗ ꯂꯥꯛꯀꯗꯕ</string>
+    <string name="guardian_home_confirm">ꯌꯥꯍꯜꯂꯨ</string>
+    <string name="guardian_home_recent_activity">ꯅꯪꯒꯤ ꯍꯧꯖꯤꯛ Activity</string>
+    <string name="guardian_home_see_all">ꯍꯤꯁ꯭ꯇꯣꯔꯤ ꯄꯨꯝꯅꯃꯛ ꯌꯦꯡꯉꯨ</string>
+    <string name="guardian_home_just_now">ꯍꯧꯖꯤꯛ</string>
+    <string name="guardian_home_mins_ago">%1$d ꯃꯤꯅꯤꯠ ꯃꯃꯥꯡ</string>
+    <string name="guardian_home_hrs_ago">%1$d ꯍꯥꯎꯔ ꯃꯃꯥꯡ</string>
+
+    <string name="guardian_alerts_title">ꯑꯦꯂꯥꯔꯠꯁ</string>
+    <string name="guardian_alerts_filter_all">ꯄꯨꯝꯅꯃꯛ</string>
+    <string name="guardian_alerts_filter_critical">ꯌꯥꯝꯅ ꯃꯔꯨꯑꯣꯏꯕ</string>
+    <string name="guardian_alerts_filter_warning">ꯋꯥꯔꯅꯤꯡ</string>
+    <string name="guardian_alerts_filter_info">ꯏꯟꯐꯣ</string>
+    <string name="guardian_alerts_empty">ꯄꯨꯝꯅꯃꯛ ꯆꯪꯂꯤ — alert ꯂꯩꯇꯦ</string>
+
+    <string name="guardian_reminders_title">ꯔꯤꯃꯥꯏꯟꯗꯔꯁ</string>
+    <string name="guardian_reminders_today">ꯉꯁꯤꯒꯤ medicine schedule</string>
+    <string name="guardian_reminders_add">ꯔꯤꯃꯥꯏꯟꯗꯔ ꯍꯥꯞꯄꯤꯌꯨ</string>
+    <string name="guardian_reminders_schedule">ꯉꯁꯤꯒꯤ Schedule</string>
+    <string name="guardian_reminders_status_done">ꯂꯣꯏꯔꯦ</string>
+    <string name="guardian_reminders_status_upcoming">ꯃꯈꯥꯗ ꯂꯥꯛꯀꯗꯕ</string>
+    <string name="guardian_reminders_status_missed">ꯊꯥꯗꯣꯛꯄ ꯌꯥꯝꯂꯦ</string>
+    <string name="add_medicine_title">Medicine ꯍꯥꯞꯄꯤꯌꯨ</string>
+    <string name="edit_medicine_title">Medicine ꯁꯦꯝꯒꯠꯄꯤꯌꯨ</string>
+    <string name="medicine_name_label">Medicine ꯃꯤꯡ</string>
+    <string name="dosage_label">Dosage (ꯈꯣꯠꯄ 1 pill ꯒꯨꯝꯅ)</string>
+    <string name="instructions_label">Instruction (Optional)</string>
+    <string name="select_time">ꯃꯇꯝ ꯈꯜꯂꯨ</string>
+    <string name="add_time">ꯃꯇꯝ ꯍꯥꯞꯄꯤꯌꯨ</string>
+    <string name="save_button">ꯁꯦꯚ ꯇꯧ</string>
+    <string name="cancel_button">ꯀꯦꯟꯁꯦꯜ</string>
+    <string name="delete_medicine_confirm">ꯑꯗꯣꯝꯅ reminder ꯑꯁꯤ delete ꯇꯧꯅꯕ ꯁꯨꯔꯛꯄꯥ?</string>
+
+    <string name="guardian_profile_title">ꯄ꯭ꯔꯣꯐꯥꯏꯜ</string>
+    <string name="guardian_profile_guardian_badge">Guardian</string>
+    <string name="guardian_profile_linked_elder">ꯃꯔꯛ ꯌꯥꯎꯕ Elder</string>
+    <string name="guardian_profile_connection_active">Connection Active</string>
+    <string name="guardian_profile_preferences">Preference ꯁꯤꯡ</string>
+    <string name="guardian_profile_notifications">Notification ꯁꯤꯡ</string>
+    <string name="guardian_profile_change_language">ꯂꯣꯟ ꯍꯣꯡꯗꯣꯛꯎ</string>
+    <string name="guardian_profile_help">ꯃꯇꯦꯡ &amp; Support</string>
+    <string name="guardian_profile_logout">ꯂꯣꯒꯑꯥꯎꯠ</string>
+
+    <string name="guardian_navbar_title_1">Dashboard</string>
+    <string name="guardian_navbar_title_2">Reminder ꯁꯤꯡ</string>
+    <string name="guardian_navbar_title_3">Location</string>
+    <string name="guardian_navbar_title_4">Alert ꯁꯤꯡ</string>
+    <string name="guardian_navbar_title_5">Settings</string>
+
+    <string name="guardian_geofence_1">Geofence Setting ꯁꯤꯡ</string>
+    <string name="guardian_geofence_2">Safe zone center ꯁꯦꯠ ꯇꯧꯅꯕ map ꯗ tap ꯇꯧꯔꯨ.</string>
+    <string name="guardian_geofence_3">Geofence ꯌꯥꯍꯜꯂꯨ</string>
+    <string name="guardian_geofence_4">Radius</string>
+    <string name="guardian_geofence_5">Configuration ꯁꯦꯚ ꯇꯧ</string>
+</resources>

@@ -30,20 +30,39 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.biprangshu.guardiansathi.Global.core.Language
 import com.biprangshu.guardiansathi.Global.core.isGestureNav
-import com.biprangshu.guardiansathi.Global.core.setAppLanguage
 import com.biprangshu.guardiansathi.R
+
+val AppLanguages = listOf(
+    Language("English", "English", "en"),
+    Language("Hindi", "हिन्दी", "hi"),
+    Language("Assamese", "অসমীয়া", "as"),
+    Language("Bengali", "বাংলা", "bn"),
+    Language("Dogri", "डोगरी", "doi"),
+    Language("Gujarati", "ગુજરાતી", "gu"),
+    Language("Kannada", "ಕನ್ನಡ", "kn"),
+    Language("Kashmiri", "کٲشُر", "ks"),
+    Language("Konkani", "कोंकणी", "kok"),
+    Language("Maithili", "मैथिली", "mai"),
+    Language("Malayalam", "മലയാളം", "ml"),
+    Language("Manipuri", "ꯃꯤꯇꯩꯂꯣꯟ", "mni"),
+    Language("Marathi", "मराठी", "mr"),
+    Language("Nepali", "नेपाली", "ne"),
+    Language("Odia", "ଓଡ଼ିଆ", "or"),
+    Language("Punjabi", "ਪੰਜਾਬੀ", "pa"),
+    Language("Santali", "ᱥᱟᱱᱛᱟᱲᱤ", "sat"),
+    Language("Sindhi", "سنڌي", "sd"),
+    Language("Tamil", "தமிழ்", "ta"),
+    Language("Telugu", "తెలుగు", "te"),
+    Language("Urdu", "اردو", "ur"),
+)
 
 @Composable
 fun LanguageSelectionPage(
     onContinue: (String) -> Unit
 ) {
-    val languages = listOf(
-        Language("English", "English", "en"),
-        Language("Hindi", "हिन्दी", "hi"),
-        Language("Assamese", "অসমীয়া", "as")
-    )
 
-    var selected by remember { mutableStateOf(languages[0]) }
+
+    var selected by remember { mutableStateOf(AppLanguages[0]) }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -76,7 +95,7 @@ fun LanguageSelectionPage(
                     modifier = Modifier.weight(1f)
                 ) {
                     // Language List
-                    languages.forEach { lang ->
+                    AppLanguages.forEach { lang ->
                         item {
                             LanguageItem(
                                 language = lang,

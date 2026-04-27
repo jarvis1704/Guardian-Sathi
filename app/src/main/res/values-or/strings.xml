@@ -1,0 +1,226 @@
+<resources>
+    <string name="app_name">ଗାର୍ଡିଆନ ସାଥୀ</string>
+
+    <string name="app_language">ଇଂରାଜୀ - UK</string>
+
+    <string name="continue_button">ଜାରି ରଖନ୍ତୁ</string>
+    <string name="onboarding_1_T">ଆପଣଙ୍କ ବୃଦ୍ଧମାନେ, ସଦା ସୁରକ୍ଷିତ</string>
+    <string name="onboarding_1_S">ଗାର୍ଡିଆନ ସାଥୀ ଆପଣଙ୍କ ବୃଦ୍ଧ ପ୍ରିୟଜନଙ୍କୁ 24/7 ନିରୀକ୍ଷଣ କରେ ଏବଂ ଆପତ୍କାଳୀନ ସତର୍କତା ଦେଇଥାଏ—ଯେତେବେଳେ ଆପଣ ସାଙ୍ଗରେ ନଥାନ୍ତି ମଧ୍ୟ।</string>
+    <string name="onboarding_2_T">ଯୋଗାଯୋଗରେ ରୁହନ୍ତୁ, ନିଶ୍ଚିନ୍ତ ରୁହନ୍ତୁ</string>
+    <string name="onboarding_2_S">ଔଷଧ ସ୍ମରଣ, ବ୍ୟାଟେରୀ ସ୍ଥିତି ଏବଂ ଅବସ୍ଥାନ ସମ୍ପର୍କରେ ତୁରନ୍ତ ଅଦ୍ୟତନ ପାଆନ୍ତୁ। ବାରମ୍ବାର ଫୋନ୍ କରିବା ବିନା ତାଙ୍କ ସୁରକ୍ଷା ବିଷୟରେ ଜାଣନ୍ତୁ।</string>
+    <string name="onboarding_3_T">ସତ୍ୟରେ ସୁରକ୍ଷା ଦେଇଥିବା AI</string>
+    <string name="onboarding_3_S">ଆମ ସ୍ମାର୍ଟ ଗାର୍ଡିଆନ ଠକେଇ ଚିହ୍ନଟ କରେ, ଅସାମାନ୍ୟ ଲେନଦେନ ନିରୀକ୍ଷଣ କରେ ଏବଂ ସମ୍ଭାବ୍ୟ ବିପଦ ବିଷୟରେ ସତର୍କ କରେ।</string>
+    <string name="onboarding_B1">ପରବର୍ତ୍ତୀ</string>
+    <string name="onboarding_B2">ଛାଡନ୍ତୁ</string>
+    <string name="onboarding_B3">ଆରମ୍ଭ କରନ୍ତୁ</string>
+
+    <string name="login_title">ଆପଣଙ୍କ ବ୍ୟକ୍ତିଗତ ସୁରକ୍ଷା ଏଠାରୁ ଆରମ୍ଭ ହୁଏ</string>
+    <string name="login_sub">ସ୍ମାର୍ଟ ସୁରକ୍ଷା, ତୁରନ୍ତ ସତର୍କତା ଏବଂ ନିଶ୍ଚିନ୍ତତା</string>
+    <string name="login_button">Google ସହିତ ଜାରି ରଖନ୍ତୁ</string>
+    <string name="registration_type_T">ଆପଣ କିଏ?</string>
+    <string name="registration_type_S">ଜାରି ରଖିବା ପାଇଁ ନିଜ ଭୂମିକା ବାଛନ୍ତୁ</string>
+    <string name="registration_type_elder_T">ମୁଁ ଜଣେ ବୃଦ୍ଧ</string>
+    <string name="registration_type_elder_S">ମୁଁ ଯତ୍ନ ପାଇବାକୁ ଚାହେଁ ଏବଂ ସହଜ ନିର୍ଦ୍ଦେଶନା ସହିତ ସ୍ୱାଧୀନତା ରକ୍ଷା କରିବାକୁ ଚାହେଁ</string>
+    <string name="registration_type_guardian_T">ମୁଁ ଜଣେ ଗାର୍ଡିଆନ</string>
+    <string name="registration_type_guardian_S">ମୁଁ କାହାକୁ ଯତ୍ନ କରିବାକୁ ଏବଂ କୋଥାରୁ ମଧ୍ୟ ତାଙ୍କ ସୁସ୍ଥତା ନିରୀକ୍ଷଣ କରିବାକୁ ଚାହେଁ</string>
+
+    <string name="LinkGuardian_T">ଆପଣଙ୍କ ଗାର୍ଡିଆନ ସହିତ ଯୋଡନ୍ତୁ</string>
+    <string name="LinkGuardian_S">ଏହି କୋଡ୍‌କୁ ସ୍କାନ୍ କରିବାକୁ ଆପଣଙ୍କ ଗାର୍ଡିଆନକୁ କହନ୍ତୁ</string>
+    <string name="LinkGuardian_S2">ବ୍ୟାକଅପ୍ ସଂଯୋଗ କୋଡ୍</string>
+    <string name="LinkGuardian_S3">ସଂଯୋଗ ପାଇଁ ଅପେକ୍ଷା କରୁଛି...</string>
+    <string name="LinkGuardian_Share">ଲିଙ୍କ ସେୟାର କରନ୍ତୁ</string>
+    <string name="LinkGuardian_Share_S">ଆପଣଙ୍କ ଗାର୍ଡିଆନ ଆପଣଙ୍କ ସୁରକ୍ଷା ଏବଂ ସ୍ୱାସ୍ଥ୍ୟ ଅଦ୍ୟତନ ନିରୀକ୍ଷଣ ପାଇଁ ସୁରକ୍ଷିତ ଆମନ୍ତ୍ରଣ ପାଇବେ।</string>
+    <string name="LinkGuardian_Share_Message">ହେଁ, ମୁଁ ମୋର ସୁରକ୍ଷା ପାଇଁ Guardian Saathi ବ୍ୟବହାର କରୁଛି। ଆପଣ ମୋର ଗାର୍ଡିଆନ ଭାବେ ଯୋଡିହେବେ କି?
+    \nGuardian Saathi ଡାଉନଲୋଡ୍ କରନ୍ତୁ: [Link]
+    \n\nଆପଣ ମୋର ସୁରକ୍ଷା ଏବଂ ସ୍ୱାସ୍ଥ୍ୟ ସମ୍ପର୍କରେ ଅଦ୍ୟତନ ପାଇପାରିବେ।
+    \nCode: </string>
+
+    <string name="LinkElder_T">ଜଣେ ବୃଦ୍ଧଙ୍କ ସହିତ ଯୋଡନ୍ତୁ</string>
+    <string name="LinkElder_S">ତାଙ୍କର QR କୋଡ୍ ଏଠାରେ ସ୍କାନ୍ କରନ୍ତୁ</string>
+    <string name="LinkElder_S2">ନହେଲେ, ଏଠାରେ ସଂଯୋଗ କୋଡ୍ ଲେଖନ୍ତୁ:</string>
+    <string name="LinkElder_Share">ଗ୍ୟାଲେରୀରୁ କୋଡ୍ ସ୍କାନ୍ କରନ୍ତୁ</string>
+    <string name="LinkElder_Share_cam">QR କୋଡ୍‌ ଉପରେ କ୍ୟାମେରା ଧରନ୍ତୁ</string>
+    <string name="LinkElder_Share_S">ତାଙ୍କ ସୁରକ୍ଷା ଏବଂ ସ୍ୱାସ୍ଥ୍ୟ ଅଦ୍ୟତନ ନିରୀକ୍ଷଣ ପାଇଁ ଆପଣ ସୁରକ୍ଷିତ ଭାବରେ ସଂଯୋଗ ହେବେ।</string>
+    <string name="LinkElder_button">ଏବେ ଯୋଡନ୍ତୁ</string>
+    <string name="LinkElder_Cam_Per">QR କୋଡ୍ ସ୍କାନ୍ କରିବା ପାଇଁ କ୍ୟାମେରା ଅନୁମତି ଆବଶ୍ୟକ</string>
+    <string name="LinkElder_Cam_Per_Button">ଅନୁମତି ଦିଅନ୍ତୁ</string>
+
+    <string name="ConnectionSuccess_H">ସଫଳତାର ସହିତ ସଂଯୋଗ ହୋଇଛି</string>
+    <string name="ConnectionSuccess_D">ଆପଣ ବର୍ତ୍ତମାନ ଯୋଡିତ:</string>
+    <string name="ConnectionSuccess_retry">ଠିକ୍ ବ୍ୟକ୍ତି ନୁହେଁ କି? ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ</string>
+
+    <string name="ElderPermission_button">ଅନୁମତି ଦିଅନ୍ତୁ</string>
+    <string name="ElderPermission_1_T">ବ୍ୟାଟେରୀ ସୀମାବଦ୍ଧତା ବନ୍ଦ କରନ୍ତୁ</string>
+    <string name="ElderPermission_1_S">GuardianSathi କୁ ସଦା ସକ୍ରିୟ ରଖନ୍ତୁ</string>
+    <string name="ElderPermission_1_R1">Android ଦ୍ୱାରା ପୃଷ୍ଠଭୂମିରେ ଆପଣଙ୍କ ସୁରକ୍ଷା ବନ୍ଦ ହେବାକୁ ରୋକେ। ବ୍ୟାଟେରୀ ସେଭର୍ ଚାଲୁ ଥିଲେ ମଧ୍ୟ ଫଲ୍ ଡିଟେକ୍ସନ ଏବଂ ଅବସ୍ଥାନ କାମ କରେ।</string>
+    <string name="ElderPermission_1_R2">GuardianSathi କୁ ଅନିୟନ୍ତ୍ରିତ ଭାବରେ ଚଲାଇବାକୁ ଅନୁମତି ଦେବା ପାଇଁ ଏକ ସ୍କ୍ରିନ୍ ଦେଖାଯିବ। “Allow” ଉପରେ ଟାପ୍ କରନ୍ତୁ।</string>
+    <string name="ElderPermission_1_D">ଏହା ଆପଣଙ୍କ ବ୍ୟାଟେରୀ ଜୀବନକୁ ବହୁତ ପ୍ରଭାବିତ କରେନାହିଁ। ଏହା କେବଳ Android କୁ ଆପ୍ ବନ୍ଦ କରିବାରୁ ରୋକେ।</string>
+
+    <string name="ElderPermission_2_T">ନୋଟିଫିକେସନ୍ ଆକ୍ସେସ୍</string>
+    <string name="ElderPermission_2_S">ଅନ୍ୟ ଆପ୍‌ରେ ଠକେଇ ଚିହ୍ନଟ କରନ୍ତୁ</string>
+    <string name="ElderPermission_2_R1">WhatsApp ଏବଂ SMS ଆପ୍‌ର ନୋଟିଫିକେସନ୍‌ଗୁଡିକୁ ସନ୍ଦେହଜନକ ଲିଙ୍କ ଏବଂ ଫିସିଂ ପ୍ୟାଟର୍ନ ପାଇଁ ସ୍କାନ୍ କରେ।</string>
+    <string name="ElderPermission_2_R2">ପରବର୍ତ୍ତୀ ସ୍କ୍ରିନରେ “GuardianSathi” ଖୋଜି ଏହାକୁ ଚାଲୁ କରନ୍ତୁ। ପୁଷ୍ଟିକରଣ ପପଅପ୍‌ରେ “Allow” ଟାପ୍ କରନ୍ତୁ।</string>
+    <string name="ElderPermission_2_D">ଆମେ କେବଳ ଠକେଇ ପ୍ୟାଟର୍ନ ପାଇଁ ନୋଟିଫିକେସନ୍ ବିଶ୍ଳେଷଣ କରୁଛୁ। ଆପଣଙ୍କ ବ୍ୟକ୍ତିଗତ ସନ୍ଦେଶ ପଢାଯାଏ କିମ୍ବା ସଂରକ୍ଷଣ ହୁଏ ନାହିଁ।</string>
+
+    <string name="ElderPermission_3_T">ଅବସ୍ଥାନ ଆକ୍ସେସ୍</string>
+    <string name="ElderPermission_3_S">ଆପଣଙ୍କ ସୁରକ୍ଷା ପାଇଁ ଆବଶ୍ୟକ</string>
+    <string name="ElderPermission_3_R1">ଆପଣଙ୍କ ଗାର୍ଡିଆନ ଆପଣଙ୍କ ଅବସ୍ଥାନକୁ ତୁରନ୍ତ ଦେଖିପାରିବେ।</string>
+    <string name="ElderPermission_3_R2">ଆପତ୍କାଳୀନ SOS ଏବଂ ଜିଓ-ଫେନ୍ସ ସତର୍କତା ପାଇଁ ଆବଶ୍ୟକ।</string>
+    <string name="ElderPermission_3_D">ଆପଣଙ୍କ ଅବସ୍ଥାନ କେବଳ ଆପଣଙ୍କ ବିଶ୍ୱସ୍ତ ଗାର୍ଡିଆନ ସହିତ ଅଂଶୀଦାର କରାଯାଏ। ଆମେ ଏହାକୁ ଅନ୍ୟ କାହା ସହିତ ଭାଗ କରୁନାହୁଁ।</string>
+
+    <string name="ElderPermission_4_T">ସଦା-ଚାଲୁ ଅବସ୍ଥାନ</string>
+    <string name="ElderPermission_4_S">ଆପ୍ ବନ୍ଦ ଥିଲେ ମଧ୍ୟ ସୁରକ୍ଷା</string>
+    <string name="ElderPermission_4_R1">GuardianSathi ପୃଷ୍ଠଭୂମିରେ ଥିଲେ ମଧ୍ୟ ଜିଓ-ଫେନ୍ସ ସତର୍କତା କାମ କରେ।</string>
+    <string name="ElderPermission_4_R2">ଆପଣ ସୁରକ୍ଷିତ ଅଞ୍ଚଳ ଛାଡ଼ିଲେ ଆପଣଙ୍କ ଗାର୍ଡିଆନକୁ ସୂଚନା ମିଳିବ।</string>
+    <string name="ElderPermission_4_D">ପୃଷ୍ଠଭୂମି ଅବସ୍ଥାନ କେବଳ ସୁରକ୍ଷା ନିରୀକ୍ଷଣ ପାଇଁ ବ୍ୟବହୃତ ହୁଏ ଏବଂ କେବେ ବିକ୍ରି କିମ୍ବା ଅଂଶୀଦାର କରାଯାଏ ନାହିଁ।</string>
+
+    <string name="ElderPermission_5_T">ସୂଚିତ ରୁହନ୍ତୁ</string>
+    <string name="ElderPermission_5_S">ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ସତର୍କତା ଆପଣଙ୍କ ଧ୍ୟାନ ଚାହିଁଥାଏ</string>
+    <string name="ElderPermission_5_R1">ଔଷଧ ସ୍ମରଣ ଏବଂ ସ୍ୱାସ୍ଥ୍ୟ ଯାଞ୍ଚ ସତର୍କତା ସମୟରେ ପାଆନ୍ତୁ।</string>
+    <string name="ElderPermission_5_R2">ଆପଣଙ୍କ ଗାର୍ଡିଆନ ତୁରନ୍ତ ଜରୁରୀ ସନ୍ଦେଶ ପଠାଇପାରିବେ।</string>
+    <string name="ElderPermission_5_D">ଆମେ କେବଳ ଆପଣଙ୍କ ସୁରକ୍ଷା ଏବଂ ସ୍ୱାସ୍ଥ୍ୟ ସମ୍ବନ୍ଧୀୟ ସୂଚନା ପଠାଉଛୁ।</string>
+
+    <string name="ElderPermission_6_T">ପଡ଼ିଯିବା ଚିହ୍ନଟ</string>
+    <string name="ElderPermission_6_S">ଆମେ ନିରବରେ ଆପଣଙ୍କୁ ନଜର ରଖୁଛୁ</string>
+    <string name="ElderPermission_6_R1">ହଠାତ୍ ପଡ଼ିଯିବାକୁ ଚିହ୍ନଟ କରି ତୁରନ୍ତ ଆପଣଙ୍କ ଗାର୍ଡିଆନକୁ ସୂଚନା ଦେଏ।</string>
+    <string name="ElderPermission_6_R2">ପଡ଼ିଯିବା ପରେ ଅସାମାନ୍ୟ ନିଷ୍କ୍ରିୟତା ଚିହ୍ନଟ ପାଇଁ ଗତିବିଧି ପ୍ୟାଟର୍ନ ନିରୀକ୍ଷଣ କରେ।</string>
+    <string name="ElderPermission_6_D">ମୋସନ୍ ଡାଟା ଆପଣଙ୍କ ଡିଭାଇସ୍‌ରେ ପ୍ରୋସେସ୍ ହୁଏ ଏବଂ କୌଣସି ସର୍ଭରକୁ ଅପଲୋଡ୍ ହୁଏ ନାହିଁ।</string>
+
+    <string name="ElderPermission_7_T">SMS ସୁରକ୍ଷା</string>
+    <string name="ElderPermission_7_S">ଠକେଇ ସନ୍ଦେଶରୁ ସୁରକ୍ଷିତ ରୁହନ୍ତୁ</string>
+    <string name="ElderPermission_7_R1">ଆସୁଥିବା ସନ୍ଦେଶଗୁଡ଼ିକୁ ଜଣାଶୁଣା ଠକେଇ ଏବଂ ଫିସିଂ ପ୍ୟାଟର୍ନ ପାଇଁ ସ୍କାନ୍ କରେ।</string>
+    <string name="ElderPermission_7_R2">ଆପଣ ଭୁଲରେ ପ୍ରତିକ୍ରିୟା ଦେବା ପୂର୍ବରୁ ଆପଣଙ୍କ ଗାର୍ଡିଆନକୁ ସତର୍କ କରାଯାଏ।</string>
+    <string name="ElderPermission_7_D">ଆପଣଙ୍କ ସନ୍ଦେଶଗୁଡ଼ିକ ଡିଭାଇସ୍‌ରେ ଲୋକାଲ୍ ଭାବରେ ସ୍କାନ୍ ହୁଏ। ଆମେ କେବେ ମଧ୍ୟ ବ୍ୟକ୍ତିଗତ SMS ପଢ଼ୁ କିମ୍ବା ସଂରକ୍ଷଣ କରୁନାହୁଁ।</string>
+
+    <string name="ElderPermission_8_T">କଲ୍ ସୁରକ୍ଷା</string>
+    <string name="ElderPermission_8_S">ତୁରନ୍ତ ଠକେଇ କଲ୍ ଚିହ୍ନଟ କରନ୍ତୁ</string>
+    <string name="ElderPermission_8_R1">ଜଣାଶୁଣା ଠକେଇ ଏବଂ ଧୋକା ନମ୍ବରରୁ ଆସୁଥିବା କଲ୍ ଚିହ୍ନଟ କରେ।</string>
+    <string name="ElderPermission_8_R2">ସନ୍ଦେହଜନକ କଲ୍ ଆସିଲେ ଆପଣଙ୍କ ଗାର୍ଡିଆନକୁ ସୂଚନା ଦିଆଯାଏ।</string>
+    <string name="ElderPermission_8_D">କଲ୍ ଡାଟା କେବଳ ଠକେଇ ଚିହ୍ନଟ ପାଇଁ ବ୍ୟବହୃତ ହୁଏ ଏବଂ ସଂରକ୍ଷଣ କିମ୍ବା ଅଂଶୀଦାର କରାଯାଏ ନାହିଁ।</string>
+
+    <string name="ElderPermission_9_T">କଲ୍ ଇତିହାସ ଆକ୍ସେସ୍</string>
+    <string name="ElderPermission_9_S">ସନ୍ଦେହଜନକ କଲ୍ ପ୍ୟାଟର୍ନ ଚିହ୍ନଟ କରନ୍ତୁ</string>
+    <string name="ElderPermission_9_R1">ପୁନରାବୃତ୍ତି ଠକେଇ ନମ୍ବର ସମ୍ପର୍କ ଚିହ୍ନଟ ପାଇଁ କଲ୍ ଇତିହାସ ବିଶ୍ଳେଷଣ କରେ।</string>
+    <string name="ElderPermission_9_R2">ସମୟ ସହିତ ଅସାମାନ୍ୟ କଲ୍ ପ୍ୟାଟର୍ନ ବୁଝିବାରେ ଆପଣଙ୍କ ଗାର୍ଡିଆନକୁ ସାହାଯ୍ୟ କରେ।</string>
+    <string name="ElderPermission_9_D">କଲ୍ ଇତିହାସ ଲୋକାଲ୍ ଭାବରେ ବିଶ୍ଳେଷଣ ହୁଏ ଏବଂ କେବଳ ଚିହ୍ନଟ ଏଣ୍ଟ୍ରିମାନେ ଗାର୍ଡିଆନ ସହିତ ଅଂଶୀଦାର ହୁଅନ୍ତି।</string>
+
+    <string name="ElderPermission_10_T">ପୁରା ସ୍କ୍ରିନ୍ ସତର୍କତା</string>
+    <string name="ElderPermission_10_S">ଆପତ୍କାଳୀନ ସତର୍କତା ତୁରନ୍ତ ଦେଖନ୍ତୁ</string>
+    <string name="ElderPermission_10_R1">ଫୋନ୍ ଲକ୍ ଥିଲେ କିମ୍ବା ଅନ୍ୟ ଆପ୍ ଖୋଲା ଥିଲେ ମଧ୍ୟ SOS ଏବଂ ପଡ଼ିଯିବା ସତର୍କତା ସ୍କ୍ରିନ୍‌ରେ ଦେଖାଯିବ।</string>
+    <string name="ElderPermission_10_R2">ପରବର୍ତ୍ତୀ ସ୍କ୍ରିନରେ “GuardianSathi” ଖୋଜି “Allow full screen intents” ଚାଲୁ କରନ୍ତୁ।</string>
+    <string name="ElderPermission_10_D">ଏହା କେବଳ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ସୁରକ୍ଷା ସତର୍କତା ପାଇଁ ବ୍ୟବହୃତ ହୁଏ। GuardianSathi କେବେ ମଧ୍ୟ ବିଜ୍ଞାପନ କିମ୍ବା ଅନାବଶ୍ୟକ ପପଅପ୍ ଦେଖାଇବ ନାହିଁ।</string>
+
+    <string name="ElderPermission_11_T">ସମ୍ପର୍କ ଆକ୍ସେସ୍</string>
+    <string name="ElderPermission_11_S">ଅଜଣା କଲର୍ ଚିହ୍ନଟ କରନ୍ତୁ</string>
+    <string name="ElderPermission_11_R1">ଆସୁଥିବା ଏବଂ ଯାଉଥିବା କଲ୍‌ଗୁଡ଼ିକୁ ଆପଣଙ୍କ ସମ୍ପର୍କ ସହିତ ମେଳ କରି ଠକେଇକାରୀ ନମ୍ବର ଚିହ୍ନଟ କରେ।</string>
+    <string name="ElderPermission_11_R2">ସେଭ୍ ନହୋଇଥିବା ନମ୍ବରରୁ ପୁନରାବୃତ୍ତି ସମ୍ପର୍କ ହେଲେ ଆପଣଙ୍କ ଗାର୍ଡିଆନକୁ ସତର୍କ କରାଯାଏ।</string>
+    <string name="ElderPermission_11_D">ଆପଣଙ୍କ ସମ୍ପର୍କଗୁଡ଼ିକ କେବଳ ଡିଭାଇସ୍‌ରେ ଲୋକାଲ୍ ଭାବରେ ଯାଞ୍ଚ ହୁଏ। ସେଗୁଡ଼ିକ କେବେ ଅପଲୋଡ୍ କିମ୍ବା ଅଂଶୀଦାର ହୁଏ ନାହିଁ।</string>
+
+    <string name="ElderHome_1">ଅନୁମତି ଅନୁପସ୍ଥିତ</string>
+    <string name="ElderHome_2">ଆପଣ ସୁରକ୍ଷିତ ଅଛନ୍ତି</string>
+    <string name="ElderHome_3">ସହାୟକ ସହିତ କଥାହୁଅନ୍ତୁ</string>
+    <string name="ElderHome_4">ଆପତ୍କାଳୀନ ସମ୍ପର୍କ</string>
+    <string name="ElderHome_5">SOS — ମୋତେ ସହାୟତା ଦରକାର</string>
+    <string name="ElderHome_6">ସେଟିଂସ୍</string>
+
+    <string name="EmergencyType_1">ପୋଲିସ୍ ଷ୍ଟେସନ୍</string>
+    <string name="EmergencyType_2">ହସ୍ପିଟାଲ୍</string>
+    <string name="EmergencyType_3">ଅଗ୍ନିଶମ କେନ୍ଦ୍ର</string>
+    <string name="EmergencyType_4">ଔଷଧ ଦୋକାନ</string>
+
+    <string name="EmergencyCon_1">ବ୍ୟକ୍ତିଗତ</string>
+    <string name="EmergencyCon_2">ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି ବ୍ୟକ୍ତିଗତ ସମ୍ପର୍କ ଯୋଡାଯାଇନାହିଁ</string>
+    <string name="EmergencyCon_3">ଆପଣଙ୍କ ସମୀପରେ</string>
+    <string name="EmergencyCon_4">କଲ୍ କରନ୍ତୁ</string>
+    <string name="EmergencyCon_5">ଜାତୀୟ ହେଲ୍ପଲାଇନ୍</string>
+    <string name="EmergencyCon_6">ପୋଲିସ୍ ଷ୍ଟେସନ୍</string>
+    <string name="EmergencyCon_7">ଆମ୍ବୁଲାନ୍ସ</string>
+    <string name="EmergencyCon_8">ଅଗ୍ନିଶମ ବାହିନୀ</string>
+    <string name="EmergencyCon_9">ବୃଦ୍ଧ ହେଲ୍ପଲାଇନ୍</string>
+    <string name="EmergencyCon_10">ମହିଳା ହେଲ୍ପଲାଇନ୍</string>
+    <string name="EmergencyCon_11">ନିକଟସ୍ଥ ହେଲ୍ପଲାଇନ୍ ଆଣାଯାଉଛି</string>
+    <string name="EmergencyCon_12">ନିକଟରେ କୌଣସି ହେଲ୍ପଲାଇନ୍ ମିଳିଲା ନାହିଁ</string>
+
+    <string name="FallAlert_1">ଆପଣ ପଡ଼ିଗଲେ କି?</string>
+    <string name="FallAlert_2">ଗାର୍ଡିଆନକୁ ସୂଚନା ଦିଆଯିବ</string>
+    <string name="FallAlert_3">✅ ମୁଁ ଠିକ୍ ଅଛି</string>
+    <string name="FallAlert_4">⚠️ ପଡ଼ିଯିବା ଚିହ୍ନଟ</string>
+    <string name="FallAlert_5">ଆପଣ ପଡ଼ିଗଲେ କି? 10 ସେକେଣ୍ଡରେ ଗାର୍ଡିଆନକୁ ସୂଚନା ଯିବ</string>
+
+    <string name="Settings_Title">ସେଟିଂସ୍</string>
+    <string name="Settings_EmergencyContacts">ଆପତ୍କାଳୀନ ସମ୍ପର୍କ</string>
+    <string name="Settings_AddNewContact">ନୂତନ ସମ୍ପର୍କ ଯୋଡନ୍ତୁ</string>
+    <string name="Settings_Preferences">ପସନ୍ଦ</string>
+    <string name="Settings_ChangeLanguage">ଭାଷା ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
+    <string name="Settings_HelpSupport">ସହାୟତା ଏବଂ ସମର୍ଥନ ପାଆନ୍ତୁ</string>
+    <string name="Settings_Logout">ଲଗ୍ଆଉଟ୍</string>
+    <string name="apply_button">ପ୍ରୟୋଗ କରନ୍ତୁ</string>
+
+    <string name="VoiceAssistant">ଭଏସ୍ ସହାୟକ</string>
+
+    <!-- Guardian Home Screen -->
+    <string name="guardian_home_title">ଗାର୍ଡିଆନ ସାଥୀ</string>
+    <string name="guardian_home_monitoring_label">ବର୍ତ୍ତମାନ ନିରୀକ୍ଷଣରେ</string>
+    <string name="guardian_home_status_safe">ଘରେ ସୁରକ୍ଷିତ</string>
+    <string name="guardian_home_battery_label">ବ୍ୟାଟେରୀ</string>
+    <string name="guardian_home_location_label">ଅବସ୍ଥାନ</string>
+    <string name="guardian_home_location_safe_zone">ସୁରକ୍ଷିତ ଅଞ୍ଚଳ</string>
+    <string name="guardian_home_last_active_label">ଶେଷ ସକ୍ରିୟତା</string>
+    <string name="guardian_home_upcoming_label">ପରବର୍ତ୍ତୀ</string>
+    <string name="guardian_home_confirm">ନିଶ୍ଚିତ କରନ୍ତୁ</string>
+    <string name="guardian_home_recent_activity">ସମ୍ପ୍ରତି କାର୍ଯ୍ୟକଳାପ</string>
+    <string name="guardian_home_see_all">ସମସ୍ତ ଇତିହାସ ଦେଖନ୍ତୁ</string>
+    <string name="guardian_home_just_now">ଏମିତିକି</string>
+    <string name="guardian_home_mins_ago">%1$d ମିନିଟ୍ ପୂର୍ବେ</string>
+    <string name="guardian_home_hrs_ago">%1$d ଘଣ୍ଟା ପୂର୍ବେ</string>
+
+    <!-- Guardian Alerts Screen -->
+    <string name="guardian_alerts_title">ସତର୍କତା</string>
+    <string name="guardian_alerts_filter_all">ସମସ୍ତ</string>
+    <string name="guardian_alerts_filter_critical">ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ</string>
+    <string name="guardian_alerts_filter_warning">ଚେତାବନୀ</string>
+    <string name="guardian_alerts_filter_info">ସୂଚନା</string>
+    <string name="guardian_alerts_empty">ସବୁ ଠିକ୍ ଅଛି — କୌଣସି ସତର୍କତା ନାହିଁ</string>
+
+    <!-- Guardian Reminders Screen -->
+    <string name="guardian_reminders_title">ସ୍ମରଣ</string>
+    <string name="guardian_reminders_today">ଆଜିର ଔଷଧ ସୂଚୀ</string>
+    <string name="guardian_reminders_add">ସ୍ମରଣ ଯୋଡନ୍ତୁ</string>
+    <string name="guardian_reminders_schedule">ଆଜିର ସୂଚୀ</string>
+    <string name="guardian_reminders_status_done">ସମ୍ପୂର୍ଣ୍ଣ</string>
+    <string name="guardian_reminders_status_upcoming">ଆସୁଛି</string>
+    <string name="guardian_reminders_status_missed">ଛୁଟିଗଲା</string>
+    <string name="add_medicine_title">ଔଷଧ ଯୋଡନ୍ତୁ</string>
+    <string name="edit_medicine_title">ଔଷଧ ସମ୍ପାଦନ କରନ୍ତୁ</string>
+    <string name="medicine_name_label">ଔଷଧର ନାମ</string>
+    <string name="dosage_label">ଡୋଜ୍ (ଉଦାହରଣ: 1 ଟି ଗୋଳି)</string>
+    <string name="instructions_label">ନିର୍ଦ୍ଦେଶାବଳୀ (ଇଚ୍ଛାନୁସାରେ)</string>
+    <string name="select_time">ସମୟ ବାଛନ୍ତୁ</string>
+    <string name="add_time">ସମୟ ଯୋଡନ୍ତୁ</string>
+    <string name="save_button">ସେଭ୍ କରନ୍ତୁ</string>
+    <string name="cancel_button">ବାତିଲ୍ କରନ୍ତୁ</string>
+    <string name="delete_medicine_confirm">ଆପଣ ନିଶ୍ଚିତ କି ଏହି ସ୍ମରଣକୁ ଡିଲିଟ୍ କରିବାକୁ ଚାହୁଁଛନ୍ତି?</string>
+
+    <!-- Guardian Profile Screen -->
+    <string name="guardian_profile_title">ପ୍ରୋଫାଇଲ୍</string>
+    <string name="guardian_profile_guardian_badge">ଗାର୍ଡିଆନ</string>
+    <string name="guardian_profile_linked_elder">ଯୋଡାଯାଇଥିବା ବୃଦ୍ଧ</string>
+    <string name="guardian_profile_connection_active">ସଂଯୋଗ ସକ୍ରିୟ</string>
+    <string name="guardian_profile_preferences">ପସନ୍ଦ</string>
+    <string name="guardian_profile_notifications">ସୂଚନା</string>
+    <string name="guardian_profile_change_language">ଭାଷା ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
+    <string name="guardian_profile_help">ସହାୟତା ଏବଂ ସମର୍ଥନ</string>
+    <string name="guardian_profile_logout">ଲଗ୍ଆଉଟ୍</string>
+
+    <string name="guardian_navbar_title_1">ଡ୍ୟାଶବୋର୍ଡ</string>
+    <string name="guardian_navbar_title_2">ସ୍ମରଣ</string>
+    <string name="guardian_navbar_title_3">ଅବସ୍ଥାନ</string>
+    <string name="guardian_navbar_title_4">ସତର୍କତା</string>
+    <string name="guardian_navbar_title_5">ସେଟିଂସ୍</string>
+
+    <string name="guardian_geofence_1">ଜିଓଫେନ୍ସ ସେଟିଂସ୍</string>
+    <string name="guardian_geofence_2">ସୁରକ୍ଷିତ ଅଞ୍ଚଳର କେନ୍ଦ୍ର ସେଟ୍ କରିବା ପାଇଁ ମାନଚିତ୍ରରେ ଟାପ୍ କରନ୍ତୁ।</string>
+    <string name="guardian_geofence_3">ଜିଓଫେନ୍ସ ସକ୍ରିୟ କରନ୍ତୁ</string>
+    <string name="guardian_geofence_4">ବ୍ୟାସାର୍ଦ୍ଧ</string>
+    <string name="guardian_geofence_5">କନଫିଗରେସନ୍ ସେଭ୍ କରନ୍ତୁ</string>
+</resources>

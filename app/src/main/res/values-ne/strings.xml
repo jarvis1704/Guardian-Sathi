@@ -1,0 +1,227 @@
+<resources>
+    <string name="app_name">गार्डियन साथी</string>
+
+    <string name="app_language">अंग्रेजी - यूके</string>
+
+    <string name="continue_button">जारी राख्नुहोस्</string>
+    <string name="onboarding_1_T">तपाईंका ज्येष्ठहरू, सधैं सुरक्षित</string>
+    <string name="onboarding_1_S">गार्डियन साथीले तपाईंका वृद्ध प्रियजनहरूको २४/७ हेरचाह गर्छ र तुरुन्त आपतकालीन सूचनाहरू दिन्छ—तपाईं त्यहाँ हुन नसक्दा पनि।</string>
+    <string name="onboarding_2_T">जोडिएको रहनुहोस्, शान्त रहनुहोस्</string>
+    <string name="onboarding_2_S">औषधि सम्झाउने, ब्याट्री अवस्था, र स्थानबारे वास्तविक-समय अपडेट पाउनुहोस्। बारम्बार फोन नगरी पनि उनीहरू सुरक्षित छन् भन्ने थाहा पाउनुहोस्।</string>
+    <string name="onboarding_3_T">वास्तवमै सुरक्षा गर्ने AI</string>
+    <string name="onboarding_3_S">हाम्रो बुद्धिमान संरक्षकले ठगी पत्ता लगाउँछ, असामान्य लेनदेनहरू निगरानी गर्छ, र सम्भावित खतराबारे तपाईंलाई सचेत गराउँछ।</string>
+    <string name="onboarding_B1">अर्को</string>
+    <string name="onboarding_B2">छोड्नुहोस्</string>
+    <string name="onboarding_B3">सुरु गर्नुहोस्</string>
+
+    <string name="login_title">तपाईंको व्यक्तिगत सुरक्षा यहाँबाट सुरु हुन्छ</string>
+    <string name="login_sub">स्मार्ट सुरक्षा, तुरुन्त सूचनाहरू, र मानसिक शान्ति</string>
+    <string name="login_button">गुगलसँग जारी राख्नुहोस्</string>
+    <string name="registration_type_T">तपाईं को हुनुहुन्छ?</string>
+    <string name="registration_type_S">जारी राख्न आफ्नो भूमिका चयन गर्नुहोस्</string>
+    <string name="registration_type_elder_T">म एक ज्येष्ठ हुँ</string>
+    <string name="registration_type_elder_S">म हेरचाह पाउन चाहन्छु र हल्का मार्गदर्शनसँग आफ्नो स्वतन्त्रता कायम राख्न चाहन्छु</string>
+    <string name="registration_type_guardian_T">म एक संरक्षक हुँ</string>
+    <string name="registration_type_guardian_S">म कसैको हेरचाह गर्न चाहन्छु र जहाँबाट पनि उनीहरूको अवस्था निगरानी गर्न चाहन्छु</string>
+
+    <string name="LinkGuardian_T">आफ्नो संरक्षकसँग जडान गर्नुहोस्</string>
+    <string name="LinkGuardian_S">आफ्नो संरक्षकलाई यो कोड स्क्यान गर्न भन्नुहोस्</string>
+    <string name="LinkGuardian_S2">ब्याकअप जडान कोड</string>
+    <string name="LinkGuardian_S3">जडानको प्रतीक्षा गर्दै...</string>
+    <string name="LinkGuardian_Share">लिङ्क सेयर गर्नुहोस्</string>
+    <string name="LinkGuardian_Share_S">तपाईंको संरक्षकले तपाईंको सुरक्षा र स्वास्थ्य अपडेटहरू निगरानी गर्न सुरक्षित निमन्त्रणा प्राप्त गर्नेछ।</string>
+    <string name="LinkGuardian_Share_Message">हे, म आफ्नो सुरक्षाको लागि गार्डियन साथी प्रयोग गर्दैछु। के तपाईं मेरो संरक्षकको रूपमा जडान हुन सक्नुहुन्छ?
+        \nगार्डियन साथी डाउनलोड गर्नुहोस्: [Link]
+        \n\nतपाईं मेरो सुरक्षा र स्वास्थ्यबारे अपडेट रहन सक्नुहुन्छ।
+        \nकोड: </string>
+
+    <string name="LinkElder_T">एक ज्येष्ठसँग जडान गर्नुहोस्</string>
+    <string name="LinkElder_S">यहाँ उनीहरूको QR कोड स्क्यान गर्नुहोस्</string>
+    <string name="LinkElder_S2">वा, यहाँ जडान कोड प्रविष्ट गर्नुहोस्:</string>
+    <string name="LinkElder_Share">ग्यालेरीबाट कोड स्क्यान गर्नुहोस्</string>
+    <string name="LinkElder_Share_cam">QR कोडमा आफ्नो क्यामेरा लक्षित गर्नुहोस्</string>
+    <string name="LinkElder_Share_S">तपाईं सुरक्षित रूपमा उनीहरूको सुरक्षा र स्वास्थ्य अपडेटहरू निगरानी गर्न जडान हुनुहुनेछ।</string>
+    <string name="LinkElder_button">अहिले जडान गर्नुहोस्</string>
+    <string name="LinkElder_Cam_Per">QR कोड स्क्यान गर्न क्यामेरा पहुँच आवश्यक छ</string>
+    <string name="LinkElder_Cam_Per_Button">अनुमति दिनुहोस्</string>
+
+    <string name="ConnectionSuccess_H">सफलतापूर्वक जडान भयो</string>
+    <string name="ConnectionSuccess_D">तपाईं अब यससँग जडान हुनुभयो:</string>
+    <string name="ConnectionSuccess_retry">ठिक व्यक्ति होइन? फेरि प्रयास गर्नुहोस्</string>
+
+    <string name="ElderPermission_button">अनुमति दिनुहोस्</string>
+    <string name="ElderPermission_1_T">ब्याट्री प्रतिबन्ध निष्क्रिय गर्नुहोस्</string>
+    <string name="ElderPermission_1_S">गार्डियन साथी सधैं सक्रिय राख्नुहोस्</string>
+    <string name="ElderPermission_1_R1">एन्ड्रोइडले पृष्ठभूमिमा तपाईंको सुरक्षा बन्द गर्नबाट रोक्छ। ब्याट्री सेभर हुँदा पनि खस्ने पत्ता लगाउने र स्थान काम गर्ने सुनिश्चित गर्छ।</string>
+    <string name="ElderPermission_1_R2">अर्को स्क्रिनमा गार्डियन साथीलाई अवरोध बिना चल्न अनुमति दिन अनुरोध गरिनेछ। पुष्टि गर्न \"अनुमति दिनुहोस्\" ट्याप गर्नुहोस्।</string>
+    <string name="ElderPermission_1_D">यसले तपाईंको ब्याट्रीमा खासै प्रभाव पार्दैन। यसले केवल एपलाई जबरजस्ती बन्द हुनबाट रोक्छ।</string>
+
+    <string name="ElderPermission_2_T">सूचना पहुँच</string>
+    <string name="ElderPermission_2_S">अन्य एपहरूमा ठगी पत्ता लगाउनुहोस्</string>
+    <string name="ElderPermission_2_R1">व्हाट्सएप र SMS एपहरूका सूचनाहरू स्क्यान गरेर शंकास्पद लिङ्क र फिसिङ ढाँचाहरू पहिचान गर्छ।</string>
+    <string name="ElderPermission_2_R2">अर्को स्क्रिनमा सूचीमा \"GuardianSathi\" खोज्नुहोस् र यसलाई सक्रिय गर्नुहोस्। पुष्टि पपअपमा \"अनुमति दिनुहोस्\" ट्याप गर्नुहोस्।</string>
+    <string name="ElderPermission_2_D">हामी केवल ठगी ढाँचाका लागि सूचनाहरू विश्लेषण गर्छौं। तपाईंका व्यक्तिगत सन्देशहरू कहिल्यै पढिँदैन वा भण्डारण गरिँदैन।</string>
+
+    <string name="ElderPermission_3_T">स्थान पहुँच</string>
+    <string name="ElderPermission_3_S">तपाईंको सुरक्षाका लागि आवश्यक</string>
+    <string name="ElderPermission_3_R1">तपाईंको संरक्षकले तपाईंको स्थान वास्तविक समयमा देख्न सक्छ।</string>
+    <string name="ElderPermission_3_R2">आपतकालीन SOS र जियो-फेन्स सूचनाहरूका लागि आवश्यक।</string>
+    <string name="ElderPermission_3_D">तपाईंको स्थान केवल तपाईंका विश्वसनीय संरक्षकसँग साझा गरिन्छ। हामी यसलाई अरूसँग कहिल्यै साझा गर्दैनौं।</string>
+
+    <string name="ElderPermission_4_T">सधैं चालु स्थान</string>
+    <string name="ElderPermission_4_S">एप बन्द हुँदा पनि सुरक्षा</string>
+    <string name="ElderPermission_4_R1">गार्डियन साथी पृष्ठभूमिमा हुँदा पनि जियो-फेन्स चेतावनी काम गर्छ।</string>
+    <string name="ElderPermission_4_R2">तपाईं सुरक्षित क्षेत्रबाट बाहिर जाँदा कुनै पनि समयमा तपाईंको संरक्षकलाई सूचना दिइन्छ।</string>
+    <string name="ElderPermission_4_D">पृष्ठभूमि स्थान केवल सुरक्षा निगरानीका लागि प्रयोग हुन्छ र कहिल्यै बेचिँदैन वा साझा गरिँदैन।</string>
+
+    <string name="ElderPermission_5_T">सूचित रहनुहोस्</string>
+    <string name="ElderPermission_5_S">महत्त्वपूर्ण सूचनाहरू आवश्यक छन्</string>
+    <string name="ElderPermission_5_R1">समयमै औषधि सम्झाउने र स्वास्थ्य जाँच सूचनाहरू प्राप्त गर्नुहोस्।</string>
+    <string name="ElderPermission_5_R2">तपाईंको संरक्षकले तुरुन्तै तपाईंलाई जरुरी सन्देश पठाउन सक्छ।</string>
+    <string name="ElderPermission_5_D">हामी केवल तपाईंको सुरक्षा र स्वास्थ्यसँग सम्बन्धित सूचनाहरू मात्र पठाउँछौं।</string>
+
+    <string name="ElderPermission_6_T">खस्ने पत्ता लगाउने</string>
+    <string name="ElderPermission_6_S">हामी तपाईंलाई चुपचाप हेरिरहेका छौं</string>
+    <string name="ElderPermission_6_R1">अचानक खसेको पत्ता लगाएर तुरुन्तै तपाईंको संरक्षकलाई सूचना दिन्छ।</string>
+    <string name="ElderPermission_6_R2">खसेपछि असामान्य स्थिरता पत्ता लगाउन गतिविधि ढाँचाहरू निगरानी गर्छ।</string>
+    <string name="ElderPermission_6_D">गतिविधि डेटा तपाईंको उपकरणमै प्रक्रिया हुन्छ र कहिल्यै सर्भरमा अपलोड हुँदैन।</string>
+
+    <string name="ElderPermission_7_T">SMS सुरक्षा</string>
+    <string name="ElderPermission_7_S">ठगी सन्देशबाट जोगिनुहोस्</string>
+    <string name="ElderPermission_7_R1">आउने सन्देशहरूलाई स्क्यान गरेर ज्ञात ठगी र फिसिङ ढाँचाहरू पत्ता लगाउँछ।</string>
+    <string name="ElderPermission_7_R2">तपाईंले गल्तीले प्रतिक्रिया दिनुअघि तपाईंको संरक्षकलाई चेतावनी दिन्छ।</string>
+    <string name="ElderPermission_7_D">तपाईंका सन्देशहरू तपाईंको उपकरणमै स्क्यान गरिन्छन्। हामी तपाईंका व्यक्तिगत SMS कहिल्यै पढ्दैनौं वा भण्डारण गर्दैनौं।</string>
+
+    <string name="ElderPermission_8_T">कल सुरक्षा</string>
+    <string name="ElderPermission_8_S">वास्तविक समयमा ठगी कल पत्ता लगाउनुहोस्</string>
+    <string name="ElderPermission_8_R1">ज्ञात ठगी नम्बरहरूबाट आउने कलहरू पहिचान गर्छ।</string>
+    <string name="ElderPermission_8_R2">शंकास्पद कल प्राप्त हुँदा तपाईंको संरक्षकलाई सूचना दिइन्छ।</string>
+    <string name="ElderPermission_8_D">कल डेटा केवल ठगी पत्ता लगाउन प्रयोग हुन्छ र कहिल्यै भण्डारण वा साझा गरिँदैन।</string>
+
+    <string name="ElderPermission_9_T">कल इतिहास पहुँच</string>
+    <string name="ElderPermission_9_S">शंकास्पद कल ढाँचा पहिचान गर्नुहोस्</string>
+    <string name="ElderPermission_9_R1">कल इतिहास विश्लेषण गरेर ठगी नम्बरबाट दोहोरिने सम्पर्क पत्ता लगाउँछ।</string>
+    <string name="ElderPermission_9_R2">समयसँगै असामान्य कल ढाँचाहरू बुझ्न तपाईंको संरक्षकलाई सहयोग गर्छ।</string>
+    <string name="ElderPermission_9_D">कल इतिहास स्थानीय रूपमा विश्लेषण गरिन्छ र केवल चिन्हित प्रविष्टिहरू मात्र साझा गरिन्छ।</string>
+
+    <string name="ElderPermission_10_T">फुल स्क्रिन चेतावनी</string>
+    <string name="ElderPermission_10_S">आपतकालीन चेतावनी तुरुन्तै हेर्नुहोस्</string>
+    <string name="ElderPermission_10_R1">फोन लक भएको वा अर्को एप खुला हुँदा पनि SOS र खस्ने चेतावनी स्क्रिनमा देखाउँछ।</string>
+    <string name="ElderPermission_10_R2">अर्को स्क्रिनमा \"GuardianSathi\" खोज्नुहोस् र \"Allow full screen intents\" सक्षम गर्नुहोस्।</string>
+    <string name="ElderPermission_10_D">यो केवल अत्यावश्यक सुरक्षा सूचनाका लागि प्रयोग हुन्छ। कुनै विज्ञापन वा अनावश्यक पपअप देखाइँदैन।</string>
+
+    <string name="ElderPermission_11_T">सम्पर्क पहुँच</string>
+    <string name="ElderPermission_11_S">अपरिचित कलर पहिचान गर्नुहोस्</string>
+    <string name="ElderPermission_11_R1">आउने र जाने कलहरूलाई तपाईंका सम्पर्कसँग मिलाएर शंकास्पद नम्बरहरू पत्ता लगाउँछ।</string>
+    <string name="ElderPermission_11_R2">अपरिचित नम्बरबाट बारम्बार सम्पर्क हुँदा तपाईंको संरक्षकलाई चेतावनी दिइन्छ।</string>
+    <string name="ElderPermission_11_D">सम्पर्कहरू केवल तपाईंको उपकरणमै जाँचिन्छन् र कहिल्यै अपलोड वा साझा गरिँदैन।</string>
+
+    <string name="ElderHome_1">अनुमतिहरू उपलब्ध छैनन्</string>
+    <string name="ElderHome_2">तपाईं सुरक्षित हुनुहुन्छ</string>
+    <string name="ElderHome_3">सहायकसँग कुरा गर्नुहोस्</string>
+    <string name="ElderHome_4">आपतकालीन सम्पर्कहरू</string>
+    <string name="ElderHome_5">SOS — मलाई मद्दत चाहिन्छ</string>
+    <string name="ElderHome_6">सेटिङ्स</string>
+
+    <string name="EmergencyType_1">प्रहरी चौकी</string>
+    <string name="EmergencyType_2">अस्पताल</string>
+    <string name="EmergencyType_3">दमकल केन्द्र</string>
+    <string name="EmergencyType_4">फार्मेसी</string>
+
+    <string name="EmergencyCon_1">व्यक्तिगत</string>
+    <string name="EmergencyCon_2">अहिलेसम्म कुनै व्यक्तिगत सम्पर्क थपिएको छैन</string>
+    <string name="EmergencyCon_3">तपाईं नजिकै</string>
+    <string name="EmergencyCon_4">कल गर्नुहोस्</string>
+    <string name="EmergencyCon_5">राष्ट्रिय हेल्पलाइनहरू</string>
+    <string name="EmergencyCon_6">प्रहरी चौकी</string>
+    <string name="EmergencyCon_7">एम्बुलेन्स</string>
+    <string name="EmergencyCon_8">दमकल</string>
+    <string name="EmergencyCon_9">ज्येष्ठ नागरिक हेल्पलाइन</string>
+    <string name="EmergencyCon_10">महिला हेल्पलाइन</string>
+    <string name="EmergencyCon_11">नजिकका हेल्पलाइनहरू खोजिँदैछ</string>
+    <string name="EmergencyCon_12">नजिकमा कुनै हेल्पलाइन फेला परेन</string>
+
+    <string name="FallAlert_1">के तपाईं खस्नुभयो?</string>
+    <string name="FallAlert_2">संरक्षकलाई सूचित गरिनेछ</string>
+    <string name="FallAlert_3">✅ म ठिक छु</string>
+    <string name="FallAlert_4">⚠️ खस्ने घटना पत्ता लाग्यो</string>
+    <string name="FallAlert_5">के तपाईं खस्नुभयो? १० सेकेन्डमा संरक्षकलाई सूचित गरिनेछ</string>
+
+    <!-- Elder Settings Screen -->
+    <string name="Settings_Title">सेटिङ्स</string>
+    <string name="Settings_EmergencyContacts">आपतकालीन सम्पर्कहरू</string>
+    <string name="Settings_AddNewContact">नयाँ सम्पर्क थप्नुहोस्</string>
+    <string name="Settings_Preferences">प्राथमिकताहरू</string>
+    <string name="Settings_ChangeLanguage">भाषा परिवर्तन गर्नुहोस्</string>
+    <string name="Settings_HelpSupport">मद्दत र समर्थन पाउनुहोस्</string>
+    <string name="Settings_Logout">लगआउट</string>
+    <string name="apply_button">लागू गर्नुहोस्</string>
+
+    <string name="VoiceAssistant">आवाज सहायक</string>
+
+    <!-- Guardian Home Screen -->
+    <string name="guardian_home_title">गार्डियन साथी</string>
+    <string name="guardian_home_monitoring_label">हाल निगरानी गर्दै</string>
+    <string name="guardian_home_status_safe">घरमा सुरक्षित</string>
+    <string name="guardian_home_battery_label">ब्याट्री</string>
+    <string name="guardian_home_location_label">स्थान</string>
+    <string name="guardian_home_location_safe_zone">सुरक्षित क्षेत्र</string>
+    <string name="guardian_home_last_active_label">अन्तिम सक्रियता</string>
+    <string name="guardian_home_upcoming_label">अगाडि आउने</string>
+    <string name="guardian_home_confirm">पुष्टि गर्नुहोस्</string>
+    <string name="guardian_home_recent_activity">हालको गतिविधि</string>
+    <string name="guardian_home_see_all">सबै इतिहास हेर्नुहोस्</string>
+    <string name="guardian_home_just_now">अहिले मात्र</string>
+    <string name="guardian_home_mins_ago">%1$d मिनेट अघि</string>
+    <string name="guardian_home_hrs_ago">%1$d घण्टा अघि</string>
+
+    <!-- Guardian Alerts Screen -->
+    <string name="guardian_alerts_title">सूचनाहरू</string>
+    <string name="guardian_alerts_filter_all">सबै</string>
+    <string name="guardian_alerts_filter_critical">गम्भीर</string>
+    <string name="guardian_alerts_filter_warning">चेतावनी</string>
+    <string name="guardian_alerts_filter_info">जानकारी</string>
+    <string name="guardian_alerts_empty">सबै ठीक छ — कुनै सूचना छैन</string>
+
+    <!-- Guardian Reminders Screen -->
+    <string name="guardian_reminders_title">स्मरणहरू</string>
+    <string name="guardian_reminders_today">आजको औषधि तालिका</string>
+    <string name="guardian_reminders_add">स्मरण थप्नुहोस्</string>
+    <string name="guardian_reminders_schedule">आजको तालिका</string>
+    <string name="guardian_reminders_status_done">पूरा भयो</string>
+    <string name="guardian_reminders_status_upcoming">आउँदैछ</string>
+    <string name="guardian_reminders_status_missed">छुट्यो</string>
+    <string name="add_medicine_title">औषधि थप्नुहोस्</string>
+    <string name="edit_medicine_title">औषधि सम्पादन गर्नुहोस्</string>
+    <string name="medicine_name_label">औषधिको नाम</string>
+    <string name="dosage_label">मात्रा (जस्तै १ चक्की)</string>
+    <string name="instructions_label">निर्देशन (वैकल्पिक)</string>
+    <string name="select_time">समय चयन गर्नुहोस्</string>
+    <string name="add_time">समय थप्नुहोस्</string>
+    <string name="save_button">सेभ गर्नुहोस्</string>
+    <string name="cancel_button">रद्द गर्नुहोस्</string>
+    <string name="delete_medicine_confirm">के तपाईं यो स्मरण मेटाउन चाहनुहुन्छ?</string>
+
+    <!-- Guardian Profile Screen -->
+    <string name="guardian_profile_title">प्रोफाइल</string>
+    <string name="guardian_profile_guardian_badge">संरक्षक</string>
+    <string name="guardian_profile_linked_elder">जोडिएको ज्येष्ठ</string>
+    <string name="guardian_profile_connection_active">जडान सक्रिय</string>
+    <string name="guardian_profile_preferences">प्राथमिकताहरू</string>
+    <string name="guardian_profile_notifications">सूचनाहरू</string>
+    <string name="guardian_profile_change_language">भाषा परिवर्तन गर्नुहोस्</string>
+    <string name="guardian_profile_help">मद्दत र समर्थन</string>
+    <string name="guardian_profile_logout">लगआउट</string>
+
+    <string name="guardian_navbar_title_1">ड्यासबोर्ड</string>
+    <string name="guardian_navbar_title_2">स्मरणहरू</string>
+    <string name="guardian_navbar_title_3">स्थान</string>
+    <string name="guardian_navbar_title_4">सूचनाहरू</string>
+    <string name="guardian_navbar_title_5">सेटिङ्स</string>
+
+    <string name="guardian_geofence_1">जियोफेन्स सेटिङ्स</string>
+    <string name="guardian_geofence_2">सुरक्षित क्षेत्रको केन्द्र सेट गर्न नक्सामा ट्याप गर्नुहोस्।</string>
+    <string name="guardian_geofence_3">जियोफेन्स सक्षम गर्नुहोस्</string>
+    <string name="guardian_geofence_4">त्रिज्या</string>
+    <string name="guardian_geofence_5">कन्फिगरेसन सेभ गर्नुहोस्</string>
+</resources>
