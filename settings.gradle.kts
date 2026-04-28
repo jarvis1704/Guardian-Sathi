@@ -25,4 +25,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Guardian Sathi"
 include(":app")
- 
