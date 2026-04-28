@@ -26,19 +26,24 @@ Beyond monitoring, the app arms the Elder with a panic SOS button, AI voice assi
 
 ## Screenshots
 
-> **Note:** Replace the placeholder paths below with actual screenshots from your device.
+### App Flow
+
+![Flow Diagram](screenshots/flowdiagram.png)
+*Application Flow Diagram*
 
 ### Elder Persona
 
-| Home | Fall Alert | Panic SOS | Voice Assistant |
-|:---:|:---:|:---:|:---:|
-| <!-- add screenshot: Elder home screen --> <br>*Elder Home* | <!-- add screenshot: Fall detection alert --> <br>*Fall Alert* | <!-- add screenshot: SOS panic button --> <br>*Panic SOS* | <!-- add screenshot: Voice assistant --> <br>*Voice Assistant* |
+| Home | Emergency Contacts |
+|:---:|:---:|
+| ![Elder Home](screenshots/elderhome.jpeg) | ![Emergency Contacts](screenshots/emergencynumbers.jpeg) |
+| *Elder Home* | *Emergency Contacts* |
 
 ### Guardian Persona
 
-| Dashboard | Location Map | Alerts | Profile |
-|:---:|:---:|:---:|:---:|
-| <!-- add screenshot: Guardian dashboard --> <br>*Dashboard* | <!-- add screenshot: Live location map --> <br>*Location Map* | <!-- add screenshot: Alert history --> <br>*Alerts* | <!-- add screenshot: Guardian profile --> <br>*Profile* |
+| Home | Alerts | Geofence |
+|:---:|:---:|:---:|
+| ![Guardian Home](screenshots/guardianhome.jpeg) | ![Alerts](screenshots/alerts.jpeg) | ![Geofence](screenshots/geofence.jpeg) |
+| *Guardian Home* | *Alerts* | *Geofence* |
 
 ---
 
