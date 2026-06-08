@@ -97,6 +97,8 @@ class LinkElderViewModel @Inject constructor(
                         else -> null
                     }
                     if (linkedUid != null) {
+                        //setting the active elder as the current elder which is just linked
+                        sessionRepository.setActiveElderUid(linkedUid)
                         val connectedUser = firestoreUserDataSource.getUserById(linkedUid)
                         val myPhotoUrl = firebaseAuthDataSource.getCurrentUserPhotoUrl() ?: ""
                         val connectedName = (connectedUser as? Result.Success)?.data?.displayName ?: ""

@@ -272,6 +272,9 @@ fun NavGraphBuilder.guardianNav(navController: NavController) {
                 navController.navigate(SplashRoute) {
                     popUpTo(0) { inclusive = true }
                 }
+            },
+            onLinkNewElder = {
+                navController.navigate(LinkElderRoute)
             }
         )
     }

@@ -67,7 +67,21 @@ class SplashViewModel @Inject constructor(
                         is Result.Success -> {
                             if (result.data.isLinked) {
                                 sessionRepository.setLinked(true)
-                                syncLinkedUserInfo(result.data.linkedUid, userRole)
+                                val activeElder = if (userRole == "GUARDIAN") {
+                                    //checks for any previous active elder
+                                    val cachedActive = sessionRepository.activeElderUid.first()
+                                    //if not found, sets the first elder on the list of elders as active
+                                    if (cachedActive.isNullOrEmpty()) {
+                                        val firstElder = result.data.linkedElders.firstOrNull() ?: result.data.linkedUid
+                                        sessionRepository.setActiveElderUid(firstElder)
+                                        firstElder
+                                    } else {
+                                        cachedActive
+                                    }
+                                } else {
+                                    result.data.linkedUid
+                                }
+                                syncLinkedUserInfo(activeElder, userRole)
                                 roleToHomeEvent(userRole)
                             } else {
                                 roleToLinkEvent(userRole)

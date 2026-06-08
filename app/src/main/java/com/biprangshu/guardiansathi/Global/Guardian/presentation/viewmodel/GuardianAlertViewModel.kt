@@ -28,8 +28,12 @@ class GuardianAlertViewModel @Inject constructor(
     private fun fetchAlerts() {
         val uid = firebaseAuth.uid ?: return
         viewModelScope.launch {
-            repository.getAlerts(uid).collect { newAlerts ->
-                _alerts.value = newAlerts
+            try {
+                repository.getAlerts(uid).collect { newAlerts ->
+                    _alerts.value = newAlerts
+                }
+            } catch (e: Exception) {
+                android.util.Log.e("GuardianAlertVM", "Error collecting alerts", e)
             }
         }
     }

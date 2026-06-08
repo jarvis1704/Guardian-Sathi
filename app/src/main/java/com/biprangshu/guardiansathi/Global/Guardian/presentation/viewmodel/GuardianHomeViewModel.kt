@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.biprangshu.guardiansathi.Global.core.data.FirebaseAuthDataSource
 import com.biprangshu.guardiansathi.Global.core.data.FirestoreLinkDataSource
+import com.biprangshu.guardiansathi.Global.core.data.FirestoreUserDataSource
 import com.biprangshu.guardiansathi.Global.core.domain.Result
+import com.biprangshu.guardiansathi.Global.core.domain.User
 import com.biprangshu.guardiansathi.Global.domain.SessionRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -42,7 +44,9 @@ data class GuardianHomeState(
     val activityLogs: List<ActivityLogUi> = emptyList(),
     val nextReminder: com.biprangshu.guardiansathi.Global.core.domain.MedicineReminder? = null,
     val isLoading: Boolean = true,
-    val error: String? = null
+    val error: String? = null,
+    val linkedElders: List<User> = emptyList(),
+    val activeElderUid: String? = null
 ) {
     val lastActiveTimestamp: Long
         get() = maxOf(lastBatterySeen, lastLocationSeen)
@@ -51,6 +55,8 @@ data class GuardianHomeState(
 sealed interface GuardianHomeAction {
     data object OnConfirmReminder : GuardianHomeAction
     data object OnSeeAllHistory : GuardianHomeAction
+    data class OnSelectElder(val uid: String) : GuardianHomeAction
+    data object OnLinkNewElder : GuardianHomeAction
 }
 
 @HiltViewModel
@@ -58,6 +64,7 @@ class GuardianHomeViewModel @Inject constructor(
     private val firebaseAuthDataSource: FirebaseAuthDataSource,
     private val firebaseDatabase: FirebaseDatabase,
     private val firestoreLinkDataSource: FirestoreLinkDataSource,
+    private val firestoreUserDataSource: FirestoreUserDataSource,
     private val sessionRepository: SessionRepository,
     private val medicineRepository: com.biprangshu.guardiansathi.Global.core.domain.MedicineRepository
 ) : ViewModel() {
@@ -66,10 +73,13 @@ class GuardianHomeViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     private val rtdbListeners = mutableListOf<Pair<DatabaseReference, ValueEventListener>>()
+    private var activeElderJob: kotlinx.coroutines.Job? = null
+    private var medicineJob: kotlinx.coroutines.Job? = null
 
     init {
         collectSessionData()
-        attachRtdbListeners()
+        fetchLinkedElders()
+        observeActiveElderAndAttachListeners()
     }
 
     suspend fun getFCMTokenAndSave() {
@@ -111,67 +121,112 @@ class GuardianHomeViewModel @Inject constructor(
         }
     }
 
-    private fun attachRtdbListeners() {
+    private fun fetchLinkedElders() {
         viewModelScope.launch {
             val guardianUid = firebaseAuthDataSource.getCurentUserUid() ?: return@launch
             val linkResult = firestoreLinkDataSource.getLinkStatus(guardianUid)
-            val elderUid = when (linkResult) {
-                is Result.Success -> linkResult.data.linkedUid ?: return@launch
-                else -> return@launch
-            }
-
-            val elderRef = firebaseDatabase.reference.child(elderUid)
-            _state.update { it.copy(isLoading = false) }
-
-            elderRef.listenString("battery_level") { value ->
-                _state.update { it.copy(batteryLevel = value.toIntOrNull() ?: it.batteryLevel) }
-            }
-            elderRef.listenString("battery_isCharging") { value ->
-                _state.update { it.copy(isCharging = value.toBooleanStrictOrNull() ?: it.isCharging) }
-            }
-            elderRef.listenLong("battery_lastSeen") { value ->
-                _state.update { it.copy(lastBatterySeen = value) }
-            }
-            elderRef.listenString("location_lat") { value ->
-                _state.update { it.copy(locationLat = value.toDoubleOrNull() ?: it.locationLat) }
-            }
-            elderRef.listenString("location_long") { value ->
-                _state.update { it.copy(locationLong = value.toDoubleOrNull() ?: it.locationLong) }
-            }
-            elderRef.listenLong("location_lastSeen") { value ->
-                _state.update { it.copy(lastLocationSeen = value) }
-            }
-
-            val logsRef = elderRef.child("activity_logs")
-            val logsListener = object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val logs = mutableListOf<ActivityLogUi>()
-                    for (child in snapshot.children) {
-                        val id = child.key ?: continue
-                        val type = child.child("type").getValue(String::class.java) ?: continue
-                        val timestamp = child.child("timestamp").getValue(Long::class.java) ?: continue
-                        logs.add(
-                            ActivityLogUi(
-                                id = id,
-                                type = type,
-                                timestamp = timestamp,
-                                formattedTime = timestamp.toLastActiveText()
-                            )
-                        )
-                    }
-                    _state.update { it.copy(activityLogs = logs.sortedByDescending { log -> log.timestamp }) }
+            if (linkResult is Result.Success) {
+                val uids = linkResult.data.linkedElders.ifEmpty {
+                    listOfNotNull(linkResult.data.linkedUid)
                 }
-                override fun onCancelled(error: DatabaseError) {}
+                val elders = mutableListOf<User>()
+                for (uid in uids) {
+                    val userResult = firestoreUserDataSource.getUserById(uid)
+                    if (userResult is Result.Success) {
+                        elders.add(userResult.data)
+                    }
+                }
+                _state.update { it.copy(linkedElders = elders) }
             }
-            logsRef.addValueEventListener(logsListener)
-            rtdbListeners.add(logsRef to logsListener)
+        }
+    }
 
-            observeMedicineReminders(elderUid)
+    private fun observeActiveElderAndAttachListeners() {
+        activeElderJob?.cancel()
+        //whenever active elder is changed, the job is completely cleared and the new active elder details is fetched from firebase
+        activeElderJob = viewModelScope.launch {
+            sessionRepository.activeElderUid.collect { elderUid ->
+                // Clean up previous listeners
+                rtdbListeners.forEach { (ref, listener) -> ref.removeEventListener(listener) }
+                rtdbListeners.clear()
+
+                _state.update { it.copy(activeElderUid = elderUid) }
+
+                if (elderUid.isNullOrEmpty()) {
+                    _state.update { it.copy(isLoading = false, elderName = "", elderPhotoUrl = null) }
+                    return@collect
+                }
+
+                _state.update { it.copy(isLoading = true) }
+
+                // Sync active elder details from Firestore asynchronously so it doesn't block RTDB listeners
+                viewModelScope.launch {
+                    val userResult = firestoreUserDataSource.getUserById(elderUid)
+                    if (userResult is Result.Success) {
+                        val elder = userResult.data
+                        _state.update { it.copy(
+                            elderName = elder.displayName ?: "",
+                            elderPhotoUrl = elder.photoUrl
+                        ) }
+                        sessionRepository.setElderInfo(elder.displayName, elder.photoUrl)
+                    }
+                }
+
+                val elderRef = firebaseDatabase.reference.child(elderUid)
+                _state.update { it.copy(isLoading = false) }
+
+                elderRef.listenString("battery_level") { value ->
+                    _state.update { it.copy(batteryLevel = value.toIntOrNull() ?: it.batteryLevel) }
+                }
+                elderRef.listenString("battery_isCharging") { value ->
+                    _state.update { it.copy(isCharging = value.toBooleanStrictOrNull() ?: it.isCharging) }
+                }
+                elderRef.listenLong("battery_lastSeen") { value ->
+                    _state.update { it.copy(lastBatterySeen = value) }
+                }
+                elderRef.listenString("location_lat") { value ->
+                    _state.update { it.copy(locationLat = value.toDoubleOrNull() ?: it.locationLat) }
+                }
+                elderRef.listenString("location_long") { value ->
+                    _state.update { it.copy(locationLong = value.toDoubleOrNull() ?: it.locationLong) }
+                }
+                elderRef.listenLong("location_lastSeen") { value ->
+                    _state.update { it.copy(lastLocationSeen = value) }
+                }
+
+                val logsRef = elderRef.child("activity_logs")
+                val logsListener = object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val logs = mutableListOf<ActivityLogUi>()
+                        for (child in snapshot.children) {
+                            val id = child.key ?: continue
+                            val type = child.child("type").getValue(String::class.java) ?: continue
+                            val timestamp = child.child("timestamp").getValue(Long::class.java) ?: continue
+                            logs.add(
+                                ActivityLogUi(
+                                    id = id,
+                                    type = type,
+                                    timestamp = timestamp,
+                                    formattedTime = timestamp.toLastActiveText()
+                                )
+                            )
+                        }
+                        _state.update { it.copy(activityLogs = logs.sortedByDescending { log -> log.timestamp }) }
+                    }
+                    override fun onCancelled(error: DatabaseError) {}
+                }
+                logsRef.addValueEventListener(logsListener)
+                rtdbListeners.add(logsRef to logsListener)
+
+                observeMedicineReminders(elderUid)
+            }
         }
     }
 
     private fun observeMedicineReminders(elderUid: String) {
-        viewModelScope.launch {
+        medicineJob?.cancel()
+        //similar to what done in the above function
+        medicineJob = viewModelScope.launch {
             medicineRepository.getReminders(elderUid).collect { reminders ->
                 val now = java.util.Calendar.getInstance()
                 val currentHour = now.get(java.util.Calendar.HOUR_OF_DAY)
@@ -227,6 +282,15 @@ class GuardianHomeViewModel @Inject constructor(
             }
             GuardianHomeAction.OnSeeAllHistory -> {
                 // TODO: navigate to activity log once built
+            }
+            //function execution to set what is the current active elder in datastore and uploaded to firebase
+            is GuardianHomeAction.OnSelectElder -> {
+                viewModelScope.launch {
+                    sessionRepository.setActiveElderUid(action.uid)
+                }
+            }
+            GuardianHomeAction.OnLinkNewElder -> {
+                // Handled in UI level for navigation
             }
         }
     }

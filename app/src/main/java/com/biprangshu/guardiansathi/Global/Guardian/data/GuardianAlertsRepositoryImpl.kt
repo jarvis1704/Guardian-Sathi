@@ -52,7 +52,7 @@ class GuardianAlertsRepositoryImpl @Inject constructor(
 
             override fun onCancelled(error: DatabaseError) {
                 Log.e("GuardianAlertsRepo", "Database error: ${error.message}")
-                close(error.toException())
+                close()
             }
         }
 

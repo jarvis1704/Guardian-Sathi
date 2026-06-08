@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.biprangshu.guardiansathi.Global.core.data.FirebaseAuthDataSource
 import com.biprangshu.guardiansathi.Global.core.data.FirestoreLinkDataSource
 import com.biprangshu.guardiansathi.Global.core.domain.Result
+import com.biprangshu.guardiansathi.Global.domain.SessionRepository
 import com.biprangshu.guardiansathi.Global.presentation.ui.components.errorMessage
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.DataSnapshot
@@ -45,7 +46,8 @@ sealed interface GuardianGeofenceEvent {
 class GuardianGeofenceViewModel @Inject constructor(
     private val firebaseAuthDataSource: FirebaseAuthDataSource,
     private val firebaseDatabase: FirebaseDatabase,
-    private val firestoreLinkDataSource: FirestoreLinkDataSource
+    private val firestoreLinkDataSource: FirestoreLinkDataSource,
+    private val sessionRepository: SessionRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(GuardianGeofenceState())
@@ -55,85 +57,95 @@ class GuardianGeofenceViewModel @Inject constructor(
     val events = _events.receiveAsFlow()
 
     private var elderUid: String? = null
+    private var activeElderJob: kotlinx.coroutines.Job? = null
+    private val locationListeners = mutableListOf<Pair<com.google.firebase.database.DatabaseReference, com.google.firebase.database.ValueEventListener>>()
 
     init {
         fetchInitialData()
     }
 
     private fun fetchInitialData() {
-        viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
-            val guardianUid = firebaseAuthDataSource.getCurentUserUid()
-            if (guardianUid == null) {
-                _events.send(GuardianGeofenceEvent.ShowSnackbar("User not logged in"))
-                _state.update { it.copy(isLoading = false) }
-                return@launch
-            }
+        activeElderJob?.cancel()
+        activeElderJob = viewModelScope.launch {
+            sessionRepository.activeElderUid.collect { activeUid ->
+                // Clean up previous listeners
+                locationListeners.forEach { (ref, listener) -> ref.removeEventListener(listener) }
+                locationListeners.clear()
 
-            val linkResult = firestoreLinkDataSource.getLinkStatus(guardianUid)
-            elderUid = when (linkResult) {
-                is Result.Success -> linkResult.data.linkedUid
-                else -> null
-            }
+                elderUid = activeUid
 
-            if (elderUid == null) {
-                _events.send(GuardianGeofenceEvent.ShowSnackbar("No Elder linked"))
-                _state.update { it.copy(isLoading = false) }
-                return@launch
-            }
-
-            val elderRef = firebaseDatabase.reference.child(elderUid!!)
-            
-            // Listen to Elder location
-            elderRef.child("location_lat").addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val lat = snapshot.getValue(String::class.java)?.toDoubleOrNull()
-                    _state.update { it.copy(elderLocationLat = lat) }
-                    // Default center to elder location if not set
-                    if (_state.value.centerLat == null && lat != null) {
-                        _state.update { it.copy(centerLat = lat) }
-                    }
-                }
-                override fun onCancelled(error: DatabaseError) {
-                    errorMessage = error.message.toString()
-                }
-            })
-            
-            elderRef.child("location_long").addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val lng = snapshot.getValue(String::class.java)?.toDoubleOrNull()
-                    _state.update { it.copy(elderLocationLong = lng) }
-                    if (_state.value.centerLong == null && lng != null) {
-                        _state.update { it.copy(centerLong = lng) }
-                    }
-                }
-                override fun onCancelled(error: DatabaseError) {
-                    errorMessage = error.message.toString()
-                }
-            })
-
-            // Load geofence data
-            elderRef.child("geofence").addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val lat = snapshot.child("center_lat").getValue(Double::class.java)
-                    val lng = snapshot.child("center_long").getValue(Double::class.java)
-                    val rad = snapshot.child("radius_meters").getValue(Double::class.java)
-                    val active = snapshot.child("is_active").getValue(Boolean::class.java) ?: false
-                    
+                if (activeUid.isNullOrEmpty()) {
                     _state.update { 
                         it.copy(
                             isLoading = false,
-                            centerLat = lat ?: it.centerLat,
-                            centerLong = lng ?: it.centerLong,
-                            radiusMeters = rad ?: it.radiusMeters,
-                            isActive = active
+                            centerLat = null,
+                            centerLong = null,
+                            elderLocationLat = null,
+                            elderLocationLong = null
                         )
                     }
+                    return@collect
                 }
-                override fun onCancelled(error: DatabaseError) {
-                    _state.update { it.copy(isLoading = false) }
+
+                _state.update { it.copy(isLoading = true) }
+                val elderRef = firebaseDatabase.reference.child(activeUid)
+                
+                // Listen to Elder location
+                val latListener = object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val lat = snapshot.getValue(String::class.java)?.toDoubleOrNull()
+                        _state.update { it.copy(elderLocationLat = lat) }
+                        if (_state.value.centerLat == null && lat != null) {
+                            _state.update { it.copy(centerLat = lat) }
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                        errorMessage = error.message.toString()
+                    }
                 }
-            })
+                val latRef = elderRef.child("location_lat")
+                latRef.addValueEventListener(latListener)
+                locationListeners.add(latRef to latListener)
+                
+                val lngListener = object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val lng = snapshot.getValue(String::class.java)?.toDoubleOrNull()
+                        _state.update { it.copy(elderLocationLong = lng) }
+                        if (_state.value.centerLong == null && lng != null) {
+                            _state.update { it.copy(centerLong = lng) }
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                        errorMessage = error.message.toString()
+                    }
+                }
+                val lngRef = elderRef.child("location_long")
+                lngRef.addValueEventListener(lngListener)
+                locationListeners.add(lngRef to lngListener)
+
+                // Load geofence data
+                elderRef.child("geofence").addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val lat = snapshot.child("center_lat").getValue(Double::class.java)
+                        val lng = snapshot.child("center_long").getValue(Double::class.java)
+                        val rad = snapshot.child("radius_meters").getValue(Double::class.java)
+                        val active = snapshot.child("is_active").getValue(Boolean::class.java) ?: false
+                        
+                        _state.update { 
+                            it.copy(
+                                isLoading = false,
+                                centerLat = lat ?: it.centerLat,
+                                centerLong = lng ?: it.centerLong,
+                                radiusMeters = rad ?: it.radiusMeters,
+                                isActive = active
+                            )
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                        _state.update { it.copy(isLoading = false) }
+                    }
+                })
+            }
         }
     }
 
@@ -190,5 +202,12 @@ class GuardianGeofenceViewModel @Inject constructor(
                 _state.update { it.copy(isLoading = false) }
                 viewModelScope.launch { _events.send(GuardianGeofenceEvent.ShowSnackbar("Failed to save Geofence")) }
             }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        locationListeners.forEach { (ref, listener) -> ref.removeEventListener(listener) }
+        locationListeners.clear()
+        activeElderJob?.cancel()
     }
 }

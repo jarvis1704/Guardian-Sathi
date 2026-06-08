@@ -14,6 +14,7 @@ interface SessionRepository {
     //elder name for future usage
     val elderName: Flow<String?>
     val elderPhotoUrl: Flow<String?>
+    val activeElderUid: Flow<String?>
 
     suspend fun setLanguageSelected(selected: Boolean)
     suspend fun setOnboardingCompleted(completed: Boolean)
@@ -24,4 +25,6 @@ interface SessionRepository {
     suspend fun setGuardianInfo(name: String?, photoUrl: String?)
 
     suspend fun setElderInfo(name: String?, photoUrl: String?)
+
+    suspend fun setActiveElderUid(uid: String?)
 }

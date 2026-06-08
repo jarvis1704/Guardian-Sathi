@@ -20,7 +20,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.outlined.BatteryFull
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.LocationOn
@@ -62,13 +66,23 @@ private val SafeGreen = Color(0xFF4CAF50)
 
 @Composable
 fun GuardianHomeRoot(
+    onLinkNewElder: () -> Unit,
     viewModel: GuardianHomeViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
         viewModel.getFCMTokenAndSave()
     }
     val state by viewModel.state.collectAsStateWithLifecycle()
-    GuardianHomeScreen(state = state, onAction = viewModel::onAction)
+    GuardianHomeScreen(
+        state = state,
+        onAction = { action ->
+            if (action is GuardianHomeAction.OnLinkNewElder) {
+                onLinkNewElder()
+            } else {
+                viewModel.onAction(action)
+            }
+        }
+    )
 }
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -114,6 +128,86 @@ fun GuardianHomeScreen(
                     modifier = Modifier.size(36.dp),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+            }
+        }
+
+        if (state.linkedElders.isNotEmpty()) {
+            //ui to see linked elders and select between them and an add button
+            Spacer(Modifier.height(16.dp))
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                items(
+                    items = state.linkedElders,
+                    key = { it.uid }
+                ) { elder ->
+                    val isSelected = elder.uid == state.activeElderUid
+                    val borderColor = if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent
+                    val borderStroke = if (isSelected) BorderStroke(2.dp, borderColor) else null
+                    
+                    Surface(
+                        modifier = Modifier
+                            .clickable { onAction(GuardianHomeAction.OnSelectElder(elder.uid)) },
+                        shape = RoundedCornerShape(16.dp),
+                        border = borderStroke,
+                        color = if (isSelected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.2f) else MaterialTheme.colorScheme.surface
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            AsyncImage(
+                                model = elder.photoUrl,
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .size(24.dp)
+                                    .clip(CircleShape),
+                                contentScale = ContentScale.Crop,
+                                error = painterResource(R.drawable.ic_profile_placeholder),
+                                placeholder = painterResource(R.drawable.ic_profile_placeholder)
+                            )
+                            Text(
+                                text = elder.displayName ?: "—",
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+                                color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                    }
+                }
+                
+                item {
+                    Surface(
+                        modifier = Modifier
+                            .clickable { onAction(GuardianHomeAction.OnLinkNewElder) },
+                        shape = RoundedCornerShape(16.dp),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+                        color = Color.Transparent
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            //todo: take add button directly to guardian link screen
+                            Icon(
+                                imageVector = Icons.Default.Add,
+                                contentDescription = null,
+                                modifier = Modifier.size(16.dp),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                            Text(
+                                text = "Add",
+                                style = MaterialTheme.typography.bodyMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+                }
             }
         }
 

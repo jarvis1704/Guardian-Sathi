@@ -36,7 +36,11 @@ import com.biprangshu.guardiansathi.R
 // guardian/navigation/GuardianShell.kt
 
 @Composable
-fun GuardianShell(outerNavController: NavController, onLogout: () -> Unit = {}) {
+fun GuardianShell(
+    outerNavController: NavController,
+    onLogout: () -> Unit = {},
+    onLinkNewElder: () -> Unit = {}
+) {
     val guardianNavController = rememberNavController()
     val navBackStackEntry by guardianNavController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -55,7 +59,7 @@ fun GuardianShell(outerNavController: NavController, onLogout: () -> Unit = {}) 
             modifier = Modifier.padding(innerPadding)
         ) {
             composable<DashboardRoute> {
-                GuardianHomeRoot()
+                GuardianHomeRoot(onLinkNewElder = onLinkNewElder)
             }
             composable<RemindersRoute> {
                 GuardianReminderPage()
@@ -67,7 +71,10 @@ fun GuardianShell(outerNavController: NavController, onLogout: () -> Unit = {}) 
                 GuardianAlertPage()
             }
             composable<SettingsRoute> {
-                GuardianProfileRoot(onLogout = onLogout)
+                GuardianProfileRoot(
+                    onLogout = onLogout,
+                    onLinkNewElder = onLinkNewElder
+                )
             }
         }
     }

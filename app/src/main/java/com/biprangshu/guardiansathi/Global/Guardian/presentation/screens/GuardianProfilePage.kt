@@ -2,6 +2,7 @@ package com.biprangshu.guardiansathi.Global.Guardian.presentation.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +26,7 @@ import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -60,6 +62,7 @@ private val SafeGreen = Color(0xFF4CAF50)
 @Composable
 fun GuardianProfileRoot(
     onLogout: () -> Unit,
+    onLinkNewElder: () -> Unit,
     viewModel: GuardianProfileViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -74,14 +77,16 @@ fun GuardianProfileRoot(
 
     GuardianProfileScreen(
         state = state,
-        onAction = viewModel::onAction
+        onAction = viewModel::onAction,
+        onLinkNewElder = onLinkNewElder
     )
 }
 
 @Composable
 fun GuardianProfileScreen(
     state: GuardianProfileState,
-    onAction: (GuardianProfileAction) -> Unit
+    onAction: (GuardianProfileAction) -> Unit,
+    onLinkNewElder: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -246,6 +251,40 @@ fun GuardianProfileScreen(
                         )
                     }
                 }
+            }
+        }
+
+        Spacer(Modifier.height(12.dp))
+
+        //option to link a new elder
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { onLinkNewElder() },
+            shape = RoundedCornerShape(20.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(20.dp)
+                )
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    text = "Link Another Elder",
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
+                )
             }
         }
 

@@ -6,6 +6,7 @@ import com.biprangshu.guardiansathi.Global.core.domain.LinkStatus
 import com.biprangshu.guardiansathi.Global.core.domain.Result
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -72,10 +73,16 @@ class FirestoreLinkDataSource @Inject constructor(
     ): Result<Unit, DataError.Network> {
         return try {
             firestore.runBatch { batch ->
+                //now linkedUid points to the latest elder for which the data has been seeked by the guardian
                 batch.update(
                     usersCollection.document(guardianUid),
-                    mapOf("isLinked" to true, "linkedUid" to elderUid)
+                    mapOf(
+                        "isLinked" to true, 
+                        "linkedUid" to elderUid,
+                        "linkedElders" to FieldValue.arrayUnion(elderUid)
+                    )
                 )
+                //for elders, it remains same as before, as they still maintain singular connection
                 batch.update(
                     usersCollection.document(elderUid),
                     mapOf("isLinked" to true, "linkedUid" to guardianUid)
@@ -95,7 +102,10 @@ class FirestoreLinkDataSource @Inject constructor(
             if (!doc.exists()) return Result.Error(DataError.Network.NOT_FOUND)
             val isLinked = doc.getBoolean("isLinked") ?: false
             val linkedUid = doc.getString("linkedUid")
-            Result.Success(LinkStatus(isLinked, linkedUid))
+            //now guardians receieve linkedelder list for muti elder support
+            val linkedElders = doc.get("linkedElders") as? List<*>
+            val linkedEldersList = linkedElders?.filterIsInstance<String>() ?: emptyList()
+            Result.Success(LinkStatus(isLinked, linkedUid, linkedEldersList))
         } catch (e: Exception) {
             e.printStackTrace()
             Result.Error(DataError.Network.UNKNOWN)
@@ -109,7 +119,9 @@ class FirestoreLinkDataSource @Inject constructor(
                 if (error != null || snapshot == null || !snapshot.exists()) return@addSnapshotListener
                 val isLinked = snapshot.getBoolean("isLinked") ?: false
                 val linkedUid = snapshot.getString("linkedUid")
-                trySend(LinkStatus(isLinked, linkedUid))
+                val linkedElders = snapshot.get("linkedElders") as? List<*>
+                val linkedEldersList = linkedElders?.filterIsInstance<String>() ?: emptyList()
+                trySend(LinkStatus(isLinked, linkedUid, linkedEldersList))
             }
         awaitClose { registration?.remove() }
     }

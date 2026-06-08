@@ -7,6 +7,7 @@ import com.biprangshu.guardiansathi.Global.core.domain.MedicineRepository
 import com.biprangshu.guardiansathi.Global.core.domain.Result
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.biprangshu.guardiansathi.Global.domain.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -41,7 +42,8 @@ sealed interface MedicineEvent {
 class MedicineViewModel @Inject constructor(
     private val medicineRepository: MedicineRepository,
     private val firestore: FirebaseFirestore,
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
+    private val sessionRepository: SessionRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(MedicineState())
@@ -50,35 +52,32 @@ class MedicineViewModel @Inject constructor(
     private val _events = MutableSharedFlow<MedicineEvent>()
     val events = _events.asSharedFlow()
 
+    private var activeElderJob: kotlinx.coroutines.Job? = null
+    private var remindersJob: kotlinx.coroutines.Job? = null
+
     init {
         fetchLinkedUidAndObserve()
     }
 
     private fun fetchLinkedUidAndObserve() {
-        viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
-            val uid = auth.uid
-            if (uid != null) {
-                try {
-                    val doc = firestore.collection("users").document(uid).get().await()
-                    val linkedUid = doc.getString("linkedUid")
-                    if (linkedUid != null) {
-                        _state.update { it.copy(linkedUid = linkedUid) }
-                        observeReminders(linkedUid)
-                    } else {
-                        _state.update { it.copy(isLoading = false, error = "No linked elder found") }
-                    }
-                } catch (e: Exception) {
-                    _state.update { it.copy(isLoading = false, error = e.message) }
+        activeElderJob?.cancel()
+        activeElderJob = viewModelScope.launch {
+            sessionRepository.activeElderUid.collect { activeUid ->
+                remindersJob?.cancel()
+                if (activeUid.isNullOrEmpty()) {
+                    _state.update { it.copy(isLoading = false, linkedUid = null, reminders = emptyList(), error = "No linked elder selected") }
+                    return@collect
                 }
-            } else {
-                _state.update { it.copy(isLoading = false, error = "User not authenticated") }
+                
+                _state.update { it.copy(isLoading = true, linkedUid = activeUid) }
+                observeReminders(activeUid)
             }
         }
     }
 
     private fun observeReminders(linkedUid: String) {
-        viewModelScope.launch {
+        remindersJob?.cancel()
+        remindersJob = viewModelScope.launch {
             medicineRepository.getReminders(linkedUid).collectLatest { reminders ->
                 _state.update { it.copy(reminders = reminders, isLoading = false) }
             }
@@ -114,5 +113,11 @@ class MedicineViewModel @Inject constructor(
             }
             MedicineAction.Refresh -> fetchLinkedUidAndObserve()
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        activeElderJob?.cancel()
+        remindersJob?.cancel()
     }
 }

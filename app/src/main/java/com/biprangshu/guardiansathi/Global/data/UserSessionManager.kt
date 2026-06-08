@@ -33,6 +33,8 @@ class UserSessionManager @Inject constructor(
 
         val ELDER_NAME = stringPreferencesKey("elder_name")
         val ELDER_PHOTO_URL = stringPreferencesKey("elder_photo_url")
+        //now active elder is stored in datastore and then on next app open, the splash screen uses this to fetch all the data from firestore, unless the user changes the elder
+        val ACTIVE_ELDER_UID = stringPreferencesKey("active_elder_uid")
     }
 
     override val isLanguageSelected: Flow<Boolean> = context.dataStore.data.map { preferences ->
@@ -69,6 +71,10 @@ class UserSessionManager @Inject constructor(
 
     override val elderPhotoUrl: Flow<String?> = context.dataStore.data.map { preferences ->
         preferences[PreferencesKeys.ELDER_PHOTO_URL]
+    }
+
+    override val activeElderUid: Flow<String?> = context.dataStore.data.map { preferences ->
+        preferences[PreferencesKeys.ACTIVE_ELDER_UID]
     }
 
     override suspend fun setLanguageSelected(selected: Boolean) {
@@ -134,4 +140,15 @@ class UserSessionManager @Inject constructor(
                     }
                 }
         }
+
+    //function to set active elder on elder select by guardian
+    override suspend fun setActiveElderUid(uid: String?) {
+        context.dataStore.edit { preferences ->
+            if (uid == null) {
+                preferences.remove(PreferencesKeys.ACTIVE_ELDER_UID)
+            } else {
+                preferences[PreferencesKeys.ACTIVE_ELDER_UID] = uid
+            }
+        }
+    }
 }
