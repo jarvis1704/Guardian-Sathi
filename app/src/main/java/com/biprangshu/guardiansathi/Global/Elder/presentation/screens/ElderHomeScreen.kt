@@ -218,6 +218,24 @@ fun ElderHomeScreen(
         )
     }
 
+    if (specialPermissionAlertState.showSystemAlertWindowAlert) {
+        PermissionAlertDialog(
+            title = stringResource(R.string.ElderPermission_12_T),
+            subtitle = stringResource(R.string.ElderPermission_12_S),
+            reason1 = stringResource(R.string.ElderPermission_12_R1),
+            reason2 = stringResource(R.string.ElderPermission_12_R2),
+            disclaimer = stringResource(R.string.ElderPermission_12_D),
+            icon = Icons.Rounded.NotificationsActive, // You can choose a better icon if you want
+            onContinue = {
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    "package:${context.packageName}".toUri()
+                )
+                context.startActivity(intent)
+            }
+        )
+    }
+
 
 
     if (permissionState.locationPermissionGranted &&

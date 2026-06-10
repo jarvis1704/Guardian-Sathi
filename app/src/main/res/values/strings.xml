@@ -116,6 +116,12 @@
     <string name="ElderPermission_11_R2">Your guardian is alerted when repeated contact from an unsaved number is detected.</string>
     <string name="ElderPermission_11_D">Your contacts are only checked locally on your device for scam detection. They are never uploaded or shared with anyone.</string>
 
+    <string name="ElderPermission_12_T">Display Over Other Apps</string>
+    <string name="ElderPermission_12_S">Urgent alerts anywhere</string>
+    <string name="ElderPermission_12_R1">Allows emergency alerts to appear over any app you are currently using, ensuring you never miss a fall detection or SOS alert.</string>
+    <string name="ElderPermission_12_R2">In the next screen, find \"GuardianSathi\" and toggle \"Allow display over other apps\" on.</string>
+    <string name="ElderPermission_12_D">This is only used for critical safety alerts. GuardianSathi will never use this to show advertisements or unnecessary popups.</string>
+
     <string name="ElderHome_1">Missing Permissions</string>
     <string name="ElderHome_2">You are protected</string>
     <string name="ElderHome_3">Talk to assistant</string>

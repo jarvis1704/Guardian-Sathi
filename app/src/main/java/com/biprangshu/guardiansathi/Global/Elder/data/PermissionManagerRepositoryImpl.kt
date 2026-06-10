@@ -61,4 +61,8 @@ class PermissionManagerRepositoryImpl @Inject constructor(
             true // automatically granted below Android 14
         }
     }
+
+    override fun isSystemAlertWindowEnabled(): Boolean {
+        return Settings.canDrawOverlays(context)
+    }
 }

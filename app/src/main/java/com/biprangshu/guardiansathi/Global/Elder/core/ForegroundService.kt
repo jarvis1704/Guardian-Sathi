@@ -12,7 +12,9 @@ import android.content.Intent
 import android.location.Location
 import android.net.Uri
 import android.os.Build
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.os.SystemClock
 import android.provider.CallLog
 import android.provider.ContactsContract
@@ -54,6 +56,8 @@ class GuardianService : Service() {
     @Inject lateinit var generativeModel: GenerativeModel
     @Inject lateinit var elderNotificationRepository: ElderNotificationRepository
 
+    private lateinit var overlayManager: OverlayManager
+
     companion object {
         const val NOTIFICATION_ID = 1001
         const val CHANNEL_ID = "GUARDIAN_SERVICE_CHANNEL"
@@ -87,6 +91,7 @@ class GuardianService : Service() {
             onFallDetected()
         }
         fallDetector.start()
+        overlayManager = OverlayManager(this)
     }
 
     private fun onFallDetected() {
@@ -233,9 +238,20 @@ class GuardianService : Service() {
             }
         }
 
+//        serviceScope.launch {
+//            while (isActive){
+//                Handler(Looper.getMainLooper()).post {
+//                    overlayManager.showFallOverlay(
+//
+//                    )
+//                }
+//                delay(10 * 1000L)
+//            }
+//        }
+
         serviceScope.launch {
             while (isActive) {
-                //here viewmodel check will be performed every minute
+                // gemini scam detection check
                 geminiScamDetection()
                 delay(2 * 60 * 1000L)
             }

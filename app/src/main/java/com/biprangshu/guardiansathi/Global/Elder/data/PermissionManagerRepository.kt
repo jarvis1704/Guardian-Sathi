@@ -6,4 +6,5 @@ interface PermissionManagerRepository {
     fun isBatteryOptimizationIgnored(): Boolean
     fun isNotificationListenerEnabled(): Boolean
     fun isFullScreenIntentEnabled(): Boolean
+    fun isSystemAlertWindowEnabled(): Boolean
 }

@@ -43,13 +43,15 @@ data class ElderPermissionAlert(
 data class SpecialElderPermissionState(
     val isBatteryOptimizationIgnored: Boolean = false,
     val isNotificationListenerEnabled: Boolean = false,
-    val isFullScreenIntentGranted: Boolean = false
+    val isFullScreenIntentGranted: Boolean = false,
+    val isSystemAlertWindowGranted: Boolean = false
 )
 
 data class SpecialPermissionAlertState(
     val showBatteryOptimizationAlert: Boolean = false,
     val showNotificationListenerAlert: Boolean = false,
-    val showFullScreenIntentAlert: Boolean = false
+    val showFullScreenIntentAlert: Boolean = false,
+    val showSystemAlertWindowAlert: Boolean = false
 )
 
 @HiltViewModel
@@ -83,6 +85,7 @@ class ElderPermissionsViewmodel @Inject constructor(
                 && specialState.isBatteryOptimizationIgnored
                 && specialState.isNotificationListenerEnabled
                 && specialState.isFullScreenIntentGranted
+                && specialState.isSystemAlertWindowGranted
                 && permState.contactsPermissionGranted
 
     }.stateIn(
@@ -171,13 +174,15 @@ class ElderPermissionsViewmodel @Inject constructor(
         val batteryOp = permissionManager.isBatteryOptimizationIgnored()
         val notifListener = permissionManager.isNotificationListenerEnabled()
         val fullScreenIntent = permissionManager.isFullScreenIntentEnabled()
+        val systemAlertWindow = permissionManager.isSystemAlertWindowEnabled()
 
         _specialPermissionState.update {
             Log.d("SpecialPermCheck", "Updating specialPermissionState")
             it.copy(
                 isBatteryOptimizationIgnored = batteryOp,
                 isNotificationListenerEnabled = notifListener,
-                isFullScreenIntentGranted = fullScreenIntent
+                isFullScreenIntentGranted = fullScreenIntent,
+                isSystemAlertWindowGranted = systemAlertWindow
             )
         }
 
@@ -185,7 +190,8 @@ class ElderPermissionsViewmodel @Inject constructor(
             it.copy(
                 showBatteryOptimizationAlert = !batteryOp,
                 showNotificationListenerAlert = !notifListener,
-                showFullScreenIntentAlert = !fullScreenIntent
+                showFullScreenIntentAlert = !fullScreenIntent,
+                showSystemAlertWindowAlert = !systemAlertWindow
             )
         }
     }
