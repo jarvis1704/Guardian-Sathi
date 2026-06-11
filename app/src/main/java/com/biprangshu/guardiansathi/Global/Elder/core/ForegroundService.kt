@@ -506,16 +506,20 @@ class GuardianService : Service() {
             
             if (result.confidence == LinkConfidence.HIGH || result.confidence == LinkConfidence.MEDIUM) {
                 // Show popup overlay using OverlayManager
+                val localizedMsg = getString(
+                    R.string.suspicious_link_overlay_message,
+                    result.matchedLink,
+                    result.confidence.toString()
+                )
                 overlayManager.showSuspiciousLinkOverlay(
-                    //todo: make this message multilingual using strings
-                    message = "Warning: The following suspicious link was received in a notification:\n\n${result.matchedLink}\n\nThreat Level: ${result.confidence}\n\nPlease tread cautiously."
+                    message = localizedMsg
                 )
 
                 // Send notification to guardian via Firebase
                 val notifData = NotificationData(
                     packageName = "Guardian Saathi",
                     appName = "Guardian Saathi",
-                    title = "Suspicious Link Detected",
+                    title = getString(R.string.suspicious_link_overlay_title),
                     desc = "A suspicious link was received by the elder: ${result.matchedLink}",
                     body = combinedText,
                     timestamp = System.currentTimeMillis()

@@ -219,4 +219,6 @@
     <string name="guardian_geofence_3">Geofence ꯌꯥꯍꯜꯂꯨ</string>
     <string name="guardian_geofence_4">Radius</string>
     <string name="guardian_geofence_5">Configuration ꯁꯦꯚ ꯇꯧ</string>
+    <string name="suspicious_link_overlay_title">Suspicious Link Detected</string>
+    <string name="suspicious_link_overlay_message">Warning: The following suspicious link was received in a notification:\n\n%1$s\n\nThreat Level: %2$s\n\nPlease tread cautiously.</string>
 </resources>

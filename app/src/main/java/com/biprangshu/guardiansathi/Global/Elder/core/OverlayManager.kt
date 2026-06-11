@@ -169,7 +169,7 @@ class OverlayManager(private val context: Context) {
             )
             setContent {
                 ScamDetectionOverlay(
-                    title = "Suspicious Link Detected",
+                    title = context.getString(R.string.suspicious_link_overlay_title),
                     description = message
                 ) {
                     removeOverlay()

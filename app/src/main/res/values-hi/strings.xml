@@ -223,4 +223,6 @@
     <string name="guardian_geofence_3">जियोफेंस सक्षम करें</string>
     <string name="guardian_geofence_4">त्रिज्या</string>
     <string name="guardian_geofence_5">कॉन्फ़िगरेशन सहेजें</string>
+    <string name="suspicious_link_overlay_title">संदिग्ध लिंक का पता चला</string>
+    <string name="suspicious_link_overlay_message">चेतावनी: नोटिफिकेशन में निम्नलिखित संदिग्ध लिंक प्राप्त हुआ है:\n\n%1$s\n\nखतरे का स्तर: %2$s\n\nकृपया सावधानी से आगे बढ़ें।</string>
 </resources>

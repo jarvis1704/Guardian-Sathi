@@ -224,4 +224,6 @@
     <string name="guardian_geofence_3">ਜਿਓਫੈਂਸ ਚਾਲੂ ਕਰੋ</string>
     <string name="guardian_geofence_4">ਰੇਡੀਅਸ</string>
     <string name="guardian_geofence_5">ਕੰਫਿਗਰੇਸ਼ਨ ਸੇਵ ਕਰੋ</string>
+    <string name="suspicious_link_overlay_title">ਸ਼ੱਕੀ ਲਿੰਕ ਮਿਲਿਆ</string>
+    <string name="suspicious_link_overlay_message">ਚੇਤਾਵਨੀ: ਨੋਟੀਫਿਕੇਸ਼ਨ ਵਿੱਚ ਹੇਠ ਲਿਖਿਆ ਸ਼ੱਕੀ ਲਿੰਕ ਮਿਲਿਆ ਹੈ:\n\n%1$s\n\nਖ਼ਤਰੇ ਦਾ ਪੱਧਰ: %2$s\n\nਕਿਰਪา ਕਰਕੇ ਸਾਵਧਾਨ ਰਹੋ।</string>
 </resources>

@@ -220,4 +220,6 @@
     <string name="guardian_geofence_3">ಜಿಯೋಫೆನ್ಸ್ ಸಕ್ರಿಯಗೊಳಿಸಿ</string>
     <string name="guardian_geofence_4">ವ್ಯಾಸಾರ್ಧ</string>
     <string name="guardian_geofence_5">ವಿನ್ಯಾಸವನ್ನು ಉಳಿಸಿ</string>
+    <string name="suspicious_link_overlay_title">ಸಂದೇಹಾಸ್ಪದ ಲಿಂಕ್ ಪತ್ತೆಯಾಗಿದೆ</string>
+    <string name="suspicious_link_overlay_message">ಎಚ್ಚರಿಕೆ: ಅಧಿಸೂಚನೆಯಲ್ಲಿ ಈ ಕೆಳಗಿನ ಸಂದೇಹಾಸ್ಪದ ಲಿಂಕ್ ಸ್ವೀಕರಿಸಲಾಗಿದೆ:\n\n%1$s\n\nಅಪಾಯದ ಮಟ್ಟ: %2$s\n\nದಯವಿಟ್ಟು ಎಚ್ಚರಿಕೆಯಿಂದ ಇರಿ.</string>
 </resources>
