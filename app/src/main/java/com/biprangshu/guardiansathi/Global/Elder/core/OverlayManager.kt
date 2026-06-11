@@ -145,6 +145,57 @@ class OverlayManager(private val context: Context) {
             }
         }
     }
+
+    fun showSuspiciousLinkOverlay(
+        message: String,
+        onDismiss: () -> Unit = {}
+    ) {
+        if (overlayView != null) return
+        if (!Settings.canDrawOverlays(context)) return
+
+        val params = WindowManager.LayoutParams(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
+                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
+                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
+            PixelFormat.TRANSLUCENT
+        )
+
+        val composeView = ComposeView(context).apply {
+            setViewCompositionStrategy(
+                ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
+            )
+            setContent {
+                ScamDetectionOverlay(
+                    title = "Suspicious Link Detected",
+                    description = message
+                ) {
+                    removeOverlay()
+                    onDismiss()
+                }
+            }
+        }
+
+        // Attach lifecycle BEFORE adding to WindowManager
+        lifecycleOwner.attachToDecorView(composeView)
+        lifecycleOwner.onCreate()
+        lifecycleOwner.onStart()
+        lifecycleOwner.onResume()
+
+        overlayView = composeView
+
+        // Must run on main thread
+        Handler(Looper.getMainLooper()).post {
+            try {
+                windowManager.addView(composeView, params)
+            } catch (e: Exception) {
+                Log.e("OverlayManager", "Failed to add overlay view: ${e.message}")
+                overlayView = null
+            }
+        }
+    }
 }
 
 // OverlayLifecycleOwner.kt
@@ -196,6 +247,7 @@ class OverlayLifecycleOwner : LifecycleOwner, ViewModelStoreOwner, SavedStateReg
 @Composable
 fun ScamDetectionOverlay(
     description: String,
+    title: String = "Possible Scam Detected",
     onDismiss: () -> Unit
 ) {
     Box(
@@ -230,7 +282,7 @@ fun ScamDetectionOverlay(
                 )
 
                 Text(
-                    text = "Possible Scam Detected",
+                    text = title,
                     color = Color.White,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,

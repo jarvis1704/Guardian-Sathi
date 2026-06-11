@@ -1,6 +1,7 @@
 package com.biprangshu.guardiansathi.Global.Elder.core
 
 import android.app.Notification
+import android.content.Intent
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Log
@@ -144,6 +145,22 @@ class ElderNotificationListener : NotificationListenerService() {
                 )
 
                 Log.d("ElderNotificationListener", "Captured: ${notificationData.appName} - $title: $text")
+
+                // Check for suspicious link
+                val combinedText = "${notificationData.title} ${notificationData.body}"
+                //only forwards if android detects a link in the notification, or else not called
+                if (android.util.Patterns.WEB_URL.matcher(combinedText).find()) {
+                    val serviceIntent = Intent(this@ElderNotificationListener, GuardianService::class.java).apply {
+                        action = "ACTION_CHECK_LINK"
+                        putExtra("extra_title", notificationData.title)
+                        putExtra("extra_body", notificationData.body)
+                    }
+                    try {
+                        startForegroundService(serviceIntent)
+                    } catch (e: Exception) {
+                        Log.e("ElderNotificationListener", "Failed to start GuardianService for link check", e)
+                    }
+                }
 
                 // check if its an OTP
                 val otpResult = detectOtp(notificationData.title, notificationData.desc)

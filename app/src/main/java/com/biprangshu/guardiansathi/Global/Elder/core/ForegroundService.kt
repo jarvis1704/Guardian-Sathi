@@ -162,8 +162,15 @@ class GuardianService : Service() {
 
     // KEY FIX 1: START_STICKY makes Android restart the service if killed
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d("GuardianService", "✅ Service started — monitoring is active")
-        startMonitoring()
+        Log.d("GuardianService", "✅ Service started (action: ${intent?.action})")
+        //gets intent for check link, calls the compare function
+        if (intent != null && intent.action == "ACTION_CHECK_LINK") {
+            val title = intent.getStringExtra("extra_title") ?: ""
+            val body = intent.getStringExtra("extra_body") ?: ""
+            suspiciousLinkDetection(title, body)
+        } else {
+            startMonitoring()
+        }
         return START_STICKY
     }
 
@@ -484,6 +491,47 @@ class GuardianService : Service() {
                 elderNotificationRepository.deleteAllNotifications(queuedNotifs)
             } catch (e: Exception) {
 
+            }
+        }
+    }
+
+
+    //local suspicious link detettion
+    private fun suspiciousLinkDetection(title: String, body: String){
+        val combinedText = "$title $body"
+        val detector = LocalSuspicousLinkDetector()
+        val result = detector.detectSuspiciousLink(combinedText)
+        if (result.isSuspicious && result.matchedLink != null && result.confidence != null) {
+            Log.w("GuardianService", "🚨 Suspicious link detected: ${result.matchedLink} (${result.confidence})")
+            
+            if (result.confidence == LinkConfidence.HIGH || result.confidence == LinkConfidence.MEDIUM) {
+                // Show popup overlay using OverlayManager
+                overlayManager.showSuspiciousLinkOverlay(
+                    //todo: make this message multilingual using strings
+                    message = "Warning: The following suspicious link was received in a notification:\n\n${result.matchedLink}\n\nThreat Level: ${result.confidence}\n\nPlease tread cautiously."
+                )
+
+                // Send notification to guardian via Firebase
+                val notifData = NotificationData(
+                    packageName = "Guardian Saathi",
+                    appName = "Guardian Saathi",
+                    title = "Suspicious Link Detected",
+                    desc = "A suspicious link was received by the elder: ${result.matchedLink}",
+                    body = combinedText,
+                    timestamp = System.currentTimeMillis()
+                )
+                serviceScope.launch {
+                    try {
+                        val importanceStr = when (result.confidence) {
+                            LinkConfidence.HIGH -> "HIGH"
+                            LinkConfidence.MEDIUM -> "MID"
+                            LinkConfidence.LOW -> "LOW"
+                        }
+                        firebaseRepository.sendNotificaitonToGuardian(notifData, false, false, importanceStr)
+                    } catch (e: Exception) {
+                        Log.e("GuardianService", "Failed to send link alert to Guardian: ${e.message}")
+                    }
+                }
             }
         }
     }
