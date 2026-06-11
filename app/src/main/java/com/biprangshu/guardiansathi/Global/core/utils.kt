@@ -65,3 +65,18 @@ fun isGestureNavigationEnabled(context: Context): Boolean {
         false // Default to 3-button if not found
     }
 }
+
+fun isPaymentAccessibilityServiceEnabled(context: Context): Boolean {
+    val service = "${context.packageName}/com.biprangshu.guardiansathi.Global.Elder.core.PaymentAccessibilityService"
+    val enabled = Settings.Secure.getString(
+        context.contentResolver,
+        Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
+    ) ?: return false
+    return enabled.contains(service)
+}
+
+fun openAccessibilitySettings(context: Context) {
+    context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).apply {
+        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+    })
+}

@@ -65,4 +65,13 @@ class PermissionManagerRepositoryImpl @Inject constructor(
     override fun isSystemAlertWindowEnabled(): Boolean {
         return Settings.canDrawOverlays(context)
     }
+
+    override fun isPaymentAccessibilityEnabled(): Boolean {
+        val service = "${context.packageName}/com.biprangshu.guardiansathi.Global.Elder.core.PaymentAccessibilityService"
+        val enabled = Settings.Secure.getString(
+            context.contentResolver,
+            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
+        ) ?: return false
+        return enabled.contains(service)
+    }
 }

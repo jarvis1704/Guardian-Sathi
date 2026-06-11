@@ -44,14 +44,16 @@ data class SpecialElderPermissionState(
     val isBatteryOptimizationIgnored: Boolean = false,
     val isNotificationListenerEnabled: Boolean = false,
     val isFullScreenIntentGranted: Boolean = false,
-    val isSystemAlertWindowGranted: Boolean = false
+    val isSystemAlertWindowGranted: Boolean = false,
+    val isPaymentAccessibilityEnabled: Boolean = false
 )
 
 data class SpecialPermissionAlertState(
     val showBatteryOptimizationAlert: Boolean = false,
     val showNotificationListenerAlert: Boolean = false,
     val showFullScreenIntentAlert: Boolean = false,
-    val showSystemAlertWindowAlert: Boolean = false
+    val showSystemAlertWindowAlert: Boolean = false,
+    val showPaymentAccessibilityAlert: Boolean = false
 )
 
 @HiltViewModel
@@ -86,6 +88,7 @@ class ElderPermissionsViewmodel @Inject constructor(
                 && specialState.isNotificationListenerEnabled
                 && specialState.isFullScreenIntentGranted
                 && specialState.isSystemAlertWindowGranted
+                && specialState.isPaymentAccessibilityEnabled
                 && permState.contactsPermissionGranted
 
     }.stateIn(
@@ -175,6 +178,7 @@ class ElderPermissionsViewmodel @Inject constructor(
         val notifListener = permissionManager.isNotificationListenerEnabled()
         val fullScreenIntent = permissionManager.isFullScreenIntentEnabled()
         val systemAlertWindow = permissionManager.isSystemAlertWindowEnabled()
+        val paymentAccessibility = permissionManager.isPaymentAccessibilityEnabled()
 
         _specialPermissionState.update {
             Log.d("SpecialPermCheck", "Updating specialPermissionState")
@@ -182,7 +186,8 @@ class ElderPermissionsViewmodel @Inject constructor(
                 isBatteryOptimizationIgnored = batteryOp,
                 isNotificationListenerEnabled = notifListener,
                 isFullScreenIntentGranted = fullScreenIntent,
-                isSystemAlertWindowGranted = systemAlertWindow
+                isSystemAlertWindowGranted = systemAlertWindow,
+                isPaymentAccessibilityEnabled = paymentAccessibility
             )
         }
 
@@ -191,7 +196,8 @@ class ElderPermissionsViewmodel @Inject constructor(
                 showBatteryOptimizationAlert = !batteryOp,
                 showNotificationListenerAlert = !notifListener,
                 showFullScreenIntentAlert = !fullScreenIntent,
-                showSystemAlertWindowAlert = !systemAlertWindow
+                showSystemAlertWindowAlert = !systemAlertWindow,
+                showPaymentAccessibilityAlert = !paymentAccessibility
             )
         }
     }

@@ -122,6 +122,12 @@
     <string name="ElderPermission_12_R2">In the next screen, find \"GuardianSathi\" and toggle \"Allow display over other apps\" on.</string>
     <string name="ElderPermission_12_D">This is only used for critical safety alerts. GuardianSathi will never use this to show advertisements or unnecessary popups.</string>
 
+    <string name="ElderPermission_13_T">Payment Protection</string>
+    <string name="ElderPermission_13_S">Scan payments for scams</string>
+    <string name="ElderPermission_13_R1">Analyzes payment screens to warn you before sending money to suspicious recipients or making unusually large payments.</string>
+    <string name="ElderPermission_13_R2">In the next screen, find \"GuardianSathi\" and toggle \"Use GuardianSathi\" on. Tap \"Allow\" to confirm.</string>
+    <string name="ElderPermission_13_D">We only scan for payment amounts and recipient IDs. No passwords, pins, or card numbers are ever recorded or shared.</string>
+
     <string name="ElderHome_1">Missing Permissions</string>
     <string name="ElderHome_2">You are protected</string>
     <string name="ElderHome_3">Talk to assistant</string>

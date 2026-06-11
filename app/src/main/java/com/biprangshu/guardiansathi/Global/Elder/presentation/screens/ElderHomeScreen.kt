@@ -236,6 +236,21 @@ fun ElderHomeScreen(
         )
     }
 
+    if (specialPermissionAlertState.showPaymentAccessibilityAlert) {
+        PermissionAlertDialog(
+            title = stringResource(R.string.ElderPermission_13_T),
+            subtitle = stringResource(R.string.ElderPermission_13_S),
+            reason1 = stringResource(R.string.ElderPermission_13_R1),
+            reason2 = stringResource(R.string.ElderPermission_13_R2),
+            disclaimer = stringResource(R.string.ElderPermission_13_D),
+            icon = Icons.Rounded.TrackChanges, // Suitable icon for scanning/protection
+            onContinue = {
+                val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+                context.startActivity(intent)
+            }
+        )
+    }
+
 
 
     if (permissionState.locationPermissionGranted &&

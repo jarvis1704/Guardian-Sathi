@@ -7,4 +7,5 @@ interface PermissionManagerRepository {
     fun isNotificationListenerEnabled(): Boolean
     fun isFullScreenIntentEnabled(): Boolean
     fun isSystemAlertWindowEnabled(): Boolean
+    fun isPaymentAccessibilityEnabled(): Boolean
 }
