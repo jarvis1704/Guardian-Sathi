@@ -77,10 +77,14 @@ import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.biprangshu.guardiansathi.R
 import com.biprangshu.guardiansathi.Global.presentation.ui.theme.GuardianSathiTheme
+import com.biprangshu.guardiansathi.Global.Elder.data.ElderFirebaseRepository
 import kotlinx.coroutines.delay
 
 // OverlayManager.kt
-class OverlayManager(private val context: Context) {
+class OverlayManager(
+    private val context: Context,
+    private val firebaseRepository: ElderFirebaseRepository? = null
+) {
 
     private val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     private var overlayView: ComposeView? = null
@@ -116,6 +120,19 @@ class OverlayManager(private val context: Context) {
                         severity = OverlaySeverity.CRITICAL,
                         onCallGuardian = {
                             removeOverlay()
+                            firebaseRepository?.sendNotificaitonToGuardian(
+                                notificationData = NotificationData(
+                                    packageName = "Guardian Saathi",
+                                    appName = "Guardian Saathi",
+                                    title = "🚨 Elder Needs Help!",
+                                    desc = "Elder pressed \"Get Immediate Help\" after a fall was detected. Respond immediately.",
+                                    body = "Elder triggered emergency help request from fall alert overlay.",
+                                    timestamp = System.currentTimeMillis()
+                                ),
+                                isOtp = false,
+                                isTransaction = false,
+                                customImportance = "HIGH"
+                            )
                             onCallEmergency()
                         },
                         onDismiss = {
@@ -196,6 +213,19 @@ class OverlayManager(private val context: Context) {
                         severity = severity,
                         onCallGuardian = {
                             removeOverlay()
+                            firebaseRepository?.sendNotificaitonToGuardian(
+                                notificationData = NotificationData(
+                                    packageName = "Guardian Saathi",
+                                    appName = "Guardian Saathi",
+                                    title = "🚨 Elder Called Guardian!",
+                                    desc = "Elder pressed \"Call Guardian\" from a scam/suspicious activity alert. Check in immediately.",
+                                    body = "Elder triggered guardian call from scam detection overlay.",
+                                    timestamp = System.currentTimeMillis()
+                                ),
+                                isOtp = false,
+                                isTransaction = false,
+                                customImportance = "HIGH"
+                            )
                             onCallGuardian()
                         },
                         onDismiss = {

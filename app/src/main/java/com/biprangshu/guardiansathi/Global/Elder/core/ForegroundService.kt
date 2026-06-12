@@ -91,7 +91,7 @@ class GuardianService : Service() {
             onFallDetected()
         }
         fallDetector.start()
-        overlayManager = OverlayManager(this)
+        overlayManager = OverlayManager(this, firebaseRepository)
     }
 
     private fun onFallDetected() {

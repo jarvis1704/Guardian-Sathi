@@ -4,8 +4,14 @@ import android.accessibilityservice.AccessibilityService
 import android.os.Handler
 import android.os.Looper
 import android.view.accessibility.AccessibilityEvent
+import com.biprangshu.guardiansathi.Global.Elder.data.ElderFirebaseRepository
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PaymentAccessibilityService : AccessibilityService() {
+
+    @Inject lateinit var firebaseRepository: ElderFirebaseRepository
 
     private lateinit var overlayManager: OverlayManager
 
@@ -19,7 +25,7 @@ class PaymentAccessibilityService : AccessibilityService() {
 
     override fun onServiceConnected() {
         super.onServiceConnected()
-        overlayManager = OverlayManager(this)
+        overlayManager = OverlayManager(this, firebaseRepository)
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
