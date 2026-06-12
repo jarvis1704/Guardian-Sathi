@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.accessibility.AccessibilityEvent
 import com.biprangshu.guardiansathi.Global.Elder.data.ElderFirebaseRepository
+import com.biprangshu.guardiansathi.R
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -53,6 +54,7 @@ class PaymentAccessibilityService : AccessibilityService() {
         Handler(Looper.getMainLooper()).post {
             overlayManager.showSuspiciousLinkOverlay(
                 message = message,
+                title = getString(R.string.suspicious_payment_title),
                 onDismiss = {
                     // TODO: send acknowledgement to guardian via FirebaseRepository
                     // TODO: log this payment alert event for the guardian's dashboard

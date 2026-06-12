@@ -213,13 +213,28 @@ class OverlayManager(
                         severity = severity,
                         onCallGuardian = {
                             removeOverlay()
+                            if (firebaseRepository == null) {
+                                Log.e("OverlayManager", "firebaseRepository is null! Cannot send Call Guardian notification.")
+                            }
+                            val isPayment = title == context.getString(R.string.suspicious_payment_title)
+                            val notifTitle = if (isPayment) "🚨 Elder Called Guardian (Payment Alert)!" else "🚨 Elder Called Guardian!"
+                            val notifDesc = if (isPayment) {
+                                "Elder pressed \"Call Guardian\" from a suspicious payment alert. Check in immediately."
+                            } else {
+                                "Elder pressed \"Call Guardian\" from a scam/suspicious activity alert. Check in immediately."
+                            }
+                            val notifBody = if (isPayment) {
+                                "Elder triggered guardian call from payment overlay."
+                            } else {
+                                "Elder triggered guardian call from scam detection overlay."
+                            }
                             firebaseRepository?.sendNotificaitonToGuardian(
                                 notificationData = NotificationData(
                                     packageName = "Guardian Saathi",
                                     appName = "Guardian Saathi",
-                                    title = "🚨 Elder Called Guardian!",
-                                    desc = "Elder pressed \"Call Guardian\" from a scam/suspicious activity alert. Check in immediately.",
-                                    body = "Elder triggered guardian call from scam detection overlay.",
+                                    title = notifTitle,
+                                    desc = notifDesc,
+                                    body = notifBody,
                                     timestamp = System.currentTimeMillis()
                                 ),
                                 isOtp = false,
