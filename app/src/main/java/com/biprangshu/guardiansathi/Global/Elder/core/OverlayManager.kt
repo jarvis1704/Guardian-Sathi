@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material.icons.rounded.GppBad
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.Button
@@ -169,7 +170,7 @@ class OverlayManager(private val context: Context) {
             )
             setContent {
                 ScamDetectionOverlay(
-                    title = context.getString(R.string.suspicious_link_overlay_title),
+                    title = "Unusual Payment Detected!",
                     description = message
                 ) {
                     removeOverlay()
