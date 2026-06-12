@@ -354,6 +354,8 @@ fun ScamDetectionOverlay(
         onDismiss()
     }
 
+    //todo: change the text to have the strings which are language translatable
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
