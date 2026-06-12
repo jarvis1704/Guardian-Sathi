@@ -18,9 +18,11 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -47,12 +49,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.text.font.FontWeight
@@ -71,6 +76,7 @@ import androidx.savedstate.SavedStateRegistryController
 import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.biprangshu.guardiansathi.R
+import com.biprangshu.guardiansathi.Global.presentation.ui.theme.GuardianSathiTheme
 import kotlinx.coroutines.delay
 
 // OverlayManager.kt
@@ -103,10 +109,21 @@ class OverlayManager(private val context: Context) {
                 ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
             )
             setContent {
-                ScamDetectionOverlay(
-                    "This is a description"
-                ) {
-                    removeOverlay()
+                GuardianSathiTheme {
+                    ScamDetectionOverlay(
+                        title = "Fall Detected",
+                        description = "We detected a possible fall. Are you okay?",
+                        severity = OverlaySeverity.CRITICAL,
+                        onCallGuardian = {
+                            removeOverlay()
+                            onCallEmergency()
+                        },
+                        onDismiss = {
+                            removeOverlay()
+                            onImOkay()
+                            onDismiss()
+                        }
+                    )
                 }
             }
         }
@@ -149,6 +166,9 @@ class OverlayManager(private val context: Context) {
 
     fun showSuspiciousLinkOverlay(
         message: String,
+        title: String = context.getString(R.string.suspicious_link_overlay_title),
+        severity: OverlaySeverity = OverlaySeverity.WARNING,
+        onCallGuardian: () -> Unit = {},
         onDismiss: () -> Unit = {}
     ) {
         if (overlayView != null) return
@@ -169,12 +189,20 @@ class OverlayManager(private val context: Context) {
                 ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
             )
             setContent {
-                ScamDetectionOverlay(
-                    title = context.getString(R.string.suspicious_payment_title),
-                    description = message
-                ) {
-                    removeOverlay()
-                    onDismiss()
+                GuardianSathiTheme {
+                    ScamDetectionOverlay(
+                        title = title,
+                        description = message,
+                        severity = severity,
+                        onCallGuardian = {
+                            removeOverlay()
+                            onCallGuardian()
+                        },
+                        onDismiss = {
+                            removeOverlay()
+                            onDismiss()
+                        }
+                    )
                 }
             }
         }
@@ -245,48 +273,210 @@ class OverlayLifecycleOwner : LifecycleOwner, ViewModelStoreOwner, SavedStateReg
 }
 
 
+//based on the severity, the colours wil be orange or red
+enum class OverlaySeverity {
+    WARNING,
+    CRITICAL
+}
+
 @Composable
 fun ScamDetectionOverlay(
     description: String,
     title: String = "Possible Scam Detected",
+    severity: OverlaySeverity = OverlaySeverity.WARNING,
+    onCallGuardian: () -> Unit = {},
     onDismiss: () -> Unit
 ) {
+    val primaryColor = if (severity == OverlaySeverity.CRITICAL) Color(0xFFD32F2F) else Color(0xFFFF8C00)
+    val glowColor = if (severity == OverlaySeverity.CRITICAL) Color(0xFFFF5252) else Color(0xFFFFB300)
+    val cardBgColor = if (severity == OverlaySeverity.CRITICAL) Color(0xFF1F0D0D) else Color(0xFF1F150D)
+    val iconVector = if (severity == OverlaySeverity.CRITICAL) Icons.Rounded.GppBad else Icons.Rounded.Warning
+
+    // Animation transition setup
+    val infiniteTransition = rememberInfiniteTransition(label = "pulse")
+    val scale1 by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 1.6f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 2000, easing = EaseInOut),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "scale1"
+    )
+    val alpha1 by infiniteTransition.animateFloat(
+        initialValue = 0.6f,
+        targetValue = 0f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 2000, easing = EaseInOut),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "alpha1"
+    )
+
+    val scale2 by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 1.6f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 2000, delayMillis = 1000, easing = EaseInOut),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "scale2"
+    )
+    val alpha2 by infiniteTransition.animateFloat(
+        initialValue = 0.6f,
+        targetValue = 0f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 2000, delayMillis = 1000, easing = EaseInOut),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "alpha2"
+    )
+
+    val iconScale by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 1.08f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 1000, easing = EaseInOut),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "iconScale"
+    )
+
+    var progress by remember { mutableStateOf(1f) }
+    LaunchedEffect(Unit) {
+        val duration = 30000L
+        val stepTime = 100L
+        val totalSteps = duration / stepTime
+        for (i in 0..totalSteps) {
+            progress = 1f - (i.toFloat() / totalSteps)
+            delay(stepTime)
+        }
+        onDismiss()
+    }
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
+        // Overlay Scrim
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Black.copy(alpha = 0.6f))
+                .background(Color.Black.copy(alpha = 0.82f))
+        )
+
+        // Radial Glow effect behind the card
+        Box(
+            modifier = Modifier
+                .size(450.dp)
+                .background(
+                    brush = Brush.radialGradient(
+                        colors = listOf(glowColor.copy(alpha = 0.15f), Color.Transparent)
+                    ),
+                    shape = CircleShape
+                )
         )
 
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 24.dp),
-            shape = RoundedCornerShape(20.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF1A1A2E)),
-            elevation = CardDefaults.cardElevation(defaultElevation = 16.dp)
+                .padding(horizontal = 20.dp),
+            shape = RoundedCornerShape(24.dp),
+            colors = CardDefaults.cardColors(containerColor = cardBgColor.copy(alpha = 0.95f)),
+            elevation = CardDefaults.cardElevation(defaultElevation = 24.dp),
+            border = BorderStroke(
+                width = 1.5.dp,
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        primaryColor.copy(alpha = 0.4f),
+                        primaryColor.copy(alpha = 0.1f)
+                    )
+                )
+            )
         ) {
             Column(
-                modifier = Modifier.padding(28.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 28.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
+                // Pulsing Icon
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.size(120.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(72.dp)
+                            .graphicsLayer {
+                                scaleX = scale1
+                                scaleY = scale1
+                                alpha = alpha1
+                            }
+                            .background(primaryColor.copy(alpha = 0.25f), shape = CircleShape)
+                    )
+                    Box(
+                        modifier = Modifier
+                            .size(72.dp)
+                            .graphicsLayer {
+                                scaleX = scale2
+                                scaleY = scale2
+                                alpha = alpha2
+                            }
+                            .background(primaryColor.copy(alpha = 0.25f), shape = CircleShape)
+                    )
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(72.dp)
+                            .graphicsLayer {
+                                scaleX = iconScale
+                                scaleY = iconScale
+                            }
+                            .background(
+                                brush = Brush.radialGradient(
+                                    colors = listOf(
+                                        primaryColor.copy(alpha = 0.2f),
+                                        primaryColor.copy(alpha = 0.05f)
+                                    )
+                                ),
+                                shape = CircleShape
+                            )
+                            .border(2.dp, primaryColor.copy(alpha = 0.8f), CircleShape)
+                    ) {
+                        Icon(
+                            imageVector = iconVector,
+                            contentDescription = "Alert Icon",
+                            tint = primaryColor,
+                            modifier = Modifier.size(38.dp)
+                        )
+                    }
+                }
 
-                Icon(
-                    imageVector = Icons.Rounded.GppBad,
-                    contentDescription = "Scam detected",
-                    tint = Color(0xff0058BD),
-                    modifier = Modifier.size(52.dp)
-                )
+                // Severity badge
+                val badgeText = if (severity == OverlaySeverity.CRITICAL) "CRITICAL ACTION REQUIRED" else "SUSPICIOUS ACTIVITY DETECTED"
+                Box(
+                    modifier = Modifier
+                        .background(primaryColor.copy(alpha = 0.12f), shape = RoundedCornerShape(50.dp))
+                        .border(1.dp, primaryColor.copy(alpha = 0.4f), RoundedCornerShape(50.dp))
+                        .padding(horizontal = 12.dp, vertical = 5.dp)
+                ) {
+                    Text(
+                        text = badgeText,
+                        color = primaryColor,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 1.sp,
+                        textAlign = TextAlign.Center
+                    )
+                }
 
                 Text(
                     text = title,
                     color = Color.White,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.ExtraBold,
                     letterSpacing = 0.5.sp,
                     textAlign = TextAlign.Center
                 )
@@ -298,25 +488,80 @@ fun ScamDetectionOverlay(
 
                 Text(
                     text = description,
-                    color = Color.White.copy(alpha = 0.75f),
-                    fontSize = 14.sp,
+                    color = Color.White.copy(alpha = 0.85f),
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Normal,
                     textAlign = TextAlign.Center,
-                    lineHeight = 21.sp
+                    lineHeight = 22.sp,
+                    modifier = Modifier.padding(horizontal = 8.dp)
                 )
 
-                Button(
-                    onClick = onDismiss,
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0058BD))
+                // Countdown Timer bar
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(6.dp),
+                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp)
                 ) {
-                    Text(
-                        text = "Okay",
-                        color = Color.Black,
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        modifier = Modifier.padding(vertical = 4.dp)
+                    LinearProgressIndicator(
+                        progress = { progress },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(6.dp)
+                            .clip(RoundedCornerShape(3.dp)),
+                        color = primaryColor,
+                        trackColor = Color.White.copy(alpha = 0.1f)
                     )
+                    Text(
+                        text = "Auto-dismissing in ${kotlin.math.ceil(progress * 30).toInt()}s",
+                        color = Color.White.copy(alpha = 0.5f),
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                // Actions Layout
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(10.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Button(
+                        onClick = onCallGuardian,
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(14.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = primaryColor,
+                            contentColor = Color.White
+                        ),
+                        elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
+                    ) {
+                        Text(
+                            text = if (severity == OverlaySeverity.CRITICAL) "Get Immediate Help" else "Call Guardian",
+                            color = Color.White,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(vertical = 4.dp)
+                        )
+                    }
+
+                    OutlinedButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(14.dp),
+                        border = BorderStroke(1.dp, Color.White.copy(alpha = 0.3f)),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = Color.White
+                        )
+                    ) {
+                        Text(
+                            text = "I understand, close",
+                            color = Color.White.copy(alpha = 0.8f),
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier.padding(vertical = 4.dp)
+                        )
+                    }
                 }
             }
         }
