@@ -227,4 +227,5 @@
     <string name="guardian_geofence_5">কনফিগারেশন সংরক্ষণ করুন</string>
     <string name="suspicious_link_overlay_title">সন্দেহজনক লিঙ্ক সনাক্ত করা হয়েছে</string>
     <string name="suspicious_link_overlay_message">সতর্কতা: একটি বিজ্ঞপ্তিতে নিম্নলিখিত সন্দেহজনক লিঙ্কটি পাওয়া গেছে:\n\n%1$s\n\nহুমকির মাত্রা: %2$s\n\nঅনুগ্রহ করে সতর্কতার সাথে চলুন।</string>
+    <string name="suspicious_payment_title">অস্বাভাবিক পেমেন্ট শনাক্ত করা হয়েছে</string>
 </resources>

@@ -170,7 +170,7 @@ class OverlayManager(private val context: Context) {
             )
             setContent {
                 ScamDetectionOverlay(
-                    title = "Unusual Payment Detected!",
+                    title = "Unusual Payment Detected",
                     description = message
                 ) {
                     removeOverlay()

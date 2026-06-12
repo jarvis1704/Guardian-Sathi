@@ -226,4 +226,5 @@
     <string name="guardian_geofence_5">அமைப்பை சேமிக்கவும்</string>
     <string name="suspicious_link_overlay_title">சந்தேகத்திற்குரிய இணைப்பு கண்டறியப்பட்டது</string>
     <string name="suspicious_link_overlay_message">எச்சரிக்கை: அறிவிப்பில் பின்வரும் சந்தேகத்திற்குரிய இணைப்பு பெறப்பட்டது:\n\n%1$s\n\nஅச்சுறுத்தல் நிலை: %2$s\n\nதயவுசெய்து எச்சரிக்கையுடன் செயல்படவும்.</string>
+    <string name="suspicious_payment_title">வழக்கத்திற்கு மாறான கட்டணம் கண்டறியப்பட்டது</string>
 </resources>

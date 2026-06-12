@@ -226,4 +226,5 @@
     <string name="guardian_geofence_5">కాన్ఫిగరేషన్ సేవ్ చేయండి</string>
     <string name="suspicious_link_overlay_title">అనుమానాస్పద లింక్ కనుగొనబడింది</string>
     <string name="suspicious_link_overlay_message">హెచ్చరిక: నోటిఫికేషన్‌లో కింది అనుమానాస్పద లింక్ వచ్చింది:\n\n%1$s\n\nముప్పు స్థాయి: %2$s\n\nదయచేసి జాగ్రత్తగా ఉండండి.</string>
+    <string name="suspicious_payment_title">అసాధారణ చెల్లింపు గుర్తించబడింది</string>
 </resources>

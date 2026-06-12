@@ -226,4 +226,5 @@
     <string name="guardian_geofence_5">कन्फिगरेसन सेभ गर्नुहोस्</string>
     <string name="suspicious_link_overlay_title">Suspicious Link Detected</string>
     <string name="suspicious_link_overlay_message">Warning: The following suspicious link was received in a notification:\n\n%1$s\n\nThreat Level: %2$s\n\nPlease tread cautiously.</string>
+    <string name="suspicious_payment_title">अनावश्यक भुक्तानी पत्ता लाग्यो</string>
 </resources>

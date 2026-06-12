@@ -226,4 +226,5 @@
     <string name="guardian_geofence_5">ക്രമീകരണം സംരക്ഷിക്കുക</string>
     <string name="suspicious_link_overlay_title">സംശയാസ്പദമായ ലിങ്ക് കണ്ടെത്തി</string>
     <string name="suspicious_link_overlay_message">മുന്നറിയിപ്പ്: അറിയിപ്പിൽ താഴെ പറയുന്ന സംശയാസ്പദമായ ലിങ്ക് ലഭിച്ചു:\n\n%1$s\n\nഭീഷണി നില: %2$s\n\nദയവായി സൂക്ഷിക്കുക.</string>
+    <string name="suspicious_payment_title">അസാധാരണമായ പേയ്‌മെന്റ് കണ്ടെത്തി</string>
 </resources>

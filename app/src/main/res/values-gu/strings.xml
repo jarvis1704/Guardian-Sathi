@@ -226,4 +226,5 @@
     <string name="guardian_geofence_5">કોન્ફિગરેશન સાચવો</string>
     <string name="suspicious_link_overlay_title">શંકાસ્પદ લિંક મળી</string>
     <string name="suspicious_link_overlay_message">ચેતવણી: સૂચનામાં નીચેની શંકાસ્પદ લિંક મળી છે:\n\n%1$s\n\nજોખમનું સ્તર: %2$s\n\nકૃપા કરીને સાવચેત રહો.</string>
+    <string name="suspicious_payment_title">અનૈચ્છિક ચુકવણી મળી</string>
 </resources>

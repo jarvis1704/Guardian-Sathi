@@ -226,4 +226,5 @@
     <string name="guardian_geofence_5">ترتیب محفوظ کریں</string>
     <string name="suspicious_link_overlay_title">مشکوک لنک کا پتہ چلا</string>
     <string name="suspicious_link_overlay_message">انتباہ: نوٹیفکیشن میں درج ذیل مشکوک لنک موصول ہوا ہے:\n\n%1$s\n\nخطرے کی سطح: %2$s\n\nبراہ کرم احتیاط برتیں۔</string>
+    <string name="suspicious_payment_title">غیر معمولی ادائیگی کا پتہ چلا</string>
 </resources>
