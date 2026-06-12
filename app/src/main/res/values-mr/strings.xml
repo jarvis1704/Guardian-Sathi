@@ -116,6 +116,18 @@
     <string name="ElderPermission_11_R2">संरक्षकाला सूचना देते.</string>
     <string name="ElderPermission_11_D">संपर्क डेटा शेअर केला जात नाही.</string>
 
+    <string name="ElderPermission_12_T">इतर अ‍ॅप्सवर प्रदर्शित करा</string>
+    <string name="ElderPermission_12_S">कुठेही तातडीच्या सूचना</string>
+    <string name="ElderPermission_12_R1">तुम्ही सध्या वापरत असलेल्या कोणत्याही अ‍ॅपवर आपत्कालीन अलर्ट दिसण्याची परवानगी देते, ज्यामुळे तुमची फॉल डिटेक्शन किंवा SOS अलर्ट कधीही चुकणार नाही याची खात्री होते.</string>
+    <string name="ElderPermission_12_R2">पुढील स्क्रीनवर \"GuardianSathi\" शोधा आणि \"Allow display over other apps\" चालू करा.</string>
+    <string name="ElderPermission_12_D">हे फक्त गंभीर सुरक्षा सूचनांसाठी वापरले जाते। GuardianSathi जाहिराती किंवा अनावश्यक पॉपअप दाखवण्यासाठी याचा कधीही वापर करणार नाही.</string>
+
+    <string name="ElderPermission_13_T">पेमेंट सुरक्षा</string>
+    <string name="ElderPermission_13_S">फसवणुकीसाठी पेमेंट स्कॅन करा</string>
+    <string name="ElderPermission_13_R1">संशयास्पद प्राप्तकर्त्यांना पैसे पाठवण्यापूर्वी किंवा असामान्यपणे मोठे पेमेंट करण्यापूर्वी तुम्हाला चेतावणी देण्यासाठी पेमेंट स्क्रीनचे विश्लेषण करते.</string>
+    <string name="ElderPermission_13_R2">पुढील स्क्रीनवर \"GuardianSathi\" शोधा आणि \"Use GuardianSathi\" चालू करा। पुष्टी करण्यासाठी \"Allow\" वर टॅप करा.</string>
+    <string name="ElderPermission_13_D">आम्ही फक्त पेमेंट रक्कम आणि प्राप्तकर्त्याचे आयडी स्कॅन करतो। कोणताही पासवर्ड, पिन किंवा कार्ड नंबर कधीही रेकॉर्ड किंवा शेअर केला जात नाही.</string>
+
     <string name="ElderHome_1">परवानग्या उपलब्ध नाहीत</string>
     <string name="ElderHome_2">तुम्ही सुरक्षित आहात</string>
     <string name="ElderHome_3">सहाय्यकाशी बोला</string>

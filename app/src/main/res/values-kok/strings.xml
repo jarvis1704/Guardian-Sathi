@@ -116,6 +116,18 @@
     <string name="ElderPermission_11_R2">वारंवार अनोळखी नंबर संपर्क केल्यार संरक्षकाक सूचना देता.</string>
     <string name="ElderPermission_11_D">तुमचे संपर्क फकत स्थानिकपणेन तपासले जातात. ते कदीच अपलोड वा शेअर केले जात ना.</string>
 
+    <string name="ElderPermission_12_T">दुसऱ्या अॅपांचेर दाखयात</string>
+    <string name="ElderPermission_12_S">खंयच्याय जाग्यार त्वरित इशारे</string>
+    <string name="ElderPermission_12_R1">हे तुमी वापरत आसात त्या कोणत्याही अॅपाच्या वयर आपत्कालीन इशारे दाखोवपाक परवानगी दिता, जाका लागून पडप ओळख वा SOS इशारो तुमकां कदीच चुकना.</string>
+    <string name="ElderPermission_12_R2">पयल्या स्क्रीनार "GuardianSathi" शोदून "दुसऱ्या अॅपांचेर दाखोवपाक परवानगी" ऑन करात.</string>
+    <string name="ElderPermission_12_D">हे फकत गंभीर सुरक्षा इशाऱ्यांसांठी वापरता. GuardianSathi हाचो वापर कदीच जाहिराती वा गरजेबाहेरचे पॉप-अप दाखोवपाक करचो ना.</string>
+    <string name="ElderPermission_13_T">पेमेंट सुरक्षा</string>
+    <string name="ElderPermission_13_S">फसवणुकीसांठी पेमेंट स्कॅन करात</string>
+    <string name="ElderPermission_13_R1">हे पेमेंट स्क्रीनांचें विश्लेषण करून, संशयीत प्राप्तकर्त्यांकडे पयसे पाठोवंक पूर्वी वा फारच व्हड पेमेंट करचेय आधीं तुमकां इशारा दिता.</string>
+    <string name="ElderPermission_13_R2">पुढल्या स्क्रीनार "GuardianSathi" शोदून "GuardianSathi वापरात" ऑन करात. खात्री करपाक "Allow" टॅप करात.</string>
+    <string name="ElderPermission_13_D">आमी फकत पेमेंट रक्कम आणि प्राप्तकर्त्याचे ID स्कॅन करतां. कुठलेच पासवर्ड, PIN वा कार्ड नंबर कदीच नोंद केल्ली वा शेअर केल्ली जात नात.</string>
+
+
     <string name="ElderHome_1">गायब परवानग्यो</string>
     <string name="ElderHome_2">तुमी सुरक्षित आसात</string>
     <string name="ElderHome_3">सहायकासंगें उलोवात</string>

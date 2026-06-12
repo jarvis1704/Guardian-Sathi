@@ -116,6 +116,17 @@
     <string name="ElderPermission_11_R2">گارڈین خبردار۔</string>
     <string name="ElderPermission_11_D">ڈیٹا شیئر نہٕ کران۔</string>
 
+    <string name="ElderPermission_12_T">دیگر ایپس آسنۍ مَنز ظاھر کٔرِو</string>
+    <string name="ElderPermission_12_S">ہر جا فوری الرٹس</string>
+    <string name="ElderPermission_12_R1">یہ تُہنٛدے زیرِ استعمال کٔنۍہِ ایپس مَنز ہنگامی الرٹ ظاھر کرنہٕ دی اجازت دِوان، تاکہ تُہۍ فَل ڈٹیکشن یا SOS الرٹ کدِاہِ نہ گژھنۍ۔</string>
+    <string name="ElderPermission_12_R2">اگلے سکرینس مَنز "GuardianSathi" تلاش کٔرِو تہٕ "دیگر ایپس آسنۍ مَنز ظاھر کرنہٕ دی اجازت" آن کٔرِو۔</string>
+    <string name="ElderPermission_12_D">یہ صرف اہم حفاظتی الرٹسِس لۄگ استعمال ہاون۔ GuardianSathi یِیہِ کَتیہِ اشتہار یا بے لوڑ پاپ اَپس ظاھر کرنہٕ لۄگ استعمال نہ کٔرِہ۔</string>
+    <string name="ElderPermission_13_T">ادائیگی ہِفاظت</string>
+    <string name="ElderPermission_13_S">فراڈس لۄگ ادائیگیاں اسکین کٔرِو</string>
+    <string name="ElderPermission_13_R1">یہ ادائیگی سکریننہِ تجزیہ کرِتھ، مشکوک وصول کنندگان ہنزِ طرف رقم سونپنہٕ آسنۍ مَہ یا غیر معمولی طور زِیادَہ ادائیگی کرنہٕ آسنۍ مَہ تُہنٛدے خبردار کران۔</string>
+    <string name="ElderPermission_13_R2">اگلے سکرینس مَنز "GuardianSathi" تلاش کٔرِو تہٕ "GuardianSathi استعمال کٔرِو" آن کٔرِو۔ تصدیق لۄگ "Allow" ہند تپ کٔرِو۔</string>
+    <string name="ElderPermission_13_D">اَس صرف ادائیگی رقم تہٕ وصول کنندہ ID اسکین کران۔ کَنیہہ پاس ورڈ، پِن، یا کارڈ نمبر کدِاہِ ریکارڈ یا شیئر نہ کرن۔</string>
+
 
     <string name="ElderHome_1">اجازت ہند کمی</string>
     <string name="ElderHome_2">تُہند حِفاظت چھُ</string>

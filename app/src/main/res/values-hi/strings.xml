@@ -116,6 +116,18 @@
     <string name="ElderPermission_11_R2">जब किसी अनसेव्ड नंबर से बार-बार संपर्क होता है, तो आपके अभिभावक को सूचित किया जाता है।</string>
     <string name="ElderPermission_11_D">आपके संपर्क केवल आपके डिवाइस पर ही स्कैम पहचान के लिए जांचे जाते हैं। उन्हें कभी भी अपलोड या साझा नहीं किया जाता है।</string>
 
+    <string name="ElderPermission_12_T">अन्य ऐप्स के ऊपर प्रदर्शित करें</string>
+    <string name="ElderPermission_12_S">कहीं भी तत्काल अलर्ट</string>
+    <string name="ElderPermission_12_R1">आपके द्वारा वर्तमान में उपयोग किए जा रहे किसी भी ऐप पर आपातकालीन अलर्ट दिखने की अनुमति देता है, जिससे यह सुनिश्चित होता है कि आप कभी भी गिरने की पहचान या SOS अलर्ट मिस न करें।</string>
+    <string name="ElderPermission_12_R2">अगली स्क्रीन में \"GuardianSathi\" खोजें और \"Allow display over other apps\" चालू करें।</string>
+    <string name="ElderPermission_12_D">यह केवल महत्वपूर्ण सुरक्षा अलर्ट के लिए उपयोग किया जाता है। GuardianSathi कभी भी इसका उपयोग विज्ञापन या अनावश्यक पॉपअप दिखाने के लिए नहीं करेगा।</string>
+
+    <string name="ElderPermission_13_T">भुगतान सुरक्षा</string>
+    <string name="ElderPermission_13_S">धोखाधड़ी के लिए भुगतान स्कैन करें</string>
+    <string name="ElderPermission_13_R1">संदिग्ध प्राप्तकर्ताओं को पैसे भेजने या असामान्य रूप से बड़े भुगतान करने से पहले आपको चेतावनी देने के लिए भुगतान स्क्रीन का विश्लेषण करता है।</string>
+    <string name="ElderPermission_13_R2">अगली स्क्रीन में \"GuardianSathi\" खोजें और \"Use GuardianSathi\" चालू करें। पुष्टि करने के लिए \"Allow\" पर टैप करें।</string>
+    <string name="ElderPermission_13_D">हम केवल भुगतान राशि और प्राप्तकर्ता आईडी स्कैन करते हैं। कोई भी पासवर्ड, पिन या कार्ड नंबर कभी रिकॉर्ड या साझा नहीं किया जाता है।</string>
+
     <string name="ElderHome_1">अनुमतियाँ नहीं मिलीं</string>
     <string name="ElderHome_2">आप सुरक्षित हैं</string>
     <string name="ElderHome_3">सहायक से बात करें</string>

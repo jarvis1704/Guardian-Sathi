@@ -116,6 +116,17 @@
     <string name="ElderPermission_11_R2">अपरिचित नम्बरबाट बारम्बार सम्पर्क हुँदा तपाईंको संरक्षकलाई चेतावनी दिइन्छ।</string>
     <string name="ElderPermission_11_D">सम्पर्कहरू केवल तपाईंको उपकरणमै जाँचिन्छन् र कहिल्यै अपलोड वा साझा गरिँदैन।</string>
 
+    <string name="ElderPermission_12_T">अन्य एपहरूमाथि देखाउनुहोस्</string>
+    <string name="ElderPermission_12_S">जहाँसुकै आपतकालीन चेतावनी</string>
+    <string name="ElderPermission_12_R1">यसले तपाईंले प्रयोग गरिरहनुभएको कुनै पनि एपमाथि आपतकालीन चेतावनी देखाउन अनुमति दिन्छ, ताकि तपाईंले कहिल्यै fall detection वा SOS चेतावनी छुटाउनु नपरोस्।</string>
+    <string name="ElderPermission_12_R2">अर्को स्क्रिनमा "GuardianSathi" खोज्नुहोस् र "अन्य एपहरूमाथि देखाउन अनुमति" खोल्नुहोस्।</string>
+    <string name="ElderPermission_12_D">यो केवल महत्त्वपूर्ण सुरक्षा चेतावनीका लागि मात्र प्रयोग हुन्छ। GuardianSathi ले यसलाई कहिल्यै विज्ञापन वा अनावश्यक पप-अप देखाउन प्रयोग गर्नेछैन।</string>
+    <string name="ElderPermission_13_T">भुक्तानी सुरक्षा</string>
+    <string name="ElderPermission_13_S">ठगीका लागि भुक्तानी स्क्यान गर्नुहोस्</string>
+    <string name="ElderPermission_13_R1">यसले भुक्तानी स्क्रिनहरू विश्लेषण गरेर तपाईंले शंकास्पद प्राप्तकर्तालाई पैसा पठाउनुअघि वा असामान्य रूपमा ठूलो भुक्तानी गर्नुअघि तपाईंलाई चेतावनी दिन्छ।</string>
+    <string name="ElderPermission_13_R2">अर्को स्क्रिनमा "GuardianSathi" खोज्नुहोस् र "GuardianSathi प्रयोग गर्नुहोस्" खोल्नुहोस्। पुष्टि गर्न "Allow" थिच्नुहोस्।</string>
+    <string name="ElderPermission_13_D">हामी केवल भुक्तानी रकम र प्राप्तकर्ता ID हरू स्क्यान गर्छौं। कुनै पासवर्ड, पिन वा कार्ड नम्बर कहिल्यै रेकर्ड वा साझा गरिँदैन।</string>
+
     <string name="ElderHome_1">अनुमतिहरू उपलब्ध छैनन्</string>
     <string name="ElderHome_2">तपाईं सुरक्षित हुनुहुन्छ</string>
     <string name="ElderHome_3">सहायकसँग कुरा गर्नुहोस्</string>

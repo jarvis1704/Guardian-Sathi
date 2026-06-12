@@ -117,6 +117,18 @@
     <string name="ElderPermission_11_R2">যেতিয়া কোনো সংৰক্ষণ নকৰা নম্বৰ পৰা বাৰে বাৰে যোগাযোগ কৰা হয়, তেতিয়া আপোনাৰ অভিভাৱকক জাননী দিয়া হয়।</string>
     <string name="ElderPermission_11_D">আপোনাৰ যোগাযোগসমূহ কেৱল আপোনাৰ ডিভাইচত স্কাম চিনাক্তকৰণৰ বাবে ব্যৱহাৰ কৰা হয়। এইবোৰ কেতিয়াও আপলোড বা শ্বেয়াৰ কৰা নহয়।</string>
 
+    <string name="ElderPermission_12_T">অন্য এপসমূহৰ ওপৰত দেখুৱাওক</string>
+    <string name="ElderPermission_12_S">ক\'তো তৎক্ষণাত সতৰ্কবাণী</string>
+    <string name="ElderPermission_12_R1">এইটোৱে জৰুৰী সতৰ্কবাণীসমূহ আপোনাৰ ব্যৱহৃত যিকোনো এপৰ ওপৰত দেখুৱাবলৈ অনুমতি দিয়ে, যাতে আপুনি কেতিয়াও পতন চিনাক্তকৰণ বা SOS সতৰ্কবাণী মিছ নকৰে।</string>
+    <string name="ElderPermission_12_R2">পৰৱৰ্তী স্ক্ৰীনত "GuardianSathi" বিচাৰি "অন্য এপসমূহৰ ওপৰত দেখুৱাবলৈ অনুমতি" অন কৰক।</string>
+    <string name="ElderPermission_12_D">ইয়াক কেৱল গুৰুত্বপূৰ্ণ সুৰক্ষা সতৰ্কবাণীৰ বাবে ব্যৱহাৰ কৰা হয়। GuardianSathi-য়ে কেতিয়াও ইয়াক বিজ্ঞাপন বা অপ্রয়োজনীয় পপ-আপ দেখুৱাবলৈ ব্যৱহাৰ নকৰে।</string>
+    <string name="ElderPermission_13_T">পেমেণ্ট সুৰক্ষা</string>
+    <string name="ElderPermission_13_S">প্ৰতাৰণাৰ বাবে পেমেণ্ট স্কেন কৰক</string>
+    <string name="ElderPermission_13_R1">ই পেমেণ্ট স্ক্ৰীন বিশ্লেষণ কৰি সন্দেহজনক প্ৰাপকৰ ওচৰত ধন পঠোৱাৰ আগতে বা অস্বাভাৱিকভাৱে ডাঙৰ পেমেণ্ট কৰাৰ আগতে আপোনাক সতৰ্ক কৰে।</string>
+    <string name="ElderPermission_13_R2">পৰৱৰ্তী স্ক্ৰীনত "GuardianSathi" বিচাৰি "GuardianSathi ব্যৱহাৰ কৰক" অন কৰক। নিশ্চিত কৰিবলৈ "Allow" টিপক।</string>
+    <string name="ElderPermission_13_D">আমি কেৱল পেমেণ্টৰ পৰিমাণ আৰু প্ৰাপকৰ আইডি স্কেন কৰোঁ। কোনো পাছৱৰ্ড, পিন, বা কাৰ্ড নম্বৰ কেতিয়াও ৰেকৰ্ড বা ভাগ কৰা নহয়।</string>
+
+
     <string name="ElderHome_1">অনুমতি নাই</string>
     <string name="ElderHome_2">আপুনি সুৰক্ষিত</string>
     <string name="ElderHome_3">সহায়কৰ সৈতে কথা পাতক</string>

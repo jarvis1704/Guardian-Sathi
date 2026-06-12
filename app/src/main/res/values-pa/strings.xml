@@ -116,6 +116,18 @@
     <string name="ElderPermission_11_R2">ਜੇ ਕਿਸੇ ਅਣਸੰਭਾਲੇ ਨੰਬਰ ਤੋਂ ਵਾਰ-ਵਾਰ ਸੰਪਰਕ ਹੁੰਦਾ ਹੈ ਤਾਂ ਤੁਹਾਡੇ ਗਾਰਡੀਅਨ ਨੂੰ ਸੁਚਿਤ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।</string>
     <string name="ElderPermission_11_D">ਤੁਹਾਡੇ ਸੰਪਰਕ ਸਿਰਫ ਤੁਹਾਡੇ ਡਿਵਾਈਸ \'ਤੇ ਹੀ ਚੈੱਕ ਕੀਤੇ ਜਾਂਦੇ ਹਨ। ਇਹ ਕਦੇ ਵੀ ਅਪਲੋਡ ਜਾਂ ਸਾਂਝੇ ਨਹੀਂ ਕੀਤੇ ਜਾਂਦੇ।</string>
 
+    <string name="ElderPermission_12_T">ਹੋਰ ਐਪਾਂ ਦੇ ਉੱਪਰ ਦਿਖਾਓ</string>
+    <string name="ElderPermission_12_S">किਤੇ ਵੀ ਜ਼ਰੂਰੀ ਅਲਰਟ</string>
+    <string name="ElderPermission_12_R1">ਤੁਹਾਨੂੰ ਵਰਤਮਾਨ ਵਿੱਚ ਵਰਤ ਰਹੇ ਕਿਸੇ ਵੀ ਐਪ ਦੇ ਉੱਪਰ ਐਮਰਜੈਂਸੀ ਅਲਰਟ ਦਿਖਾਉਣ ਦੀ ਇਜਾਜ਼ਤ ਦਿੰਦਾ ਹੈ, ਇਹ ਯਕੀਨੀ ਬਣਾਉਂਦਾ ਹੈ ਕਿ ਤੁਸੀਂ ਕਦੇ ਵੀ ਫਾਲ ਡਿਟੈਕਸ਼ਨ ਜਾਂ SOS ਅਲਰਟ ਨਹੀਂ ਗੁਆਓਗੇ।</string>
+    <string name="ElderPermission_12_R2">ਅਗਲੀ ਸਕ੍ਰੀਨ \'ਤੇ \"GuardianSathi\" ਲੱਭੋ ਅਤੇ \"Allow display over other apps\" ਨੂੰ ਚਾਲੂ ਕਰੋ।</string>
+    <string name="ElderPermission_12_D">ਇਹ ਸਿਰਫ ਗੰਭੀર ਸੁਰੱਖਿਆ ਅਲਰਟਾਂ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ। GuardianSathi ਕਦੇ ਵੀ ਇਸ ਦੀ ਵਰਤੋਂ ਇਸ਼ਤਿਹਾਰਾਂ ਜਾਂ ਬੇਲੋੜੇ ਪੌਪ-ਅੱਪ ਦਿਖਾਉਣ ਲਈ ਨਹੀਂ ਕਰੇਗਾ।</string>
+
+    <string name="ElderPermission_13_T">ਪੇਮੈਂਟ ਸੁਰੱਖਿਆ</string>
+    <string name="ElderPermission_13_S">ਘੁਟਾਲਿਆਂ ਲਈ ਪੇਮੈਂਟਾਂ ਨੂੰ ਸਕੈਨ ਕਰੋ</string>
+    <string name="ElderPermission_13_R1">ਸ਼ੱਕੀ ਪ੍ਰਾਪਤਕਰਤਾਵਾਂ ਨੂੰ ਪੈਸੇ ਭੇਜਣ ਜਾਂ ਅਸਧਾਰਨ ਤੌਰ \'ਤੇ ਵੱਡੀਆਂ ਪੇਮੈਂਟਾਂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਤੁਹਾਨੂੰ ਚੇਤਾਵਨੀ ਦੇਣ ਲਈ ਪੇਮੈਂਟ ਸਕ੍ਰੀਨਾਂ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰਦਾ ਹੈ।</string>
+    <string name="ElderPermission_13_R2">ਅਗਲੀ ਸਕ੍ਰିਨ \'ਤੇ \"GuardianSathi\" ਲੱਭੋ ਅਤੇ \"Use GuardianSathi\" ਨੂੰ ਚਾਲੂ ਕਰੋ। ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ \"Allow\" \'ਤੇ ਟੈਪ ਕਰੋ।</string>
+    <string name="ElderPermission_13_D">ਅਸੀਂ ਸਿਰਫ ਪੇਮੈਂਟ ਦੀ ਰਕਮ ਅਤੇ ਪ੍ਰਾਪਤਕਰਤਾ ਦੀ ID ਨੂੰ ਸਕੈਨ ਕਰਦੇ ਹਾਂ। ਕੋਈ ਵੀ ਪਾਸਵਰਡ, ਪਿੰਨ ਜਾਂ ਕਾਰਡ ਨੰਬਰ ਕਦੇ ਵੀ ਰਿਕਾਰਡ ਜਾਂ ਸਾਂਝਾ ਨਹੀਂ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।</string>
+
     <string name="ElderHome_1">ਅਨੁਮਤੀਆਂ ਗੁੰਮ ਹਨ</string>
     <string name="ElderHome_2">ਤੁਸੀਂ ਸੁਰੱਖਿਅਤ ਹੋ</string>
     <string name="ElderHome_3">ਸਹਾਇਕ ਨਾਲ ਗੱਲ ਕਰੋ</string>

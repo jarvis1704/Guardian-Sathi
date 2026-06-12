@@ -116,6 +116,18 @@
     <string name="ElderPermission_11_R2">Unsaved number ꯑꯃꯗ repeated contact ꯈꯪꯂꯛꯄ ꯃꯇꯝꯗ guardian ꯗ alert ꯄꯤ.</string>
     <string name="ElderPermission_11_D">Contacts ꯁꯤꯡ device ꯗ local ꯑꯣꯏꯅ check ꯇꯧꯏ scam detection ꯒꯤ ꯃꯇꯨꯡꯗ। ꯑꯁꯤ upload ꯑꯃꯁꯨꯡ share ꯇꯧꯗꯦ.</string>
 
+    <string name="ElderPermission_12_T">Other app singgi thakta thokpa</string>
+    <string name="ElderPermission_12_S">Khudingchangba alert sing</string>
+    <string name="ElderPermission_12_R1">Nahakna loina chatpa amadi app ama loina use touriba matamda, emergency alert sing nahakna thoknaba permit piba, adudagi nahakna fall detection amasung SOS alert amukta khangdana.</string>
+    <string name="ElderPermission_12_R2">Thokpa screen da "GuardianSathi" amadi "other apps thakta thoknaba permit" on tou.</string>
+    <string name="ElderPermission_12_D">Adi khaktamak important safety alert singgi maramda use touri. GuardianSathi adu ads amasung unnecessary pop-up sing thoknaba khudakta use touraroi.</string>
+    <string name="ElderPermission_13_T">Payment protection</string>
+    <string name="ElderPermission_13_S">Scam gi maramda payment scan tou</string>
+    <string name="ElderPermission_13_R1">Payment screen sing analyse touraga suspicious recipient singda money thadokpa matamgi matakta amasung unusually large payment sing tourba matamgi matakta nahakpu warning piba.</string>
+    <string name="ElderPermission_13_R2">Thokpa screen da "GuardianSathi" ama thougatlaga "Use GuardianSathi" on tou. Confirm tou-naba "Allow" tap tou.</string>
+    <string name="ElderPermission_13_D">Eikhoina payment amount amasung recipient ID khaktamak scan touri. Password, PIN, card number amata kaktuna record amasung share touraroi.</string>
+
+
     <string name="ElderHome_1">Permission ꯂꯩꯇꯦ</string>
     <string name="ElderHome_2">ꯑꯗꯣꯝ ꯉꯥꯛꯁꯤꯜꯂꯛꯂꯦ</string>
     <string name="ElderHome_3">Assistant ꯒꯥ ꯋꯥ ꯁꯟꯅꯨ</string>

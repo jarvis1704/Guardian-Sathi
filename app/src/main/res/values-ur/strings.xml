@@ -116,6 +116,18 @@
     <string name="ElderPermission_11_R2">غیر محفوظ نمبر سے بار بار رابطے پر آپ کے محافظ کو اطلاع دی جاتی ہے۔</string>
     <string name="ElderPermission_11_D">آپ کے رابطے صرف مقامی طور پر چیک کیے جاتے ہیں اور کبھی شیئر نہیں کیے جاتے۔</string>
 
+    <string name="ElderPermission_12_T">دیگر ایپس کے اوپر دکھائیں</string>
+    <string name="ElderPermission_12_S">کہیں بھی فوری الرٹس</string>
+    <string name="ElderPermission_12_R1">آپ کو اس وقت استعمال ہونے والی کسی بھی ایپ کے اوپر ہنگامی الرٹس دکھانے کی اجازت دیتا ہے، اس بات کو یقینی بناتا ہے کہ آپ کبھی بھی گرنے کی نشاندہی یا SOS الرٹ نہیں چھوڑیں گے۔</string>
+    <string name="ElderPermission_12_R2">اگلی اسکرین پر \"GuardianSathi\" تلاش کریں اور \"Allow display over other apps\" کو آن کریں۔</string>
+    <string name="ElderPermission_12_D">یہ صرف اہم حفاظتی الرٹس کے لیے استعمال کیا جاتا ہے۔ GuardianSathi اسے اشتہارات یا غیر ضروری پاپ اپ دکھانے کے لیے کبھی استعمال نہیں کرے گا۔</string>
+
+    <string name="ElderPermission_13_T">ادائیگی کی حفاظت</string>
+    <string name="ElderPermission_13_S">دھوکہ دہی کے لیے ادائیگیوں کو اسکین کریں</string>
+    <string name="ElderPermission_13_R1">مشکوک وصول کنندگان کو رقم بھیجنے یا غیر معمولی طور پر بڑی ادائیگیاں کرنے سے پہلے آپ کو متنبہ کرنے کے لیے ادائیگی کی اسکرینوں کا تجزیہ کرتا ہے۔</string>
+    <string name="ElderPermission_13_R2">اگلی اسکرین پر \"GuardianSathi\" تلاش کریں اور \"Use GuardianSathi\" کو آن کریں۔ تصدیق کے لیے \"Allow\" پر ٹیپ کریں۔</string>
+    <string name="ElderPermission_13_D">ہم صرف ادائیگی کی رقم اور وصول کنندہ کی آئی ڈی اسکین کرتے ہیں۔ کوئی پاس ورڈ، پن، یا کارڈ نمبر کبھی بھی ریکارڈ یا شیئر نہیں کیا جاتا ہے۔</string>
+
     <string name="ElderHome_1">اجازتیں موجود نہیں</string>
     <string name="ElderHome_2">آپ محفوظ ہیں</string>
     <string name="ElderHome_3">اسسٹنٹ سے بات کریں</string>

@@ -116,6 +116,18 @@
     <string name="ElderPermission_11_R2">बार-बार अनसेव नंबर सँ संपर्क होए पर गार्डियन केँ चेतावनी भेटैत अछि।</string>
     <string name="ElderPermission_11_D">अहाँक संपर्क केवल डिवाइस पर लोकल रूप सँ जांचल जाइत अछि। ई नहि अपलोड होइत अछि आ नहि साझा।</string>
 
+    <string name="ElderPermission_12_T">दोसर ऐपके उपर देखाउ</string>
+    <string name="ElderPermission_12_S">कहीं भी तुरंत चेतावनी</string>
+    <string name="ElderPermission_12_R1">ई आपतकालीन चेतावनीकेँ अहाँ जे कियो ऐप उपयोग क रहल छी, तकर उपर देखाबय दैत अछि, जाहि सँ अहाँ कहियो फॉल डिटेक्शन वा SOS चेतावनी नहि चुकब।</string>
+    <string name="ElderPermission_12_R2">अगिला स्क्रीनमे "GuardianSathi" खोजि "दोसर ऐपके उपर देखाबय अनुमति" चालू करू।</string>
+    <string name="ElderPermission_12_D">ई केवल महत्वपूर्ण सुरक्षा चेतावनीक लेल उपयोग होइत अछि। GuardianSathi एकर उपयोग कहियो विज्ञापन वा अनावश्यक पॉप-अप देखाबय लेल नहि करब।</string>
+    <string name="ElderPermission_13_T">भुगतान सुरक्षा</string>
+    <string name="ElderPermission_13_S">धोखाधड़ीक लेल भुगतान स्कैन करू</string>
+    <string name="ElderPermission_13_R1">ई भुगतान स्क्रीनक विश्लेषण कए कए संदिग्ध प्राप्तकर्ताकें पैसा पठाबय सँ पहिने वा असामान्य रूपसँ पैघ भुगतान करय सँ पहिने अहाँकेँ चेतावनी दैत अछि।</string>
+    <string name="ElderPermission_13_R2">अगिला स्क्रीनमे "GuardianSathi" खोजि "GuardianSathi उपयोग करू" चालू करू। पुष्टि लेल "Allow" टेप करू।</string>
+    <string name="ElderPermission_13_D">हम केवल भुगतान राशि आ प्राप्तकर्ता ID स्कैन करैत छी। कोनो पासवर्ड, पिन वा कार्ड नंबर कहियो रिकॉर्ड वा साझा नहि कएल जाइत अछि।</string>
+
+
     <string name="ElderHome_1">अनुमति नहि भेटल</string>
     <string name="ElderHome_2">अहाँ सुरक्षित छी</string>
     <string name="ElderHome_3">सहायक सँ बात करू</string>

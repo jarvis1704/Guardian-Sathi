@@ -116,6 +116,18 @@
     <string name="ElderPermission_11_R2">അറിയാത്ത നമ്പറുകൾ കണ്ടെത്തുമ്പോൾ ഗാർഡിയനെ അറിയിക്കുന്നു.</string>
     <string name="ElderPermission_11_D">കോണ്ടാക്ട്സ് പ്രാദേശികമായി മാത്രം ഉപയോഗിക്കുന്നു.</string>
 
+    <string name="ElderPermission_12_T">മറ്റ് ആപ്പുകൾക്ക് മുകളിൽ പ്രദർശിപ്പിക്കുക</string>
+    <string name="ElderPermission_12_S">എവിടെയും അടിയന്തര അലേർട്ടുകൾ</string>
+    <string name="ElderPermission_12_R1">നിങ്ങൾ നിലവിൽ ഉപയോഗിക്കുന്ന ഏത് ആപ്പിനും മുകളിൽ അടിയന്തര അലേർട്ടുകൾ വരാൻ അനുവദിക്കുന്നു, ഇത് നിങ്ങൾക്ക് വീഴ്ച കണ്ടെത്തലോ SOS അലേർട്ടോ ഒരിക്കലും നഷ്ടമാകില്ലെന്ന് ഉറപ്പാക്കുന്നു.</string>
+    <string name="ElderPermission_12_R2">അടുത്ത സ്ക്രീനിൽ \"GuardianSathi\" കണ്ടെത്തി \"Allow display over other apps\" ഓണാക്കുക.</string>
+    <string name="ElderPermission_12_D">ഇത് നിർണ്ണായക സുരക്ഷാ അലേർട്ടുകൾക്കായി മാത്രമേ ഉപയോഗിക്കുന്നുള്ളൂ. പരസ്യങ്ങളോ അനാവശ്യ പോപ്പ്അപ്പുകളോ കാണിക്കാൻ GuardianSathi ഇത് ഒരിക്കലും ഉപയോഗിക്കില്ല.</string>
+
+    <string name="ElderPermission_13_T">പേയ്‌മെന്റ് സുരക്ഷ</string>
+    <string name="ElderPermission_13_S">തട്ടിപ്പുകൾക്കായി പേയ്‌മെന്റുകൾ സ്കാൻ ചെയ്യുക</string>
+    <string name="ElderPermission_13_R1">സംശയാസ്പദമായ സ്വീകർത്താക്കൾക്ക് പണം അയയ്ക്കുന്നതിനോ അസാധാരണമാംവിധം വലിയ പേയ്‌മെന്റുകൾ നടത്തുന്നതിനോ മുമ്പ് നിങ്ങൾക്ക് മുന്നറിയിപ്പ് നൽകുന്നതിന് പേയ്‌മെന്റ് സ്ക്രീനുകൾ വിശകലനം ചെയ്യുന്നു.</string>
+    <string name="ElderPermission_13_R2">അടുത്ത സ്ക്രീനിൽ \"GuardianSathi\" കണ്ടെത്തി \"Use GuardianSathi\" ഓണാക്കുക. സ്ഥിരീകരിക്കുന്നതിന് \"Allow\" ടാപ്പ് ചെയ്യുക.</string>
+    <string name="ElderPermission_13_D">ഞങ്ങൾ പേയ്‌മെന്റ് തുകകളും സ്വീകർത്താവിന്റെ ഐഡികളും മാത്രമേ സ്കാൻ ചെയ്യുന്നുള്ളൂ. പാസ്‌വേഡുകളോ പിന്നുകളോ കാർഡ് നമ്പറുകളോ ഒരിക്കലും റെക്കോർഡ് ചെയ്യുകയോ പങ്കിടുകയോ ഇല്ല.</string>
+
     <string name="ElderHome_1">അനുമതികൾ ലഭ്യമല്ല</string>
     <string name="ElderHome_2">നിങ്ങൾ സുരക്ഷിതരാണ്</string>
     <string name="ElderHome_3">സഹായിയുമായി സംസാരിക്കുക</string>

@@ -125,6 +125,18 @@
     <string name="ElderPermission_11_R2">अंजान नंबर ते गार्डियन नूं अलर्ट मिलदा ऐ।</string>
     <string name="ElderPermission_11_D">कॉन्टैक्ट्स लोकली चेक होंदे ने।</string>
 
+    <string name="ElderPermission_12_T">होर ऐपैं दे उप्पर दिखाओ</string>
+    <string name="ElderPermission_12_S">कित्थें वी तुरत चेतावनियाँ</string>
+    <string name="ElderPermission_12_R1">इह तुसें इस्तेमाल करदे किसी वी ऐप दे उप्पर एमरजैंसी चेतावनियाँ दिखाओन दी इजाजत दिंदै, तां जो तुस पड्ने दी पहचान जां SOS चेतावनी कदे ना गवा\'ओ।</string>
+    <string name="ElderPermission_12_R2">अगली स्क्रीन च "GuardianSathi" लब्भो ते "होऱ ऐपैं दे उप्पर दिखाओन दी इजाजत" चालू करो।</string>
+    <string name="ElderPermission_12_D">इह सिरफ जरूरी सुरक्षा चेतावनियाँ लेई इस्तेमाल होन्दा ऐ। GuardianSathi इहदा इस्तेमाल कदे वी इश्तिहारां जां फालतू पॉप-अप दिखाओन लेई निं करग।</string>
+    <string name="ElderPermission_13_T">पेमेंट सुरक्षा</string>
+    <string name="ElderPermission_13_S">ठगी लेई पेमेंट स्कैन करो</string>
+    <string name="ElderPermission_13_R1">इह पेमेंट स्क्रीनां दा विश्लेषण करियै तुसेंगी शक़ी प्राप्तकर्ताएं गी पैसे भेजन कन्नै पैह्लें जां असामान्य तौर पर वड्डे पेमेंट करने कन्नै पैह्लें चेतावनी दिंदा ऐ।</string>
+    <string name="ElderPermission_13_R2">अगली स्क्रीन च "GuardianSathi" लब्भो ते "GuardianSathi इस्तेमाल करो" चालू करो। पुष्टि लेई "Allow" ते टैप करो।</string>
+    <string name="ElderPermission_13_D">अस सिर्फ पेमेंट रकम ते प्राप्तकर्ता ID स्कैन करदे आं। कोई पासवर्ड, पिन जां कार्ड नंबर कदे वी रिकॉर्ड जां शेयर निं कीते जंदे।</string>
+
+
     <string name="ElderHome_1">अनुमतियां नहीं मिलीं</string>
     <string name="ElderHome_2">तुस सुरक्षित ओ</string>
     <string name="ElderHome_3">सहायक नाल गल करो</string>

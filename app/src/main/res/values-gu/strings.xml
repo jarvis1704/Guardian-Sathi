@@ -116,6 +116,18 @@
     <string name="ElderPermission_11_R2">અનસેવ્ડ નંબરથી વારંવાર સંપર્ક થાય ત્યારે તમારા ગાર્ડિયનને જાણ કરે છે.</string>
     <string name="ElderPermission_11_D">તમારા સંપર્કો માત્ર સ્થાનિક રીતે તપાસવામાં આવે છે.</string>
 
+    <string name="ElderPermission_12_T">અન્ય એપ્સની ઉપર પ્રદર્શિત કરો</string>
+    <string name="ElderPermission_12_S">ગમે ત્યાં તાત્કાલિક એલર્ટ</string>
+    <string name="ElderPermission_12_R1">તમે હાલમાં ઉપયોગ કરી રહ્યાં હોવ તેવી કોઈપણ એપ્લિકેશન પર ઇમરજન્સી એલર્ટ દેખાવાની મંજૂરી આપે છે, જેથી તમે ક્યારેય ફૉલ ડિટેક્શન અથવા SOS એલર્ટ ચૂકી ન જાઓ.</string>
+    <string name="ElderPermission_12_R2">આગામી સ્ક્રીનમાં \"GuardianSathi\" શોધો અને \"Allow display over other apps\" ચાલુ કરો.</string>
+    <string name="ElderPermission_12_D">આનો ઉપયોગ ફક્ત ગંભીર સુરક્ષા એલર્ટ માટે જ કરવામાં આવે છે. GuardianSathi ક્યારેય જાહેરાતો અથવા બિનજરૂરી પોપઅપ્સ બતાવવા માટે આનો ઉપયોગ કરશે નહીં.</string>
+
+    <string name="ElderPermission_13_T">પેમેન્ટ સુરક્ષા</string>
+    <string name="ElderPermission_13_S">છેતરપિંડી માટે પેમેન્ટ સ્કેન કરો</string>
+    <string name="ElderPermission_13_R1">શંકાસ્પદ પ્રાપ્તકર્તાઓને પૈસા મોકલતા પહેલા અથવા અસામાન્ય રીતે મોટા પેમેન્ટ કરતા પહેલા તમને ચેતવણી આપવા માટે પેમેન્ટ સ્ક્રીનનું વિશ્લેષણ કરે છે.</string>
+    <string name="ElderPermission_13_R2">આગામી સ્ક્રીનમાં \"GuardianSathi\" શોધો અને \"Use GuardianSathi\" ચાલુ કરો. પુષ્ટિ કરવા માટે \"Allow\" પર ટેપ કરો.</string>
+    <string name="ElderPermission_13_D">અમે ફક્ત પેમેન્ટની રકમ અને પ્રાપ્તકર્તાની ID સ્કેન કરીએ છીએ. કોઈ પાસવર્ડ, પિન અથવા કાર્ડ નંબર ક્યારેય રેકોર્ડ અથવા શેર કરવામાં આવતા નથી.</string>
+
     <string name="ElderHome_1">ગુમ થયેલી પરવાનગીઓ</string>
     <string name="ElderHome_2">તમે સુરક્ષિત છો</string>
     <string name="ElderHome_3">સહાયક સાથે વાત કરો</string>

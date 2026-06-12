@@ -114,7 +114,19 @@
     <string name="ElderPermission_11_S">ଅଜଣା କଲର୍ ଚିହ୍ନଟ କରନ୍ତୁ</string>
     <string name="ElderPermission_11_R1">ଆସୁଥିବା ଏବଂ ଯାଉଥିବା କଲ୍‌ଗୁଡ଼ିକୁ ଆପଣଙ୍କ ସମ୍ପର୍କ ସହିତ ମେଳ କରି ଠକେଇକାରୀ ନମ୍ବର ଚିହ୍ନଟ କରେ।</string>
     <string name="ElderPermission_11_R2">ସେଭ୍ ନହୋଇଥିବା ନମ୍ବରରୁ ପୁନରାବୃତ୍ତି ସମ୍ପର୍କ ହେଲେ ଆପଣଙ୍କ ଗାର୍ଡିଆନକୁ ସତର୍କ କରାଯାଏ।</string>
-    <string name="ElderPermission_11_D">ଆପଣଙ୍କ ସମ୍ପର୍କଗୁଡ଼ିକ କେବଳ ଡିଭାଇସ୍‌ରେ ଲୋକାଲ୍ ଭାବରେ ଯାଞ୍ଚ ହୁଏ। ସେଗୁଡ଼ିକ କେବେ ଅପଲୋଡ୍ କିମ୍ବା ଅଂଶୀଦାର ହୁଏ ନାହିଁ।</string>
+    <string name="ElderPermission_11_D">ଆପଣଙ୍କ ସମ୍ପର୍କଗୁଡ଼ିକ କେବଳ ଡିଭାଇସ୍‌ରେ ଲୋକାଲ୍ ଭାବରେ ଯାଞ୍ચ ହୁଏ। ସେଗୁଡ଼ିକ କେବେ ଅପଲୋଡ୍ କିମ୍ବା ଅଂଶୀଦାର ହୁଏ ନାହିଁ।</string>
+
+    <string name="ElderPermission_12_T">ଅନ୍ୟ ଆପ୍ ଉପରେ ପ୍ରଦର୍ଶନ କରନ୍ତୁ</string>
+    <string name="ElderPermission_12_S">ଯେକୌଣସି ସ୍ଥାନରେ ଜରୁରୀକାଳୀନ ଆଲର୍ଟ</string>
+    <string name="ElderPermission_12_R1">ଆପଣ ବର୍ତ୍ତମାନ ବ୍ୟବହାର କରୁଥିବା ଯେକୌଣସି ଆପ୍ ଉପରେ ଜରୁରୀକାଳୀନ ଆଲର୍ଟ ଦେଖାଯିବାକୁ ଅନୁମତି ଦିଏ, ଯାହା ଦ୍ୱାରା ଆପଣ କେବେ ବି ଫଲ୍ ଡିଟେକ୍ସନ୍ କିମ୍ବା SOS ଆଲର୍ଟ ମିସ୍ କରିବେ ନାହିଁ।</string>
+    <string name="ElderPermission_12_R2">ପରବର୍ତ୍ତୀ ସ୍କ୍ରିନରେ \"GuardianSathi\" ଖୋଜନ୍ତୁ ଏବଂ \"Allow display over other apps\" ଅନ୍ କରନ୍ତୁ।</string>
+    <string name="ElderPermission_12_D">ଏହା କେବଳ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ସୁରକ୍ଷା ଆଲର୍ଟ ପାଇଁ ବ୍ୟବହୃତ ହୁଏ। GuardianSathi କଦାପି ବିଜ୍ଞାପନ କିମ୍ବା ଅନାବଶ୍ୟକ ପପ୍-ଅପ୍ ଦେଖାଇବା ପାଇଁ ଏହାକୁ ବ୍ୟବହାର କରିବ ନାହିଁ।</string>
+
+    <string name="ElderPermission_13_T">ପେମେଣ୍ଟ ସୁରକ୍ଷା</string>
+    <string name="ElderPermission_13_S">ଜାଲିଆତି ପାଇଁ ପେମେଣ୍ଟ ସ୍କାନ କରନ୍ତୁ</string>
+    <string name="ElderPermission_13_R1">ସନ୍ଦେହଜନକ ପ୍ରାପ୍ତକର୍ତ୍ତାଙ୍କୁ ଟଙ୍କା ପଠାଇବା ପୂର୍ବରୁ କିମ୍ବା ଅସ୍ୱାଭାବିକ ଭାବରେ ବଡ଼ ପେମେଣ୍ଟ କରିବା ପୂର୍ବରୁ ଆପଣଙ୍କୁ ସତର୍କ କରିବା ପାଇଁ ପେମେଣ୍ଟ ସ୍କ୍ରିନ୍ ବିଶ୍ଳେଷଣ କରେ।</string>
+    <string name="ElderPermission_13_R2">ପରବର୍ତ୍ତୀ ସ୍କ୍ରିନରେ \"GuardianSathi\" ଖୋଜନ୍ତୁ ଏବଂ \"Use GuardianSathi\" ଅନ୍ କରନ୍ତୁ। ନିଶ୍ଚିତ କରିବାକୁ \"Allow\" ଉପରେ ଟ୍ୟାପ୍ କରନ୍ତୁ।</string>
+    <string name="ElderPermission_13_D">ଆମେ କେବଳ ପେମେଣ୍ଟ ପରିମାଣ ଏବଂ ପ୍ରାପ୍ତକର୍ତ୍ତା ID ସ୍କାନ କରୁ। କୌଣସି ପାସୱାର୍ଡ, ପିନ୍ କିମ୍ବା କାର୍ଡ ନମ୍ବର କେବେ ବି ରେକର୍ଡ କିମ୍ବା ସେୟାର କରାଯାଏ ନାହିଁ।</string>
 
     <string name="ElderHome_1">ଅନୁମତି ଅନୁପସ୍ଥିତ</string>
     <string name="ElderHome_2">ଆପଣ ସୁରକ୍ଷିତ ଅଛନ୍ତି</string>
@@ -223,7 +235,7 @@
     <string name="guardian_geofence_3">ଜିଓଫେନ୍ସ ସକ୍ରିୟ କରନ୍ତୁ</string>
     <string name="guardian_geofence_4">ବ୍ୟାସାର୍ଦ୍ଧ</string>
     <string name="guardian_geofence_5">କନଫିଗରେସନ୍ ସେଭ୍ କରନ୍ତୁ</string>
-    <string name="suspicious_link_overlay_title">Suspicious Link Detected</string>
-    <string name="suspicious_link_overlay_message">Warning: The following suspicious link was received in a notification:\n\n%1$s\n\nThreat Level: %2$s\n\nPlease tread cautiously.</string>
+    <string name="suspicious_link_overlay_title">ସନ୍ଦେହଜନକ ଲିଙ୍କ୍ ଚିହ୍ନଟ ହୋଇଛି</string>
+    <string name="suspicious_link_overlay_message">ସତର୍କତା: ନୋଟିଫିକେସନ୍‌ରେ ନିମ୍ନଲିଖିତ ସନ୍ଦେହଜନକ ଲିଙ୍କ୍ ମିଳିଛି:\n\n%1$s\n\nବିପଦ ସ୍ତର: %2$s\n\nଦୟାକରି ସାବଧାନତାର ସହ ଆଗକୁ ବଢନ୍ତୁ।</string>
     <string name="suspicious_payment_title">ଅସ୍ୱାଭାବିକ ପେମେଣ୍ଟ ଚିହ୍ନଟ ହୋଇଛି</string>
 </resources>

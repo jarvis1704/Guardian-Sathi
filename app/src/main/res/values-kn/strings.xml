@@ -116,6 +116,17 @@
     <string name="ElderPermission_11_R2">ಗಾರ್ಡಿಯನ್‌ಗೆ ಎಚ್ಚರಿಕೆ ನೀಡುತ್ತದೆ.</string>
     <string name="ElderPermission_11_D">ಸಂಪರ್ಕಗಳನ್ನು ಹಂಚಲಾಗುವುದಿಲ್ಲ.</string>
 
+    <string name="ElderPermission_12_T">ಇತರ ಆಪ್‌ಗಳ ಮೇಲೆ ಪ್ರದರ್ಶಿಸಿ</string>
+    <string name="ElderPermission_12_S">ಎಲ್ಲಿಯಾದರೂ ತುರ್ತು ಅಲರ್ಟ್‌ಗಳು</string>
+    <string name="ElderPermission_12_R1">ನೀವು ಪ್ರಸ್ತುತ ಬಳಸುತ್ತಿರುವ ಯಾವುದೇ ಆಪ್‌ನ ಮೇಲೆ ತುರ್ತು ಅಲರ್ಟ್‌ಗಳು ಕಾಣಿಸಿಕೊಳ್ಳಲು ಅನುಮತಿಸುತ್ತದೆ, ಇದರಿಂದ ನೀವು ಎಂದಿಗೂ ಫಾಲ್ ಡಿಟೆಕ್ಷನ್ ಅಥವಾ SOS ಅಲರ್ಟ್ ತಪ್ಪಿಸಿಕೊಳ್ಳುವುದಿಲ್ಲ.</string>
+    <string name="ElderPermission_12_R2">ಮುಂದಿನ ಪರದೆಯಲ್ಲಿ \"GuardianSathi\" ಹುಡುಕಿ ಮತ್ತು \"Allow display over other apps\" ಆನ್ ಮಾಡಿ.</string>
+    <string name="ElderPermission_12_D">ಇದನ್ನು ಕೇವಲ ನಿರ್ಣಾಯಕ ಸುರಕ್ಷತಾ ಅಲರ್ಟ್‌ಗಳಿಗಾಗಿ ಬಳಸಲಾಗುತ್ತದೆ. GuardianSathi ಎಂದಿಗೂ ಜಾಹೀરાತುಗಳು ಅಥವಾ ಅನಗತ್ಯ ಪಾಪ್‌ಅಪ್‌ಗಳನ್ನು ತೋರಿಸಲು ಇದನ್ನು ಬಳಸುವುದಿಲ್ಲ.</string>
+
+    <string name="ElderPermission_13_T">ಪಾವತಿ ಸುರಕ್ಷತೆ</string>
+    <string name="ElderPermission_13_S">ವಂಚನೆಗಳಿಗಾಗಿ ಪಾವತಿಗಳನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡಿ</string>
+    <string name="ElderPermission_13_R1">ಶಂಕಿತ ಸ್ವೀಕೃತದಾರರಿಗೆ ಹಣ ಕಳುಹಿಸುವ ಮೊದಲು ಅಥವಾ ಅಸಾಮಾನ್ಯವಾಗಿ ದೊಡ್ಡ ಪಾವತಿಗಳನ್ನು ಮಾಡುವ ಮೊದಲು ನಿಮಗೆ ಎಚ್ಚರಿಕೆ ನೀಡಲು ಪಾವತಿ ಪರದೆಗಳನ್ನು ವಿಶ್ಲೇಷಿಸುತ್ತದೆ.</string>
+    <string name="ElderPermission_13_R2">ಮುಂದಿನ ಪರದೆಯಲ್ಲಿ \"GuardianSathi\" ಹುಡುಕಿ och \"Use GuardianSathi\" ಆನ್ ಮಾಡಿ. ಖಚಿತಪಡಿಸಲು \"Allow\" ಟ್ಯಾಪ್ ಮಾಡಿ.</string>
+    <string name="ElderPermission_13_D">ನಾವು ಕೇವಲ ಪಾವತಿ ಮೊತ್ತ ಮತ್ತು ಸ್ವೀಕೃತದಾರರ ಐಡಿಗಳನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡುತ್ತೇವೆ. ಯಾವುದೇ ಪಾಸ್‌ವರ್ಡ್‌ಗಳು, ಪಿನ್‌ಗಳು ಅಥವಾ ಕಾರ್ಡ್ ಸಂಖ್ಯೆಗಳನ್ನು ಎಂದಿಗೂ ರೆಕಾರ್ಡ್ ಮಾಡಲಾಗುವುದಿಲ್ಲ ಅಥವಾ ಹಂಚಿಕೊಳ್ಳಲಾಗುವುದಿಲ್ಲ।</string>
 
     <string name="ElderHome_1">ಅನುಮತಿಗಳು ಲಭ್ಯವಿಲ್ಲ</string>
     <string name="ElderHome_2">ನೀವು ಸುರಕ್ಷಿತರಾಗಿದ್ದೀರಿ</string>

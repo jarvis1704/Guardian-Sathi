@@ -116,6 +116,18 @@
     <string name="ElderPermission_11_R2">పునరావృతంగా కాల్ వచ్చినప్పుడు గార్డియన్‌కు హెచ్చరిక పంపుతుంది.</string>
     <string name="ElderPermission_11_D">మీ కాంటాక్ట్స్ ఎప్పుడూ షేర్ చేయబడవు.</string>
 
+    <string name="ElderPermission_12_T">ఇతర యాప్‌ల పైన ప్రదర్శించు</string>
+    <string name="ElderPermission_12_S">ఎక్కడైనా అత్యవసర హెచ్చరికలు</string>
+    <string name="ElderPermission_12_R1">మీరు ప్రస్తుతం ఉపయోగిస్తున్న ఏదైనా యాప్ పైన అత్యవసర హెచ్చరికలు కనిపించడానికి అనుమతిస్తుంది, తద్వారా మీరు ఎప్పటికీ ఫాల్ డిటెక్షన్ లేదా SOS హెచ్చరికను కోల్పోకుండా చూస్తుంది.</string>
+    <string name="ElderPermission_12_R2">తదుపరి స్క్రీన్‌లో \"GuardianSathi\"ని కనుగొని, \"Allow display over other apps\"ని ఆన్ చేయండి.</string>
+    <string name="ElderPermission_12_D">ఇది క్లిష్టమైన భద్రతా హెచ్చరికల కోసం మాత్రమే ఉపయోగించబడుతుంది. GuardianSathi దీన్ని ఎప్పుడూ ఉపయోగించదు.</string>
+
+    <string name="ElderPermission_13_T">పేమెంట్ రక్షణ</string>
+    <string name="ElderPermission_13_S">మోసాల కోసం పేమెంట్లను స్కాన్ చేయండి</string>
+    <string name="ElderPermission_13_R1">అనుమానాస్పద గ్రహీతలకు డబ్బు పంపే ముందు లేదా అసాధ్యారణంగా పెద్ద పేమెంట్లు చేసే ముందు మిమ్మల్ని హెచ్చరించడానికి పేమెంట్ స్క్రీన్‌లను విశ్లేషిస్తుంది.</string>
+    <string name="ElderPermission_13_R2">తదుపరి స్క్రీన్‌లో \"GuardianSathi\"ని కనుగొని, \"Use GuardianSathi\"ని ఆన్ చేయండి. నిర్ధారించడానికి \"Allow\"పై నొక్కండి.</string>
+    <string name="ElderPermission_13_D">మేము పేమెంట్ మొత్తాలు మరియు గ్రహీత IDలను మాత్రమే స్కాన్ చేస్తాము. ఎటువంటి పాస్‌వర్డ్‌లు, పిన్‌లు లేదా కార్డ్ నంబర్‌లు ఎప్పుడూ రికార్డ్ చేయబడవు లేదా షేర్ చేయబడవు.</string>
+
     <string name="ElderHome_1">అనుమతులు లేవు</string>
     <string name="ElderHome_2">మీరు రక్షితంగా ఉన్నారు</string>
     <string name="ElderHome_3">సహాయకుడితో మాట్లాడండి</string>

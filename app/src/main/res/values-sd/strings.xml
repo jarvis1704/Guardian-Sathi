@@ -141,6 +141,17 @@
     <string name="EmergencyCon_11">ويجهي هيلپ لائينون حاصل ڪيون پيون وڃن</string>
     <string name="EmergencyCon_12">ويجهي هيلپ لائينون نه مليون</string>
 
+    <string name="ElderPermission_12_T">ٻين ايپس جي مٿان ڏيکاريو</string>
+    <string name="ElderPermission_12_S">هر هنڌ فوري الرٽس</string>
+    <string name="ElderPermission_12_R1">هي توهان کي استعمال ٿيندڙ ڪنهن به ايپ جي مٿان ايمرجنسي الرٽس ڏيکارڻ جي اجازت ڏئي ٿو، ته جيئن توهان fall detection يا SOS الرٽ ڪڏهن به نه وڃايو.</string>
+    <string name="ElderPermission_12_R2">اڳتي اسڪرين ۾ "GuardianSathi" ڳوليو ۽ "ٻين ايپس جي مٿان ڏيکارڻ جي اجازت" آن ڪريو.</string>
+    <string name="ElderPermission_12_D">هي صرف اهم حفاظتي الرٽس لاءِ استعمال ٿيندو آهي. GuardianSathi ان کي ڪڏهن به اشتهار يا غير ضروري پاپ اپ ڏيکارڻ لاءِ استعمال نه ڪندو.</string>
+    <string name="ElderPermission_13_T">ادائگي جي حفاظت</string>
+    <string name="ElderPermission_13_S">ڌوڪيبازي لاءِ ادائيگيون اسڪين ڪريو</string>
+    <string name="ElderPermission_13_R1">هي ادائيگي جي اسڪرينن جو تجزيو ڪري مشڪوڪ وصول ڪندڙن ڏانهن پئسا موڪلڻ کان اڳ يا غيرمعمولي وڏي ادائيگيون ڪرڻ کان اڳ توهان کي خبردار ڪري ٿو.</string>
+    <string name="ElderPermission_13_R2">اڳتي اسڪرين ۾ "GuardianSathi" ڳوليو ۽ "GuardianSathi استعمال ڪريو" آن ڪريو. تصديق لاءِ "Allow" تي ٽيپ ڪريو.</string>
+    <string name="ElderPermission_13_D">اسان صرف ادائيگي جي رقم ۽ وصول ڪندڙ ID اسڪين ڪندا آهيون. ڪوبه پاسورڊ، پن يا ڪارڊ نمبر ڪڏهن به رڪارڊ يا شيئر نه ڪيو ويندو.</string>
+
     <string name="FallAlert_1">ڇا توهان ڪري پيا؟</string>
     <string name="FallAlert_2">محافظ کي اطلاع ڏنو ويندو</string>
     <string name="FallAlert_3">✅ مان ٺيڪ آهيان</string>

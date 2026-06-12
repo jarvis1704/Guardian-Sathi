@@ -116,6 +116,17 @@
     <string name="ElderPermission_11_R2">संरक्षक को चेतावनी।</string>
     <string name="ElderPermission_11_D">डेटा साझा न होत।</string>
 
+    <string name="ElderPermission_12_T">Other app re dekhaw</string>
+    <string name="ElderPermission_12_S">Jahaṅkhan turui alert</string>
+    <string name="ElderPermission_12_R1">Ete emergency alert sing ko je app re bebohar karog, tâte dekhaw barat maleyat, jate ṭhaṛi dhorom lạg-a SOS alert kabhi no miss hoy.</string>
+    <string name="ElderPermission_12_R2">Ane screen re "GuardianSathi" khojokh ar "other apps re dekhaw barat anumat" on kar.</string>
+    <string name="ElderPermission_12_D">E khali gurutopurna safety alert lạg bebohar hoy. GuardianSathi eko ads ba anawashyak pop-up dekhaw barat kabhi bebohar no karay.</string>
+    <string name="ElderPermission_13_T">Payment protection</string>
+    <string name="ElderPermission_13_S">Fraud lạg payment scan kar</string>
+    <string name="ElderPermission_13_R1">E payment screen ko analyze kate suspicious recipient lạg paisa pathaw-barat pehle ba unusually bada payment kar-barat pehle apna warning de.</string>
+    <string name="ElderPermission_13_R2">Ane screen re "GuardianSathi" khojokh ar "Use GuardianSathi" on kar. Pushti lạg "Allow" tap kar.</string>
+    <string name="ElderPermission_13_D">Ame khali payment amount ar recipient ID scan kar. Kono password, pin, ba card number kabhi record ba share no hoy.</string>
+
     <string name="ElderHome_1">अनुमति नाहिं मिलल</string>
     <string name="ElderHome_2">आप सुरक्षित आहें</string>
     <string name="ElderHome_3">सहायक संग बात कर</string>
