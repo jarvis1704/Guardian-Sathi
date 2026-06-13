@@ -168,6 +168,10 @@ class GuardianService : Service() {
             val title = intent.getStringExtra("extra_title") ?: ""
             val body = intent.getStringExtra("extra_body") ?: ""
             suspiciousLinkDetection(title, body)
+        } else if (intent != null && intent.action == "ACTION_CHECK_FILE") {
+            val title = intent.getStringExtra("extra_title") ?: ""
+            val body = intent.getStringExtra("extra_body") ?: ""
+            suspiciousFileDetection(title, body)
         } else {
             startMonitoring()
         }
@@ -534,6 +538,56 @@ class GuardianService : Service() {
                         firebaseRepository.sendNotificaitonToGuardian(notifData, false, false, importanceStr)
                     } catch (e: Exception) {
                         Log.e("GuardianService", "Failed to send link alert to Guardian: ${e.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    // local suspicious file detection
+    private fun suspiciousFileDetection(title: String, body: String) {
+        val combinedText = "$title $body"
+        val detector = SuspiciousFileDetector()
+        val result = detector.detectSuspiciousFile(combinedText)
+        if (result.isSuspicious && result.matchedFileName != null && result.confidence != null) {
+            Log.w("GuardianService", "🚨 Suspicious file detected: ${result.matchedFileName} (${result.confidence})")
+            
+            if (result.confidence == FileConfidence.HIGH || result.confidence == FileConfidence.MEDIUM) {
+                // Show popup overlay using OverlayManager
+                val threatLevel = when (result.confidence) {
+                    FileConfidence.HIGH -> "High"
+                    FileConfidence.MEDIUM -> "Medium"
+                    FileConfidence.LOW -> "Low"
+                }
+                val localizedMsg = getString(
+                    R.string.suspicious_file_overlay_message,
+                    result.matchedFileName,
+                    threatLevel
+                )
+                overlayManager.showSuspiciousLinkOverlay(
+                    message = localizedMsg,
+                    title = getString(R.string.suspicious_file_title)
+                )
+
+                // Send notification to guardian via Firebase
+                val notifData = NotificationData(
+                    packageName = "Guardian Saathi",
+                    appName = "Guardian Saathi",
+                    title = getString(R.string.suspicious_file_title),
+                    desc = "A suspicious file was received by the elder: ${result.matchedFileName}",
+                    body = combinedText,
+                    timestamp = System.currentTimeMillis()
+                )
+                serviceScope.launch {
+                    try {
+                        val importanceStr = when (result.confidence) {
+                            FileConfidence.HIGH -> "HIGH"
+                            FileConfidence.MEDIUM -> "MID"
+                            FileConfidence.LOW -> "LOW"
+                        }
+                        firebaseRepository.sendNotificaitonToGuardian(notifData, false, false, importanceStr)
+                    } catch (e: Exception) {
+                        Log.e("GuardianService", "Failed to send file alert to Guardian: ${e.message}")
                     }
                 }
             }

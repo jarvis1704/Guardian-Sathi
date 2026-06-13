@@ -162,6 +162,22 @@ class ElderNotificationListener : NotificationListenerService() {
                     }
                 }
 
+                // Check for suspicious file
+                val fileDetector = SuspiciousFileDetector()
+                val fileResult = fileDetector.detectSuspiciousFile(combinedText)
+                if (fileResult.isSuspicious) {
+                    val serviceIntent = Intent(this@ElderNotificationListener, GuardianService::class.java).apply {
+                        action = "ACTION_CHECK_FILE"
+                        putExtra("extra_title", notificationData.title)
+                        putExtra("extra_body", notificationData.body)
+                    }
+                    try {
+                        startForegroundService(serviceIntent)
+                    } catch (e: Exception) {
+                        Log.e("ElderNotificationListener", "Failed to start GuardianService for file check", e)
+                    }
+                }
+
                 // check if its an OTP
                 val otpResult = detectOtp(notificationData.title, notificationData.desc)
                 val transactionResult = detectTransaction(notificationData.title, notificationData.desc)

@@ -67,7 +67,7 @@ fun isGestureNavigationEnabled(context: Context): Boolean {
 }
 
 fun isPaymentAccessibilityServiceEnabled(context: Context): Boolean {
-    val service = "${context.packageName}/com.biprangshu.guardiansathi.Global.Elder.core.PaymentAccessibilityService"
+    val service = "${context.packageName}/com.biprangshu.guardiansathi.Global.Elder.core.GuardianAccessibilityService"
     val enabled = Settings.Secure.getString(
         context.contentResolver,
         Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES

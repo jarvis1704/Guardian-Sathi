@@ -6,4 +6,4 @@
     android:accessibilityFlags="flagReportViewIds|flagRetrieveInteractiveWindows"
     android:canRetrieveWindowContent="true"
     android:notificationTimeout="100"
-    android:packageNames="com.phonepe.app,net.one97.paytm,com.google.android.apps.nbu.paisa.user,in.amazon.mShop.android.shopping,com.mobikwik_new,com.bhim.axis" />
+    android:packageNames="com.phonepe.app,net.one97.paytm,com.google.android.apps.nbu.paisa.user,in.amazon.mShop.android.shopping,com.mobikwik_new,com.bhim.axis,com.whatsapp,com.whatsapp.w4b,org.telegram.messenger,com.google.android.apps.messaging,com.facebook.orca" />

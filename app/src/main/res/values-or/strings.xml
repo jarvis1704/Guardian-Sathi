@@ -238,4 +238,7 @@
     <string name="suspicious_link_overlay_title">ସନ୍ଦେହଜନକ ଲିଙ୍କ୍ ଚିହ୍ନଟ ହୋଇଛି</string>
     <string name="suspicious_link_overlay_message">ସତର୍କତା: ନୋଟିଫିକେସନ୍‌ରେ ନିମ୍ନଲିଖିତ ସନ୍ଦେହଜନକ ଲିଙ୍କ୍ ମିଳିଛି:\n\n%1$s\n\nବିପଦ ସ୍ତର: %2$s\n\nଦୟାକରି ସାବଧାନତାର ସହ ଆଗକୁ ବଢନ୍ତୁ।</string>
     <string name="suspicious_payment_title">ଅସ୍ୱାଭାବିକ ପେମେଣ୍ଟ ଚିହ୍ନଟ ହୋଇଛି</string>
+
+    <string name="suspicious_file_title">Suspicious File Detected</string>
+    <string name="suspicious_file_overlay_message">Warning: A suspicious file was detected:\n\n%1$s\n\nThreat Level: %2$s\n\nThis type of file can be dangerous. Do not open it.</string>
 </resources>

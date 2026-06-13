@@ -244,4 +244,7 @@
     <string name="suspicious_link_overlay_title">Suspicious Link Detected</string>
     <string name="suspicious_link_overlay_message">Warning: The following suspicious link was received in a notification:\n\n%1$s\n\nThreat Level: %2$s\n\nPlease tread cautiously.</string>
     <string name="suspicious_payment_title">असामान्य भुगतान दा पता चलेआ</string>
+
+    <string name="suspicious_file_title">Suspicious File Detected</string>
+    <string name="suspicious_file_overlay_message">Warning: A suspicious file was detected:\n\n%1$s\n\nThreat Level: %2$s\n\nThis type of file can be dangerous. Do not open it.</string>
 </resources>
