@@ -20,7 +20,7 @@ A dual-persona Android safety app connecting elderly users with trusted family m
 
 Guardian Saathi pairs two roles on a single platform: the **Elder** (person being watched over) and the **Guardian** (trusted family member doing the watching). The Elder's device runs a persistent foreground service that streams live location, battery status, and fall events to Firebase — all surfaced in the Guardian's real-time dashboard.
 
-Beyond monitoring, the app arms the Elder with a panic SOS button, AI voice assistant (Gemini), medicine reminders, and intelligent scam/fraud SMS detection — making it a full safety companion, not just a tracker.
+Beyond monitoring, the app arms the Elder with a panic SOS button, AI voice assistant (Gemini), medicine reminders, payment safety checks, suspicious link/file warnings, and intelligent scam/fraud notification detection — making it a full safety companion, not just a tracker.
 
 ---
 
@@ -56,18 +56,23 @@ Beyond monitoring, the app arms the Elder with a panic SOS button, AI voice assi
 | **Panic SOS** | One-tap emergency button. Fires push notification to linked Guardian instantly. |
 | **Medicine Reminders** | Schedule medications with take/skip actions. Powered by `AlarmManager` + `BroadcastReceiver`. |
 | **Voice Assistant** | Natural language assistant using Google Gemini API. Hands-free for accessibility. |
-| **Scam / Fraud Detection** | AI-powered SMS scanning to flag phishing, fraud, and unknown callers. |
+| **Scam / Fraud Detection** | Notification monitoring for OTPs, transactions, scam patterns, banking/payment apps, and suspicious messages. |
+| **Suspicious Link Warning** | Local URL scanner flags risky domains, short links, and scam keywords, then shows a full-screen warning overlay and alerts the Guardian. |
+| **Suspicious File Warning** | In-progress protection for suspicious files such as APKs, executables, archives, double-extension downloads, and remote-access app names. |
+| **Payment Safety Overlay** | Accessibility-based payment screen reader warns Elders before high-value UPI/payment transactions and lets them call the Guardian. |
+| **Guardian Call Alert** | When an Elder taps "Call Guardian" from a scam, payment, file, or fall warning, a high-priority Guardian notification is sent. |
 | **Emergency Contacts** | Locally stored contacts (Room DB) for quick SOS access without internet. |
 | **QR Link to Guardian** | Generates a QR code for secure one-time pairing with a Guardian account. |
-| **Multi-language UI** | Full interface in English, Hindi, Bengali, and Tamil. |
+| **Expanded Language Support** | Localized resource coverage expanded across Indian languages, including English, Hindi, Assamese, Bengali, Gujarati, Kannada, Malayalam, Marathi, Tamil, Telugu, Urdu, and more. |
 
 ### Guardian Persona
 | Feature | Description |
 |---|---|
 | **Live Location Map** | Real-time map of Elder's location, updated every 3 minutes via Firebase RTDB. |
 | **Battery Monitoring** | Live battery level and charging status, updated every 5 minutes. |
+| **One Guardian, Multiple Elders** | A Guardian can link multiple Elders, switch the active Elder, and view each Elder's live status separately. |
 | **Push Alerts** | FCM notifications for falls, SOS presses, and critical events. |
-| **Alert History** | Timestamped log of all emergency events. |
+| **Alert & Activity History** | Timestamped logs for emergency events, geofence transitions, and safety detections. |
 | **QR Code Scanning** | Scan Elder's QR code to complete secure linking. |
 | **Guardian Profile** | Manage account, view linked Elder details, logout. |
 
@@ -97,6 +102,7 @@ Beyond monitoring, the app arms the Elder with a panic SOS button, AI voice assi
 | Library | Use |
 |---|---|
 | Google Gemini API | Voice assistant natural language processing |
+| Local Scam Detectors | Suspicious link, file, OTP, transaction, and payment-screen risk detection |
 | ML Kit Barcode Scanning | QR code detection for Guardian-Elder linking |
 | ZXing | QR code generation on Elder side |
 
@@ -133,7 +139,7 @@ app/
 │
 ├── Elder/               # Elder persona
 │   ├── core/            # GuardianService (foreground), FallDetector, location/battery helpers
-│   │                    # GuardianNotificationListenerService
+│   │                    # notification/accessibility monitoring, scam/link/file/payment overlays
 │   ├── data/            # Firebase & location repo impls, Room (GuardianContact)
 │   ├── di/              # Room, maps, permissions, voice assistant Hilt modules
 │   └── presentation/    # ElderHomeScreen, PanicSOSPage, VoiceAssistantPage,
@@ -160,8 +166,9 @@ app/
 
 - **`Result<D, E>`** — All repository methods return a sealed `Result` type. Helpers: `map`, `onSuccess`, `onFailure`, `asEmptyResult`.
 - **`UserSessionManager`** — DataStore singleton tracking login state, role, link status, and persona display names/photos.
-- **Foreground Service** — `GuardianService` runs continuously on Elder device (START_STICKY, restarts on boot via `BootReceiver`). Streams location every 3 min and battery every 5 min to Firebase RTDB.
+- **Foreground Service** — `GuardianService` runs continuously on Elder device (START_STICKY, restarts on boot via `BootReceiver`). Streams location every 3 min and battery every 5 min to Firebase RTDB, monitors medicine reminders, and handles fall/link/file safety alerts.
 - **Firebase split** — Realtime Database for high-frequency live sensor data; Firestore for structured user and link data.
+- **Local safety overlays** — Notification/accessibility services run local risk detection and use system overlays to warn Elders without waiting for a network call.
 - **One-shot event channel** — ViewModels expose `Channel<Event>` for navigation and one-time UI events (e.g., logout, permission prompts).
 
 ---
@@ -226,14 +233,31 @@ Open the project in Android Studio, let Gradle sync, then run on a physical devi
 
 ## Localization
 
-The app is fully localized in four languages. All user-visible strings must be added to each locale:
+The app has expanded localized resource coverage across Indian languages. All user-visible strings should be added to every supported locale directory:
 
 | Language | Resource directory |
 |---|---|
 | English | `res/values/strings.xml` |
+| Assamese | `res/values-as/strings.xml` |
 | Hindi | `res/values-hi/strings.xml` |
 | Bengali | `res/values-bn/strings.xml` |
+| Dogri | `res/values-doi/strings.xml` |
+| Gujarati | `res/values-gu/strings.xml` |
+| Kannada | `res/values-kn/strings.xml` |
+| Konkani | `res/values-kok/strings.xml` |
+| Kashmiri | `res/values-ks/strings.xml` |
+| Maithili | `res/values-mai/strings.xml` |
+| Malayalam | `res/values-ml/strings.xml` |
+| Manipuri | `res/values-mni/strings.xml` |
+| Marathi | `res/values-mr/strings.xml` |
+| Nepali | `res/values-ne/strings.xml` |
+| Odia | `res/values-or/strings.xml` |
+| Punjabi | `res/values-pa/strings.xml` |
+| Santali | `res/values-sat/strings.xml` |
+| Sindhi | `res/values-sd/strings.xml` |
 | Tamil | `res/values-ta/strings.xml` |
+| Telugu | `res/values-te/strings.xml` |
+| Urdu | `res/values-ur/strings.xml` |
 
 ---
 
@@ -246,6 +270,10 @@ The app is fully localized in four languages. All user-visible strings must be a
 | `CAMERA` | QR code scanning for Guardian-Elder link |
 | `RECORD_AUDIO` | Voice assistant input |
 | `READ_SMS`, `RECEIVE_SMS` | Scam/fraud SMS detection |
+| `BIND_NOTIFICATION_LISTENER_SERVICE` | Elder notification monitoring for OTP, transaction, suspicious link, and suspicious file detection |
+| `BIND_ACCESSIBILITY_SERVICE` | Payment screen reading and on-screen suspicious file warnings |
+| `SYSTEM_ALERT_WINDOW` | Full-screen warning overlays for falls, scams, suspicious links/files, and payment alerts |
+| `READ_PHONE_STATE`, `READ_CALL_LOG` | Call-related safety checks and unknown-number monitoring |
 | `USE_FULL_SCREEN_INTENT` | Fall alarm screen over lock screen |
 | `RECEIVE_BOOT_COMPLETED` | Restart foreground service after reboot |
 | `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` | Keep foreground service alive |
