@@ -53,9 +53,20 @@ android {
 
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("/home/biprangshu/Work/AndroidKeyStore/guardian_saathi.jks")
+            storePassword = "123456"
+            keyAlias = "key0"
+            keyPassword = "123456"
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
