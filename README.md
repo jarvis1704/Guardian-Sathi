@@ -38,6 +38,13 @@ Beyond monitoring, the app arms the Elder with a panic SOS button, AI voice assi
 | ![Elder Home](screenshots/elderhome.jpeg) | ![Emergency Contacts](screenshots/emergencynumbers.jpeg) |
 | *Elder Home* | *Emergency Contacts* |
 
+### Scam Alerts
+
+| Suspicious Link | Suspicious File | Unusual Payment |
+|:---:|:---:|:---:|
+| ![Suspicious Link Alert](screenshots/suspicous_link_alert.jpg) | ![Suspicious File Alert](screenshots/suspicous_file_alert.jpg) | ![Unusual Payment Alert](screenshots/unusual_payment_alert.jpg) |
+| *Suspicious Link Alert* | *Suspicious File Alert* | *Unusual Payment Alert* |
+
 ### Guardian Persona
 
 | Home | Alerts | Geofence |
